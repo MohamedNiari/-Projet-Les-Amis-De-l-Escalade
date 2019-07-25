@@ -1,0 +1,26 @@
+Topo
+Site (photos)
+Secteur => id, nom, numéro, listeVoies
+Voie => id, nbLongeurs, Spits, numéro, nom
+
+--------------
+18/07
+utiliser les annotations @entity au niveau des classes pour hibernate
+au niveau du fichier properties : ddlauto sur hibernate permet de recréer la BDD
+passer ddlauto en "validate", une fois l'appli mis en prod
+la création de la BBD se fera avec Spring
+
+---------------
+25/07
+créer une liste de commentaire dans l'objet site
+créer une liste de topo dans l'objet utilisateur
+utiliser spring jdbc et hibernate
+*laissé de coté spring MVC
+
+soap : n'est plus utilisé
+spring : projet 7
+docker : projet 8
+microservice : projet 12
+
+---------------
+
