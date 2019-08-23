@@ -1,29 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- =============================================================== -->
 	<!-- Informations du projet -->
 	<!-- =============================================================== -->
+
+	<!-- ===== Informations Maven ===== -->
+	<groupId>com.niari.oc</groupId>
+	<artifactId>couche-business</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+
+	<!-- ===== Propriété ===== -->
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
 	<!-- ===== Projet Parent Maven ===== -->
 	<parent>
 		<groupId>com.niari.oc</groupId>
 		<artifactId>amis-de-escalade</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath></relativePath>
 	</parent>
-
-	<!-- ===== Informations Maven ===== -->
-	<artifactId>couche-business</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	
 
 	<!-- ===== Informations générales ===== -->
 	<name>couche-business</name>
 	<url>http://maven.apache.org</url>
+	<description>Implémentation des règles de gestion fonctionnelles</description>
 
 	<!-- =============================================================== -->
 	<!-- Dépendances -->
@@ -44,7 +55,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
-	</dependencies>
-
+    </dependencies>
 
 </project>

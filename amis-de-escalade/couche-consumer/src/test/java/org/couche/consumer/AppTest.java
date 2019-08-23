@@ -33,6 +33,15 @@ public class AppTest
      */
     public void testApp()
     {
+   
         assertTrue( true );
     }
+    
+    /*
+     * test de creation d'un commentaire sur la BDD
+     */
+    public void testCreateCommentaire() {
+    	
+    }
+    
 }

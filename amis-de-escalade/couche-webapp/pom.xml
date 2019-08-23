@@ -8,29 +8,36 @@
 	<!-- =============================================================== -->
 	<!-- Informations du projet -->
 	<!-- =============================================================== -->
+
+	<!-- ===== Informations Maven ===== -->
+	<groupId>com.niari.oc</groupId>
+	<artifactId>couche-webapp</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+
 	<!-- ===== Projet Parent Maven ===== -->
 	<parent>
 		<groupId>com.niari.oc</groupId>
 		<artifactId>amis-de-escalade</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath></relativePath>
 	</parent>
-
-	<!-- ===== Informations Maven ===== -->
-	<artifactId>couche-webapp</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging>
 
 	<!-- ===== Informations générales ===== -->
 	<name>couche-webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<!-- =============================================================== -->
-	<!-- Propriétés -->
+	<!-- Propriété -->
 	<!-- =============================================================== -->
 	<properties>
 		<application.name>SiteEscalade</application.name>
 		<maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
 		<build.timestamp>${maven.build.timestamp}</build.timestamp>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
 	</properties>
 
 	<!-- =============================================================== -->
@@ -62,6 +69,7 @@
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.bval</groupId>
 			<artifactId>bval-jsr</artifactId>
@@ -71,10 +79,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>
 		</dependency>
+
 	</dependencies>
 
 	<!-- =============================================================== -->
@@ -107,7 +117,7 @@
 									<rules>
 										<!-- Le projet et son parent ne doivent pas être en SNAPSHOT -->
 										<requireReleaseVersion />
-										<!-- Aucune dépendance ne doit être en SNAPSHOT -->
+										<!-- Aucune d�pendance ne doit être en SNAPSHOT -->
 										<requireReleaseDeps />
 									</rules>
 								</configuration>
@@ -146,7 +156,7 @@
 		<finalName>SiteEscalade</finalName>
 
 		<plugins>
-			<!-- assurer qu'au moins un profile est activé -->
+			<!-- Assurer qu'au moins un profile est activé -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>

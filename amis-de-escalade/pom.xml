@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- =============================================================== -->
@@ -14,11 +12,9 @@
 	<packaging>pom</packaging>
 
 	<!-- ===== Informations générales ===== -->
-	<name>Site Web Escalade</name>
+	<name>SiteWebEscalade</name>
 	<url>http://maven.apache.org</url>
-	<description>
-        Création un site communautaire autour de l'escalade pour l'association "Les amis de l'escalade".
-    </description>
+	<description>Création un site communautaire autour de l'escalade pour l'association "Les amis de l'escalade"</description>
 
 	<organization>
 		<name>Niari CO</name>
@@ -40,9 +36,7 @@
 	<!-- =============================================================== -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven-jar-plugin.version>3.6.1</maven-jar-plugin.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<!-- =============================================================== -->
@@ -66,16 +60,19 @@
 				<artifactId>couche-webapp</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
+
 			<dependency>
 				<groupId>com.niari.oc</groupId>
 				<artifactId>couche-business</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
+
 			<dependency>
 				<groupId>com.niari.oc</groupId>
 				<artifactId>couche-consumer</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
+
 			<dependency>
 				<groupId>com.niari.oc</groupId>
 				<artifactId>couche-model</artifactId>
@@ -83,6 +80,19 @@
 			</dependency>
 
 			<!-- ===== Bibliothèques tierces ===== -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>2.1.10.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>8.0.17</version>
+				<scope>runtime</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -94,7 +104,7 @@
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>4.0.1</version>
-				<scope>provided</scope>				
+				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
@@ -115,6 +125,7 @@
 				<artifactId>commons-collections4</artifactId>
 				<version>4.4</version>
 			</dependency>
+
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-text</artifactId>
@@ -168,8 +179,8 @@
 					<version>3.2.3</version>
 				</plugin>
 
-
 			</plugins>
+
 		</pluginManagement>
 	</build>
 
@@ -206,6 +217,4 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
-
 </project>
