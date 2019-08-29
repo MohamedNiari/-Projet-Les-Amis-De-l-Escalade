@@ -40,7 +40,7 @@ public class Commentaire {
 		
 	
 	/**************************************
-	 * Generation des setters and getters *
+	 * Generation des setters et getters *
 	 **************************************/
 
 	public Long getId_Commentaire() {
