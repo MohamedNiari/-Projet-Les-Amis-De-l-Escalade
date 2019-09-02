@@ -1,7 +1,8 @@
 package org.couche.model.entities;
 
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Secteur {
-	
+
 	/*
 	 * Colonne Id de la table secteur avec auto-incrementation
 	 */
@@ -24,26 +25,50 @@ public class Secteur {
 	private Long id_Secteur;
 	private String nom;
 	private Integer numeroSecteur;
-	private String descriptions;
-	
+	private String description;
+
 	/*
-	 * Relation de un à plusieurs de secteur à voie
+	 * Relation de "plusieurs à un" de secteur à voie avec supression en cascade
 	 */
-	@OneToMany(mappedBy = "secteur")
-	private Set<Voie> voies;
-	
+	@OneToMany(mappedBy = "secteur", cascade = { CascadeType.ALL })
+	private List<Voie> voies;
+
 	/*
-	 * Relation "plusieurs à un" de secteur à sites
+	 * Relation "un à plusieurs" de secteur à sites sans supression en cascade
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "id_Site")
-	private Sites sites;	
-	
-	
+	private Sites sites;
+
+	/*
+	 * Constructeur
+	 */
+	public Secteur() {
+
+	}
+
+	/*
+	 * Constructeur avec Id
+	 */
+	public Secteur(Long id_Secteur, String nom, Integer numeroSecteur, String descriptions) {
+		this.id_Secteur = id_Secteur;
+		this.nom = nom;
+		this.numeroSecteur = numeroSecteur;
+		this.description = descriptions;
+	}
+
+	/*
+	 * Constructeur sans Id
+	 */
+	public Secteur(String nom, Integer numeroSecteur, String descriptions) {
+		this.nom = nom;
+		this.numeroSecteur = numeroSecteur;
+		this.description = descriptions;
+	}
+
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
-
 	public Sites getSites() {
 		return sites;
 	}
@@ -77,19 +102,25 @@ public class Secteur {
 	}
 
 	public String getDescriptions() {
-		return descriptions;
+		return description;
 	}
 
 	public void setDescriptions(String descriptions) {
-		this.descriptions = descriptions;
+		this.description = descriptions;
 	}
 
-	public Set<Voie> getVoies() {
+	public List<Voie> getVoies() {
 		return voies;
 	}
 
-	public void setVoies(Set<Voie> voies) {
+	public void setVoies(List<Voie> voies) {
 		this.voies = voies;
+	}
+
+	@Override
+	public String toString() {
+		return "Secteur [id_Secteur=" + id_Secteur + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
+				+ ", descriptions=" + description + ", voies=" + voies + ", sites=" + sites + "]";
 	}
 
 }

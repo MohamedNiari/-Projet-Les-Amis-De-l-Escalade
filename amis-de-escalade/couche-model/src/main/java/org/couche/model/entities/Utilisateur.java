@@ -1,14 +1,13 @@
 package org.couche.model.entities;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /*
@@ -16,7 +15,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Utilisateur {
-	
+
 	/*
 	 * Colonne Id de la table utilisateur avec auto-incrementation
 	 */
@@ -32,23 +31,65 @@ public class Utilisateur {
 	private String prenom;
 	private String ville;
 	private String pays;
-	
+
 	/*
-	 * Relation de "un à plusieurs" de secteur à voie
+	 * Relation de "plusieurs à un" de utilisateur à topo sans supression en cascade
 	 */
-	@OneToMany(mappedBy = "utilisateur")
-	private Set<Topo> topos;
-	
+	@OneToMany(mappedBy = "utilisateur", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH })
+	private List<Topo> topos;
+
 	/*
-	 * Relation de "un à plusieurs" de secteur à voie
+	 * Relation de "plusieurs à un" de utilisateur à commentaire sans supression en
+	 * cascade
 	 */
-	@OneToMany(mappedBy = "utilisateur")
-	private Set<Commentaire> commentaires;
-	
-	
+	@OneToMany(mappedBy = "utilisateur", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH })
+	private List<Commentaire> commentaires;
+
+	/*
+	 * Constructeur
+	 */
+	public Utilisateur() {
+
+	}
+
+	/*
+	 * Constructeur avec Id
+	 */
+	public Utilisateur(Long id_Utilisateur, String nom, String adresseMail, String identifiant, String motDePasse,
+			Date dateInscription, Boolean membreAssociation, String prenom, String ville, String pays) {
+		this.id_Utilisateur = id_Utilisateur;
+		this.nom = nom;
+		this.adresseMail = adresseMail;
+		this.identifiant = identifiant;
+		this.motDePasse = motDePasse;
+		this.dateInscription = dateInscription;
+		this.membreAssociation = membreAssociation;
+		this.prenom = prenom;
+		this.ville = ville;
+		this.pays = pays;
+	}
+
+	/*
+	 * Constructeur sans Id
+	 */
+	public Utilisateur(String nom, String adresseMail, String identifiant, String motDePasse, Date dateInscription,
+			Boolean membreAssociation, String prenom, String ville, String pays) {
+		this.nom = nom;
+		this.adresseMail = adresseMail;
+		this.identifiant = identifiant;
+		this.motDePasse = motDePasse;
+		this.dateInscription = dateInscription;
+		this.membreAssociation = membreAssociation;
+		this.prenom = prenom;
+		this.ville = ville;
+		this.pays = pays;
+	}
+
 	/**************************************
 	 * Generation des setters and getters *
-	 **************************************/	
+	 **************************************/
 
 	public Long getId_Utilisateur() {
 		return id_Utilisateur;
@@ -56,22 +97,6 @@ public class Utilisateur {
 
 	public void setId_Utilisateur(Long id_Utilisateur) {
 		this.id_Utilisateur = id_Utilisateur;
-	}
-
-	public Set<Topo> getTopos() {
-		return topos;
-	}
-
-	public void setTopos(Set<Topo> topos) {
-		this.topos = topos;
-	}
-
-	public Set<Commentaire> getCommentaires() {
-		return commentaires;
-	}
-
-	public void setCommentaires(Set<Commentaire> commentaires) {
-		this.commentaires = commentaires;
 	}
 
 	public Long getId() {
@@ -152,6 +177,22 @@ public class Utilisateur {
 
 	public void setPays(String pays) {
 		this.pays = pays;
+	}
+
+	public List<Topo> getTopos() {
+		return topos;
+	}
+
+	public void setTopos(List<Topo> topos) {
+		this.topos = topos;
+	}
+
+	public List<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+
+	public void setCommentaires(List<Commentaire> commentaires) {
+		this.commentaires = commentaires;
 	}
 
 }

@@ -1,8 +1,9 @@
 package org.couche.model.entities;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Topo {
-	
+
 	/*
 	 * Colonne Id de la table topo avec auto-incrementation
 	 */
@@ -24,45 +25,83 @@ public class Topo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id_Topo;
 	private String nom;
-	private String descriptions;
+	private String description;
 	private String lieu;
 	private Date dateParution;
 	private Boolean disponible;
-	
+
 	/*
-	 * Relation de "un à plusieurs" de secteur à voie
+	 * Relation de "de plusieurs à un" de secteur à voie sans supression en cascade
 	 */
-	@OneToMany(mappedBy = "topo")
-	private Set<Sites> sites;
-	
+	@OneToMany(mappedBy = "topo", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH })
+	private List<Sites> sites;
+
 	/*
-	 * Relation "plusieurs à un" de topo à utilisateur
+	 * Relation "un à plusieurs" de topo à utilisateur sans supression en cascade
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "id_Utilisateur")
-	private Utilisateur utilisateur;	
-	
+	private Utilisateur utilisateur;
+
+	/*
+	 * Constructeur
+	 */
+	public Topo() {
+
+	}
+
+	/*
+	 * Constructeur avec Id
+	 */
+	public Topo(Long id_Topo, String nom, String description, String lieu, Date dateParution, Boolean disponible) {
+		this.id_Topo = id_Topo;
+		this.nom = nom;
+		this.description = description;
+		this.lieu = lieu;
+		this.dateParution = dateParution;
+		this.disponible = disponible;
+	}
+
+	/*
+	 * Constructeur sans Id
+	 */
+	public Topo(String nom, String description, String lieu, Date dateParution, Boolean disponible) {
+		this.nom = nom;
+		this.description = description;
+		this.lieu = lieu;
+		this.dateParution = dateParution;
+		this.disponible = disponible;
+	}
+
 	
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
-	
-	public Set<Sites> getSites() {
-		return sites;
-	}
-
-	public void setSites(Set<Sites> sites) {
-		this.sites = sites;
-	}
 
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
 
+	public Boolean getDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(Boolean disponible) {
+		this.disponible = disponible;
+	}
+
+	public List<Sites> getSites() {
+		return sites;
+	}
+
+	public void setSites(List<Sites> sites) {
+		this.sites = sites;
+	}
+
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-
 
 	public Long getId_Topo() {
 		return id_Topo;
@@ -78,14 +117,6 @@ public class Topo {
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public String getDescriptions() {
-		return descriptions;
-	}
-
-	public void setDescriptions(String descriptions) {
-		this.descriptions = descriptions;
 	}
 
 	public String getLieu() {
@@ -110,6 +141,14 @@ public class Topo {
 
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

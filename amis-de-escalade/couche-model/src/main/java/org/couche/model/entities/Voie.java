@@ -1,5 +1,6 @@
 package org.couche.model.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,22 +23,55 @@ public class Voie {
 	private String nom;
 	private Integer nombreLongueurs;
 	private String cotation;
-	private String descriptions;
+	private String description;
 	private Boolean equiperSpits;
 	private Integer numeroVoie;
 
 	/*
-	 * Relation "plusieurs à un" de voie à secteur
+	 * Relation "un à plusieurs" de voie à secteur sans supression en cascade
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "id_Secteur")
 	private Secteur secteur;
-	
-	
+
+	/*
+	 * Constructeur
+	 */
+	public Voie() {
+
+	}
+
+	/*
+	 * Constructeur avec Id
+	 */
+	public Voie(Long id_Voie, String nom, Integer nombreLongueurs, String cotation, String description,
+			Boolean equiperSpits, Integer numeroVoie) {
+		this.id_Voie = id_Voie;
+		this.nom = nom;
+		this.nombreLongueurs = nombreLongueurs;
+		this.cotation = cotation;
+		this.description = description;
+		this.equiperSpits = equiperSpits;
+		this.numeroVoie = numeroVoie;
+	}
+
+	/*
+	 * Constructeur sans Id
+	 */
+	public Voie(String nom, Integer nombreLongueurs, String cotation, String description, Boolean equiperSpits,
+			Integer numeroVoie) {
+		this.nom = nom;
+		this.nombreLongueurs = nombreLongueurs;
+		this.cotation = cotation;
+		this.description = description;
+		this.equiperSpits = equiperSpits;
+		this.numeroVoie = numeroVoie;
+	}
+
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
-	
+
 	public Long getId_Voie() {
 		return id_Voie;
 	}
@@ -70,14 +104,6 @@ public class Voie {
 		this.cotation = cotation;
 	}
 
-	public String getDescriptions() {
-		return descriptions;
-	}
-
-	public void setDescriptions(String descriptions) {
-		this.descriptions = descriptions;
-	}
-
 	public Boolean getEquiperSpits() {
 		return equiperSpits;
 	}
@@ -108,6 +134,14 @@ public class Voie {
 
 	public void setNumeroVoie(Integer numeroVoie) {
 		this.numeroVoie = numeroVoie;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

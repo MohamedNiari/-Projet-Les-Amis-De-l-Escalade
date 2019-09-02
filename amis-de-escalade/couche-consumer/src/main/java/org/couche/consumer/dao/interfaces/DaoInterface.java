@@ -3,7 +3,7 @@ package org.couche.consumer.dao.interfaces;
 import java.io.Serializable;
 import java.util.List;
 
-public interface VoieDaoInterface<T, Id extends Serializable> {
+public interface DaoInterface<T, Id extends Serializable> {
 	
 	public void create(T entity);
     

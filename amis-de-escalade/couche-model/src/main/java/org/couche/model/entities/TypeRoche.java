@@ -9,6 +9,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TypeRoche {
 
+	@SuppressWarnings("unused")
 	private enum rocher {
 		calcaire, granite, gneiss
 	}

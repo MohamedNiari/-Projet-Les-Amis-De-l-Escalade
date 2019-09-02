@@ -8,6 +8,10 @@ import org.couche.model.entities.Commentaire;
 public class CommentaireService {
 
 	private static CommentaireDaoImplementation commentaireDao;
+	
+	public CommentaireService() {
+		commentaireDao = new CommentaireDaoImplementation();
+	}
 
 	public void create(Commentaire entity) {
 		commentaireDao.openCurrentSessionwithTransaction();

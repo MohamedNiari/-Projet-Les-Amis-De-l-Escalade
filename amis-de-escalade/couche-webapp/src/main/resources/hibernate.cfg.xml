@@ -5,26 +5,41 @@
 
 <hibernate-configuration>
 
-    <session-factory>
+	<session-factory>
 
-        <!-- Information de connexion à la base de données -->
-        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/escalade?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC</property>
-        <property name="connection.username">openclassroom</property>
-        <property name="connection.password">openclassroom</property>
+		<!-- Information de connexion à la base de données -->
+		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/escalade?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC</property>
+		<property name="connection.username">openclassroom</property>
+		<property name="connection.password">openclassroom</property>
 
-        <!-- Paramétrage du pool de connexion -->
-        <property name="connection.pool_size">1</property>
+		<!-- Paramétrage du pool de connexion -->
+		<property name="connection.pool_size">100</property>
 
-        <!-- Selection du dialect MySQL -->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- Selection du dialect MySQL -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
-        <!-- Affichage du code SQL dans la console -->
-        <property name="show_sql">true</property>
+		<!-- Affichage du code SQL dans la console -->
+		<property name="show_sql">true</property>
 
 		<!-- Session courante en mode thread -->
 		<property name="current_session_context_class">thread</property>
- 
-    </session-factory>
+
+		<!-- Pour empecher le changement de schema durant la phase de production -->
+		<property name="hbm2ddl.auto">validate</property>
+
+		<!-- Utilisation du sequence style generator pour les applications en JPA -->
+		<property name="hibernate.id.new_generator_mappings"> value="true"</property>
+
+		<!-- mappings des classes annotées -->
+		<mapping class="org.couche.model.entities.Commentaire" />
+		<mapping class="org.couche.model.entities.Secteur" />
+		<mapping class="org.couche.model.entities.Sites" />
+		<mapping class="org.couche.model.entities.Topo" />
+		<mapping class="org.couche.model.entities.Utilisateur" />
+		<mapping class="org.couche.model.entities.Voie" />
+
+
+	</session-factory>
 
 </hibernate-configuration>

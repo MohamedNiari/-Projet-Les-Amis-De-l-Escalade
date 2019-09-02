@@ -1,7 +1,8 @@
 package org.couche.model.entities;
 
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Sites {
-	
+
 	/*
 	 * Colonne Id de la table sites avec auto-incrementation
 	 */
@@ -24,37 +25,69 @@ public class Sites {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id_Site;
 	private String nom;
-	private Long hauteurMax;
+	private Integer hauteurMax;
 	private String lieu;
 	private Boolean taguerOfficiel;
-	private String descriptions;
+	private String description;
 	@Embedded
 	private TypeRoche rocher;
-	
+
 	/*
-	 * Relation de "un à plusieurs" de secteur à voie
+	 * Relation de "plusieurs à un" de secteur à voie sans supression en cascade
 	 */
-	@OneToMany(mappedBy = "sites")
-	private Set<Secteur> secteurs;
-	
-	
+	@OneToMany(mappedBy = "sites", cascade = { CascadeType.ALL })
+	private List<Secteur> secteurs;
+
+	@OneToMany(mappedBy = "sites", cascade = { CascadeType.ALL })
+	private List<Commentaire> commentaires;
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@JoinColumn(name = "id_Topo")
+	private Topo topo;
+
+	/*
+	 * Constructeur
+	 */
+	public Sites() {
+
+	}
+
+	/*
+	 * Constructeur avec Id
+	 */
+	public Sites(Long id_Site, String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions,
+			TypeRoche rocher) {
+		this.id_Site = id_Site;
+		this.nom = nom;
+		this.hauteurMax = hauteurMax;
+		this.lieu = lieu;
+		this.taguerOfficiel = taguerOfficiel;
+		this.description = descriptions;
+		this.rocher = rocher;
+	}
+
+	/*
+	 * Constructeur sans Id
+	 */
+	public Sites(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions,
+			TypeRoche rocher) {
+		this.nom = nom;
+		this.hauteurMax = hauteurMax;
+		this.lieu = lieu;
+		this.taguerOfficiel = taguerOfficiel;
+		this.description = descriptions;
+		this.rocher = rocher;
+	}
+
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
-	
-	public Set<Secteur> getSecteurs() {
-		return secteurs;
-	}
 
-	public void setSecteurs(Set<Secteur> secteurs) {
-		this.secteurs = secteurs;
-	}
-
-	public Set<Commentaire> getCommentaires() {
+	public List<Commentaire> getCommentaires() {
 		return commentaires;
 	}
 
-	public void setCommentaires(Set<Commentaire> commentaires) {
+	public void setCommentaires(List<Commentaire> commentaires) {
 		this.commentaires = commentaires;
 	}
 
@@ -65,13 +98,6 @@ public class Sites {
 	public void setTopo(Topo topo) {
 		this.topo = topo;
 	}
-
-	@OneToMany(mappedBy = "sites")
-	private Set<Commentaire> commentaires;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_Topo")
-	private Topo topo;
 
 	public Long getId_Site() {
 		return id_Site;
@@ -89,11 +115,11 @@ public class Sites {
 		this.nom = nom;
 	}
 
-	public Long getHauteurMax() {
+	public Integer getHauteurMax() {
 		return hauteurMax;
 	}
 
-	public void setHauteurMax(Long hauteurMax) {
+	public void setHauteurMax(Integer hauteurMax) {
 		this.hauteurMax = hauteurMax;
 	}
 
@@ -114,11 +140,11 @@ public class Sites {
 	}
 
 	public String getDescriptions() {
-		return descriptions;
+		return description;
 	}
 
 	public void setDescriptions(String descriptions) {
-		this.descriptions = descriptions;
+		this.description = descriptions;
 	}
 
 	public TypeRoche getRocher() {
@@ -128,7 +154,21 @@ public class Sites {
 	public void setRocher(TypeRoche rocher) {
 		this.rocher = rocher;
 	}
-	
-	
+
+	public Boolean getTaguerOfficiel() {
+		return taguerOfficiel;
+	}
+
+	public void setTaguerOfficiel(Boolean taguerOfficiel) {
+		this.taguerOfficiel = taguerOfficiel;
+	}
+
+	public List<Secteur> getSecteurs() {
+		return secteurs;
+	}
+
+	public void setSecteurs(List<Secteur> secteurs) {
+		this.secteurs = secteurs;
+	}
 
 }
