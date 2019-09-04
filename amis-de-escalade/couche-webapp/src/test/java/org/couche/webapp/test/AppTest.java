@@ -3,22 +3,24 @@ package org.couche.webapp.test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import org.couche.business.services.CommentaireService;
-import org.couche.model.entities.Commentaire;
+import org.couche.business.services.UtilisateurService;
+import org.couche.model.entities.Utilisateur;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 public class AppTest {
 
 	public static void main(String[] args) throws ParseException {
 
-		CommentaireService CommentaireService = new CommentaireService();
+		UtilisateurService utilisateurService = new UtilisateurService();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-		Commentaire commentaire1 = new Commentaire("Trop fatigué aurjoud'hui", dateFormat.parse("29-04-2014"));
-		Commentaire commentaire2 = new Commentaire("C'était long la montée", dateFormat.parse("15-06-2006"));
-		Commentaire commentaire3 = new Commentaire("On aurait du se scinder en 2 groupes",
-				dateFormat.parse("19-01-2019"));
+		Utilisateur utilisateurTest = new Utilisateur("Niari4", "mniari@openclassroom.com", "A287755", "bonjour",
+				dateFormat.parse("04-09-2019"), true, "Mohamed4", "Sochaux", "France");
 
-		CommentaireService.create(commentaire1);
+		utilisateurService.create(utilisateurTest);
 
 	}
 

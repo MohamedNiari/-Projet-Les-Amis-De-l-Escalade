@@ -22,7 +22,7 @@ public class Topo {
 	 * Colonne Id de la table topo avec auto-incrementation
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_Topo;
 	private String nom;
 	private String description;
@@ -31,14 +31,14 @@ public class Topo {
 	private Boolean disponible;
 
 	/*
-	 * Relation de "de plusieurs à un" de secteur à voie sans supression en cascade
+	 * Relation de secteur à voie sans supression en cascade
 	 */
 	@OneToMany(mappedBy = "topo", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
 	private List<Sites> sites;
 
 	/*
-	 * Relation "un à plusieurs" de topo à utilisateur sans supression en cascade
+	 * Relation de topo à utilisateur sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "id_Utilisateur")
@@ -74,14 +74,9 @@ public class Topo {
 		this.disponible = disponible;
 	}
 
-	
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
-
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
-	}
 
 	public Boolean getDisponible() {
 		return disponible;
@@ -97,6 +92,10 @@ public class Topo {
 
 	public void setSites(List<Sites> sites) {
 		this.sites = sites;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {
@@ -149,6 +148,12 @@ public class Topo {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Topo [id_Topo=" + id_Topo + ", nom=" + nom + ", description=" + description + ", lieu=" + lieu
+				+ ", dateParution=" + dateParution + ", disponible=" + disponible + ", sites=" + sites + "]";
 	}
 
 }

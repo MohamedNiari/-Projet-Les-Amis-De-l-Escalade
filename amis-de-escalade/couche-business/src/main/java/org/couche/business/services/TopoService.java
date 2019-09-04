@@ -9,6 +9,10 @@ public class TopoService {
 
 	private static TopoDaoImplementation topoDao;
 
+	public TopoService() {
+		topoDao = new TopoDaoImplementation();
+	}
+
 	public void create(Topo entity) {
 		topoDao.openCurrentSessionwithTransaction();
 		topoDao.create(entity);

@@ -29,15 +29,14 @@ public class Commentaire {
 	private Date date_du_commentaire;
 
 	/*
-	 * Relation "un à plusieurs" de commentaire à sites un à plusieurs sans
-	 * supression en cascade
+	 * Relation de commentaire à sites sans suppression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "id_Site")
 	private Sites sites;
 
 	/*
-	 * Relation "un à plusieurs" de commentaire à utilisateur sans supression en
+	 * Relation de commentaire à utilisateur sans supression en
 	 * cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })

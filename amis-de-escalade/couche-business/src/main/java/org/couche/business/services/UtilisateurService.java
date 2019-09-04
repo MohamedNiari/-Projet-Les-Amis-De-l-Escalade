@@ -7,7 +7,11 @@ import org.couche.model.entities.Utilisateur;
 
 public class UtilisateurService {
 
-	private static UtilisateurDaoImplementation utilisateurDao;
+	private UtilisateurDaoImplementation utilisateurDao;
+
+	public UtilisateurService() {
+		utilisateurDao = new UtilisateurDaoImplementation();
+	}
 
 	public void create(Utilisateur entity) {
 		utilisateurDao.openCurrentSessionwithTransaction();

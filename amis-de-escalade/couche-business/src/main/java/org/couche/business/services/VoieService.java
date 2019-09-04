@@ -9,6 +9,10 @@ public class VoieService {
 
 	private static VoieDaoImplementation voieDao;
 
+	public VoieService() {
+		voieDao = new VoieDaoImplementation();
+	}
+
 	public void create(Voie entity) {
 		voieDao.openCurrentSessionwithTransaction();
 		voieDao.create(entity);

@@ -21,20 +21,20 @@ public class Secteur {
 	 * Colonne Id de la table secteur avec auto-incrementation
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_Secteur;
 	private String nom;
 	private Integer numeroSecteur;
 	private String description;
 
 	/*
-	 * Relation de "plusieurs à un" de secteur à voie avec supression en cascade
+	 * Relation de secteur à voie avec supression en cascade
 	 */
 	@OneToMany(mappedBy = "secteur", cascade = { CascadeType.ALL })
 	private List<Voie> voies;
 
 	/*
-	 * Relation "un à plusieurs" de secteur à sites sans supression en cascade
+	 * Relation de secteur à sites sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "id_Site")
@@ -65,6 +65,7 @@ public class Secteur {
 		this.numeroSecteur = numeroSecteur;
 		this.description = descriptions;
 	}
+	
 
 	/**************************************
 	 * Generation des setters and getters *

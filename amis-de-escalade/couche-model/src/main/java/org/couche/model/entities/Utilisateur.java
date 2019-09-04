@@ -1,5 +1,6 @@
 package org.couche.model.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Utilisateur {
 	 * Colonne Id de la table utilisateur avec auto-incrementation
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_Utilisateur;
 	private String nom;
 	private String adresseMail;
@@ -33,14 +34,14 @@ public class Utilisateur {
 	private String pays;
 
 	/*
-	 * Relation de "plusieurs à un" de utilisateur à topo sans supression en cascade
+	 * Relation de utilisateur à topo sans suppression en cascade
 	 */
 	@OneToMany(mappedBy = "utilisateur", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
 	private List<Topo> topos;
 
 	/*
-	 * Relation de "plusieurs à un" de utilisateur à commentaire sans supression en
+	 * Relation de utilisateur à commentaire sans suppression en
 	 * cascade
 	 */
 	@OneToMany(mappedBy = "utilisateur", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
@@ -85,6 +86,18 @@ public class Utilisateur {
 		this.prenom = prenom;
 		this.ville = ville;
 		this.pays = pays;
+	}
+	
+	/*
+	 * Méthode pour la relation bidirectionnelle
+	 */
+	public void add(Topo topo) {
+		if (topos == null) {
+			topos = new ArrayList<>();
+		}
+
+		topos.add(topo);
+		topo.setUtilisateur(this);
 	}
 
 	/**************************************
@@ -194,5 +207,6 @@ public class Utilisateur {
 	public void setCommentaires(List<Commentaire> commentaires) {
 		this.commentaires = commentaires;
 	}
-
+	
+	
 }

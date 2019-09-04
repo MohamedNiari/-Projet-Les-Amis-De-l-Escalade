@@ -3,11 +3,16 @@ package org.couche.business.services;
 import java.util.List;
 
 import org.couche.consumer.dao.implementation.SitesDaoImplementation;
+import org.couche.consumer.dao.implementation.UtilisateurDaoImplementation;
 import org.couche.model.entities.Sites;
 
 public class SitesService {
 
 	private static SitesDaoImplementation sitesDao;
+	
+	public SitesService() {
+		sitesDao = new SitesDaoImplementation();
+	}
 
 	public void create(Sites entity) {
 		sitesDao.openCurrentSessionwithTransaction();

@@ -3,11 +3,16 @@ package org.couche.business.services;
 import java.util.List;
 
 import org.couche.consumer.dao.implementation.SecteurDaoImplementation;
+import org.couche.consumer.dao.implementation.UtilisateurDaoImplementation;
 import org.couche.model.entities.Secteur;
 
 public class SecteurService {
 
 	private static SecteurDaoImplementation secteurDao;
+	
+	public SecteurService() {
+		secteurDao = new SecteurDaoImplementation();
+	}
 
 	public void create(Secteur entity) {
 		secteurDao.openCurrentSessionwithTransaction();

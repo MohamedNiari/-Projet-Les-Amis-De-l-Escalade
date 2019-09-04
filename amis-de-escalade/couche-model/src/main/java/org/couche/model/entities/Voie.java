@@ -18,7 +18,7 @@ public class Voie {
 	 * Colonne Id de la table voie avec auto-incrementation
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_Voie;
 	private String nom;
 	private Integer nombreLongueurs;
@@ -28,7 +28,7 @@ public class Voie {
 	private Integer numeroVoie;
 
 	/*
-	 * Relation "un à plusieurs" de voie à secteur sans supression en cascade
+	 * Relation de voie à secteur sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "id_Secteur")

@@ -1,5 +1,6 @@
 package org.couche.model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ public class Sites {
 	 * Colonne Id de la table sites avec auto-incrementation
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_Site;
 	private String nom;
 	private Integer hauteurMax;
@@ -33,7 +34,7 @@ public class Sites {
 	private TypeRoche rocher;
 
 	/*
-	 * Relation de "plusieurs à un" de secteur à voie sans supression en cascade
+	 * Relation de secteur à voie sans supression en cascade
 	 */
 	@OneToMany(mappedBy = "sites", cascade = { CascadeType.ALL })
 	private List<Secteur> secteurs;
@@ -77,6 +78,15 @@ public class Sites {
 		this.taguerOfficiel = taguerOfficiel;
 		this.description = descriptions;
 		this.rocher = rocher;
+	}
+
+	public void add(Secteur secteur) {
+		if (secteurs == null) {
+			secteurs = new ArrayList<>();
+		}
+
+		secteurs.add(secteur);
+		secteur.setSites(this);
 	}
 
 	/**************************************
