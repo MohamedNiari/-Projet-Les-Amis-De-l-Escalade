@@ -207,6 +207,14 @@ public class Utilisateur {
 	public void setCommentaires(List<Commentaire> commentaires) {
 		this.commentaires = commentaires;
 	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [id_Utilisateur=" + id_Utilisateur + ", nom=" + nom + ", adresseMail=" + adresseMail
+				+ ", identifiant=" + identifiant + ", motDePasse=" + motDePasse + ", dateInscription=" + dateInscription
+				+ ", membreAssociation=" + membreAssociation + ", prenom=" + prenom + ", ville=" + ville + ", pays="
+				+ pays + ", topos=" + topos + ", commentaires=" + commentaires + "]";
+	}
 	
 	
 }

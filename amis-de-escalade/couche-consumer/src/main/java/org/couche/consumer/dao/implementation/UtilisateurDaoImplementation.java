@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class UtilisateurDaoImplementation implements  DaoInterface<Utilisateur, Long> {
+public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, Long> {
 
 	private Session currentSession;
 
