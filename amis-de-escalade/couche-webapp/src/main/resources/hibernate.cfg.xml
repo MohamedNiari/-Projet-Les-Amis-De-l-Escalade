@@ -35,7 +35,7 @@
 		<!-- mappings des classes annotées -->
 		<mapping class="org.couche.model.entities.Commentaire" />
 		<mapping class="org.couche.model.entities.Secteur" />
-		<mapping class="org.couche.model.entities.Sites" />
+		<mapping class="org.couche.model.entities.Site" />
 		<mapping class="org.couche.model.entities.Topo" />
 		<mapping class="org.couche.model.entities.Utilisateur" />
 		<mapping class="org.couche.model.entities.Voie" />
