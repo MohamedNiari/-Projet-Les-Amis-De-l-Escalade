@@ -3,13 +3,13 @@ package org.couche.consumer.dao.implementation;
 import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
-import org.couche.model.entities.Sites;
+import org.couche.model.entities.Site;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class SitesDaoImplementation implements DaoInterface<Sites, Long> {
+public class SitesDaoImplementation implements DaoInterface<Site, Long> {
 
 	private Session currentSession;
 
@@ -26,7 +26,7 @@ public class SitesDaoImplementation implements DaoInterface<Sites, Long> {
 	 * Création de la session factory
 	 */
 	private static SessionFactory getSessionFactory() {
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Sites.class)
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Site.class)
 				.buildSessionFactory();
 
 		return factory;
@@ -88,40 +88,40 @@ public class SitesDaoImplementation implements DaoInterface<Sites, Long> {
 	 * Methodes d'accès la base de données
 	 */
 	@Override
-	public void create(Sites entity) {
+	public void create(Site entity) {
 		getCurrentSession().save(entity);
 
 	}
 
 	@Override
-	public void update(Sites entity) {
+	public void update(Site entity) {
 		getCurrentSession().update(entity);
 	}
 
 	@Override
-	public void delete(Sites entity) {
+	public void delete(Site entity) {
 		getCurrentSession().delete(entity);
 
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Sites> findAll() {
-		List<Sites> Sitess = (List<Sites>) getCurrentSession().createQuery("from escalade").list();
+	public List<Site> findAll() {
+		List<Site> Sitess = (List<Site>) getCurrentSession().createQuery("from escalade").list();
 		return Sitess;
 	}
 
 	@Override
 	public void deleteAll() {
-		List<Sites> entityList = findAll();
-		for (Sites entity : entityList) {
+		List<Site> entityList = findAll();
+		for (Site entity : entityList) {
 			delete(entity);
 		}
 	}
 
 	@Override
-	public Sites findById(Long id) {
-		Sites Sites = (Sites) getCurrentSession().get(Sites.class, id);
+	public Site findById(Long id) {
+		Site Sites = (Site) getCurrentSession().get(Site.class, id);
 		return Sites;
 	}
 }

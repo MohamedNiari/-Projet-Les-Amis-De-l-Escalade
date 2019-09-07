@@ -34,11 +34,11 @@ public class Secteur {
 	private List<Voie> voies;
 
 	/*
-	 * Relation de secteur à sites sans supression en cascade
+	 * Relation de secteur à site sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "id_Site")
-	private Sites sites;
+	private Site site;
 
 	/*
 	 * Constructeur
@@ -70,12 +70,12 @@ public class Secteur {
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
-	public Sites getSites() {
-		return sites;
+	public Site getSite() {
+		return site;
 	}
 
-	public void setSites(Sites sites) {
-		this.sites = sites;
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 	public Long getId_Secteur() {
@@ -121,7 +121,7 @@ public class Secteur {
 	@Override
 	public String toString() {
 		return "Secteur [id_Secteur=" + id_Secteur + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
-				+ ", descriptions=" + description + ", voies=" + voies + ", sites=" + sites + "]";
+				+ ", descriptions=" + description + ", voies=" + voies + ", site=" + site + "]";
 	}
 
 }

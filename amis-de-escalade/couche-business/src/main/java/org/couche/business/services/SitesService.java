@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.couche.consumer.dao.implementation.SitesDaoImplementation;
 import org.couche.consumer.dao.implementation.UtilisateurDaoImplementation;
-import org.couche.model.entities.Sites;
+import org.couche.model.entities.Site;
 
 public class SitesService {
 
@@ -14,35 +14,35 @@ public class SitesService {
 		sitesDao = new SitesDaoImplementation();
 	}
 
-	public void create(Sites entity) {
+	public void create(Site entity) {
 		sitesDao.openCurrentSessionwithTransaction();
 		sitesDao.create(entity);
 		sitesDao.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(Sites entity) {
+	public void update(Site entity) {
 		sitesDao.openCurrentSessionwithTransaction();
 		sitesDao.update(entity);
 		sitesDao.closeCurrentSessionwithTransaction();
 	}
 
-	public Sites findById(Long id) {
+	public Site findById(Long id) {
 		sitesDao.openCurrentSession();
-		Sites site = sitesDao.findById(id);
+		Site site = sitesDao.findById(id);
 		sitesDao.closeCurrentSession();
 		return site;
 	}
 
 	public void delete(Long id) {
 		sitesDao.openCurrentSessionwithTransaction();
-		Sites site = sitesDao.findById(id);
+		Site site = sitesDao.findById(id);
 		sitesDao.delete(site);
 		sitesDao.closeCurrentSessionwithTransaction();
 	}
 
-	public List<Sites> findAll() {
+	public List<Site> findAll() {
 		sitesDao.openCurrentSession();
-		List<Sites> sites = sitesDao.findAll();
+		List<Site> sites = sitesDao.findAll();
 		sitesDao.closeCurrentSession();
 		return sites;
 	}

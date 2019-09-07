@@ -29,11 +29,11 @@ public class Commentaire {
 	private Date date_du_commentaire;
 
 	/*
-	 * Relation de commentaire à sites sans suppression en cascade
+	 * Relation de commentaire à site sans suppression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "id_Site")
-	private Sites sites;
+	private Site site;
 
 	/*
 	 * Relation de commentaire à utilisateur sans supression en
@@ -86,12 +86,12 @@ public class Commentaire {
 		return texte;
 	}
 
-	public Sites getSites() {
-		return sites;
+	public Site getSite() {
+		return site;
 	}
 
-	public void setSites(Sites sites) {
-		this.sites = sites;
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 	public Utilisateur getUtilisateur() {

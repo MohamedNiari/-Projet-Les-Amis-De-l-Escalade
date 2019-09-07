@@ -14,13 +14,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /*
- * Bean Sites qui représente sous forme d'objet la table du même nom
+ * Bean Site qui représente sous forme d'objet la table du même nom
  */
 @Entity
-public class Sites {
+public class Site {
 
 	/*
-	 * Colonne Id de la table sites avec auto-incrementation
+	 * Colonne Id de la table site avec auto-incrementation
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +36,10 @@ public class Sites {
 	/*
 	 * Relation de secteur à voie sans supression en cascade
 	 */
-	@OneToMany(mappedBy = "sites", cascade = { CascadeType.ALL })
+	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
 	private List<Secteur> secteurs;
 
-	@OneToMany(mappedBy = "sites", cascade = { CascadeType.ALL })
+	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
 	private List<Commentaire> commentaires;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
@@ -49,14 +49,14 @@ public class Sites {
 	/*
 	 * Constructeur
 	 */
-	public Sites() {
+	public Site() {
 
 	}
 
 	/*
 	 * Constructeur avec Id
 	 */
-	public Sites(Long id_Site, String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions,
+	public Site(Long id_Site, String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions,
 			TypeRoche rocher) {
 		this.id_Site = id_Site;
 		this.nom = nom;
@@ -70,7 +70,7 @@ public class Sites {
 	/*
 	 * Constructeur sans Id
 	 */
-	public Sites(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions,
+	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions,
 			TypeRoche rocher) {
 		this.nom = nom;
 		this.hauteurMax = hauteurMax;
@@ -86,7 +86,7 @@ public class Sites {
 		}
 
 		secteurs.add(secteur);
-		secteur.setSites(this);
+		secteur.setSite(this);
 	}
 
 	/**************************************

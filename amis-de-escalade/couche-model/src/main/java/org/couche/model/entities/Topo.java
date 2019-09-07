@@ -35,7 +35,7 @@ public class Topo {
 	 */
 	@OneToMany(mappedBy = "topo", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
-	private List<Sites> sites;
+	private List<Site> sites;
 
 	/*
 	 * Relation de topo à utilisateur sans supression en cascade
@@ -86,11 +86,11 @@ public class Topo {
 		this.disponible = disponible;
 	}
 
-	public List<Sites> getSites() {
+	public List<Site> getSites() {
 		return sites;
 	}
 
-	public void setSites(List<Sites> sites) {
+	public void setSites(List<Site> sites) {
 		this.sites = sites;
 	}
 
