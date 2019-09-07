@@ -22,7 +22,7 @@
 	</organization>
 
 	<!-- =============================================================== -->
-	<!-- DistributionManagement -->github
+	<!-- DistributionManagement -->
 	<!-- =============================================================== -->
 	<distributionManagement>
 		<site>
@@ -84,11 +84,6 @@
 			<!-- ===== Bibliothèques tierces ===== -->
 			<dependency>
 				<groupId>org.springframework</groupId>
-<<<<<<< HEAD
-				<artifactId>spring-orm</artifactId>
-				<version>5.1.9.RELEASE</version>
-			</dependency>
-=======
 				<artifactId>spring-core</artifactId>
 				<version>5.1.9.RELEASE</version>
 			</dependency>
@@ -104,7 +99,7 @@
 				<artifactId>spring-context</artifactId>
 				<version>5.1.9.RELEASE</version>
 			</dependency>
->>>>>>> springorm
+
 
 			<dependency>
 				<groupId>org.hibernate</groupId>
