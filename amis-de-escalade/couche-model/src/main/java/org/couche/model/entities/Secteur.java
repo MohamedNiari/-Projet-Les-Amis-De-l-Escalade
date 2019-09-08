@@ -3,6 +3,7 @@ package org.couche.model.entities;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +23,10 @@ public class Secteur {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_Secteur;
+	@Column(name="secteur_id")
+	private Long secteurId;
 	private String nom;
+	@Column(name="numero_secteur")
 	private Integer numeroSecteur;
 	private String description;
 
@@ -37,7 +40,7 @@ public class Secteur {
 	 * Relation de secteur à site sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "id_Site")
+	@JoinColumn(name = "site_id")
 	private Site site;
 
 	/*
@@ -51,7 +54,7 @@ public class Secteur {
 	 * Constructeur avec Id
 	 */
 	public Secteur(Long id_Secteur, String nom, Integer numeroSecteur, String descriptions) {
-		this.id_Secteur = id_Secteur;
+		this.secteurId = id_Secteur;
 		this.nom = nom;
 		this.numeroSecteur = numeroSecteur;
 		this.description = descriptions;
@@ -79,11 +82,11 @@ public class Secteur {
 	}
 
 	public Long getId_Secteur() {
-		return id_Secteur;
+		return secteurId;
 	}
 
 	public void setId_Secteur(Long id_Secteur) {
-		this.id_Secteur = id_Secteur;
+		this.secteurId = id_Secteur;
 	}
 
 	public String getNom() {
@@ -120,7 +123,7 @@ public class Secteur {
 
 	@Override
 	public String toString() {
-		return "Secteur [id_Secteur=" + id_Secteur + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
+		return "Secteur [id_Secteur=" + secteurId + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
 				+ ", descriptions=" + description + ", voies=" + voies + ", site=" + site + "]";
 	}
 

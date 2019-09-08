@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,10 +24,12 @@ public class Topo {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_Topo;
+	@Column(name="topo_id")
+	private Long topoId;
 	private String nom;
 	private String description;
 	private String lieu;
+	@Column(name="date_parution")
 	private Date dateParution;
 	private Boolean disponible;
 
@@ -41,7 +44,7 @@ public class Topo {
 	 * Relation de topo à utilisateur sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "id_Utilisateur")
+	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
 
 	/*
@@ -51,17 +54,6 @@ public class Topo {
 
 	}
 
-	/*
-	 * Constructeur avec Id
-	 */
-	public Topo(Long id_Topo, String nom, String description, String lieu, Date dateParution, Boolean disponible) {
-		this.id_Topo = id_Topo;
-		this.nom = nom;
-		this.description = description;
-		this.lieu = lieu;
-		this.dateParution = dateParution;
-		this.disponible = disponible;
-	}
 
 	/*
 	 * Constructeur sans Id
@@ -103,11 +95,11 @@ public class Topo {
 	}
 
 	public Long getId_Topo() {
-		return id_Topo;
+		return topoId;
 	}
 
 	public void setId_Topo(Long id_Topo) {
-		this.id_Topo = id_Topo;
+		this.topoId = id_Topo;
 	}
 
 	public String getNom() {
@@ -152,7 +144,7 @@ public class Topo {
 
 	@Override
 	public String toString() {
-		return "Topo [id_Topo=" + id_Topo + ", nom=" + nom + ", description=" + description + ", lieu=" + lieu
+		return "Topo [id_Topo=" + topoId + ", nom=" + nom + ", description=" + description + ", lieu=" + lieu
 				+ ", dateParution=" + dateParution + ", disponible=" + disponible + ", sites=" + sites + "]";
 	}
 

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,12 +23,17 @@ public class Utilisateur {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_Utilisateur;
+	@Column(name="utilisateur_id")
+	private Long utilisateurId;
 	private String nom;
+	@Column(name="adresse_mail")
 	private String adresseMail;
 	private String identifiant;
+	@Column(name="mot_de_passe")
 	private String motDePasse;
+	@Column(name="date_inscription")
 	private Date dateInscription;
+	@Column(name="membre_association")
 	private Boolean membreAssociation;
 	private String prenom;
 	private String ville;
@@ -60,7 +66,7 @@ public class Utilisateur {
 	 */
 	public Utilisateur(Long id_Utilisateur, String nom, String adresseMail, String identifiant, String motDePasse,
 			Date dateInscription, Boolean membreAssociation, String prenom, String ville, String pays) {
-		this.id_Utilisateur = id_Utilisateur;
+		this.utilisateurId = id_Utilisateur;
 		this.nom = nom;
 		this.adresseMail = adresseMail;
 		this.identifiant = identifiant;
@@ -105,19 +111,19 @@ public class Utilisateur {
 	 **************************************/
 
 	public Long getId_Utilisateur() {
-		return id_Utilisateur;
+		return utilisateurId;
 	}
 
 	public void setId_Utilisateur(Long id_Utilisateur) {
-		this.id_Utilisateur = id_Utilisateur;
+		this.utilisateurId = id_Utilisateur;
 	}
 
 	public Long getId() {
-		return id_Utilisateur;
+		return utilisateurId;
 	}
 
 	public void setId(Long id_Utilisateur) {
-		this.id_Utilisateur = id_Utilisateur;
+		this.utilisateurId = id_Utilisateur;
 	}
 
 	public String getNom() {
@@ -210,7 +216,7 @@ public class Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Utilisateur [id_Utilisateur=" + id_Utilisateur + ", nom=" + nom + ", adresseMail=" + adresseMail
+		return "Utilisateur [id_Utilisateur=" + utilisateurId + ", nom=" + nom + ", adresseMail=" + adresseMail
 				+ ", identifiant=" + identifiant + ", motDePasse=" + motDePasse + ", dateInscription=" + dateInscription
 				+ ", membreAssociation=" + membreAssociation + ", prenom=" + prenom + ", ville=" + ville + ", pays="
 				+ pays + ", topos=" + topos + ", commentaires=" + commentaires + "]";

@@ -1,6 +1,7 @@
 package org.couche.model.entities;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,19 +20,23 @@ public class Voie {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_Voie;
+	@Column(name="voie_id")
+	private Long voieId;
 	private String nom;
+	@Column(name="nombre_longueur")
 	private Integer nombreLongueurs;
 	private String cotation;
 	private String description;
+	@Column(name="equiper_spits")
 	private Boolean equiperSpits;
+	@Column(name="numero_voie")
 	private Integer numeroVoie;
 
 	/*
 	 * Relation de voie à secteur sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "id_Secteur")
+	@JoinColumn(name = "secteur_id")
 	private Secteur secteur;
 
 	/*
@@ -46,7 +51,7 @@ public class Voie {
 	 */
 	public Voie(Long id_Voie, String nom, Integer nombreLongueurs, String cotation, String description,
 			Boolean equiperSpits, Integer numeroVoie) {
-		this.id_Voie = id_Voie;
+		this.voieId = id_Voie;
 		this.nom = nom;
 		this.nombreLongueurs = nombreLongueurs;
 		this.cotation = cotation;
@@ -73,11 +78,11 @@ public class Voie {
 	 **************************************/
 
 	public Long getId_Voie() {
-		return id_Voie;
+		return voieId;
 	}
 
 	public void setId_Voie(Long id_Voie) {
-		this.id_Voie = id_Voie;
+		this.voieId = id_Voie;
 	}
 
 	public String getNom() {
@@ -143,5 +148,13 @@ public class Voie {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Override
+	public String toString() {
+		return "Voie [voieId=" + voieId + ", nom=" + nom + ", nombreLongueurs=" + nombreLongueurs + ", cotation="
+				+ cotation + ", description=" + description + ", equiperSpits=" + equiperSpits + ", numeroVoie="
+				+ numeroVoie + ", secteur=" + secteur + "]";
+	}
+	
 
 }

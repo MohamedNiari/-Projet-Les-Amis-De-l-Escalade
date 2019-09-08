@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,14 +25,18 @@ public class Site {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_Site;
+	@Column(name="site_id")
+	private Long siteId;
 	private String nom;
+	@Column(name="hauteur_max")
 	private Integer hauteurMax;
 	private String lieu;
+	@Column(name="taguer_officiel")
 	private Boolean taguerOfficiel;
 	private String description;
 	@Embedded
 	private TypeRoche rocher;
+	@Column(name="url_image")
 	private String urlImage;
 
 	/*
@@ -44,7 +49,7 @@ public class Site {
 	private List<Commentaire> commentaires;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "id_Topo")
+	@JoinColumn(name = "topo_id")
 	private Topo topo;
 
 	/*
@@ -58,7 +63,7 @@ public class Site {
 	 * Constructeur avec Id
 	 */
 	public Site(Long id_Site, String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions, String urlImage, TypeRoche rocher) {
-		this.id_Site = id_Site;
+		this.siteId = id_Site;
 		this.nom = nom;
 		this.hauteurMax = hauteurMax;
 		this.lieu = lieu;
@@ -109,11 +114,11 @@ public class Site {
 	}
 
 	public Long getId_Site() {
-		return id_Site;
+		return siteId;
 	}
 
 	public void setId_Site(Long id_Site) {
-		this.id_Site = id_Site;
+		this.siteId = id_Site;
 	}
 
 	public String getNom() {
@@ -190,7 +195,7 @@ public class Site {
 
 	@Override
 	public String toString() {
-		return "Site [id_Site=" + id_Site + ", nom=" + nom + ", hauteurMax=" + hauteurMax + ", lieu=" + lieu
+		return "Site [id_Site=" + siteId + ", nom=" + nom + ", hauteurMax=" + hauteurMax + ", lieu=" + lieu
 				+ ", taguerOfficiel=" + taguerOfficiel + ", description=" + description + ", rocher=" + rocher
 				+ ", urlImage=" + urlImage + ", secteurs=" + secteurs + ", commentaires=" + commentaires + ", topo="
 				+ topo + "]";

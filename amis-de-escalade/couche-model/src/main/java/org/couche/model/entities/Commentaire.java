@@ -3,6 +3,7 @@ package org.couche.model.entities;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,16 +24,18 @@ public class Commentaire {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_Commentaire;
+	@Column(name="commentaire_id")
+	private Long commentaireId;
 	private String texte;
 	@Temporal(TemporalType.DATE)
-	private Date date_du_commentaire;
+	@Column(name="date_du_commentaire")
+	private Date dateDuCommentaire;
 
 	/*
 	 * Relation de commentaire à site sans suppression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "id_Site")
+	@JoinColumn(name = "site_id")
 	private Site site;
 
 	/*
@@ -40,7 +43,7 @@ public class Commentaire {
 	 * cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "id_Utilisateur")
+	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
 
 	/*
@@ -55,9 +58,9 @@ public class Commentaire {
 	 */
 	public Commentaire(Long id_Commentaire, String texte, Date date_du_commentaire) {
 		super();
-		this.id_Commentaire = id_Commentaire;
+		this.commentaireId = id_Commentaire;
 		this.texte = texte;
-		this.date_du_commentaire = date_du_commentaire;
+		this.dateDuCommentaire = date_du_commentaire;
 	}
 
 	/*
@@ -66,7 +69,7 @@ public class Commentaire {
 	public Commentaire(String texte, Date date_du_commentaire) {
 		super();
 		this.texte = texte;
-		this.date_du_commentaire = date_du_commentaire;
+		this.dateDuCommentaire = date_du_commentaire;
 		// this.utilisateur = utilisateur;
 	}
 
@@ -75,11 +78,11 @@ public class Commentaire {
 	 **************************************/
 
 	public Long getId_Commentaire() {
-		return id_Commentaire;
+		return commentaireId;
 	}
 
 	public void setId_Commentaire(Long id_Commentaire) {
-		this.id_Commentaire = id_Commentaire;
+		this.commentaireId = id_Commentaire;
 	}
 
 	public String getTexte() {
@@ -107,11 +110,11 @@ public class Commentaire {
 	}
 
 	public Date getDate_du_commentaire() {
-		return date_du_commentaire;
+		return dateDuCommentaire;
 	}
 
 	public void setDate_du_commentaire(Date date_du_commentaire) {
-		this.date_du_commentaire = date_du_commentaire;
+		this.dateDuCommentaire = date_du_commentaire;
 	}
 
 }
