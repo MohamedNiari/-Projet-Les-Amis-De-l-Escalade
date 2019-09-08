@@ -6,11 +6,11 @@ import org.couche.consumer.dao.implementation.SitesDaoImplementation;
 import org.couche.consumer.dao.implementation.UtilisateurDaoImplementation;
 import org.couche.model.entities.Site;
 
-public class SitesService {
+public class SiteService {
 
 	private static SitesDaoImplementation sitesDao;
 	
-	public SitesService() {
+	public SiteService() {
 		sitesDao = new SitesDaoImplementation();
 	}
 

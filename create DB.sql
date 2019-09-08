@@ -39,6 +39,7 @@ CREATE TABLE `site` (
   `taguerOfficiel` tinyint(1) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
   `rocher` enum('Calcaire','Granite','Gneiss') NOT NULL,
+  `url_Image` varchar(300),
   `id_Topo` bigint(20),
   PRIMARY KEY (`id_Site`),
   UNIQUE KEY `nom` (`nom`),

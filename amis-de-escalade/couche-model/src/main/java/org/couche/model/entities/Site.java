@@ -32,6 +32,7 @@ public class Site {
 	private String description;
 	@Embedded
 	private TypeRoche rocher;
+	private String urlImage;
 
 	/*
 	 * Relation de secteur à voie sans supression en cascade
@@ -56,8 +57,7 @@ public class Site {
 	/*
 	 * Constructeur avec Id
 	 */
-	public Site(Long id_Site, String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions,
-			TypeRoche rocher) {
+	public Site(Long id_Site, String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions, String urlImage, TypeRoche rocher) {
 		this.id_Site = id_Site;
 		this.nom = nom;
 		this.hauteurMax = hauteurMax;
@@ -70,8 +70,7 @@ public class Site {
 	/*
 	 * Constructeur sans Id
 	 */
-	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions,
-			TypeRoche rocher) {
+	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions, String urlImage, TypeRoche rocher) {
 		this.nom = nom;
 		this.hauteurMax = hauteurMax;
 		this.lieu = lieu;
@@ -180,5 +179,22 @@ public class Site {
 	public void setSecteurs(List<Secteur> secteurs) {
 		this.secteurs = secteurs;
 	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
+	}
+
+	@Override
+	public String toString() {
+		return "Site [id_Site=" + id_Site + ", nom=" + nom + ", hauteurMax=" + hauteurMax + ", lieu=" + lieu
+				+ ", taguerOfficiel=" + taguerOfficiel + ", description=" + description + ", rocher=" + rocher
+				+ ", urlImage=" + urlImage + ", secteurs=" + secteurs + ", commentaires=" + commentaires + ", topo="
+				+ topo + "]";
+	}
+	
 
 }
