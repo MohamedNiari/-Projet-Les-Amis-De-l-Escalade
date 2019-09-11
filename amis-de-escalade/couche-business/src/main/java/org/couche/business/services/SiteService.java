@@ -2,55 +2,56 @@ package org.couche.business.services;
 
 import java.util.List;
 
-import org.couche.consumer.dao.implementation.SitesDaoImplementation;
-import org.couche.consumer.dao.implementation.UtilisateurDaoImplementation;
+import org.couche.consumer.dao.implementation.SiteDaoImplementation;
 import org.couche.model.entities.Site;
+import org.couche.model.entities.Topo;
 
 public class SiteService {
 
-	private static SitesDaoImplementation sitesDao;
-	
+	private static SiteDaoImplementation siteDao;
+
 	public SiteService() {
-		sitesDao = new SitesDaoImplementation();
+		siteDao = new SiteDaoImplementation();
 	}
 
-	public void create(Site entity) {
-		sitesDao.openCurrentSessionwithTransaction();
-		sitesDao.create(entity);
-		sitesDao.closeCurrentSessionwithTransaction();
+	public void create(Site site, Topo topo) {
+		siteDao.openCurrentSessionwithTransaction();
+		siteDao.add(site, topo);
+		siteDao.create(site);
+		siteDao.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(Site entity) {
-		sitesDao.openCurrentSessionwithTransaction();
-		sitesDao.update(entity);
-		sitesDao.closeCurrentSessionwithTransaction();
+	public void update(Site site) {
+		siteDao.openCurrentSessionwithTransaction();
+		siteDao.update(site);
+		siteDao.closeCurrentSessionwithTransaction();
 	}
 
 	public Site findById(Long id) {
-		sitesDao.openCurrentSession();
-		Site site = sitesDao.findById(id);
-		sitesDao.closeCurrentSession();
+		siteDao.openCurrentSession();
+		Site site = siteDao.findById(id);
+		siteDao.closeCurrentSession();
 		return site;
 	}
 
 	public void delete(Long id) {
-		sitesDao.openCurrentSessionwithTransaction();
-		Site site = sitesDao.findById(id);
-		sitesDao.delete(site);
-		sitesDao.closeCurrentSessionwithTransaction();
+		siteDao.openCurrentSessionwithTransaction();
+		Site site = siteDao.findById(id);
+		siteDao.delete(site);
+		siteDao.closeCurrentSessionwithTransaction();
 	}
 
 	public List<Site> findAll() {
-		sitesDao.openCurrentSession();
-		List<Site> sites = sitesDao.findAll();
-		sitesDao.closeCurrentSession();
+		siteDao.openCurrentSession();
+		List<Site> sites = siteDao.findAll();
+		siteDao.closeCurrentSession();
 		return sites;
 	}
 
 	public void deleteAll() {
-		sitesDao.openCurrentSessionwithTransaction();
-		sitesDao.deleteAll();
-		sitesDao.closeCurrentSessionwithTransaction();
+		siteDao.openCurrentSessionwithTransaction();
+		siteDao.deleteAll();
+		siteDao.closeCurrentSessionwithTransaction();
 	}
 
 }

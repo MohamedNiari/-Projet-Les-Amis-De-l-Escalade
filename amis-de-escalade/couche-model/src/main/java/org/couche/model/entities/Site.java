@@ -83,6 +83,18 @@ public class Site {
 		this.description = descriptions;
 		this.rocher = rocher;
 	}
+	
+	/*
+	 * Méthode pour la relation bidirectionnelle
+	 */
+	public void add(Commentaire commentaire) {
+		if (commentaires == null) {
+			commentaires = new ArrayList<>();
+		}
+
+		commentaires.add(commentaire);
+		commentaire.setSite(this);
+	}
 
 	public void add(Secteur secteur) {
 		if (secteurs == null) {

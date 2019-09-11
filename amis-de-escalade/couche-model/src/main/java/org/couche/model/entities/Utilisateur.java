@@ -23,17 +23,17 @@ public class Utilisateur {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="utilisateur_id")
+	@Column(name = "utilisateur_id")
 	private Long utilisateurId;
 	private String nom;
-	@Column(name="adresse_mail")
+	@Column(name = "adresse_mail")
 	private String adresseMail;
 	private String identifiant;
-	@Column(name="mot_de_passe")
+	@Column(name = "mot_de_passe")
 	private String motDePasse;
-	@Column(name="date_inscription")
+	@Column(name = "date_inscription")
 	private Date dateInscription;
-	@Column(name="membre_association")
+	@Column(name = "membre_association")
 	private Boolean membreAssociation;
 	private String prenom;
 	private String ville;
@@ -47,8 +47,7 @@ public class Utilisateur {
 	private List<Topo> topos;
 
 	/*
-	 * Relation de utilisateur à commentaire sans suppression en
-	 * cascade
+	 * Relation de utilisateur à commentaire sans suppression en cascade
 	 */
 	@OneToMany(mappedBy = "utilisateur", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
@@ -93,7 +92,7 @@ public class Utilisateur {
 		this.ville = ville;
 		this.pays = pays;
 	}
-	
+
 	/*
 	 * Méthode pour la relation bidirectionnelle
 	 */
@@ -105,7 +104,17 @@ public class Utilisateur {
 		topos.add(topo);
 		topo.setUtilisateur(this);
 	}
+	
+	public void add(Commentaire commentaire) {
+		if (commentaires == null) {
+			commentaires = new ArrayList<>();
+		}
 
+		commentaires.add(commentaire);
+		commentaire.setUtilisateur(this);
+	}
+
+	
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
@@ -221,6 +230,5 @@ public class Utilisateur {
 				+ ", membreAssociation=" + membreAssociation + ", prenom=" + prenom + ", ville=" + ville + ", pays="
 				+ pays + ", topos=" + topos + ", commentaires=" + commentaires + "]";
 	}
-	
 	
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Commentaire;
+import org.couche.model.entities.Site;
+import org.couche.model.entities.Utilisateur;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,7 +14,6 @@ import org.hibernate.cfg.Configuration;
 public class CommentaireDaoImplementation implements DaoInterface<Commentaire, Long> {
 
 	private Session currentSession;
-
 	private Transaction currentTransaction;
 
 	public CommentaireDaoImplementation() {
@@ -25,7 +26,6 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 	private static SessionFactory getSessionFactory() {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Commentaire.class)
 				.buildSessionFactory();
-
 		return factory;
 	}
 
@@ -85,18 +85,18 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 	 * Methodes d'accès la base de données
 	 */
 	@Override
-	public void create(Commentaire entity) {
-		getCurrentSession().save(entity);
+	public void create(Commentaire commentaire) {
+		getCurrentSession().save(commentaire);
 	}
 
 	@Override
-	public void update(Commentaire entity) {
-		getCurrentSession().update(entity);
+	public void update(Commentaire commentaire) {
+		getCurrentSession().update(commentaire);
 	}
 
 	@Override
-	public void delete(Commentaire entity) {
-		getCurrentSession().delete(entity);
+	public void delete(Commentaire commentaire) {
+		getCurrentSession().delete(commentaire);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -108,9 +108,9 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 
 	@Override
 	public void deleteAll() {
-		List<Commentaire> entityList = findAll();
-		for (Commentaire entity : entityList) {
-			delete(entity);
+		List<Commentaire> commentaireList = findAll();
+		for (Commentaire commentaire : commentaireList) {
+			delete(commentaire);
 		}
 	}
 
@@ -118,6 +118,14 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 	public Commentaire findById(Long id) {
 		Commentaire Commentaire = (Commentaire) getCurrentSession().get(Commentaire.class, id);
 		return Commentaire;
+	}
+
+	public void add(Commentaire commentaire, Utilisateur utilisateur) {
+		utilisateur.add(commentaire);
+	}
+
+	public void add(Commentaire commentaire, Site site) {
+		site.add(commentaire);
 	}
 
 }

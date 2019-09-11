@@ -13,15 +13,15 @@ public class UtilisateurService {
 		utilisateurDao = new UtilisateurDaoImplementation();
 	}
 
-	public void create(Utilisateur entity) {
+	public void create(Utilisateur utilisateur) {
 		utilisateurDao.openCurrentSessionwithTransaction();
-		utilisateurDao.create(entity);
+		utilisateurDao.create(utilisateur);
 		utilisateurDao.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(Utilisateur entity) {
+	public void update(Utilisateur utilisateur) {
 		utilisateurDao.openCurrentSessionwithTransaction();
-		utilisateurDao.update(entity);
+		utilisateurDao.update(utilisateur);
 		utilisateurDao.closeCurrentSessionwithTransaction();
 	}
 

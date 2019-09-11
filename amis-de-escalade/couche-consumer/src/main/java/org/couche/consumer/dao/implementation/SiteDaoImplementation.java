@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Site;
+import org.couche.model.entities.Topo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class SitesDaoImplementation implements DaoInterface<Site, Long> {
+public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 
 	private Session currentSession;
 
@@ -18,7 +19,7 @@ public class SitesDaoImplementation implements DaoInterface<Site, Long> {
 	/*
 	 * Constructor
 	 */
-	public SitesDaoImplementation() {
+	public SiteDaoImplementation() {
 
 	}
 
@@ -88,19 +89,19 @@ public class SitesDaoImplementation implements DaoInterface<Site, Long> {
 	 * Methodes d'accès la base de données
 	 */
 	@Override
-	public void create(Site entity) {
-		getCurrentSession().save(entity);
+	public void create(Site site) {
+		getCurrentSession().save(site);
 
 	}
 
 	@Override
-	public void update(Site entity) {
-		getCurrentSession().update(entity);
+	public void update(Site site) {
+		getCurrentSession().update(site);
 	}
 
 	@Override
-	public void delete(Site entity) {
-		getCurrentSession().delete(entity);
+	public void delete(Site site) {
+		getCurrentSession().delete(site);
 
 	}
 
@@ -113,9 +114,9 @@ public class SitesDaoImplementation implements DaoInterface<Site, Long> {
 
 	@Override
 	public void deleteAll() {
-		List<Site> entityList = findAll();
-		for (Site entity : entityList) {
-			delete(entity);
+		List<Site> siteList = findAll();
+		for (Site site : siteList) {
+			delete(site);
 		}
 	}
 
@@ -123,5 +124,10 @@ public class SitesDaoImplementation implements DaoInterface<Site, Long> {
 	public Site findById(Long id) {
 		Site Sites = (Site) getCurrentSession().get(Site.class, id);
 		return Sites;
+	}
+
+	public void add(Site site, Topo topo) {
+		topo.add(site);
+
 	}
 }

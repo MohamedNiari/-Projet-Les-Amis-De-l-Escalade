@@ -20,16 +20,16 @@ public class Voie {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="voie_id")
+	@Column(name = "voie_id")
 	private Long voieId;
 	private String nom;
-	@Column(name="nombre_longueur")
+	@Column(name = "nombre_longueur")
 	private Integer nombreLongueurs;
 	private String cotation;
 	private String description;
-	@Column(name="equiper_spits")
+	@Column(name = "equiper_spits")
 	private Boolean equiperSpits;
-	@Column(name="numero_voie")
+	@Column(name = "numero_voie")
 	private Integer numeroVoie;
 
 	/*
@@ -155,6 +155,5 @@ public class Voie {
 				+ cotation + ", description=" + description + ", equiperSpits=" + equiperSpits + ", numeroVoie="
 				+ numeroVoie + ", secteur=" + secteur + "]";
 	}
-	
 
 }

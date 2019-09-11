@@ -3,13 +3,14 @@ package org.couche.consumer.dao.implementation;
 import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
+import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Voie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class VoieDaoImplementation implements  DaoInterface<Voie, Long> {
+public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 
 	private Session currentSession;
 
@@ -28,7 +29,6 @@ public class VoieDaoImplementation implements  DaoInterface<Voie, Long> {
 	private static SessionFactory getSessionFactory() {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Voie.class)
 				.buildSessionFactory();
-
 		return factory;
 	}
 
@@ -88,19 +88,19 @@ public class VoieDaoImplementation implements  DaoInterface<Voie, Long> {
 	 * Methodes d'accès la base de données
 	 */
 	@Override
-	public void create(Voie entity) {
-		getCurrentSession().save(entity);
+	public void create(Voie voie) {
+		getCurrentSession().save(voie);
 
 	}
 
 	@Override
-	public void update(Voie entity) {
-		getCurrentSession().update(entity);
+	public void update(Voie voie) {
+		getCurrentSession().update(voie);
 	}
 
 	@Override
-	public void delete(Voie entity) {
-		getCurrentSession().delete(entity);
+	public void delete(Voie voie) {
+		getCurrentSession().delete(voie);
 
 	}
 
@@ -113,9 +113,9 @@ public class VoieDaoImplementation implements  DaoInterface<Voie, Long> {
 
 	@Override
 	public void deleteAll() {
-		List<Voie> entityList = findAll();
-		for (Voie entity : entityList) {
-			delete(entity);
+		List<Voie> voieList = findAll();
+		for (Voie voie : voieList) {
+			delete(voie);
 		}
 	}
 
@@ -123,5 +123,9 @@ public class VoieDaoImplementation implements  DaoInterface<Voie, Long> {
 	public Voie findById(Long id) {
 		Voie Voie = (Voie) getCurrentSession().get(Voie.class, id);
 		return Voie;
+	}
+
+	public void add(Voie voie, Secteur secteur) {
+		secteur.add(voie);
 	}
 }

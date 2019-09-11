@@ -3,6 +3,7 @@ package org.couche.business.services;
 import java.util.List;
 
 import org.couche.consumer.dao.implementation.VoieDaoImplementation;
+import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Voie;
 
 public class VoieService {
@@ -13,15 +14,16 @@ public class VoieService {
 		voieDao = new VoieDaoImplementation();
 	}
 
-	public void create(Voie entity) {
+	public void create(Voie voie, Secteur secteur) {
 		voieDao.openCurrentSessionwithTransaction();
-		voieDao.create(entity);
+		voieDao.add(voie, secteur);
+		voieDao.create(voie);
 		voieDao.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(Voie entity) {
+	public void update(Voie voie) {
 		voieDao.openCurrentSessionwithTransaction();
-		voieDao.update(entity);
+		voieDao.update(voie);
 		voieDao.closeCurrentSessionwithTransaction();
 	}
 

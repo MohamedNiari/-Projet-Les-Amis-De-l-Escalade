@@ -5,6 +5,7 @@ import java.util.List;
 import org.couche.consumer.dao.implementation.SecteurDaoImplementation;
 import org.couche.consumer.dao.implementation.UtilisateurDaoImplementation;
 import org.couche.model.entities.Secteur;
+import org.couche.model.entities.Site;
 
 public class SecteurService {
 
@@ -14,15 +15,16 @@ public class SecteurService {
 		secteurDao = new SecteurDaoImplementation();
 	}
 
-	public void create(Secteur entity) {
+	public void create(Secteur secteur, Site site) {
 		secteurDao.openCurrentSessionwithTransaction();
-		secteurDao.create(entity);
+		secteurDao.add(secteur, site);
+		secteurDao.create(secteur);
 		secteurDao.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(Secteur entity) {
+	public void update(Secteur secteur) {
 		secteurDao.openCurrentSessionwithTransaction();
-		secteurDao.update(entity);
+		secteurDao.update(secteur);
 		secteurDao.closeCurrentSessionwithTransaction();
 	}
 

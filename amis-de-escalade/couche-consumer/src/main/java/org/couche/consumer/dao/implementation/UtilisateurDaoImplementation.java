@@ -88,19 +88,19 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 	 * Methodes d'accès la base de données
 	 */
 	@Override
-	public void create(Utilisateur entity) {
-		getCurrentSession().save(entity);
+	public void create(Utilisateur utilisateur) {
+		getCurrentSession().save(utilisateur);
 
 	}
 
 	@Override
-	public void update(Utilisateur entity) {
-		getCurrentSession().update(entity);
+	public void update(Utilisateur utilisateur) {
+		getCurrentSession().update(utilisateur);
 	}
 
 	@Override
-	public void delete(Utilisateur entity) {
-		getCurrentSession().delete(entity);
+	public void delete(Utilisateur utilisateur) {
+		getCurrentSession().delete(utilisateur);
 
 	}
 
@@ -113,9 +113,9 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 
 	@Override
 	public void deleteAll() {
-		List<Utilisateur> entityList = findAll();
-		for (Utilisateur entity : entityList) {
-			delete(entity);
+		List<Utilisateur> utilisateurList = findAll();
+		for (Utilisateur utilisateur : utilisateurList) {
+			delete(utilisateur);
 		}
 	}
 

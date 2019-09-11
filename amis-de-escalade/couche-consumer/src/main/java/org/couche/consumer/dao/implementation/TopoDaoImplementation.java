@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Topo;
+import org.couche.model.entities.Utilisateur;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -27,8 +28,7 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 	 */
 	private static SessionFactory getSessionFactory() {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Topo.class)
-				.buildSessionFactory();
-
+				.addAnnotatedClass(Utilisateur.class).buildSessionFactory();
 		return factory;
 	}
 
@@ -88,19 +88,18 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 	 * Methodes d'accès la base de données
 	 */
 	@Override
-	public void create(Topo entity) {
-		getCurrentSession().save(entity);
-
+	public void create(Topo topo) {
+		getCurrentSession().save(topo);
 	}
 
 	@Override
-	public void update(Topo entity) {
-		getCurrentSession().update(entity);
+	public void update(Topo topo) {
+		getCurrentSession().update(topo);
 	}
 
 	@Override
-	public void delete(Topo entity) {
-		getCurrentSession().delete(entity);
+	public void delete(Topo topo) {
+		getCurrentSession().delete(topo);
 
 	}
 
@@ -113,9 +112,9 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 
 	@Override
 	public void deleteAll() {
-		List<Topo> entityList = findAll();
-		for (Topo entity : entityList) {
-			delete(entity);
+		List<Topo> topoList = findAll();
+		for (Topo topo : topoList) {
+			delete(topo);
 		}
 	}
 
@@ -124,4 +123,9 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 		Topo Topo = (Topo) getCurrentSession().get(Topo.class, id);
 		return Topo;
 	}
+
+	public void add(Topo topo, Utilisateur utilisateur) {
+		utilisateur.add(topo);
+	}
+
 }

@@ -1,5 +1,6 @@
 package org.couche.model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -67,6 +68,18 @@ public class Secteur {
 		this.nom = nom;
 		this.numeroSecteur = numeroSecteur;
 		this.description = descriptions;
+	}
+	
+	/*
+	 * Méthode pour la relation bidirectionnelle
+	 */
+	public void add(Voie voie) {
+		if (voies == null) {
+			voies = new ArrayList<>();
+		}
+
+		voies.add(voie);
+		voie.setSecteur(this);
 	}
 	
 

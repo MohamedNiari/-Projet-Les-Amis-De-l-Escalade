@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.couche.consumer.dao.implementation.CommentaireDaoImplementation;
 import org.couche.model.entities.Commentaire;
+import org.couche.model.entities.Site;
+import org.couche.model.entities.Utilisateur;
 
 public class CommentaireService {
 
@@ -13,15 +15,17 @@ public class CommentaireService {
 		commentaireDao = new CommentaireDaoImplementation();
 	}
 
-	public void create(Commentaire entity) {
+	public void create(Commentaire commentaire, Utilisateur utilisateur, Site site) {
 		commentaireDao.openCurrentSessionwithTransaction();
-		commentaireDao.create(entity);
+		commentaireDao.add(commentaire, utilisateur);
+		commentaireDao.add(commentaire, site);
+		commentaireDao.create(commentaire);
 		commentaireDao.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(Commentaire entity) {
+	public void update(Commentaire commentaire) {
 		commentaireDao.openCurrentSessionwithTransaction();
-		commentaireDao.update(entity);
+		commentaireDao.update(commentaire);
 		commentaireDao.closeCurrentSessionwithTransaction();
 	}
 

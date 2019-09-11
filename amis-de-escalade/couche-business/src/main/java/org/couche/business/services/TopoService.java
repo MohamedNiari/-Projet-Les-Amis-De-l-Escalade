@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.couche.consumer.dao.implementation.TopoDaoImplementation;
 import org.couche.model.entities.Topo;
+import org.couche.model.entities.Utilisateur;
 
 public class TopoService {
 
@@ -13,15 +14,16 @@ public class TopoService {
 		topoDao = new TopoDaoImplementation();
 	}
 
-	public void create(Topo entity) {
+	public void create(Topo topo, Utilisateur utilisateur) {
 		topoDao.openCurrentSessionwithTransaction();
-		topoDao.create(entity);
+		topoDao.add(topo, utilisateur);
+		topoDao.create(topo);
 		topoDao.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(Topo entity) {
+	public void update(Topo topo) {
 		topoDao.openCurrentSessionwithTransaction();
-		topoDao.update(entity);
+		topoDao.update(topo);
 		topoDao.closeCurrentSessionwithTransaction();
 	}
 

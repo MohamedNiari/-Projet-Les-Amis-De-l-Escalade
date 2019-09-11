@@ -1,5 +1,6 @@
 package org.couche.model.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,6 +65,20 @@ public class Topo {
 		this.lieu = lieu;
 		this.dateParution = dateParution;
 		this.disponible = disponible;
+		
+	}
+	
+	
+	/*
+	 * Méthode pour la relation bidirectionnelle
+	 */
+	public void add(Site site) {
+		if (sites == null) {
+			sites = new ArrayList<>();
+		}
+
+		sites.add(site);
+		site.setTopo(this);
 	}
 
 	/**************************************

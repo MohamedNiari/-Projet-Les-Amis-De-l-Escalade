@@ -24,11 +24,11 @@ public class AppTestCreate {
 		// test pour la table topo
 		TopoService topoService = new TopoService();
 
-		Topo topoServiceTest = new Topo("Escalade en Savoie",
+		Topo topoTest = new Topo("Escalade en Savoie2",
 				"Dans l’avant-pays savoyard, à la limite entre la Savoie et l’Ain, le Rhône a creusé sur 1 km le défilé de PierreChâtel. En rive gauche et rive droite, les gorges sont bordées de falaises qui surplombent les eaux vertes du fleuve.",
-				"La Savoie", dateFormat.parse("04-09-2019"), true, utilisateurTest.getId());
-
-		topoService.create(topoServiceTest);
+				"La Savoie2", dateFormat.parse("04-09-2019"), true);
+		
+		topoService.create(topoTest, utilisateurTest);
 
 	}
 

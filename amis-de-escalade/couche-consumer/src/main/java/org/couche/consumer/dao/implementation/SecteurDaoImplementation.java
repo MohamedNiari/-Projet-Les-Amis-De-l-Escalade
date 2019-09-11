@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Secteur;
+import org.couche.model.entities.Site;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,16 +17,15 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 	private Transaction currentTransaction;
 
 	public SecteurDaoImplementation() {
-		
+
 	}
-	
+
 	/*
 	 * Création de la session factory
 	 */
 	private static SessionFactory getSessionFactory() {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Secteur.class)
 				.buildSessionFactory();
-
 		return factory;
 	}
 
@@ -61,14 +61,14 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 		currentTransaction.commit();
 		currentSession.close();
 	}
-	
+
 	/*
 	 * Getters and setters
 	 */
 	public Session getCurrentSession() {
 		return currentSession;
 	}
-	
+
 	public void setCurrentSession(Session currentSession) {
 		this.currentSession = currentSession;
 	}
@@ -80,25 +80,24 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 	public void setCurrentTransaction(Transaction currentTransaction) {
 		this.currentTransaction = currentTransaction;
 	}
-	
-	
+
 	/*
 	 * Methodes d'accès la base de données
 	 */
 	@Override
-	public void create(Secteur entity) {
-		getCurrentSession().save(entity);
+	public void create(Secteur secteur) {
+		getCurrentSession().save(secteur);
 
 	}
 
 	@Override
-	public void update(Secteur entity) {
-		getCurrentSession().update(entity);
+	public void update(Secteur secteur) {
+		getCurrentSession().update(secteur);
 	}
 
 	@Override
-	public void delete(Secteur entity) {
-		getCurrentSession().delete(entity);
+	public void delete(Secteur secteur) {
+		getCurrentSession().delete(secteur);
 
 	}
 
@@ -111,9 +110,9 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 
 	@Override
 	public void deleteAll() {
-		List<Secteur> entityList = findAll();
-		for (Secteur entity : entityList) {
-			delete(entity);
+		List<Secteur> secteurList = findAll();
+		for (Secteur secteur : secteurList) {
+			delete(secteur);
 		}
 	}
 
@@ -122,5 +121,9 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 		Secteur Secteur = (Secteur) getCurrentSession().get(Secteur.class, id);
 		return Secteur;
 	}
-	
+
+	public void add(Secteur secteur, Site site) {
+		site.add(secteur);
+	}
+
 }
