@@ -5,8 +5,9 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,18 +26,19 @@ public class Site {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="site_id")
+	@Column(name = "site_id")
 	private Long siteId;
 	private String nom;
-	@Column(name="hauteur_max")
+	@Column(name = "hauteur_max")
 	private Integer hauteurMax;
 	private String lieu;
-	@Column(name="taguer_officiel")
+	@Column(name = "taguer_officiel")
 	private Boolean taguerOfficiel;
 	private String description;
-	@Embedded
-	private TypeRoche rocher;
-	@Column(name="url_image")
+	@Column(columnDefinition = "enum('calcaire', 'granite', 'gneiss')")
+	@Enumerated(EnumType.STRING)
+	private Rocher rocher;
+	@Column(name = "url_image")
 	private String urlImage;
 
 	/*
@@ -60,30 +62,19 @@ public class Site {
 	}
 
 	/*
-	 * Constructeur avec Id
+	 * Constructeur sans Id
 	 */
-	public Site(Long id_Site, String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions, String urlImage, TypeRoche rocher) {
-		this.siteId = id_Site;
+	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String description,
+			String urlImage, Rocher rocher) {
 		this.nom = nom;
 		this.hauteurMax = hauteurMax;
 		this.lieu = lieu;
 		this.taguerOfficiel = taguerOfficiel;
-		this.description = descriptions;
+		this.description = description;
+		this.urlImage = urlImage;
 		this.rocher = rocher;
 	}
 
-	/*
-	 * Constructeur sans Id
-	 */
-	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String descriptions, String urlImage, TypeRoche rocher) {
-		this.nom = nom;
-		this.hauteurMax = hauteurMax;
-		this.lieu = lieu;
-		this.taguerOfficiel = taguerOfficiel;
-		this.description = descriptions;
-		this.rocher = rocher;
-	}
-	
 	/*
 	 * Méthode pour la relation bidirectionnelle
 	 */
@@ -172,12 +163,12 @@ public class Site {
 	public void setDescriptions(String descriptions) {
 		this.description = descriptions;
 	}
-
-	public TypeRoche getRocher() {
+	
+	public Rocher getRocher() {
 		return rocher;
 	}
 
-	public void setRocher(TypeRoche rocher) {
+	public void setRocher(Rocher rocher) {
 		this.rocher = rocher;
 	}
 
@@ -207,11 +198,10 @@ public class Site {
 
 	@Override
 	public String toString() {
-		return "Site [id_Site=" + siteId + ", nom=" + nom + ", hauteurMax=" + hauteurMax + ", lieu=" + lieu
+		return "Site [siteId=" + siteId + ", nom=" + nom + ", hauteurMax=" + hauteurMax + ", lieu=" + lieu
 				+ ", taguerOfficiel=" + taguerOfficiel + ", description=" + description + ", rocher=" + rocher
-				+ ", urlImage=" + urlImage + ", secteurs=" + secteurs + ", commentaires=" + commentaires + ", topo="
-				+ topo + "]";
+				+ ", urlImage=" + urlImage + ", commentaires=" + commentaires + ", topo="
+				+ topo.getNom() + "]";
 	}
-	
 
 }

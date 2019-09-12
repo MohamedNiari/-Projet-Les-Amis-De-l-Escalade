@@ -61,23 +61,6 @@ public class Utilisateur {
 	}
 
 	/*
-	 * Constructeur avec Id
-	 */
-	public Utilisateur(Long id_Utilisateur, String nom, String adresseMail, String identifiant, String motDePasse,
-			Date dateInscription, Boolean membreAssociation, String prenom, String ville, String pays) {
-		this.utilisateurId = id_Utilisateur;
-		this.nom = nom;
-		this.adresseMail = adresseMail;
-		this.identifiant = identifiant;
-		this.motDePasse = motDePasse;
-		this.dateInscription = dateInscription;
-		this.membreAssociation = membreAssociation;
-		this.prenom = prenom;
-		this.ville = ville;
-		this.pays = pays;
-	}
-
-	/*
 	 * Constructeur sans Id
 	 */
 	public Utilisateur(String nom, String adresseMail, String identifiant, String motDePasse, Date dateInscription,
@@ -104,7 +87,7 @@ public class Utilisateur {
 		topos.add(topo);
 		topo.setUtilisateur(this);
 	}
-	
+
 	public void add(Commentaire commentaire) {
 		if (commentaires == null) {
 			commentaires = new ArrayList<>();
@@ -114,7 +97,6 @@ public class Utilisateur {
 		commentaire.setUtilisateur(this);
 	}
 
-	
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
@@ -230,5 +212,5 @@ public class Utilisateur {
 				+ ", membreAssociation=" + membreAssociation + ", prenom=" + prenom + ", ville=" + ville + ", pays="
 				+ pays + ", topos=" + topos + ", commentaires=" + commentaires + "]";
 	}
-	
+
 }

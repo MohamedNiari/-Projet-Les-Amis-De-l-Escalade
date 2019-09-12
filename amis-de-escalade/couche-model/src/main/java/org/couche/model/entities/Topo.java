@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,19 +26,19 @@ public class Topo {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="topo_id")
+	@Column(name = "topo_id")
 	private Long topoId;
 	private String nom;
 	private String description;
 	private String lieu;
-	@Column(name="date_parution")
+	@Column(name = "date_parution")
 	private Date dateParution;
 	private Boolean disponible;
 
 	/*
 	 * Relation de secteur à voie sans supression en cascade
 	 */
-	@OneToMany(mappedBy = "topo", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "topo", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
 	private List<Site> sites;
 
@@ -55,7 +56,6 @@ public class Topo {
 
 	}
 
-
 	/*
 	 * Constructeur sans Id
 	 */
@@ -65,14 +65,13 @@ public class Topo {
 		this.lieu = lieu;
 		this.dateParution = dateParution;
 		this.disponible = disponible;
-		
+
 	}
-	
-	
+
 	/*
 	 * Méthode pour la relation bidirectionnelle
 	 */
-	public void add(Site site) {
+	public void add(Site site) {		
 		if (sites == null) {
 			sites = new ArrayList<>();
 		}
@@ -159,8 +158,11 @@ public class Topo {
 
 	@Override
 	public String toString() {
-		return "Topo [id_Topo=" + topoId + ", nom=" + nom + ", description=" + description + ", lieu=" + lieu
-				+ ", dateParution=" + dateParution + ", disponible=" + disponible + ", sites=" + sites + "]";
+		return "Topo [topoId=" + topoId + ", nom=" + nom + ", description=" + description + ", lieu=" + lieu
+				+ ", dateParution=" + dateParution + ", disponible=" + disponible 
+				+ ", utilisateur=" + utilisateur.getNom() + "]";
 	}
+	
+	
 
 }

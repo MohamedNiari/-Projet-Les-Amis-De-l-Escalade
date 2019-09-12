@@ -108,8 +108,8 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Site> findAll() {
-		List<Site> Sitess = (List<Site>) getCurrentSession().createQuery("from escalade").list();
-		return Sitess;
+		List<Site> sites = (List<Site>) getCurrentSession().createQuery("from escalade").list();
+		return sites;
 	}
 
 	@Override
@@ -122,12 +122,11 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 
 	@Override
 	public Site findById(Long id) {
-		Site Sites = (Site) getCurrentSession().get(Site.class, id);
-		return Sites;
+		Site site = (Site) getCurrentSession().get(Site.class, id);
+		return site;
 	}
 
 	public void add(Site site, Topo topo) {
 		topo.add(site);
-
 	}
 }
