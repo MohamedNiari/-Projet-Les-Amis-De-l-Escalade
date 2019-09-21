@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -203,9 +202,17 @@ public class Utilisateur {
 		this.commentaires = commentaires;
 	}
 
+	public Long getUtilisateurId() {
+		return utilisateurId;
+	}
+
+	public void setUtilisateurId(Long utilisateurId) {
+		this.utilisateurId = utilisateurId;
+	}
+
 	@Override
 	public String toString() {
-		return "Utilisateur [id_Utilisateur=" + utilisateurId + ", nom=" + nom + ", adresseMail=" + adresseMail
+		return "Utilisateur [utilisateurId=" + utilisateurId + ", nom=" + nom + ", adresseMail=" + adresseMail
 				+ ", identifiant=" + identifiant + ", motDePasse=" + motDePasse + ", dateInscription=" + dateInscription
 				+ ", membreAssociation=" + membreAssociation + ", prenom=" + prenom + ", ville=" + ville + ", pays="
 				+ pays + ", topos=" + topos + ", commentaires=" + commentaires + "]";

@@ -167,9 +167,8 @@ public class Topo {
 	@Override
 	public String toString() {
 		return "Topo [topoId=" + topoId + ", nom=" + nom + ", description=" + description + ", lieu=" + lieu
-				+ ", dateParution=" + dateParution + ", disponible=" + disponible 
-				+ ", utilisateur=" + utilisateur.getNom() + "]";
+				+ ", dateParution=" + dateParution + ", disponible=" + disponible + ", sites=" + sites
+				+ ", utilisateur=" + utilisateur + "]";
 	}
-	
-	
+
 }

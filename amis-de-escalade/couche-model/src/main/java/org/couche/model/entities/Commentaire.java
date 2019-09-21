@@ -122,5 +122,5 @@ public class Commentaire {
 		return "Commentaire [commentaireId=" + commentaireId + ", texte=" + texte + ", dateDuCommentaire="
 				+ dateDuCommentaire + ", site=" + site + ", utilisateur=" + utilisateur + "]";
 	}
-	
+
 }

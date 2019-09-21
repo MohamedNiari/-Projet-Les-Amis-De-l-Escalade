@@ -35,9 +35,10 @@ public class Site {
 	@Column(name = "taguer_officiel")
 	private Boolean taguerOfficiel;
 	private String description;
-	@Column(columnDefinition = "enum('calcaire', 'granite', 'gneiss')")
+	// @Column(columnDefinition = "enum('calcaire', 'granite', 'gneiss')")
 	@Enumerated(EnumType.STRING)
-	private Rocher rocher;
+	@Column(name = "type_rocher")
+	private TypeRocher typeRocher;
 	@Column(name = "url_image")
 	private String urlImage;
 
@@ -65,14 +66,14 @@ public class Site {
 	 * Constructeur sans Id
 	 */
 	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String description,
-			String urlImage, Rocher rocher, Topo topo) {
+			String urlImage, TypeRocher typeRocher, Topo topo) {
 		this.nom = nom;
 		this.hauteurMax = hauteurMax;
 		this.lieu = lieu;
 		this.taguerOfficiel = taguerOfficiel;
 		this.description = description;
 		this.urlImage = urlImage;
-		this.rocher = rocher;
+		this.typeRocher = typeRocher;
 		this.topo = topo;
 	}
 
@@ -164,14 +165,6 @@ public class Site {
 	public void setDescriptions(String descriptions) {
 		this.description = descriptions;
 	}
-	
-	public Rocher getRocher() {
-		return rocher;
-	}
-
-	public void setRocher(Rocher rocher) {
-		this.rocher = rocher;
-	}
 
 	public Boolean getTaguerOfficiel() {
 		return taguerOfficiel;
@@ -196,8 +189,7 @@ public class Site {
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
-	
-	
+
 	public Long getSiteId() {
 		return siteId;
 	}
@@ -214,12 +206,20 @@ public class Site {
 		this.description = description;
 	}
 
+	public TypeRocher getTypeRocher() {
+		return typeRocher;
+	}
+
+	public void setTypeRocher(TypeRocher typeRocher) {
+		this.typeRocher = typeRocher;
+	}
+
 	@Override
 	public String toString() {
 		return "Site [siteId=" + siteId + ", nom=" + nom + ", hauteurMax=" + hauteurMax + ", lieu=" + lieu
-				+ ", taguerOfficiel=" + taguerOfficiel + ", description=" + description + ", rocher=" + rocher
-				+ ", urlImage=" + urlImage + ", commentaires=" + commentaires + ", topo="
-				+ topo.getNom() + "]";
+				+ ", taguerOfficiel=" + taguerOfficiel + ", description=" + description + ", typeRocher=" + typeRocher
+				+ ", urlImage=" + urlImage + ", secteurs=" + secteurs + ", commentaires=" + commentaires + ", topo="
+				+ topo + "]";
 	}
 
 }

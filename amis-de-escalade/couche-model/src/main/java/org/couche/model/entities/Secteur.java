@@ -142,8 +142,8 @@ public class Secteur {
 
 	@Override
 	public String toString() {
-		return "Secteur [id_Secteur=" + secteurId + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
-				+ ", descriptions=" + description + ", voies=" + voies + ", site=" + site + "]";
+		return "Secteur [secteurId=" + secteurId + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
+				+ ", description=" + description + ", voies=" + voies + ", site=" + site + "]";
 	}
 
 }
