@@ -126,7 +126,4 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		return site;
 	}
 
-	public void add(Site site, Topo topo) {
-		topo.add(site);
-	}
 }

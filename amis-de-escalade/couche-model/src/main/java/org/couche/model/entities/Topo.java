@@ -59,19 +59,19 @@ public class Topo {
 	/*
 	 * Constructeur sans Id
 	 */
-	public Topo(String nom, String description, String lieu, Date dateParution, Boolean disponible) {
+	public Topo(String nom, String description, String lieu, Date dateParution, Boolean disponible, Utilisateur utilisateur) {
 		this.nom = nom;
 		this.description = description;
 		this.lieu = lieu;
 		this.dateParution = dateParution;
 		this.disponible = disponible;
-
+		this.utilisateur = utilisateur;
 	}
 
 	/*
 	 * Méthode pour la relation bidirectionnelle
 	 */
-	public void add(Site site) {		
+	public void addSite(Site site) {		
 		if (sites == null) {
 			sites = new ArrayList<>();
 		}
@@ -155,6 +155,14 @@ public class Topo {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Long getTopoId() {
+		return topoId;
+	}
+
+	public void setTopoId(Long topoId) {
+		this.topoId = topoId;
+	}
 
 	@Override
 	public String toString() {
@@ -164,5 +172,4 @@ public class Topo {
 	}
 	
 	
-
 }

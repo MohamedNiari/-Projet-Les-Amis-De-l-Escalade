@@ -49,15 +49,15 @@ public class Voie {
 	/*
 	 * Constructeur avec Id
 	 */
-	public Voie(Long id_Voie, String nom, Integer nombreLongueurs, String cotation, String description,
-			Boolean equiperSpits, Integer numeroVoie) {
-		this.voieId = id_Voie;
+	public Voie(String nom, Integer nombreLongueurs, String cotation, String description,
+			Boolean equiperSpits, Integer numeroVoie, Secteur secteur) {
 		this.nom = nom;
 		this.nombreLongueurs = nombreLongueurs;
 		this.cotation = cotation;
 		this.description = description;
 		this.equiperSpits = equiperSpits;
 		this.numeroVoie = numeroVoie;
+		this.secteur = secteur;
 	}
 
 	/*
@@ -147,6 +147,15 @@ public class Voie {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	
+	public Long getVoieId() {
+		return voieId;
+	}
+
+	public void setVoieId(Long voieId) {
+		this.voieId = voieId;
 	}
 
 	@Override

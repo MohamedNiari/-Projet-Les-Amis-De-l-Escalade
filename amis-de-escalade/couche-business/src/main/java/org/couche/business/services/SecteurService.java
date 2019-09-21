@@ -17,7 +17,6 @@ public class SecteurService {
 
 	public void create(Secteur secteur, Site site) {
 		secteurDao.openCurrentSessionwithTransaction();
-		secteurDao.add(secteur, site);
 		secteurDao.create(secteur);
 		secteurDao.closeCurrentSessionwithTransaction();
 	}

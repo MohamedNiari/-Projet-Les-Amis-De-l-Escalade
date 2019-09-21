@@ -120,12 +120,4 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 		return Commentaire;
 	}
 
-	public void add(Commentaire commentaire, Utilisateur utilisateur) {
-		utilisateur.add(commentaire);
-	}
-
-	public void add(Commentaire commentaire, Site site) {
-		site.add(commentaire);
-	}
-
 }

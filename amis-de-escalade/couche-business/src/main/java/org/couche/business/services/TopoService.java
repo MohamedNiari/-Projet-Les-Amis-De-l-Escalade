@@ -14,9 +14,8 @@ public class TopoService {
 		topoDao = new TopoDaoImplementation();
 	}
 
-	public void create(Topo topo, Utilisateur utilisateur) {
+	public void create(Topo topo) {
 		topoDao.openCurrentSessionwithTransaction();
-		topoDao.add(topo, utilisateur);
 		topoDao.create(topo);
 		topoDao.closeCurrentSessionwithTransaction();
 	}

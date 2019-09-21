@@ -65,7 +65,7 @@ public class Site {
 	 * Constructeur sans Id
 	 */
 	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String description,
-			String urlImage, Rocher rocher) {
+			String urlImage, Rocher rocher, Topo topo) {
 		this.nom = nom;
 		this.hauteurMax = hauteurMax;
 		this.lieu = lieu;
@@ -73,12 +73,13 @@ public class Site {
 		this.description = description;
 		this.urlImage = urlImage;
 		this.rocher = rocher;
+		this.topo = topo;
 	}
 
 	/*
 	 * Méthode pour la relation bidirectionnelle
 	 */
-	public void add(Commentaire commentaire) {
+	public void addCommentaire(Commentaire commentaire) {
 		if (commentaires == null) {
 			commentaires = new ArrayList<>();
 		}
@@ -87,7 +88,7 @@ public class Site {
 		commentaire.setSite(this);
 	}
 
-	public void add(Secteur secteur) {
+	public void addSecteur(Secteur secteur) {
 		if (secteurs == null) {
 			secteurs = new ArrayList<>();
 		}
@@ -194,6 +195,23 @@ public class Site {
 
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
+	}
+	
+	
+	public Long getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(Long siteId) {
+		this.siteId = siteId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

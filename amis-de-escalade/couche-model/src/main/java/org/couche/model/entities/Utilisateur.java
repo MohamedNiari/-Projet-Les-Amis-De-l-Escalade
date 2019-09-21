@@ -42,15 +42,13 @@ public class Utilisateur {
 	/*
 	 * Relation de utilisateur à topo sans suppression en cascade
 	 */
-	@OneToMany(mappedBy = "utilisateur", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
+	@OneToMany(mappedBy = "utilisateur")
 	private List<Topo> topos;
 
 	/*
 	 * Relation de utilisateur à commentaire sans suppression en cascade
 	 */
-	@OneToMany(mappedBy = "utilisateur", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
+	@OneToMany(mappedBy = "utilisateur")
 	private List<Commentaire> commentaires;
 
 	/*
@@ -79,7 +77,7 @@ public class Utilisateur {
 	/*
 	 * Méthode pour la relation bidirectionnelle
 	 */
-	public void add(Topo topo) {
+	public void addTopo(Topo topo) {
 		if (topos == null) {
 			topos = new ArrayList<>();
 		}
@@ -88,7 +86,7 @@ public class Utilisateur {
 		topo.setUtilisateur(this);
 	}
 
-	public void add(Commentaire commentaire) {
+	public void addCommentaire(Commentaire commentaire) {
 		if (commentaires == null) {
 			commentaires = new ArrayList<>();
 		}

@@ -125,7 +125,4 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 		return Voie;
 	}
 
-	public void add(Voie voie, Secteur secteur) {
-		secteur.add(voie);
-	}
 }

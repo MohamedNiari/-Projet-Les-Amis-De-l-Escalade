@@ -124,8 +124,4 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 		return Topo;
 	}
 
-	public void add(Topo topo, Utilisateur utilisateur) {
-		utilisateur.add(topo);
-	}
-
 }

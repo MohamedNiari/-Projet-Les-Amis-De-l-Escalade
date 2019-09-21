@@ -17,8 +17,6 @@ public class CommentaireService {
 
 	public void create(Commentaire commentaire, Utilisateur utilisateur, Site site) {
 		commentaireDao.openCurrentSessionwithTransaction();
-		commentaireDao.add(commentaire, utilisateur);
-		commentaireDao.add(commentaire, site);
 		commentaireDao.create(commentaire);
 		commentaireDao.closeCurrentSessionwithTransaction();
 	}

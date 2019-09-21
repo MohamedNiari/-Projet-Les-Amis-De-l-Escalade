@@ -16,7 +16,6 @@ public class VoieService {
 
 	public void create(Voie voie, Secteur secteur) {
 		voieDao.openCurrentSessionwithTransaction();
-		voieDao.add(voie, secteur);
 		voieDao.create(voie);
 		voieDao.closeCurrentSessionwithTransaction();
 	}

@@ -24,10 +24,10 @@ public class Secteur {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="secteur_id")
+	@Column(name = "secteur_id")
 	private Long secteurId;
 	private String nom;
-	@Column(name="numero_secteur")
+	@Column(name = "numero_secteur")
 	private Integer numeroSecteur;
 	private String description;
 
@@ -52,28 +52,19 @@ public class Secteur {
 	}
 
 	/*
-	 * Constructeur avec Id
+	 * Constructeur
 	 */
-	public Secteur(Long id_Secteur, String nom, Integer numeroSecteur, String descriptions) {
-		this.secteurId = id_Secteur;
+	public Secteur(String nom, Integer numeroSecteur, String descriptions, Site site) {
 		this.nom = nom;
 		this.numeroSecteur = numeroSecteur;
 		this.description = descriptions;
+		this.site = site;
 	}
 
 	/*
-	 * Constructeur sans Id
-	 */
-	public Secteur(String nom, Integer numeroSecteur, String descriptions) {
-		this.nom = nom;
-		this.numeroSecteur = numeroSecteur;
-		this.description = descriptions;
-	}
-	
-	/*
 	 * Méthode pour la relation bidirectionnelle
 	 */
-	public void add(Voie voie) {
+	public void addVoie(Voie voie) {
 		if (voies == null) {
 			voies = new ArrayList<>();
 		}
@@ -81,7 +72,6 @@ public class Secteur {
 		voies.add(voie);
 		voie.setSecteur(this);
 	}
-	
 
 	/**************************************
 	 * Generation des setters and getters *
@@ -132,6 +122,22 @@ public class Secteur {
 
 	public void setVoies(List<Voie> voies) {
 		this.voies = voies;
+	}
+
+	public Long getSecteurId() {
+		return secteurId;
+	}
+
+	public void setSecteurId(Long secteurId) {
+		this.secteurId = secteurId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

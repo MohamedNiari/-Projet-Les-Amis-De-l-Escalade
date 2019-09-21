@@ -122,8 +122,4 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 		return Secteur;
 	}
 
-	public void add(Secteur secteur, Site site) {
-		site.add(secteur);
-	}
-
 }

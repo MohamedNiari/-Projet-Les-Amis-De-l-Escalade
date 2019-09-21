@@ -54,36 +54,20 @@ public class Commentaire {
 	}
 
 	/*
-	 * Constructeur avec Id
+	 * Constructeur
 	 */
-	public Commentaire(Long id_Commentaire, String texte, Date date_du_commentaire) {
-		super();
-		this.commentaireId = id_Commentaire;
+	public Commentaire(String texte, Date dateDuCommentaire, Site site, Utilisateur utilisateur) {
 		this.texte = texte;
-		this.dateDuCommentaire = date_du_commentaire;
+		this.dateDuCommentaire = dateDuCommentaire;
+		this.site = site;
+		this.utilisateur = utilisateur;
 	}
 
-	/*
-	 * Constructeur sans Id
-	 */
-	public Commentaire(String texte, Date date_du_commentaire) {
-		super();
-		this.texte = texte;
-		this.dateDuCommentaire = date_du_commentaire;
-		// this.utilisateur = utilisateur;
-	}
 
 	/**************************************
 	 * Generation des setters et getters *
 	 **************************************/
 
-	public Long getId_Commentaire() {
-		return commentaireId;
-	}
-
-	public void setId_Commentaire(Long id_Commentaire) {
-		this.commentaireId = id_Commentaire;
-	}
 
 	public String getTexte() {
 		return texte;
@@ -117,4 +101,26 @@ public class Commentaire {
 		this.dateDuCommentaire = date_du_commentaire;
 	}
 
+	public Long getCommentaireId() {
+		return commentaireId;
+	}
+
+	public void setCommentaireId(Long commentaireId) {
+		this.commentaireId = commentaireId;
+	}
+
+	public Date getDateDuCommentaire() {
+		return dateDuCommentaire;
+	}
+
+	public void setDateDuCommentaire(Date dateDuCommentaire) {
+		this.dateDuCommentaire = dateDuCommentaire;
+	}
+
+	@Override
+	public String toString() {
+		return "Commentaire [commentaireId=" + commentaireId + ", texte=" + texte + ", dateDuCommentaire="
+				+ dateDuCommentaire + ", site=" + site + ", utilisateur=" + utilisateur + "]";
+	}
+	
 }

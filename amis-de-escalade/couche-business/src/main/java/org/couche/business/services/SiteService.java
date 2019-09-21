@@ -14,9 +14,8 @@ public class SiteService {
 		siteDao = new SiteDaoImplementation();
 	}
 
-	public void create(Site site, Topo topo) {
+	public void create(Site site) {
 		siteDao.openCurrentSessionwithTransaction();
-		siteDao.add(site, topo);
 		siteDao.create(site);
 		siteDao.closeCurrentSessionwithTransaction();
 	}
