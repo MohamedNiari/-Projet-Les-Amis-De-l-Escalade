@@ -1,14 +1,18 @@
 package org.couche.model.entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 /*
@@ -34,9 +38,13 @@ public class Utilisateur {
 	private Date dateInscription;
 	@Column(name = "membre_association")
 	private Boolean membreAssociation;
-	private String prenom;
 	private String ville;
 	private String pays;
+
+	@ElementCollection
+	@CollectionTable(name = "utilisateur_prenom", joinColumns = @JoinColumn(name = "utilisateur_id"))
+	@Column(name = "prenom")
+	private Collection<String> prenoms = new ArrayList<String>();
 
 	/*
 	 * Relation de utilisateur à topo sans suppression en cascade
@@ -61,14 +69,13 @@ public class Utilisateur {
 	 * Constructeur sans Id
 	 */
 	public Utilisateur(String nom, String adresseMail, String identifiant, String motDePasse, Date dateInscription,
-			Boolean membreAssociation, String prenom, String ville, String pays) {
+			Boolean membreAssociation, String ville, String pays) {
 		this.nom = nom;
 		this.adresseMail = adresseMail;
 		this.identifiant = identifiant;
 		this.motDePasse = motDePasse;
 		this.dateInscription = dateInscription;
 		this.membreAssociation = membreAssociation;
-		this.prenom = prenom;
 		this.ville = ville;
 		this.pays = pays;
 	}
@@ -162,14 +169,6 @@ public class Utilisateur {
 		this.membreAssociation = membreAssociation;
 	}
 
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
 	public String getVille() {
 		return ville;
 	}
@@ -210,12 +209,20 @@ public class Utilisateur {
 		this.utilisateurId = utilisateurId;
 	}
 
+	public Collection<String> getPrenoms() {
+		return prenoms;
+	}
+
+	public void setPrenoms(Collection<String> prenoms) {
+		this.prenoms = prenoms;
+	}
+
 	@Override
 	public String toString() {
 		return "Utilisateur [utilisateurId=" + utilisateurId + ", nom=" + nom + ", adresseMail=" + adresseMail
 				+ ", identifiant=" + identifiant + ", motDePasse=" + motDePasse + ", dateInscription=" + dateInscription
-				+ ", membreAssociation=" + membreAssociation + ", prenom=" + prenom + ", ville=" + ville + ", pays="
-				+ pays + ", topos=" + topos + ", commentaires=" + commentaires + "]";
+				+ ", membreAssociation=" + membreAssociation + ", ville=" + ville + ", pays=" + pays + ", prenoms="
+				+ prenoms + ", topos=" + topos + ", commentaires=" + commentaires + "]";
 	}
 
 }

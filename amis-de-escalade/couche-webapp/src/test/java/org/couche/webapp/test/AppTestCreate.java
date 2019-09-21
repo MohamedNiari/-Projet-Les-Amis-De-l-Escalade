@@ -21,7 +21,11 @@ public class AppTestCreate {
 		UtilisateurService utilisateurService = new UtilisateurService();
 
 		Utilisateur utilisateurTest = new Utilisateur("Niari", "mniari@openclassroom.com", "A287755", "bonjour",
-				dateFormat.parse("04-09-2019"), true, "Mohamed4", "Sochaux", "France");
+				dateFormat.parse("04-09-2019"), true, "Sochaux", "France");
+		
+		utilisateurTest.getPrenoms().add("Mohamed");
+		utilisateurTest.getPrenoms().add("James");
+		utilisateurTest.getPrenoms().add("Tayeb");
 
 		utilisateurService.create(utilisateurTest);
 
