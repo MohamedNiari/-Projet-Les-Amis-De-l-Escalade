@@ -29,8 +29,6 @@
 		<!-- Autorise des modifications du schema durant la phase de developpement -->
 		<property name="hbm2ddl.auto">update</property>
 
-
-
 		<!-- mappings des classes annotées -->
 		<mapping class="org.couche.model.entities.Commentaire" />
 		<mapping class="org.couche.model.entities.Secteur" />
