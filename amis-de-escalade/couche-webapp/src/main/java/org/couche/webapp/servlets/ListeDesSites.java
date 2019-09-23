@@ -1,16 +1,23 @@
 package org.couche.webapp.servlets;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.couche.business.services.SiteService;
+import org.couche.model.entities.Site;
+
+
 /**
  * Servlet implementation class ListeDesSites
  */
-@WebServlet(name="ListeSites", urlPatterns="/sites")
+@WebServlet(name="ListeDesSites", urlPatterns="/sites")
 public class ListeDesSites extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +33,17 @@ public class ListeDesSites extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 request.getRequestDispatcher("/WEB-INF/listeSites.jsp").forward(request, response);
+		
+		// get sites
+		SiteService siteService = new SiteService();
+		List<Site> sites = siteService.findAll();
+		// add sites to the request
+		request.setAttribute("SITE_LIST", sites);
+				
+		// send to JSP page (view)
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/liste-sites.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 	/**
