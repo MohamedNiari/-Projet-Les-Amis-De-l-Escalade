@@ -13,43 +13,44 @@ import javax.servlet.http.HttpServletResponse;
 import org.couche.business.services.SiteService;
 import org.couche.model.entities.Site;
 
-
 /**
  * Servlet implementation class ListeDesSites
  */
-@WebServlet(name="ListeDesSites", urlPatterns="/sites")
+@WebServlet("/ListeDesSites")
 public class ListeDesSites extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ListeDesSites() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		// get sites
 		SiteService siteService = new SiteService();
 		List<Site> sites = siteService.findAll();
 		// add sites to the request
 		request.setAttribute("SITE_LIST", sites);
-				
+
+		for (Site site : sites) {
+			System.out.println(site.getNom());
+			System.out.println(site.getDescription());
+		}
+
 		// send to JSP page (view)
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/liste-sites.jsp");
 		dispatcher.forward(request, response);
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

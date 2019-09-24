@@ -31,13 +31,13 @@
 				</tr>
 
 				<c:forEach var="tempSite" items="${SITE_LIST}">
-				<c:out value="${SITE_LIST}"></c:out>
+				
 					<tr>
-						<td>${tempSite}</td>
+						<td>${tempSite.nom}</td>
 						<td>${tempSite.lieu}</td>
 						<td>${tempSite.description}</td>
-						<td>${tempSite.hauteur_max}</td>
-						<td>${tempSite.taguer_officiel}</td>
+						<td>${tempSite.hauteurMax}</td>
+						<td>${tempSite.taguerOfficiel}</td>
 					</tr>
 
 				</c:forEach>

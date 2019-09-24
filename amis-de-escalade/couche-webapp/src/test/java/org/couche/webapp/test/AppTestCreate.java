@@ -2,6 +2,7 @@ package org.couche.webapp.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.couche.business.services.SiteService;
 import org.couche.business.services.TopoService;
@@ -15,7 +16,7 @@ public class AppTestCreate {
 
 	public static void main(String[] args) throws ParseException {
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		/*SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 		// test pour la table utilisateur
 		UtilisateurService utilisateurService = new UtilisateurService();
@@ -51,6 +52,17 @@ public class AppTestCreate {
 
 		siteService.create(siteTest);
 		siteService.create(siteTest2);
+		*/
+		
+		SiteService siteService = new SiteService();
+		List<Site> sites = siteService.findAll();
+		
+		for (Site site : sites){
+
+			System.out.println(site.getNom());
+			System.out.println(site.getDescription());
+
+			}
 	}
 
 }

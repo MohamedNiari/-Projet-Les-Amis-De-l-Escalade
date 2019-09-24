@@ -108,7 +108,7 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Site> findAll() {
-		List<Site> sites = (List<Site>) getCurrentSession().createQuery("from escalade").list();
+		List<Site> sites = (List<Site>) getCurrentSession().createQuery("SELECT t FROM Site t").list();
 		return sites;
 	}
 

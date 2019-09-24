@@ -32,7 +32,7 @@
 	<!-- Propriété -->
 	<!-- =============================================================== -->
 	<properties>
-		<application.name>SiteEscalade</application.name>
+		<application.name>SiteEscalade2</application.name>
 		<maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
 		<build.timestamp>${maven.build.timestamp}</build.timestamp>
 
@@ -57,20 +57,7 @@
 		</dependency>
 
 		<!-- ===== Bibliothèques tierces ===== -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

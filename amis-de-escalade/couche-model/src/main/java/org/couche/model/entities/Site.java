@@ -158,14 +158,6 @@ public class Site {
 		this.taguerOfficiel = taguerOfficiel;
 	}
 
-	public String getDescriptions() {
-		return description;
-	}
-
-	public void setDescriptions(String descriptions) {
-		this.description = descriptions;
-	}
-
 	public Boolean getTaguerOfficiel() {
 		return taguerOfficiel;
 	}
@@ -198,20 +190,20 @@ public class Site {
 		this.siteId = siteId;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public TypeRocher getTypeRocher() {
 		return typeRocher;
 	}
 
 	public void setTypeRocher(TypeRocher typeRocher) {
 		this.typeRocher = typeRocher;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
