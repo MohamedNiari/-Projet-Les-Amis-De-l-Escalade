@@ -16,7 +16,7 @@ public class AppTestCreate {
 
 	public static void main(String[] args) throws ParseException {
 
-		/*SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 		// test pour la table utilisateur
 		UtilisateurService utilisateurService = new UtilisateurService();
@@ -43,26 +43,22 @@ public class AppTestCreate {
 		SiteService siteService = new SiteService();
 
 		Site siteTest = new Site("Bellevue", 42, "Privas", false,
-				"Situé presque au fond de la vallée de la Vallouise, au Nord de L’Argentière la Bessée, existe-t-il meilleur endroit pour grimper en été ? Peut-être, mais Ailefroide a quand même de quoi convaincre",
-				"/couche-webapp/src/main/webapp/WEB-INF/img/siteDeBellevue.jpg", TypeRocher.Granite, topoTest);
+				"Situé presque au fond de la vallée de la Vallouise, au Nord de L’Argentière la Bessée, existe-t-il meilleur endroit pour grimper en été ? Peut-être, mais Ailefroide a quand même de quoi convaincre.",
+				"img/Bellevue.jpg", TypeRocher.Granite, topoTest);
 
 		Site siteTest2 = new Site("Ablon", 74, "Thorens", true,
 				"La falaise appartient à un vallon de calcaire urgonien, parvenu jusqu’à nous sous forme de murs verticaux ou légèrement déversants, compacts et finement ciselés d’une multitude de cannelures et de picots, qui sont d’ailleurs la marque de fabrique d’Ablon.",
-				"/couche-webapp/src/main/webapp/WEB-INF/img/Ablon.jpg", TypeRocher.Gneiss, topoTest);
+				"img/Ablon.jpg", TypeRocher.Gneiss, topoTest);
+		
+		Site siteTest3 = new Site("Le Teillon", 69, "Oullins", true,
+				"Grande fissure, entièrement à protéger (relais sur un point, un piton à 20 m). La première partie se protège très bien avec des câblés.",
+				"img/LeTeillon.jpg", TypeRocher.Calcaire, topoTest);
 
 		siteService.create(siteTest);
 		siteService.create(siteTest2);
-		*/
+		siteService.create(siteTest3);
 		
-		SiteService siteService = new SiteService();
-		List<Site> sites = siteService.findAll();
 		
-		for (Site site : sites){
-
-			System.out.println(site.getNom());
-			System.out.println(site.getDescription());
-
-			}
 	}
 
 }

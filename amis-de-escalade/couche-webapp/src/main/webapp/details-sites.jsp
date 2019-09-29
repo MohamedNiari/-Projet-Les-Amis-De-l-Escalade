@@ -39,37 +39,41 @@
 		</div>
 	</nav>
 
-	<section class="d-flex align-content-end flex-wrap bd-highlight mb-3"
-		id="cards">
+	<section id="carousel">
 
-		<c:forEach var="tempSite" items="${SITE_LIST}">
-
-			<div
-				class="card border-success mb-3 col-md-4 d-flex align-items-stretch">
-				<div class="card-header">
-					<span class="float-left">${tempSite.nom}</span> <span
-						class="float-right"><small> <i
-							class="fas fa-level-up-alt"></i> ${tempSite.hauteurMax} m
-					</small></span>
+		<div id="carouselSiteImages" class="carousel slide"
+			data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselSiteImages" data-slide-to="0"
+					class="active"></li>
+				<li data-target="#carouselSiteImages" data-slide-to="1"></li>
+				<li data-target="#carouselSiteImages" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img class="d-block w-100" src="${THE_SITE.urlImage}" alt="First slide">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>${THE_SITE.nom}</h5>
+						<p>Magnifique</p>
+					</div>
 				</div>
-				<div class="card-body text-success">
-					<h8 class="card-title"> <strong>Lieu</strong> ${tempSite.lieu}
-					<c:if test="${tempSite.taguerOfficiel}">
-						<span><img src="css/official.png" class="float-right"
-							id="official" alt="official"></span></h8>
-					</c:if>
-					<br> <br>
-					<p class="card-text">${tempSite.description}</p>
-
-					<c:url var="detailsSite" value="DetailsSites">
-						<c:param name="siteId" value="${tempSite.siteId}" />
-					</c:url>
-					<a href="${detailsSite }" class="stretched-link"></a>
+				<div class="carousel-item">
+					<img class="d-block w-100" src="..." alt="Second slide">
 				</div>
-				<span class="text-secondary"><strong> Type </strong> <em>${tempSite.typeRocher}</em></span>
+				<div class="carousel-item">
+					<img class="d-block w-100" src="..." alt="Third slide">
+				</div>
 			</div>
-
-		</c:forEach>
+			<a class="carousel-control-prev" href="#carouselSiteImages"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Précédent</span>
+			</a> <a class="carousel-control-next" href="#carouselSiteImages"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Suivant</span>
+			</a>
+		</div>
 	</section>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

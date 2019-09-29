@@ -1,7 +1,6 @@
 package org.couche.webapp.servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,10 +15,9 @@ import org.couche.model.entities.Site;
 /**
  * Servlet implementation class ListeDesSites
  */
-@WebServlet("/ListeDesSites")
-public class ListeDesSites extends HttpServlet {
+@WebServlet("/DetailsSites")
+public class DetailsDesSites extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -28,15 +26,18 @@ public class ListeDesSites extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Récupération de la liste des sites depuis la la BDD
-		SiteService siteService = new SiteService();
-		List<Site> sites = siteService.findAll();
-		
-		// Ajout de sites à la request
-		request.setAttribute("SITE_LIST", sites);
+		// Récupération de l'id du site depuis la JSP
+		String siteId = request.getParameter("siteId");
 
-		// Envoi à la JSP
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/liste-sites.jsp");
+		// Récupération du site depuis la BDD
+		SiteService siteService = new SiteService();
+		Site site = siteService.findById(Long.parseLong(siteId));
+
+		// Mise de site dans la request
+		request.setAttribute("THE_SITE", site);
+
+		// Envoi à la jsp
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -47,7 +48,7 @@ public class ListeDesSites extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 
