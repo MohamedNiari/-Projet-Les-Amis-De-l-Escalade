@@ -42,7 +42,7 @@ public class AppTestCreate {
 		// test pour la table site
 		SiteService siteService = new SiteService();
 
-		Site siteTest = new Site("site de bellevue", 42, "Privas", false,
+		Site siteTest = new Site("Bellevue", 42, "Privas", false,
 				"Situé presque au fond de la vallée de la Vallouise, au Nord de L’Argentière la Bessée, existe-t-il meilleur endroit pour grimper en été ? Peut-être, mais Ailefroide a quand même de quoi convaincre",
 				"/couche-webapp/src/main/webapp/WEB-INF/img/siteDeBellevue.jpg", TypeRocher.Granite, topoTest);
 

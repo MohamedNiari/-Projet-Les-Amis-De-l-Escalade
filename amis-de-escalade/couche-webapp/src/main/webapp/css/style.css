@@ -1,47 +1,51 @@
 html, body{
-	margin-left:15px; margin-right:15px; 
-	padding:0px; 
-	font-family:Verdana, Arial, Helvetica, sans-serif;
+    height: 100%;
 }
 
-table {   
-	border-collapse:collapse;
-	border-bottom:1px solid gray;
-	font-family: Tahoma,Verdana,Segoe,sans-serif;
-	width:72%;
-}
- 
-th {
-	border-bottom:1px solid gray;
-	background:none repeat scroll 0 0 #0775d3;
-	padding:10px;
-	color: #FFFFFF;
+#cover {
+    background: url('stars.png') no-repeat;
+    background-size: cover;
+    color:white;
+    text-shadow: 2px 2px #565F5D;
+    font-weight: bold;
+    height: 89%;
+    text-align: center;
+    display: flex;
+    align-items: center;
 }
 
-tr {
-	border-top:1px solid gray;
-	text-align:center;	
+#carousel div div div div {
+    color:black;
 }
- 
-tr:nth-child(even) {background: #FFFFFF}
-tr:nth-child(odd) {background: #BBBBBB}	
- 
-#wrapper {width: 100%; margin-top: 0px; }
-#header {width: 72%; background: #0775d3; margin-top: 0px; padding:15px 0px 15px 0px;}
-#header h2 {width: 100%; margin:auto; color: #FFFFFF;}
-#container {width: 100%; margin:auto}
-#container h3 {color: #000;}
-#container #content {margin-top: 20px;}
 
-.add-student-button {
-	border: 1px solid #666; 
-	border-radius: 5px; 
-	padding: 4px; 
-	font-size: 12px;
-	font-weight: bold;
-	width: 120px; 
-	padding: 5px 10px; 
-	
-	margin-bottom: 15px;
-	background: #cccccc;
+#footer{
+    height: 9.5%;   
+    margin: auto;
+}
+
+header, section {
+    margin-left : 10%;
+    margin-right : 10%;
+}
+
+#cover, #footer, #cards {
+
+    width: 80%;
+    box-shadow: 10px 10px 18px #202020;
+    margin-bottom: 0.5%;
+}
+
+#cards{
+    margin-top: 0.5%;
+}
+
+#hauteur {
+    font-size: 60%;
+    text-align: right; 
+    display:block;
+}
+
+#official {
+	width: 30%;
+	height: 30%;
 }

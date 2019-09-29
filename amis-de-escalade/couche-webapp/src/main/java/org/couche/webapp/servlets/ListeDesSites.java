@@ -31,13 +31,9 @@ public class ListeDesSites extends HttpServlet {
 		// get sites
 		SiteService siteService = new SiteService();
 		List<Site> sites = siteService.findAll();
+		
 		// add sites to the request
 		request.setAttribute("SITE_LIST", sites);
-
-		for (Site site : sites) {
-			System.out.println(site.getNom());
-			System.out.println(site.getDescription());
-		}
 
 		// send to JSP page (view)
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/liste-sites.jsp");

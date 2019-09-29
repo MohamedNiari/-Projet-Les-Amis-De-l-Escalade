@@ -30,7 +30,6 @@
 		<groupId>com.niari.oc</groupId>
 		<artifactId>amis-de-escalade</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath></relativePath>
 	</parent>
 
 	<!-- ===== Informations générales ===== -->
