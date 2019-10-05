@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Site;
-import org.couche.model.entities.Topo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

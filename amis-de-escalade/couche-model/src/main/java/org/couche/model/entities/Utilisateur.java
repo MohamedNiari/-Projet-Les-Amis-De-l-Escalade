@@ -40,7 +40,10 @@ public class Utilisateur {
 	private Boolean membreAssociation;
 	private String ville;
 	private String pays;
-
+	
+	/*
+	 * Liste de prénoms
+	 */
 	@ElementCollection
 	@CollectionTable(name = "utilisateur_prenom", joinColumns = @JoinColumn(name = "utilisateur_id"))
 	@Column(name = "prenom")

@@ -1,13 +1,17 @@
 package org.couche.model.entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,8 +43,14 @@ public class Site {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type_rocher")
 	private TypeRocher typeRocher;
+
+	/*
+	 * Liste de prénoms
+	 */
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "site_url_image", joinColumns = { @JoinColumn(name = "site_id") })
 	@Column(name = "url_image")
-	private String urlImage;
+	private Collection<String> urlImages = new ArrayList<String>();
 
 	/*
 	 * Relation de secteur à voie sans supression en cascade
@@ -66,13 +76,12 @@ public class Site {
 	 * Constructeur sans Id
 	 */
 	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String description,
-			String urlImage, TypeRocher typeRocher, Topo topo) {
+			TypeRocher typeRocher, Topo topo) {
 		this.nom = nom;
 		this.hauteurMax = hauteurMax;
 		this.lieu = lieu;
 		this.taguerOfficiel = taguerOfficiel;
 		this.description = description;
-		this.urlImage = urlImage;
 		this.typeRocher = typeRocher;
 		this.topo = topo;
 	}
@@ -174,14 +183,6 @@ public class Site {
 		this.secteurs = secteurs;
 	}
 
-	public String getUrlImage() {
-		return urlImage;
-	}
-
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
-	}
-
 	public Long getSiteId() {
 		return siteId;
 	}
@@ -206,11 +207,19 @@ public class Site {
 		this.description = description;
 	}
 
+	public Collection<String> getUrlImages() {
+		return urlImages;
+	}
+
+	public void setUrlImages(Collection<String> urlImages) {
+		this.urlImages = urlImages;
+	}
+
 	@Override
 	public String toString() {
 		return "Site [siteId=" + siteId + ", nom=" + nom + ", hauteurMax=" + hauteurMax + ", lieu=" + lieu
 				+ ", taguerOfficiel=" + taguerOfficiel + ", description=" + description + ", typeRocher=" + typeRocher
-				+ ", urlImage=" + urlImage + ", secteurs=" + secteurs + ", commentaires=" + commentaires + ", topo="
+				+ ", urlImages=" + urlImages + ", secteurs=" + secteurs + ", commentaires=" + commentaires + ", topo="
 				+ topo + "]";
 	}
 

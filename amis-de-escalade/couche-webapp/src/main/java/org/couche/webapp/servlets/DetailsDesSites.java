@@ -1,6 +1,7 @@
 package org.couche.webapp.servlets;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +16,7 @@ import org.couche.model.entities.Site;
 /**
  * Servlet implementation class ListeDesSites
  */
-@WebServlet("/DetailsSites")
+@WebServlet("/DetailsDesSites")
 public class DetailsDesSites extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,8 +34,13 @@ public class DetailsDesSites extends HttpServlet {
 		SiteService siteService = new SiteService();
 		Site site = siteService.findById(Long.parseLong(siteId));
 
-		// Mise de site dans la request
+		// Chargement du site dans la request
 		request.setAttribute("THE_SITE", site);
+
+		Collection<String> urlImages = site.getUrlImages();
+
+		// Chargement des images du site
+		request.setAttribute("IMAGE_LIST", urlImages);
 
 		// Envoi à la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");

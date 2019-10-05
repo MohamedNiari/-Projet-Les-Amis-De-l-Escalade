@@ -52,5 +52,7 @@ public class SiteService {
 		siteDao.deleteAll();
 		siteDao.closeCurrentSessionwithTransaction();
 	}
+	
+
 
 }

@@ -23,7 +23,7 @@ public class AppTestCreate {
 
 		Utilisateur utilisateurTest = new Utilisateur("Niari", "mniari@openclassroom.com", "A287755", "bonjour",
 				dateFormat.parse("04-09-2019"), true, "Sochaux", "France");
-		
+
 		utilisateurTest.getPrenoms().add("Mohamed");
 		utilisateurTest.getPrenoms().add("James");
 		utilisateurTest.getPrenoms().add("Tayeb");
@@ -44,21 +44,32 @@ public class AppTestCreate {
 
 		Site siteTest = new Site("Bellevue", 42, "Privas", false,
 				"Situé presque au fond de la vallée de la Vallouise, au Nord de L’Argentière la Bessée, existe-t-il meilleur endroit pour grimper en été ? Peut-être, mais Ailefroide a quand même de quoi convaincre.",
-				"img/Bellevue.jpg", TypeRocher.Granite, topoTest);
+				TypeRocher.Granite, topoTest);
+		
+		siteTest.getUrlImages().add("img/Ablon.jpg");
+		siteTest.getUrlImages().add("img/Ablon2.jpg");
+		siteTest.getUrlImages().add("img/Ablon3.jpg");		
 
 		Site siteTest2 = new Site("Ablon", 74, "Thorens", true,
 				"La falaise appartient à un vallon de calcaire urgonien, parvenu jusqu’à nous sous forme de murs verticaux ou légèrement déversants, compacts et finement ciselés d’une multitude de cannelures et de picots, qui sont d’ailleurs la marque de fabrique d’Ablon.",
-				"img/Ablon.jpg", TypeRocher.Gneiss, topoTest);
+				TypeRocher.Gneiss, topoTest);
 		
+		siteTest2.getUrlImages().add("img/Bellevue.jpg");
+		siteTest2.getUrlImages().add("img/Bellevue2.jpg");
+		siteTest2.getUrlImages().add("img/Bellevue3.jpg");
+
 		Site siteTest3 = new Site("Le Teillon", 69, "Oullins", true,
 				"Grande fissure, entièrement à protéger (relais sur un point, un piton à 20 m). La première partie se protège très bien avec des câblés.",
-				"img/LeTeillon.jpg", TypeRocher.Calcaire, topoTest);
+				TypeRocher.Calcaire, topoTest);
+		
+		siteTest3.getUrlImages().add("img/LeTeillon.jpg");
+		siteTest3.getUrlImages().add("img/LeTeillon2.jpg");
+		siteTest3.getUrlImages().add("img/LeTeillon3.jpg");
 
 		siteService.create(siteTest);
 		siteService.create(siteTest2);
 		siteService.create(siteTest3);
-		
-		
+
 	}
 
 }
