@@ -55,7 +55,7 @@
 						<li data-target="#carouselImageSite" data-slide-to="3"></li>
 					</ol>
 
-					<div class="carousel-inner">
+					<div class="carousel-inner" role="listbox" id="carouselStyle">
 						<div class="carousel-item active">
 							<img class="thumbnail img-responsive" src="img/Ablon2.jpg"
 								alt="First slide"></img>
