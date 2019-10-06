@@ -1,7 +1,7 @@
 html, body {
 	height: 100%;
-	background: rgb(255,251,255);
-	text-shadow:0.5px 0.5px #eef0f0;
+	background: rgb(255, 251, 255);
+	
 }
 
 #cover {
@@ -49,14 +49,18 @@ header, section {
 
 #carouselStyle {
 	width: 100%;
-	height: 500px !important;
-	background-color: grey;
+	height: 600px !important;
+	background-color: green;
+
 }
 
 .box {
-	padding: 5px;
+	padding: 10px;
 }
 
-.box p {	
-	padding: 5px;
+hr {
+	padding: 0px;
+	margin: 0px;
 }
+
+

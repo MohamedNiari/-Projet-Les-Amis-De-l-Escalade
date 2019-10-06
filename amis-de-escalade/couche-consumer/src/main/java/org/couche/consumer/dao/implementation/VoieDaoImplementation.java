@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Secteur;
+import org.couche.model.entities.Site;
 import org.couche.model.entities.Voie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,7 +29,7 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 	 */
 	private static SessionFactory getSessionFactory() {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Voie.class)
-				.buildSessionFactory();
+				.addAnnotatedClass(Secteur.class).buildSessionFactory();
 		return factory;
 	}
 
@@ -123,6 +124,11 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 	public Voie findById(Long id) {
 		Voie Voie = (Voie) getCurrentSession().get(Voie.class, id);
 		return Voie;
+	}
+
+	public List<Voie> findBySecteur(Long secteurid) {
+		List<Voie> voies = (List<Voie>) getCurrentSession().get(Secteur.class, secteurid).getVoies();
+		return voies;
 	}
 
 }

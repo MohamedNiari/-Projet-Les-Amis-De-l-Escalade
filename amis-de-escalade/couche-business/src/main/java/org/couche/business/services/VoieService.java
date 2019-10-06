@@ -53,4 +53,12 @@ public class VoieService {
 		voieDao.closeCurrentSessionwithTransaction();
 	}
 
+	public List<Voie> findBySecteur(Secteur secteur) {
+		voieDao.openCurrentSession();
+		List<Voie> voies = voieDao.findBySecteur(secteur.getId_Secteur());
+		voieDao.closeCurrentSession();
+		return voies;
+
+	}
+
 }

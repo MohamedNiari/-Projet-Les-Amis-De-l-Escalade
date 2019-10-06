@@ -57,10 +57,17 @@
 
 					<div class="carousel-inner" role="listbox" id="carouselStyle">
 						<div class="carousel-item active">
-							<img class="thumbnail img-responsive" src="img/Ablon2.jpg"
-								alt="First slide"></img>
-						</div>
+							<img class="thumbnail img-responsive stretched"
+								src="img/amisEscalade.jpg" alt="First slide"></img>
+							<div class="carousel-caption d-none d-md-block"
+								style="font-family: cursive; color: #685450">
+								<p>Découvez le site :</p>
+								<h5>
+									<strong><u>${THE_SITE.nom}</u></strong>
+								</h5>
+							</div>
 
+						</div>
 						<c:forEach items="${IMAGE_LIST}" var="item">
 							<div class="carousel-item">
 								<img class="thumbnail img-responsive" src="${item}"
@@ -83,25 +90,35 @@
 				<div class="col-md-8">
 					<div class="row">
 						<div class="col-md-12 box">
-							<p>
-								<h4>Site <strong>${THE_SITE.nom}</strong></h4> <br> <br>
-								<p>${THE_SITE.description}</p>
-							</p>
+							<p></p>
+							<h4>
+								<strong>${THE_SITE.nom}</strong>
+							</h4>
+							<hr>
+							<br>
+							<p style="font-size: 0.9em; font-style: italic">${THE_SITE.description}</p>
+							<br>
 						</div>
 					</div>
+
 					<div class="row">
 						<div class="col-md-12 box">
 							<c:forEach items="${SECTEUR_LIST}" var="item">
-								<p><h5>Le Secteur n° ${item.numeroSecteur} : ${item.nom} </h5>
-								<p>${item.description}</p>
-								</p>
+								<p></p>
+								<h6 style="font-size: 0.8em">
+									Secteur n° ${item.numeroSecteur} : <strong>${item.nom}</strong>
+									<c:out value="${VOIE_LISTAutracien}" />
+								</h6>
+								<hr>
+								<br>
+								<p style="font-size: 0.7em; font-style: italic">${item.description}</p>
+								<br>
 							</c:forEach>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</section>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

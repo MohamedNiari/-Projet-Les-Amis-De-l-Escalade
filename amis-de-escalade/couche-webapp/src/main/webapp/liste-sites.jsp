@@ -57,11 +57,12 @@
 					</small></span>
 				</div>
 				<div class="card-body text-success">
-					<h8 class="card-title"> <strong>Lieu</strong> ${tempSite.lieu}</h8>
+					<h8 class="card-title"> <strong>Lieu</strong> ${tempSite.lieu}
 					<c:if test="${tempSite.taguerOfficiel}">
 						<span><img src="img/official.png" class="float-right"
 							id="official" alt="official"></img></span>
 					</c:if>
+					</h8>
 					<br> <br>
 					<p class="card-text">${tempSite.description}</p>
 

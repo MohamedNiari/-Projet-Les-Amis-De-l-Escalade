@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
+import org.couche.business.services.VoieService;
 import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
+import org.couche.model.entities.Voie;
 
 /**
  * Servlet implementation class ListeDesSites
@@ -36,20 +38,31 @@ public class DetailsDesSites extends HttpServlet {
 		// Récupération du site depuis la BDD
 		SiteService siteService = new SiteService();
 		Site site = siteService.findById(Long.parseLong(siteId));
-	
+
 		// Chargement du site dans la request
 		request.setAttribute("THE_SITE", site);
 
 		// Chargement des images du site
 		Collection<String> urlImages = site.getUrlImages();
 		request.setAttribute("IMAGE_LIST", urlImages);
-		
+
 		// Récupération des secteurs du site
 		SecteurService secteurService = new SecteurService();
 		List<Secteur> Secteurs = secteurService.findBySite(Long.parseLong(siteId));
-		
+
 		// Chargement des secteurs du site
 		request.setAttribute("SECTEUR_LIST", Secteurs);
+
+		// Récupération des voies des différends secteurs
+		for (Secteur secteur : Secteurs) {
+			String theSecteur = secteur.getNom();
+			String voie_list = "VOIE_LIST" + theSecteur;
+
+			VoieService voieService = new VoieService();
+			List<Voie> Voies = voieService.findBySecteur(secteur);
+			System.out.println(voie_list);
+			request.setAttribute(voie_list, Voies);
+		}
 
 		// Envoi à la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");
