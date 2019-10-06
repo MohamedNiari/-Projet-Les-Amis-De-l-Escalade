@@ -2,6 +2,7 @@ package org.couche.webapp.servlets;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
+import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 
 /**
@@ -33,14 +36,20 @@ public class DetailsDesSites extends HttpServlet {
 		// Récupération du site depuis la BDD
 		SiteService siteService = new SiteService();
 		Site site = siteService.findById(Long.parseLong(siteId));
-
+	
 		// Chargement du site dans la request
 		request.setAttribute("THE_SITE", site);
 
-		Collection<String> urlImages = site.getUrlImages();
-
 		// Chargement des images du site
+		Collection<String> urlImages = site.getUrlImages();
 		request.setAttribute("IMAGE_LIST", urlImages);
+		
+		// Récupération des secteurs du site
+		SecteurService secteurService = new SecteurService();
+		List<Secteur> Secteurs = secteurService.findBySite(Long.parseLong(siteId));
+		
+		// Chargement des secteurs du site
+		request.setAttribute("SECTEUR_LIST", Secteurs);
 
 		// Envoi à la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");

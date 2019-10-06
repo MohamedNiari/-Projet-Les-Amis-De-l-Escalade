@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
 import org.couche.business.services.TopoService;
 import org.couche.business.services.UtilisateurService;
+import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.TypeRocher;
@@ -15,7 +17,7 @@ import org.couche.model.entities.Utilisateur;
 public class AppTestCreate {
 
 	public static void main(String[] args) throws ParseException {
-
+/*
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 		// test pour la table utilisateur
@@ -69,7 +71,19 @@ public class AppTestCreate {
 		siteService.create(siteTest);
 		siteService.create(siteTest2);
 		siteService.create(siteTest3);
+*/
+		SiteService siteService = new SiteService();
 
+		Site siteTest = siteService.findById(2L);
+				
+		SecteurService secteurService = new SecteurService();
+		Secteur secteurTest = new Secteur("La vertical", 1, "Enormes cannelures", siteTest);
+		Secteur secteurTest2 = new Secteur("Saint-Georges", 2, "Son calcaire est superbe et unique", siteTest);
+		Secteur secteurTest3 = new Secteur("Autracien", 3, "le rocher est finement sculpté ", siteTest);
+		
+		secteurService.create(secteurTest);
+		secteurService.create(secteurTest2);
+		secteurService.create(secteurTest3);
 	}
 
 }

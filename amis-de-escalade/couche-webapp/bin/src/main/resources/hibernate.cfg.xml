@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Information de connexion à la base de données -->
+		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/escalade?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC</property>
+		<property name="connection.username">openclassroom</property>
+		<property name="connection.password">openclassroom</property>
+
+		<!-- Paramétrage du pool de connexion -->
+		<property name="connection.pool_size">100</property>
+		<property name="hibernate.hbm2ddl.auto">validate</property>
+
+		<!-- Selection du dialect MySQL -->
+		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+		<!-- Affichage du code SQL dans la console -->
+		<property name="show_sql">true</property>
+
+		<!-- Session courante en mode thread -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- Autorise des modifications du schema durant la phase de developpement -->
+		<property name="hbm2ddl.auto">validate</property>
+
+		<!-- mappings des classes annotées -->
+		<mapping class="org.couche.model.entities.Commentaire" />
+		<mapping class="org.couche.model.entities.Secteur" />
+		<mapping class="org.couche.model.entities.Site" />
+		<mapping class="org.couche.model.entities.Topo" />
+		<mapping class="org.couche.model.entities.Utilisateur" />
+		<mapping class="org.couche.model.entities.Voie" />
+
+
+	</session-factory>
+
+</hibernate-configuration>

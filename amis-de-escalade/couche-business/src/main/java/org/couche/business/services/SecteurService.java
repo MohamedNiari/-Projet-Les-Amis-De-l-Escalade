@@ -15,7 +15,7 @@ public class SecteurService {
 		secteurDao = new SecteurDaoImplementation();
 	}
 
-	public void create(Secteur secteur, Site site) {
+	public void create(Secteur secteur) {
 		secteurDao.openCurrentSessionwithTransaction();
 		secteurDao.create(secteur);
 		secteurDao.closeCurrentSessionwithTransaction();
@@ -52,6 +52,13 @@ public class SecteurService {
 		secteurDao.openCurrentSessionwithTransaction();
 		secteurDao.deleteAll();
 		secteurDao.closeCurrentSessionwithTransaction();
+	}	
+	
+	public List<Secteur> findBySite(Long siteid){
+		secteurDao.openCurrentSession();
+		List<Secteur> secteurs = secteurDao.findBySite(siteid);
+		secteurDao.closeCurrentSession();
+		return secteurs;		
 	}
 
 }

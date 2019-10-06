@@ -2,6 +2,10 @@ package org.couche.consumer.dao.implementation;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
@@ -120,6 +124,13 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 	public Secteur findById(Long id) {
 		Secteur Secteur = (Secteur) getCurrentSession().get(Secteur.class, id);
 		return Secteur;
+	}
+	
+	
+	public List<Secteur> findBySite(Long siteid) {
+		List<Secteur> Secteurs = (List<Secteur>) getCurrentSession().get(Site.class, siteid).getSecteurs();
+		return Secteurs;
+
 	}
 
 }

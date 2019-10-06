@@ -19,6 +19,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 /*
  * Bean Site qui représente sous forme d'objet la table du même nom
  */
@@ -48,13 +51,14 @@ public class Site {
 	 * Liste de prénoms
 	 */
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "site_url_image", joinColumns = { @JoinColumn(name = "site_id") })
+	@CollectionTable(name = "site_url_image", joinColumns = {@JoinColumn(name = "site_id") })
 	@Column(name = "url_image")
 	private Collection<String> urlImages = new ArrayList<String>();
 
 	/*
 	 * Relation de secteur à voie sans supression en cascade
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
 	private List<Secteur> secteurs;
 

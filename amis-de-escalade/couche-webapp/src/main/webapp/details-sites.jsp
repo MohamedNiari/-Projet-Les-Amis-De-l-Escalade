@@ -40,7 +40,7 @@
 			<span class="navbar-text">Tout sur l'escalade</span>
 		</div>
 	</nav>
-	
+
 	<section>
 		<div class="container-fluid">
 			<div class="row">
@@ -80,9 +80,28 @@
 					</a>
 				</div>
 
-				<div class="bg-secondary col-md-8">Toto</div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-12 box">
+							<p>
+								<h4>Site <strong>${THE_SITE.nom}</strong></h4> <br> <br>
+								<p>${THE_SITE.description}</p>
+							</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 box">
+							<c:forEach items="${SECTEUR_LIST}" var="item">
+								<p><h5>Le Secteur n° ${item.numeroSecteur} : ${item.nom} </h5>
+								<p>${item.description}</p>
+								</p>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+
 	</section>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
