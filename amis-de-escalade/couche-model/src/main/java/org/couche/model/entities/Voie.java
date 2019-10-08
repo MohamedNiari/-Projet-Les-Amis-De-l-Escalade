@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /*
- * Bean Voie qui représente sous forme d'objet la table du même nom
+ * Bean Voie qui reprÃ©sente sous forme d'objet la table du mÃªme nom
  */
 @Entity
 public class Voie {
@@ -22,18 +22,16 @@ public class Voie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "voie_id")
 	private Long voieId;
-	private String nom;
 	@Column(name = "nombre_longueur")
 	private Integer nombreLongueurs;
 	private String cotation;
-	private String description;
 	@Column(name = "equiper_spits")
 	private Boolean equiperSpits;
 	@Column(name = "numero_voie")
 	private Integer numeroVoie;
 
 	/*
-	 * Relation de voie à secteur sans supression en cascade
+	 * Relation de voie Ã  secteur sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "secteur_id")
@@ -47,30 +45,16 @@ public class Voie {
 	}
 
 	/*
-	 * Constructeur avec Id
+	 * Constructeur avec paramÃ¨tres
 	 */
-	public Voie(String nom, Integer nombreLongueurs, String cotation, String description,
-			Boolean equiperSpits, Integer numeroVoie, Secteur secteur) {
-		this.nom = nom;
+	public Voie(Integer nombreLongueurs, String cotation, Boolean equiperSpits, Integer numeroVoie,
+			Secteur secteur) {
+
 		this.nombreLongueurs = nombreLongueurs;
 		this.cotation = cotation;
-		this.description = description;
 		this.equiperSpits = equiperSpits;
 		this.numeroVoie = numeroVoie;
 		this.secteur = secteur;
-	}
-
-	/*
-	 * Constructeur sans Id
-	 */
-	public Voie(String nom, Integer nombreLongueurs, String cotation, String description, Boolean equiperSpits,
-			Integer numeroVoie) {
-		this.nom = nom;
-		this.nombreLongueurs = nombreLongueurs;
-		this.cotation = cotation;
-		this.description = description;
-		this.equiperSpits = equiperSpits;
-		this.numeroVoie = numeroVoie;
 	}
 
 	/**************************************
@@ -83,14 +67,6 @@ public class Voie {
 
 	public void setId_Voie(Long id_Voie) {
 		this.voieId = id_Voie;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
 	}
 
 	public int getNombreLongueurs() {
@@ -141,15 +117,6 @@ public class Voie {
 		this.numeroVoie = numeroVoie;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	
 	public Long getVoieId() {
 		return voieId;
 	}
@@ -158,11 +125,6 @@ public class Voie {
 		this.voieId = voieId;
 	}
 
-	@Override
-	public String toString() {
-		return "Voie [voieId=" + voieId + ", nom=" + nom + ", nombreLongueurs=" + nombreLongueurs + ", cotation="
-				+ cotation + ", description=" + description + ", equiperSpits=" + equiperSpits + ", numeroVoie="
-				+ numeroVoie + ", secteur=" + secteur + "]";
-	}
+
 
 }

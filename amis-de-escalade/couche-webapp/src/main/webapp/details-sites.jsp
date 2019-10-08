@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.couche.model.entities.Voie"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -63,7 +66,7 @@
 								style="font-family: cursive; color: #685450">
 								<p>Découvez le site :</p>
 								<h5>
-									<strong><u>${THE_SITE.nom}</u></strong>
+									<strong>${THE_SITE.nom}</strong>
 								</h5>
 							</div>
 
@@ -103,11 +106,14 @@
 
 					<div class="row">
 						<div class="col-md-12 box">
+							<c:set var="VOIE_LISTLaVertical" value="VOIE_LIST" />
+							<c:set var="VOIE_LISTLaVertical" value="${VOIE_LIST}LaVertical" />
+							<c:set var="VOIE_LISTLaVertical" value='${requestScope["VOIE_LISTLaVertical"]}' />
+
 							<c:forEach items="${SECTEUR_LIST}" var="item">
-								<p></p>
 								<h6 style="font-size: 0.8em">
 									Secteur n° ${item.numeroSecteur} : <strong>${item.nom}</strong>
-									<c:out value="${VOIE_LISTAutracien}" />
+									<span>est composé de ${fn:length(VOIE_LISTLaVertical)} voies</span>
 								</h6>
 								<hr>
 								<br>

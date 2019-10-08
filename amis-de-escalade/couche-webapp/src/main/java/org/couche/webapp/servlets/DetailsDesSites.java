@@ -32,10 +32,10 @@ public class DetailsDesSites extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Récupération de l'id du site depuis la JSP
+		// RÃ©cupÃ©ration de l'id du site depuis la JSP
 		String siteId = request.getParameter("siteId");
 
-		// Récupération du site depuis la BDD
+		// RÃ©cupÃ©ration du site depuis la BDD
 		SiteService siteService = new SiteService();
 		Site site = siteService.findById(Long.parseLong(siteId));
 
@@ -46,25 +46,25 @@ public class DetailsDesSites extends HttpServlet {
 		Collection<String> urlImages = site.getUrlImages();
 		request.setAttribute("IMAGE_LIST", urlImages);
 
-		// Récupération des secteurs du site
+		// RÃ©cupÃ©ration des secteurs du site
 		SecteurService secteurService = new SecteurService();
 		List<Secteur> Secteurs = secteurService.findBySite(Long.parseLong(siteId));
 
 		// Chargement des secteurs du site
 		request.setAttribute("SECTEUR_LIST", Secteurs);
 
-		// Récupération des voies des différends secteurs
+		// RÃ©cupÃ©ration des voies des diffÃ©rends secteurs
 		for (Secteur secteur : Secteurs) {
 			String theSecteur = secteur.getNom();
 			String voie_list = "VOIE_LIST" + theSecteur;
 
 			VoieService voieService = new VoieService();
 			List<Voie> Voies = voieService.findBySecteur(secteur);
-			System.out.println(voie_list);
+			System.out.println("SERVLET " + voie_list);
 			request.setAttribute(voie_list, Voies);
 		}
 
-		// Envoi à la jsp
+		// Envoi Ã  la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");
 		dispatcher.forward(request, response);
 

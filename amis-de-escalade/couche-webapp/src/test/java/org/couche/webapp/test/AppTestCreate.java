@@ -2,22 +2,22 @@ package org.couche.webapp.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
-
 import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
 import org.couche.business.services.TopoService;
 import org.couche.business.services.UtilisateurService;
+import org.couche.business.services.VoieService;
 import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.TypeRocher;
 import org.couche.model.entities.Utilisateur;
+import org.couche.model.entities.Voie;
 
 public class AppTestCreate {
 
 	public static void main(String[] args) throws ParseException {
-/*
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 		// test pour la table utilisateur
@@ -36,7 +36,7 @@ public class AppTestCreate {
 		TopoService topoService = new TopoService();
 
 		Topo topoTest = new Topo("Escalade en Savoie2",
-				"Dans l’avant-pays savoyard, à la limite entre la Savoie et l’Ain, le Rhône a creusé sur 1 km le défilé de PierreChâtel. En rive gauche et rive droite, les gorges sont bordées de falaises qui surplombent les eaux vertes du fleuve.",
+				"Rive gauche, le rocher passe à l’ombre à 12h30 mais les arbres cachent assez bien le soleil avant. On peut donc y grimper en été, même le matin hors période de canicule.",
 				"La Savoie2", dateFormat.parse("04-09-2019"), true, utilisateurTest);
 
 		topoService.create(topoTest);
@@ -45,25 +45,25 @@ public class AppTestCreate {
 		SiteService siteService = new SiteService();
 
 		Site siteTest = new Site("Bellevue", 42, "Privas", false,
-				"Situé presque au fond de la vallée de la Vallouise, au Nord de L’Argentière la Bessée, existe-t-il meilleur endroit pour grimper en été ? Peut-être, mais Ailefroide a quand même de quoi convaincre.",
+				"Pas beaucoup de voies pour l’instant mais il y a encore un peu de potentiel, il est donc probable que de nouvelles voies soient équipées, voire d’autres secteurs.",
 				TypeRocher.Granite, topoTest);
-		
+
 		siteTest.getUrlImages().add("img/Ablon.jpg");
 		siteTest.getUrlImages().add("img/Ablon2.jpg");
-		siteTest.getUrlImages().add("img/Ablon3.jpg");		
+		siteTest.getUrlImages().add("img/Ablon3.jpg");
 
 		Site siteTest2 = new Site("Ablon", 74, "Thorens", true,
-				"La falaise appartient à un vallon de calcaire urgonien, parvenu jusqu’à nous sous forme de murs verticaux ou légèrement déversants, compacts et finement ciselés d’une multitude de cannelures et de picots, qui sont d’ailleurs la marque de fabrique d’Ablon.",
+				"C’est LA FALAISE incontournable de la région par sa taille, sa grimpe et sa vue. Son orientation ouest, et le peu d’ombre au pied de la falaise, font que l’on peut y grimper toute l’année.",
 				TypeRocher.Gneiss, topoTest);
-		
+
 		siteTest2.getUrlImages().add("img/Bellevue.jpg");
 		siteTest2.getUrlImages().add("img/Bellevue2.jpg");
 		siteTest2.getUrlImages().add("img/Bellevue3.jpg");
 
 		Site siteTest3 = new Site("Le Teillon", 69, "Oullins", true,
-				"Grande fissure, entièrement à protéger (relais sur un point, un piton à 20 m). La première partie se protège très bien avec des câblés.",
+				"Site à la mode dans les années 1970 pour aller taquiner du piton, le Teillon aujourd’hui ne parle plus à personne, éclipsé qu’il est dans l’ombre médiatique et photogénique de sa célébrissime voisine.",
 				TypeRocher.Calcaire, topoTest);
-		
+
 		siteTest3.getUrlImages().add("img/LeTeillon.jpg");
 		siteTest3.getUrlImages().add("img/LeTeillon2.jpg");
 		siteTest3.getUrlImages().add("img/LeTeillon3.jpg");
@@ -71,19 +71,33 @@ public class AppTestCreate {
 		siteService.create(siteTest);
 		siteService.create(siteTest2);
 		siteService.create(siteTest3);
-*/
-		SiteService siteService = new SiteService();
 
-		Site siteTest = siteService.findById(2L);
-				
+		// test pour la table secteur
 		SecteurService secteurService = new SecteurService();
 		Secteur secteurTest = new Secteur("La vertical", 1, "Enormes cannelures", siteTest);
 		Secteur secteurTest2 = new Secteur("Saint-Georges", 2, "Son calcaire est superbe et unique", siteTest);
 		Secteur secteurTest3 = new Secteur("Autracien", 3, "le rocher est finement sculpté ", siteTest);
-		
+
 		secteurService.create(secteurTest);
 		secteurService.create(secteurTest2);
 		secteurService.create(secteurTest3);
+
+		// test pour la table voie
+		VoieService VoieService = new VoieService();
+		Voie voieTest = new Voie(7, "5b", true, 1, secteurTest);
+		Voie voieTest2 = new Voie(4, "5a", false, 2, secteurTest);
+		Voie voieTest3 = new Voie(6, "3b", false, 3, secteurTest);
+		Voie voieTest4 = new Voie(8, "3c", true, 4, secteurTest);
+		Voie voieTest5 = new Voie(4, "4b", false, 1, secteurTest2);
+		Voie voieTest6 = new Voie(5, "5c", true, 2, secteurTest2);
+
+		VoieService.create(voieTest);
+		VoieService.create(voieTest2);
+		VoieService.create(voieTest3);
+		VoieService.create(voieTest4);
+		VoieService.create(voieTest5);
+		VoieService.create(voieTest6);
+
 	}
 
 }

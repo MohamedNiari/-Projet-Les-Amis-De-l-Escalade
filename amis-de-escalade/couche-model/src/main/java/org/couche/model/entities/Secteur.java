@@ -38,6 +38,7 @@ public class Secteur {
 	/*
 	 * Relation de secteur à voie avec supression en cascade
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "secteur", cascade = { CascadeType.ALL })
 	private List<Voie> voies;
 
@@ -144,10 +145,6 @@ public class Secteur {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "Secteur [secteurId=" + secteurId + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
-				+ ", description=" + description + ", voies=" + voies + ", site=" + site + "]";
-	}
+
 
 }
