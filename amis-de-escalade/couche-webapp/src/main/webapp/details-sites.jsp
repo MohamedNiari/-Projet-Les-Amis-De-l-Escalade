@@ -60,21 +60,22 @@
 
 					<div class="carousel-inner" role="listbox" id="carouselStyle">
 						<div class="carousel-item active">
-							<img class="thumbnail img-responsive stretched"
-								src="img/amisEscalade.jpg" alt="First slide"></img>
+							<img class="img-thumbnail img-fluid img-responsive"
+								src="img/amisEscalade.jpg" alt="slide presentation"></img>
 							<div class="carousel-caption d-none d-md-block"
 								style="font-family: cursive; color: #685450">
-								<p>Découvez le site :</p>
+								<br><br>
+								
 								<h5>
-									<strong>${THE_SITE.nom}</strong>
+									Découvez le site <strong>${THE_SITE.nom}</strong>
 								</h5>
 							</div>
 
 						</div>
 						<c:forEach items="${IMAGE_LIST}" var="item">
 							<div class="carousel-item">
-								<img class="thumbnail img-responsive" src="${item}"
-									alt="First slide"></img>
+								<img class="img-thumbnail img-fluid img-responsive" src="${item}"
+									alt="slide du site"></img>
 							</div>
 						</c:forEach>
 					</div>
@@ -112,7 +113,7 @@
 
 							<c:forEach items="${SECTEUR_LIST}" var="item">
 								<h6 style="font-size: 0.8em">
-									Secteur n° ${item.numeroSecteur} : <strong>${item.nom}</strong>
+									Secteur n° ${item.numeroSecteur} <strong>${item.nom}</strong>
 									<span>est composé de ${fn:length(VOIE_LISTLaVertical)} voies</span>
 								</h6>
 								<hr>
