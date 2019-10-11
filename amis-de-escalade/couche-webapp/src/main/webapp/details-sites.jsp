@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="org.couche.model.entities.Voie"%>
 
 <!DOCTYPE html>
@@ -60,22 +60,20 @@
 
 					<div class="carousel-inner" role="listbox" id="carouselStyle">
 						<div class="carousel-item active">
-							<img class="img-thumbnail img-fluid img-responsive"
-								src="img/amisEscalade.jpg" alt="slide presentation"></img>
+							<img class="img-fluid img-responsive" src="img/amisEscalade.jpg"
+								alt="slide presentation"></img>
 							<div class="carousel-caption d-none d-md-block"
 								style="font-family: cursive; color: #685450">
-								<br><br>
-								
+								<br> <br>
 								<h5>
 									Découvez le site <strong>${THE_SITE.nom}</strong>
 								</h5>
 							</div>
-
 						</div>
 						<c:forEach items="${IMAGE_LIST}" var="item">
 							<div class="carousel-item">
-								<img class="img-thumbnail img-fluid img-responsive" src="${item}"
-									alt="slide du site"></img>
+								<img class="img-fluid img-responsive" src="${item}"
+									alt="slides du site"></img>
 							</div>
 						</c:forEach>
 					</div>
@@ -107,19 +105,23 @@
 
 					<div class="row">
 						<div class="col-md-12 box">
-							<c:set var="VOIE_LISTLaVertical" value="VOIE_LIST" />
-							<c:set var="VOIE_LISTLaVertical" value="${VOIE_LIST}LaVertical" />
-							<c:set var="VOIE_LISTLaVertical" value='${requestScope["VOIE_LISTLaVertical"]}' />
-
 							<c:forEach items="${SECTEUR_LIST}" var="item">
 								<h6 style="font-size: 0.8em">
-									Secteur n° ${item.numeroSecteur} <strong>${item.nom}</strong>
-									<span>est composé de ${fn:length(VOIE_LISTLaVertical)} voies</span>
+									Secteur n° ${item.numeroSecteur} : <strong>${item.nom}</strong>
+									<span>est composé de ${fn:length(item.voies)} voies</span>
 								</h6>
 								<hr>
-								<br>
 								<p style="font-size: 0.7em; font-style: italic">${item.description}</p>
-								<br>
+
+								<c:forEach items="${VOIE_LIST}" var="item">
+									<table>
+										<tr>
+											<td>${item.cotation}</td>
+											<td>${item.equiperSpits}</td>
+											<td>${item.nombreLongueurs}</td>
+										</tr>
+									</table>
+								</c:forEach>
 							</c:forEach>
 						</div>
 					</div>

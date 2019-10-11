@@ -76,7 +76,7 @@ public class AppTestCreate {
 		SecteurService secteurService = new SecteurService();
 		Secteur secteurTest = new Secteur("La vertical", 1, "Enormes cannelures", siteTest);
 		Secteur secteurTest2 = new Secteur("Saint-Georges", 2, "Son calcaire est superbe et unique", siteTest);
-		Secteur secteurTest3 = new Secteur("Autracien", 3, "le rocher est finement sculpté ", siteTest);
+		Secteur secteurTest3 = new Secteur("Autracien", 3, "Le rocher est finement sculpté ", siteTest);
 
 		secteurService.create(secteurTest);
 		secteurService.create(secteurTest2);
@@ -97,7 +97,7 @@ public class AppTestCreate {
 		VoieService.create(voieTest4);
 		VoieService.create(voieTest5);
 		VoieService.create(voieTest6);
-
+		
 	}
 
 }

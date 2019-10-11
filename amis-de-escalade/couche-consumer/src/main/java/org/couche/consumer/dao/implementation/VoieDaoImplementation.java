@@ -108,8 +108,8 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Voie> findAll() {
-		List<Voie> Voies = (List<Voie>) getCurrentSession().createQuery("from escalade").list();
-		return Voies;
+		List<Voie> voies = (List<Voie>) getCurrentSession().createQuery("from Voie").list();
+		return voies;
 	}
 
 	@Override
