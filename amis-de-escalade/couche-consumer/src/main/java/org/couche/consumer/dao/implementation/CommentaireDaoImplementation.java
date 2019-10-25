@@ -84,29 +84,24 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 	/*
 	 * Methodes d'accès la base de données
 	 */
-	@Override
 	public void create(Commentaire commentaire) {
 		getCurrentSession().save(commentaire);
 	}
 
-	@Override
 	public void update(Commentaire commentaire) {
 		getCurrentSession().update(commentaire);
 	}
 
-	@Override
 	public void delete(Commentaire commentaire) {
 		getCurrentSession().delete(commentaire);
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Commentaire> findAll() {
 		List<Commentaire> Commentaires = (List<Commentaire>) getCurrentSession().createQuery("from escalade").list();
 		return Commentaires;
 	}
 
-	@Override
 	public void deleteAll() {
 		List<Commentaire> commentaireList = findAll();
 		for (Commentaire commentaire : commentaireList) {
@@ -114,7 +109,6 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 		}
 	}
 
-	@Override
 	public Commentaire findById(Long id) {
 		Commentaire Commentaire = (Commentaire) getCurrentSession().get(Commentaire.class, id);
 		return Commentaire;

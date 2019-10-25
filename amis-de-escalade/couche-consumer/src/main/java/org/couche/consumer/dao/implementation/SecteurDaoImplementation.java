@@ -88,31 +88,31 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 	/*
 	 * Methodes d'accès la base de données
 	 */
-	@Override
+	
 	public void create(Secteur secteur) {
 		getCurrentSession().save(secteur);
 
 	}
 
-	@Override
+	
 	public void update(Secteur secteur) {
 		getCurrentSession().update(secteur);
 	}
 
-	@Override
+	
 	public void delete(Secteur secteur) {
 		getCurrentSession().delete(secteur);
 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public List<Secteur> findAll() {
 		List<Secteur> Secteurs = (List<Secteur>) getCurrentSession().createQuery("from escalade").list();
 		return Secteurs;
 	}
 
-	@Override
+	
 	public void deleteAll() {
 		List<Secteur> secteurList = findAll();
 		for (Secteur secteur : secteurList) {
@@ -120,7 +120,7 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 		}
 	}
 
-	@Override
+	
 	public Secteur findById(Long id) {
 		Secteur Secteur = (Secteur) getCurrentSession().get(Secteur.class, id);
 		return Secteur;

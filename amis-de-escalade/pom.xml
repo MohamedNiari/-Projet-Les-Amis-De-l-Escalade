@@ -17,7 +17,7 @@
 	<description>Création un site communautaire autour de l'escalade pour l'association "Les amis de l'escalade"</description>
 
 	<organization>
-		<name>Niari CO</name>
+		<name>Niari And CO</name>
 		<url>https://exemple.org</url>
 	</organization>
 
@@ -36,9 +36,9 @@
 	<!-- =============================================================== -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>10</java.version>
+		<maven.compiler.source>10</maven.compiler.source>
+		<maven.compiler.target>10</maven.compiler.target>
 	</properties>
 
 	<!-- =============================================================== -->
@@ -181,8 +181,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.1</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<source>10</source>
+						<target>10</target>
 					</configuration>
 				</plugin>
 

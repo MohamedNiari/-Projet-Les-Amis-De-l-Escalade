@@ -71,7 +71,7 @@ public class Secteur {
 	 */
 	public void addVoie(Voie voie) {
 		if (voies == null) {
-			voies = new ArrayList<>();
+			voies = new ArrayList<Voie>();
 		}
 
 		voies.add(voie);

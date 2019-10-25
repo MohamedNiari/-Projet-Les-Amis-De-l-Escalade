@@ -73,7 +73,7 @@ public class Topo {
 	 */
 	public void addSite(Site site) {		
 		if (sites == null) {
-			sites = new ArrayList<>();
+			sites = new ArrayList<Site>();
 		}
 
 		sites.add(site);

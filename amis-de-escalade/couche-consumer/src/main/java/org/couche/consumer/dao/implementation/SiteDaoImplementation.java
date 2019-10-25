@@ -87,31 +87,31 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 	/*
 	 * Methodes d'accès la base de données
 	 */
-	@Override
+	
 	public void create(Site site) {
 		getCurrentSession().save(site);
 
 	}
 
-	@Override
+	
 	public void update(Site site) {
 		getCurrentSession().update(site);
 	}
 
-	@Override
+	
 	public void delete(Site site) {
 		getCurrentSession().delete(site);
 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public List<Site> findAll() {
 		List<Site> sites = (List<Site>) getCurrentSession().createQuery("SELECT t FROM Site t").list();
 		return sites;
 	}
 
-	@Override
+	
 	public void deleteAll() {
 		List<Site> siteList = findAll();
 		for (Site site : siteList) {
@@ -119,7 +119,7 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		}
 	}
 
-	@Override
+	
 	public Site findById(Long id) {
 		Site site = (Site) getCurrentSession().get(Site.class, id);
 		return site;

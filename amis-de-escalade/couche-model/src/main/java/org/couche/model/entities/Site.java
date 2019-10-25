@@ -95,7 +95,7 @@ public class Site {
 	 */
 	public void addCommentaire(Commentaire commentaire) {
 		if (commentaires == null) {
-			commentaires = new ArrayList<>();
+			commentaires = new ArrayList<Commentaire>();
 		}
 
 		commentaires.add(commentaire);
@@ -104,7 +104,7 @@ public class Site {
 
 	public void addSecteur(Secteur secteur) {
 		if (secteurs == null) {
-			secteurs = new ArrayList<>();
+			secteurs = new ArrayList<Secteur>();
 		}
 
 		secteurs.add(secteur);

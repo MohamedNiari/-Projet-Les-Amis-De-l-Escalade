@@ -1,5 +1,7 @@
 package org.couche.model.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /*
- * Bean Voie qui reprÃ©sente sous forme d'objet la table du mÃªme nom
+ * Bean Voie qui reprà©sente sous forme d'objet la table du màªme nom
  */
 @Entity
 public class Voie {
@@ -31,11 +37,15 @@ public class Voie {
 	private Integer numeroVoie;
 
 	/*
-	 * Relation de voie Ã  secteur sans supression en cascade
+	 * Relation de voie à  secteur sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "secteur_id")
 	private Secteur secteur;
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "voie", cascade = { CascadeType.ALL })
+	private List<Longueur> longueurs;
 
 	/*
 	 * Constructeur
@@ -45,11 +55,9 @@ public class Voie {
 	}
 
 	/*
-	 * Constructeur avec paramÃ¨tres
+	 * Constructeur avec paramètres
 	 */
-	public Voie(Integer nombreLongueurs, String cotation, Boolean equiperSpits, Integer numeroVoie,
-			Secteur secteur) {
-
+	public Voie(Integer nombreLongueurs, String cotation, Boolean equiperSpits, Integer numeroVoie, Secteur secteur) {
 		this.nombreLongueurs = nombreLongueurs;
 		this.cotation = cotation;
 		this.equiperSpits = equiperSpits;
@@ -124,7 +132,5 @@ public class Voie {
 	public void setVoieId(Long voieId) {
 		this.voieId = voieId;
 	}
-
-
 
 }

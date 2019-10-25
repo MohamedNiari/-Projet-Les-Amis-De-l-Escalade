@@ -87,30 +87,30 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 	/*
 	 * Methodes d'accès la base de données
 	 */
-	@Override
+	
 	public void create(Topo topo) {
 		getCurrentSession().save(topo);
 	}
 
-	@Override
+	
 	public void update(Topo topo) {
 		getCurrentSession().update(topo);
 	}
 
-	@Override
+	
 	public void delete(Topo topo) {
 		getCurrentSession().delete(topo);
 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public List<Topo> findAll() {
 		List<Topo> Topos = (List<Topo>) getCurrentSession().createQuery("from escalade").list();
 		return Topos;
 	}
 
-	@Override
+	
 	public void deleteAll() {
 		List<Topo> topoList = findAll();
 		for (Topo topo : topoList) {
@@ -118,7 +118,7 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 		}
 	}
 
-	@Override
+	
 	public Topo findById(Long id) {
 		Topo Topo = (Topo) getCurrentSession().get(Topo.class, id);
 		return Topo;

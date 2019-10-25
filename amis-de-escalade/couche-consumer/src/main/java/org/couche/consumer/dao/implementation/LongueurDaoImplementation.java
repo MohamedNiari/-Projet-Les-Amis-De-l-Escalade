@@ -3,14 +3,14 @@ package org.couche.consumer.dao.implementation;
 import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
-import org.couche.model.entities.Secteur;
+import org.couche.model.entities.Longueur;
 import org.couche.model.entities.Voie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
+public class LongueurDaoImplementation implements DaoInterface<Longueur, Long> {
 
 	private Session currentSession;
 
@@ -19,7 +19,7 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 	/*
 	 * Constructor
 	 */
-	public VoieDaoImplementation() {
+	public LongueurDaoImplementation() {
 
 	}
 
@@ -27,8 +27,8 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 	 * Création de la session factory
 	 */
 	private static SessionFactory getSessionFactory() {
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Voie.class)
-				.addAnnotatedClass(Secteur.class).buildSessionFactory();
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Longueur.class)
+				.addAnnotatedClass(Voie.class).buildSessionFactory();
 		return factory;
 	}
 
@@ -88,46 +88,41 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 	 * Methodes d'accès la base de données
 	 */
 	
-	public void create(Voie voie) {
-		getCurrentSession().save(voie);
+	public void create(Longueur longueur) {
+		getCurrentSession().save(longueur);
 
 	}
 
 	
-	public void update(Voie voie) {
-		getCurrentSession().update(voie);
+	public void update(Longueur longueur) {
+		getCurrentSession().update(longueur);
 	}
 
 	
-	public void delete(Voie voie) {
-		getCurrentSession().delete(voie);
+	public void delete(Longueur longueur) {
+		getCurrentSession().delete(longueur);
 
 	}
 
 	@SuppressWarnings("unchecked")
 	
-	public List<Voie> findAll() {
-		List<Voie> voies = (List<Voie>) getCurrentSession().createQuery("from Voie").list();
-		return voies;
+	public List<Longueur> findAll() {
+		List<Longueur> longueurs = (List<Longueur>) getCurrentSession().createQuery("from Longueur").list();
+		return longueurs;
 	}
 
 	
 	public void deleteAll() {
-		List<Voie> voieList = findAll();
-		for (Voie voie : voieList) {
-			delete(voie);
+		List<Longueur> longueurList = findAll();
+		for (Longueur longueur : longueurList) {
+			delete(longueur);
 		}
 	}
 
 	
-	public Voie findById(Long id) {
-		Voie Voie = (Voie) getCurrentSession().get(Voie.class, id);
-		return Voie;
-	}
-
-	public List<Voie> findBySecteur(Long secteurid) {
-		List<Voie> voies = (List<Voie>) getCurrentSession().get(Secteur.class, secteurid).getVoies();
-		return voies;
+	public Longueur findById(Long id) {
+		Longueur longueur = (Longueur) getCurrentSession().get(Longueur.class, id);
+		return longueur;
 	}
 
 }

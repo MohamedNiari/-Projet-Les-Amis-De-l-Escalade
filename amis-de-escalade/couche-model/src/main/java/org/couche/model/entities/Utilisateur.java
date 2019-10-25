@@ -88,7 +88,7 @@ public class Utilisateur {
 	 */
 	public void addTopo(Topo topo) {
 		if (topos == null) {
-			topos = new ArrayList<>();
+			topos = new ArrayList<Topo>();
 		}
 
 		topos.add(topo);
@@ -97,7 +97,7 @@ public class Utilisateur {
 
 	public void addCommentaire(Commentaire commentaire) {
 		if (commentaires == null) {
-			commentaires = new ArrayList<>();
+			commentaires = new ArrayList<Commentaire>();
 		}
 
 		commentaires.add(commentaire);

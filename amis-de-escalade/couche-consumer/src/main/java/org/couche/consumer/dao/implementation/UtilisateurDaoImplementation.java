@@ -87,31 +87,31 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 	/*
 	 * Methodes d'accès la base de données
 	 */
-	@Override
+	
 	public void create(Utilisateur utilisateur) {
 		getCurrentSession().save(utilisateur);
 
 	}
 
-	@Override
+	
 	public void update(Utilisateur utilisateur) {
 		getCurrentSession().update(utilisateur);
 	}
 
-	@Override
+	
 	public void delete(Utilisateur utilisateur) {
 		getCurrentSession().delete(utilisateur);
 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public List<Utilisateur> findAll() {
 		List<Utilisateur> Utilisateurs = (List<Utilisateur>) getCurrentSession().createQuery("from escalade").list();
 		return Utilisateurs;
 	}
 
-	@Override
+	
 	public void deleteAll() {
 		List<Utilisateur> utilisateurList = findAll();
 		for (Utilisateur utilisateur : utilisateurList) {
@@ -119,7 +119,7 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 		}
 	}
 
-	@Override
+	
 	public Utilisateur findById(Long id) {
 		Utilisateur Utilisateur = (Utilisateur) getCurrentSession().get(Utilisateur.class, id);
 		return Utilisateur;
