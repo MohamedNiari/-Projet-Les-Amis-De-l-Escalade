@@ -20,10 +20,16 @@ public class Longueur {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "voie_id")
+	@Column(name = "longueur_id")
 	private Long longueurId;
-	@Column(name = "longueur_metre")
-	private Integer longueurMetre;
+	@Column(name = "mesure")
+	private Integer mesure;
+	@Column(name = "cotation")
+	private String cotation;
+	@Column(name = "equiper_spits")
+	private Boolean equiperSpits;
+	@Column(name = "numero_longueur")
+	private Integer numeroLongueur;
 
 	/*
 	 * Relation de voie Â  secteur sans supression en cascade
@@ -42,8 +48,11 @@ public class Longueur {
 	/*
 	 * Constructeur avec paramÃ¨tres
 	 */
-	public Longueur(Integer longueurMetre, Voie voie) {
-		this.longueurMetre = longueurMetre;
+	public Longueur(Integer mesure, String cotation, Boolean equiperSpits, Integer numeroLongueur, Voie voie) {
+		this.mesure = mesure;
+		this.cotation = cotation;
+		this.equiperSpits = equiperSpits;
+		this.numeroLongueur = numeroLongueur;
 		this.voie = voie;
 	}
 
@@ -59,14 +68,6 @@ public class Longueur {
 		this.longueurId = longueurId;
 	}
 
-	public Integer getLongueurMetre() {
-		return longueurMetre;
-	}
-
-	public void setLongueurMetre(Integer longueurMetre) {
-		this.longueurMetre = longueurMetre;
-	}
-
 	public Voie getVoie() {
 		return voie;
 	}
@@ -75,9 +76,42 @@ public class Longueur {
 		this.voie = voie;
 	}
 
+	public Integer getMesure() {
+		return mesure;
+	}
+
+	public void setMesure(Integer mesure) {
+		this.mesure = mesure;
+	}
+
+	public String getCotation() {
+		return cotation;
+	}
+
+	public void setCotation(String cotation) {
+		this.cotation = cotation;
+	}
+
+	public Boolean getEquiperSpits() {
+		return equiperSpits;
+	}
+
+	public void setEquiperSpits(Boolean equiperSpits) {
+		this.equiperSpits = equiperSpits;
+	}
+
+	public Integer getNumeroLongueur() {
+		return numeroLongueur;
+	}
+
+	public void setNumeroLongueur(Integer numeroLongueur) {
+		this.numeroLongueur = numeroLongueur;
+	}
+
 	@Override
 	public String toString() {
-		return "Longueur [longueurId=" + longueurId + ", longueurMetre=" + longueurMetre + ", voie=" + voie + "]";
+		return "Longueur [longueurId=" + longueurId + ", mesure=" + mesure + ", cotation=" + cotation
+				+ ", equiperSpits=" + equiperSpits + ", numeroLongueur=" + numeroLongueur + ", voie=" + voie + "]";
 	}
 
 }

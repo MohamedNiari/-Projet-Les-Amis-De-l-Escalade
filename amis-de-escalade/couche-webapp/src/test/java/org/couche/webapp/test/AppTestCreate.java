@@ -60,8 +60,8 @@ public class AppTestCreate {
 				TypeRocher.Gneiss, topoTest);
 
 		siteTest2.getUrlImages().add("img/Bellevue.jpg");
-		siteTest2.getUrlImages().add("img/Bellevue2.jpg");
-		siteTest2.getUrlImages().add("img/Bellevue3.jpg");
+		siteTest2.getUrlImages().add("img/Bellevue2.png");
+		siteTest2.getUrlImages().add("img/Bellevue3.png");
 
 		Site siteTest3 = new Site("Le Teillon", 69, "Oullins", true,
 				"Site à la mode dans les années 1970 pour aller taquiner du piton, le Teillon aujourd’hui ne parle plus à personne, éclipsé qu’il est dans l’ombre médiatique et photogénique de sa célébrissime voisine.",
@@ -87,12 +87,12 @@ public class AppTestCreate {
 
 		// test pour la table voie
 		VoieService VoieService = new VoieService();
-		Voie voieTest = new Voie(7, "5b", true, 1, secteurTest);
-		Voie voieTest2 = new Voie(4, "5a", false, 2, secteurTest);
-		Voie voieTest3 = new Voie(6, "3b", false, 3, secteurTest);
-		Voie voieTest4 = new Voie(8, "3c", true, 4, secteurTest);
-		Voie voieTest5 = new Voie(4, "4b", false, 1, secteurTest2);
-		Voie voieTest6 = new Voie(5, "5c", true, 2, secteurTest2);
+		Voie voieTest = new Voie(7, 1, secteurTest);
+		Voie voieTest2 = new Voie(4, 2, secteurTest);
+		Voie voieTest3 = new Voie(6, 3, secteurTest);
+		Voie voieTest4 = new Voie(8, 4, secteurTest);
+		Voie voieTest5 = new Voie(4, 1, secteurTest2);
+		Voie voieTest6 = new Voie(5, 2, secteurTest2);
 
 		VoieService.create(voieTest);
 		VoieService.create(voieTest2);
@@ -103,29 +103,31 @@ public class AppTestCreate {
 		
 		// test pour la table longueur
 		LongueurService longueurService = new LongueurService();
-		Longueur longueurTest = new Longueur(18, voieTest);
-		Longueur longueurTest2 = new Longueur(45, voieTest);
-		Longueur longueurTest3 = new Longueur(14, voieTest);
-		Longueur longueurTest4 = new Longueur(25, voieTest);
-		Longueur longueurTest5 = new Longueur(32, voieTest);
-		Longueur longueurTest6 = new Longueur(21, voieTest);
-		Longueur longueurTest7 = new Longueur(18, voieTest);
-		Longueur longueurTest8 = new Longueur(45, voieTest2);
-		Longueur longueurTest9 = new Longueur(14, voieTest2);
-		Longueur longueurTest10 = new Longueur(25, voieTest2);
-		Longueur longueurTest11 = new Longueur(32, voieTest2);
-		Longueur longueurTest12 = new Longueur(21, voieTest3);
-		Longueur longueurTest13 = new Longueur(18, voieTest3);
-		Longueur longueurTest14 = new Longueur(45, voieTest3);
-		Longueur longueurTest15 = new Longueur(14, voieTest3);
-		Longueur longueurTest16 = new Longueur(25, voieTest3);
-		Longueur longueurTest17 = new Longueur(32, voieTest3);
-		Longueur longueurTest18 = new Longueur(21, voieTest4);
-		Longueur longueurTest19 = new Longueur(11, voieTest4);
-		Longueur longueurTest20 = new Longueur(25, voieTest4);
-		Longueur longueurTest21 = new Longueur(17, voieTest4);
-		Longueur longueurTest22 = new Longueur(14, voieTest4);
-		Longueur longueurTest23 = new Longueur(29, voieTest4);
+		Longueur longueurTest = new Longueur(25, "4a", true, 1, voieTest);
+		Longueur longueurTest2 = new Longueur(15, "5c", false, 2, voieTest);
+		Longueur longueurTest3 = new Longueur(41, "5b", true, 3, voieTest);
+		Longueur longueurTest4 = new Longueur(35, "4c", true, 4, voieTest);
+		Longueur longueurTest5 = new Longueur(25, "5a", true, 5, voieTest);
+		Longueur longueurTest6 = new Longueur(12, "5c", false, 6, voieTest);
+		Longueur longueurTest7 = new Longueur(14, "5a", false, 7, voieTest);
+		Longueur longueurTest8 = new Longueur(45, "7a", true, 1, voieTest2);
+		Longueur longueurTest9 = new Longueur(14, "7c", false, 2, voieTest2);
+		Longueur longueurTest10 = new Longueur(25, "8a", false, 3, voieTest2);
+		Longueur longueurTest11 = new Longueur(32, "8b", true, 4, voieTest2);
+		Longueur longueurTest12 = new Longueur(21, "8c", false, 1, voieTest3);
+		Longueur longueurTest13 = new Longueur(18, "7b", false, 2, voieTest3);
+		Longueur longueurTest14 = new Longueur(45, "7a", false, 3, voieTest3);
+		Longueur longueurTest15 = new Longueur(14, "6c", true, 4, voieTest3);
+		Longueur longueurTest16 = new Longueur(25, "8a", false, 5, voieTest3);
+		Longueur longueurTest17 = new Longueur(32, "6c", false, 6, voieTest3);
+		Longueur longueurTest18 = new Longueur(21, "7a", true, 1, voieTest4);
+		Longueur longueurTest19 = new Longueur(11, "7b", true, 2, voieTest4);
+		Longueur longueurTest20 = new Longueur(25, "5c", true, 3, voieTest4);
+		Longueur longueurTest21 = new Longueur(17, "6b", false, 4, voieTest4);
+		Longueur longueurTest22 = new Longueur(14, "6c", true, 5, voieTest4);
+		Longueur longueurTest23 = new Longueur(29, "7a", true, 6, voieTest4);
+		Longueur longueurTest24 = new Longueur(4, "6c", true, 7, voieTest4);
+		Longueur longueurTest25 = new Longueur(49, "6a", false, 8, voieTest4);
 
 
 		longueurService.create(longueurTest);
@@ -151,6 +153,8 @@ public class AppTestCreate {
 		longueurService.create(longueurTest21);
 		longueurService.create(longueurTest22);
 		longueurService.create(longueurTest23);
+		longueurService.create(longueurTest24);
+		longueurService.create(longueurTest25);
 		
 	}
 

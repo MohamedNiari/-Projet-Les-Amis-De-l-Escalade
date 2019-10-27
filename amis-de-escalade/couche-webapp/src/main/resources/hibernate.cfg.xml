@@ -36,6 +36,7 @@
 		<mapping class="org.couche.model.entities.Topo" />
 		<mapping class="org.couche.model.entities.Utilisateur" />
 		<mapping class="org.couche.model.entities.Voie" />
+		<mapping class="org.couche.model.entities.Longueur" />
 
 
 	</session-factory>

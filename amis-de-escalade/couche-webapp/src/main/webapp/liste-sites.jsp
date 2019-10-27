@@ -21,7 +21,9 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-success" id="footer">
+	<nav
+		class="navbar navbar-expand-lg navbar-dark bg-success border border-white"
+		id="ombre">
 		<c:url var="listeDesSites" value="ListeDesSites" />
 		<a class="navbar-brand" href="${listeDesSites}">Page d'accueil </a>
 
@@ -39,18 +41,54 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
 			</ul>
+			<form action="rechercheSite" method="post" class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche Site</button>
+			</form>
 			<span class="navbar-text"> Tout sur l'escalade </span>
 		</div>
 	</nav>
 
-	<section class="d-flex align-content-end flex-wrap bd-highlight mb-3"
-		id="cards">
+	<section class="d-flex flex-wrap" id="cards">
 
 		<c:forEach var="tempSite" items="${SITE_LIST}">
 
-			<div
-				class="card border-success mb-3 col-md-4 d-flex align-items-stretch">
-				<div class="card-header">
+			<div class="card border-success mb-3 col-md-4 shadow-lg p-4 mb-4">
+				<div class="card-header bg-transparent border-success">
+					<span class="float-left"><strong>${tempSite.nom}</strong></span> <span
+						class="float-right"><small> <i
+							class="fas fa-level-up-alt"></i> ${tempSite.hauteurMax} m
+					</small></span>
+				</div>
+				<div class="card-body text-success">
+					<h6 class="card-title">
+						<strong>Lieu</strong> ${tempSite.lieu}
+						<c:if test="${tempSite.taguerOfficiel}">
+							<span><img src="img/official.png" class="float-right"
+								id="official" alt="official"></img></span>
+						</c:if>
+					</h6>
+					<br> <br>
+					<p class="card-text">${tempSite.description}</p>
+
+					<c:url var="detailsDesSites" value="DetailsDesSites">
+						<c:param name="siteId" value="${tempSite.siteId}" />
+					</c:url>
+					<a href="${detailsDesSites}" class="stretched-link"></a>
+				</div>
+				<div
+					class="card-footer bg-transparent border-success text-secondary">
+					<strong> Type </strong> <em>${tempSite.typeRocher}</em>
+				</div>
+			</div>
+
+		</c:forEach>
+
+		<c:forEach var="tempSite" items="${SITE_LIST}">
+
+			<div class="card border-success mb-3 col-md-4 ">
+				<div class="card-header bg-transparent border-success">
 					<span class="float-left"><strong>${tempSite.nom}</strong></span> <span
 						class="float-right"><small> <i
 							class="fas fa-level-up-alt"></i> ${tempSite.hauteurMax} m
@@ -61,8 +99,7 @@
 					<c:if test="${tempSite.taguerOfficiel}">
 						<span><img src="img/official.png" class="float-right"
 							id="official" alt="official"></img></span>
-					</c:if>
-					</h8>
+					</c:if> </h8>
 					<br> <br>
 					<p class="card-text">${tempSite.description}</p>
 
@@ -71,7 +108,10 @@
 					</c:url>
 					<a href="${detailsDesSites}" class="stretched-link"></a>
 				</div>
-				<span class="text-secondary"><strong> Type </strong> <em>${tempSite.typeRocher}</em></span>
+				<div
+					class="card-footer bg-transparent border-success text-secondary">
+					<strong> Type </strong> <em>${tempSite.typeRocher}</em>
+				</div>
 			</div>
 
 		</c:forEach>

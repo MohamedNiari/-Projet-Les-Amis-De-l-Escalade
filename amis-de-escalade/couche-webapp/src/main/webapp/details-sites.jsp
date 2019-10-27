@@ -22,7 +22,9 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-success" id="footer">
+	<nav
+		class="navbar navbar-expand-lg navbar-dark bg-success border border-white"
+		>
 		<c:url var="listeDesSites" value="ListeDesSites" />
 		<a class="navbar-brand" href="${listeDesSites}">Page d'accueil </a>
 
@@ -44,10 +46,10 @@
 		</div>
 	</nav>
 
-	<section>
-		<div class="container-fluid">
-			<div class="row">
-				<div id="carouselImageSite" class="carousel slide col-md-4"
+	<section class="d-flex flex-wrap">
+		<div class="col-md-4">
+			<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
+				<div id="carouselImageSite" class="carousel slide"
 					data-ride="carousel">
 
 					<ol class="carousel-indicators">
@@ -63,10 +65,10 @@
 							<img class="img-fluid img-responsive" src="img/amisEscalade.jpg"
 								alt="slide presentation"></img>
 							<div class="carousel-caption d-none d-md-block"
-								style="font-family: cursive; color: #685450">
+								style="font-family: cursive; color: #695D5A">
 								<br> <br>
 								<h5>
-									Découvez le site <strong>${THE_SITE.nom}</strong>
+									Découvez le site de <strong>${THE_SITE.nom}</strong>
 								</h5>
 							</div>
 						</div>
@@ -88,44 +90,94 @@
 						class="sr-only">Next</span>
 					</a>
 				</div>
+			</div>
+		</div>
 
-				<div class="col-md-8">
-					<div class="row">
-						<div class="col-md-12 box">
-							<p></p>
-							<h4>
-								<strong>${THE_SITE.nom}</strong>
-							</h4>
-							<hr>
-							<br>
-							<p style="font-size: 0.9em; font-style: italic">${THE_SITE.description}</p>
-							<br>
-						</div>
-					</div>
+		<div class="col-md-8">
 
-					<div class="row">
-						<div class="col-md-12 box">
-							<c:forEach items="${SECTEUR_LIST}" var="item">
-								<h6 style="font-size: 0.8em">
-									Secteur n° ${item.numeroSecteur} : <strong>${item.nom}</strong>
-									<span>est composé de ${fn:length(item.voies)} voies</span>
-								</h6>
-								<hr>
-								<p style="font-size: 0.7em; font-style: italic">${item.description}</p>
-
-								<c:forEach items="${VOIE_LIST}" var="item">
-									<table>
-										<tr>
-											<td>${item.cotation}</td>
-											<td>${item.equiperSpits}</td>
-											<td>${item.nombreLongueurs}</td>
-										</tr>
-									</table>
-								</c:forEach>
-							</c:forEach>
-						</div>
-					</div>
+			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
+				<div class="col-md-12">
+					<h4>
+						<i class="fas fa-map-signs" style="color: #685450"></i> &nbsp;<strong
+							style="font-family: cursive">Site de ${THE_SITE.nom}</strong>
+					</h4>
+					<hr>
+					<br>
+					<p style="font-size: 0.9em; font-style: italic">${THE_SITE.description}</p>
+					<br>
 				</div>
+
+			</div>
+
+			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
+
+				<c:forEach items="${SECTEUR_LIST}" var="itemSecteur">
+					<div style="margin-bottom: 2%">
+						<h6 style="font-size: 1.1em">
+							<i class="fas fa-share" style="color: #685450"></i> &nbsp; Secteur n°
+							${itemSecteur.numeroSecteur} : <strong>${itemSecteur.nom}</strong>
+							<span class="float-right">${fn:length(itemSecteur.voies)}
+								voies</span>
+						</h6>
+						<hr>
+						<br>
+						<p style="font-size: 0.9em; font-style: italic">${itemSecteur.description}</p>
+
+						<c:forEach items="${itemSecteur.voies}" var="itemVoie">
+							<div class="card-deck">
+								<div class="card">
+									<div class="card-body">
+										<div class="row border-bottom card-title font-weight-bold"
+											style="font-size: 0.8em">
+											<div class="col-sm">
+												<p>
+													Voie n° ${itemVoie.numeroVoie} <i
+														class="fas fa-flag-checkered float-right"></i>
+												</p>
+											</div>
+										</div>
+										<div class="card-text">
+											<table class="table">
+												<thead class="thead-light">
+													<tr>
+														<th scope="col">Longueur</th>
+														<th scope="col">Mesure</th>
+														<th scope="col">Cotation</th>
+														<th scope="col">Equipée Spits</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${itemVoie.longueurs}" var="itemLongueur">
+														<tr>
+															<th scope="row">${itemLongueur.numeroLongueur}</th>
+															<td>${itemLongueur.mesure}</td>
+															<td>${itemLongueur.cotation}</td>
+															<td>
+																<c:choose>
+																	<c:when test="${itemLongueur.equiperSpits == true}">
+															            Oui
+															         </c:when>
+																	<c:otherwise>
+															            Non
+															         </c:otherwise>
+																</c:choose>
+															</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+
+										</div>
+										<div class="card-footer">
+											<small class="text-muted float-right">${itemVoie.nombreLongueurs}
+												Longueurs</small>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>

@@ -28,16 +28,13 @@ public class Voie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "voie_id")
 	private Long voieId;
-	@Column(name = "nombre_longueur")
-	private Integer nombreLongueurs;
-	private String cotation;
-	@Column(name = "equiper_spits")
-	private Boolean equiperSpits;
 	@Column(name = "numero_voie")
 	private Integer numeroVoie;
+	@Column(name = "nombre_longueur")
+	private Integer nombreLongueurs;
 
 	/*
-	 * Relation de voie Ã Â  secteur sans supression en cascade
+	 * Relation de voie à secteur sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "secteur_id")
@@ -55,12 +52,10 @@ public class Voie {
 	}
 
 	/*
-	 * Constructeur avec paramÃ¨tres
+	 * Constructeur avec paramètres
 	 */
-	public Voie(Integer nombreLongueurs, String cotation, Boolean equiperSpits, Integer numeroVoie, Secteur secteur) {
+	public Voie(Integer nombreLongueurs, Integer numeroVoie, Secteur secteur) {
 		this.nombreLongueurs = nombreLongueurs;
-		this.cotation = cotation;
-		this.equiperSpits = equiperSpits;
 		this.numeroVoie = numeroVoie;
 		this.secteur = secteur;
 	}
@@ -83,22 +78,6 @@ public class Voie {
 
 	public void setNombreLongueurs(int nombreLongueurs) {
 		this.nombreLongueurs = nombreLongueurs;
-	}
-
-	public String getCotation() {
-		return cotation;
-	}
-
-	public void setCotation(String cotation) {
-		this.cotation = cotation;
-	}
-
-	public Boolean getEquiperSpits() {
-		return equiperSpits;
-	}
-
-	public void setEquiperSpits(Boolean equiperSpits) {
-		this.equiperSpits = equiperSpits;
 	}
 
 	public int getNumeroVoie() {
@@ -133,12 +112,19 @@ public class Voie {
 		this.voieId = voieId;
 	}
 
+	public List<Longueur> getLongueurs() {
+		return longueurs;
+	}
+
+	public void setLongueurs(List<Longueur> longueurs) {
+		this.longueurs = longueurs;
+	}
+
 	@Override
 	public String toString() {
-		return "Voie [voieId=" + voieId + ", nombreLongueurs=" + nombreLongueurs + ", cotation=" + cotation
-				+ ", equiperSpits=" + equiperSpits + ", numeroVoie=" + numeroVoie + ", secteur=" + secteur
-				+ ", longueurs=" + longueurs + "]";
+		return "Voie [voieId=" + voieId + ", numeroVoie=" + numeroVoie + ", nombreLongueurs=" + nombreLongueurs
+				+ ", secteur=" + secteur + ", longueurs=" + longueurs + "]";
 	}
-	
+
 	
 }
