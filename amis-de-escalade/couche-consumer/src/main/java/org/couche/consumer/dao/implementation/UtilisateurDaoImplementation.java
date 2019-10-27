@@ -87,31 +87,51 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 	/*
 	 * Methodes d'accès la base de données
 	 */
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void create(Utilisateur utilisateur) {
 		getCurrentSession().save(utilisateur);
 
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void update(Utilisateur utilisateur) {
 		getCurrentSession().update(utilisateur);
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void delete(Utilisateur utilisateur) {
 		getCurrentSession().delete(utilisateur);
 
 	}
 
 	@SuppressWarnings("unchecked")
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public List<Utilisateur> findAll() {
 		List<Utilisateur> Utilisateurs = (List<Utilisateur>) getCurrentSession().createQuery("from escalade").list();
 		return Utilisateurs;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void deleteAll() {
 		List<Utilisateur> utilisateurList = findAll();
 		for (Utilisateur utilisateur : utilisateurList) {
@@ -119,7 +139,11 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 		}
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public Utilisateur findById(Long id) {
 		Utilisateur Utilisateur = (Utilisateur) getCurrentSession().get(Utilisateur.class, id);
 		return Utilisateur;

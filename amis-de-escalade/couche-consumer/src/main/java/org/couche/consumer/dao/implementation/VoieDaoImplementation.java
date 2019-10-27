@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Secteur;
+<<<<<<< HEAD
+=======
+import org.couche.model.entities.Site;
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 import org.couche.model.entities.Voie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -87,31 +91,51 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 	/*
 	 * Methodes d'accès la base de données
 	 */
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void create(Voie voie) {
 		getCurrentSession().save(voie);
 
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void update(Voie voie) {
 		getCurrentSession().update(voie);
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void delete(Voie voie) {
 		getCurrentSession().delete(voie);
 
 	}
 
 	@SuppressWarnings("unchecked")
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public List<Voie> findAll() {
 		List<Voie> voies = (List<Voie>) getCurrentSession().createQuery("from Voie").list();
 		return voies;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void deleteAll() {
 		List<Voie> voieList = findAll();
 		for (Voie voie : voieList) {
@@ -119,7 +143,11 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 		}
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public Voie findById(Long id) {
 		Voie Voie = (Voie) getCurrentSession().get(Voie.class, id);
 		return Voie;

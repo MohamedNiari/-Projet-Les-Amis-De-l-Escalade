@@ -1,6 +1,7 @@
 html, body {
 	height: 100%;
 	background: rgb(255, 251, 255);
+<<<<<<< HEAD
 	
 }
 
@@ -14,6 +15,8 @@ html, body {
 	text-align: center;
 	display: flex;
 	align-items: center;
+=======
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 }
 
 #footer {
@@ -21,6 +24,7 @@ html, body {
 	margin: auto;
 }
 
+<<<<<<< HEAD
 header, section {
 	margin-left: 10%;
 	margin-right: 10%;
@@ -36,31 +40,95 @@ header, section {
 	margin-top: 0.5%;
 }
 
+=======
+section {
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 0.5%;
+	margin-top: 0.5%;
+}
+
+#cover, #footer, #cards, #carouselStyle {
+	margin-bottom: 0.5%;
+	margin-top: 0.5%;
+}
+
+
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 #hauteur {
 	font-size: 60%;
 	text-align: right;
 	display: block;
 }
 
+<<<<<<< HEAD
+=======
+/* gestion du logo official */
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 #official {
 	width: 30%;
 	height: 30%;
 }
 
+<<<<<<< HEAD
+=======
+/* gestion de la carousel */
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 #carouselStyle {
 	width: 100%;
 	height: 600px !important;
 	background-color: green;
+<<<<<<< HEAD
 
 }
 
 .box {
 	padding: 10px;
+=======
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 }
 
 hr {
 	padding: 0px;
 	margin: 0px;
+<<<<<<< HEAD
 }
 
 
+=======
+	border-color: #5cb85c;
+}
+
+nav {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+/*Augementation de la hauteur de la nv*/
+.navbar {
+	min-height: 80px;
+}
+
+.navbar-brand {
+	padding: 0 15px;
+	height: 80px;
+	line-height: 80px;
+}
+
+.navbar-toggle {
+	/* (80px - button height 34px) / 2 = 23px */
+	margin-top: 23px;
+	padding: 9px 10px !important;
+}
+
+@media ( min-width : 768px) {
+	.navbar-nav>li>a {
+		/* (80px - line-height of 27px) / 2 = 26.5px */
+		padding-top: 26.5px;
+		padding-bottom: 26.5px;
+		line-height: 27px;
+	}
+}
+
+/*Centrage du contenu de la nav*/
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7

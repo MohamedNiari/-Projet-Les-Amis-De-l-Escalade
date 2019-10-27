@@ -95,7 +95,11 @@ public class Site {
 	 */
 	public void addCommentaire(Commentaire commentaire) {
 		if (commentaires == null) {
+<<<<<<< HEAD
 			commentaires = new ArrayList<Commentaire>();
+=======
+			commentaires = new ArrayList<>();
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 		}
 
 		commentaires.add(commentaire);
@@ -104,7 +108,11 @@ public class Site {
 
 	public void addSecteur(Secteur secteur) {
 		if (secteurs == null) {
+<<<<<<< HEAD
 			secteurs = new ArrayList<Secteur>();
+=======
+			secteurs = new ArrayList<>();
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 		}
 
 		secteurs.add(secteur);

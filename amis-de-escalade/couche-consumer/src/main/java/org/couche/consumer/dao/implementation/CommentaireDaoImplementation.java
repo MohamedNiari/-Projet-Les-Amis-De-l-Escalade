@@ -84,24 +84,44 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 	/*
 	 * Methodes d'accès la base de données
 	 */
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void create(Commentaire commentaire) {
 		getCurrentSession().save(commentaire);
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void update(Commentaire commentaire) {
 		getCurrentSession().update(commentaire);
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void delete(Commentaire commentaire) {
 		getCurrentSession().delete(commentaire);
 	}
 
 	@SuppressWarnings("unchecked")
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public List<Commentaire> findAll() {
 		List<Commentaire> Commentaires = (List<Commentaire>) getCurrentSession().createQuery("from escalade").list();
 		return Commentaires;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void deleteAll() {
 		List<Commentaire> commentaireList = findAll();
 		for (Commentaire commentaire : commentaireList) {
@@ -109,6 +129,10 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public Commentaire findById(Long id) {
 		Commentaire Commentaire = (Commentaire) getCurrentSession().get(Commentaire.class, id);
 		return Commentaire;

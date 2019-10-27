@@ -87,30 +87,50 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 	/*
 	 * Methodes d'accès la base de données
 	 */
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void create(Topo topo) {
 		getCurrentSession().save(topo);
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void update(Topo topo) {
 		getCurrentSession().update(topo);
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void delete(Topo topo) {
 		getCurrentSession().delete(topo);
 
 	}
 
 	@SuppressWarnings("unchecked")
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public List<Topo> findAll() {
 		List<Topo> Topos = (List<Topo>) getCurrentSession().createQuery("from escalade").list();
 		return Topos;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void deleteAll() {
 		List<Topo> topoList = findAll();
 		for (Topo topo : topoList) {
@@ -118,7 +138,11 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 		}
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public Topo findById(Long id) {
 		Topo Topo = (Topo) getCurrentSession().get(Topo.class, id);
 		return Topo;
