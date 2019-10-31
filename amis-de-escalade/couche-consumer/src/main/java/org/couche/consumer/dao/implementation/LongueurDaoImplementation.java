@@ -24,11 +24,7 @@ public class LongueurDaoImplementation implements DaoInterface<Longueur, Long> {
 	}
 
 	/*
-<<<<<<< HEAD
-	 * Création de la session factory
-=======
 	 * CrÃ©ation de la session factory
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	 */
 	private static SessionFactory getSessionFactory() {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Longueur.class)
@@ -37,27 +33,16 @@ public class LongueurDaoImplementation implements DaoInterface<Longueur, Long> {
 	}
 
 	/*
-<<<<<<< HEAD
-	 * Création de la session
-	 */
-	public Session openCurrentSession() {
-		// création de la session
-=======
 	 * CrÃ©ation de la session
 	 */
 	public Session openCurrentSession() {
 		// crÃ©ation de la session
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 		currentSession = getSessionFactory().openSession();
 		return currentSession;
 	}
 
 	/*
-<<<<<<< HEAD
-	 * Création de la session avec transaction
-=======
 	 * CrÃ©ation de la session avec transaction
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	 */
 	public Session openCurrentSessionwithTransaction() {
 		currentSession = getSessionFactory().openSession();
@@ -100,11 +85,7 @@ public class LongueurDaoImplementation implements DaoInterface<Longueur, Long> {
 	}
 
 	/*
-<<<<<<< HEAD
-	 * Methodes d'accès la base de données
-=======
 	 * Methodes d'accÃ¨s la base de donnÃ©es
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	 */
 	
 	public void create(Longueur longueur) {

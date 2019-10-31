@@ -88,11 +88,7 @@ public class Utilisateur {
 	 */
 	public void addTopo(Topo topo) {
 		if (topos == null) {
-<<<<<<< HEAD
-			topos = new ArrayList<Topo>();
-=======
 			topos = new ArrayList<>();
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 		}
 
 		topos.add(topo);
@@ -101,11 +97,7 @@ public class Utilisateur {
 
 	public void addCommentaire(Commentaire commentaire) {
 		if (commentaires == null) {
-<<<<<<< HEAD
-			commentaires = new ArrayList<Commentaire>();
-=======
 			commentaires = new ArrayList<>();
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 		}
 
 		commentaires.add(commentaire);

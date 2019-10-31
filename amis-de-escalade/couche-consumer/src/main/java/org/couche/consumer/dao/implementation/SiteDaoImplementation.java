@@ -87,51 +87,31 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 	/*
 	 * Methodes d'accès la base de données
 	 */
-<<<<<<< HEAD
-	
-=======
 	@Override
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void create(Site site) {
 		getCurrentSession().save(site);
 
 	}
 
-<<<<<<< HEAD
-	
-=======
 	@Override
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void update(Site site) {
 		getCurrentSession().update(site);
 	}
 
-<<<<<<< HEAD
-	
-=======
 	@Override
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void delete(Site site) {
 		getCurrentSession().delete(site);
 
 	}
 
 	@SuppressWarnings("unchecked")
-<<<<<<< HEAD
-	
-=======
 	@Override
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public List<Site> findAll() {
 		List<Site> sites = (List<Site>) getCurrentSession().createQuery("SELECT t FROM Site t").list();
 		return sites;
 	}
 
-<<<<<<< HEAD
-	
-=======
 	@Override
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void deleteAll() {
 		List<Site> siteList = findAll();
 		for (Site site : siteList) {
@@ -139,11 +119,7 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		}
 	}
 
-<<<<<<< HEAD
-	
-=======
 	@Override
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public Site findById(Long id) {
 		Site site = (Site) getCurrentSession().get(Site.class, id);
 		return site;

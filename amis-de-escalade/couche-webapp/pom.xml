@@ -4,23 +4,15 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	<!-- =============================================================== -->
 	<!-- Informations du projet -->
 	<!-- =============================================================== -->
 
 	<!-- ===== Informations Maven ===== -->
-<<<<<<< HEAD
-	<artifactId>couche-webapp</artifactId>
-=======
 	<groupId>com.niari.oc</groupId>
 	<artifactId>couche-webapp</artifactId>
 	<version>1.0-SNAPSHOT</version>
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	<packaging>war</packaging>
 
 
@@ -44,15 +36,9 @@
 		<build.timestamp>${maven.build.timestamp}</build.timestamp>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<<<<<<< HEAD
-		<java.version>10</java.version>
-		<maven.compiler.source>10</maven.compiler.source>
-		<maven.compiler.target>10</maven.compiler.target>
-=======
 		<java.version>1.13</java.version>
 		<maven.compiler.source>1.13</maven.compiler.source>
 		<maven.compiler.target>1.13</maven.compiler.target>
->>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	</properties>
 
 	<!-- =============================================================== -->
