@@ -10,7 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /*
+<<<<<<< HEAD
+ * Bean Voie qui repr©sente sous forme d'objet la table du mªme nom
+=======
  * Bean Voie qui reprÂ©sente sous forme d'objet la table du mÂªme nom
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
  */
 @Entity
 public class Longueur {
@@ -20,6 +24,15 @@ public class Longueur {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
+	@Column(name = "voie_id")
+	private Long longueurId;
+	@Column(name = "longueur_metre")
+	private Integer longueurMetre;
+
+	/*
+	 * Relation de voie   secteur sans supression en cascade
+=======
 	@Column(name = "longueur_id")
 	private Long longueurId;
 	@Column(name = "mesure")
@@ -33,6 +46,7 @@ public class Longueur {
 
 	/*
 	 * Relation de voie Â  secteur sans supression en cascade
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "voie_id")
@@ -46,6 +60,12 @@ public class Longueur {
 	}
 
 	/*
+<<<<<<< HEAD
+	 * Constructeur avec paramètres
+	 */
+	public Longueur(Integer longueurMetre, Voie voie) {
+		this.longueurMetre = longueurMetre;
+=======
 	 * Constructeur avec paramÃ¨tres
 	 */
 	public Longueur(Integer mesure, String cotation, Boolean equiperSpits, Integer numeroLongueur, Voie voie) {
@@ -53,6 +73,7 @@ public class Longueur {
 		this.cotation = cotation;
 		this.equiperSpits = equiperSpits;
 		this.numeroLongueur = numeroLongueur;
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 		this.voie = voie;
 	}
 
@@ -68,6 +89,17 @@ public class Longueur {
 		this.longueurId = longueurId;
 	}
 
+<<<<<<< HEAD
+	public Integer getLongueurMetre() {
+		return longueurMetre;
+	}
+
+	public void setLongueurMetre(Integer longueurMetre) {
+		this.longueurMetre = longueurMetre;
+	}
+
+=======
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public Voie getVoie() {
 		return voie;
 	}
@@ -76,6 +108,11 @@ public class Longueur {
 		this.voie = voie;
 	}
 
+<<<<<<< HEAD
+	@Override
+	public String toString() {
+		return "Longueur [longueurId=" + longueurId + ", longueurMetre=" + longueurMetre + ", voie=" + voie + "]";
+=======
 	public Integer getMesure() {
 		return mesure;
 	}
@@ -112,6 +149,7 @@ public class Longueur {
 	public String toString() {
 		return "Longueur [longueurId=" + longueurId + ", mesure=" + mesure + ", cotation=" + cotation
 				+ ", equiperSpits=" + equiperSpits + ", numeroLongueur=" + numeroLongueur + ", voie=" + voie + "]";
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	}
 
 }

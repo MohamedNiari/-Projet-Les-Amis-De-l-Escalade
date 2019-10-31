@@ -16,7 +16,11 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 /*
+<<<<<<< HEAD
+ * Bean Voie qui reprà©sente sous forme d'objet la table du màªme nom
+=======
  * Bean Voie qui reprÃ Â©sente sous forme d'objet la table du mÃ Âªme nom
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
  */
 @Entity
 public class Voie {
@@ -28,6 +32,18 @@ public class Voie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "voie_id")
 	private Long voieId;
+<<<<<<< HEAD
+	@Column(name = "nombre_longueur")
+	private Integer nombreLongueurs;
+	private String cotation;
+	@Column(name = "equiper_spits")
+	private Boolean equiperSpits;
+	@Column(name = "numero_voie")
+	private Integer numeroVoie;
+
+	/*
+	 * Relation de voie à  secteur sans supression en cascade
+=======
 	@Column(name = "numero_voie")
 	private Integer numeroVoie;
 	@Column(name = "nombre_longueur")
@@ -35,6 +51,7 @@ public class Voie {
 
 	/*
 	 * Relation de voie à secteur sans supression en cascade
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "secteur_id")
@@ -54,8 +71,15 @@ public class Voie {
 	/*
 	 * Constructeur avec paramètres
 	 */
+<<<<<<< HEAD
+	public Voie(Integer nombreLongueurs, String cotation, Boolean equiperSpits, Integer numeroVoie, Secteur secteur) {
+		this.nombreLongueurs = nombreLongueurs;
+		this.cotation = cotation;
+		this.equiperSpits = equiperSpits;
+=======
 	public Voie(Integer nombreLongueurs, Integer numeroVoie, Secteur secteur) {
 		this.nombreLongueurs = nombreLongueurs;
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 		this.numeroVoie = numeroVoie;
 		this.secteur = secteur;
 	}
@@ -80,6 +104,25 @@ public class Voie {
 		this.nombreLongueurs = nombreLongueurs;
 	}
 
+<<<<<<< HEAD
+	public String getCotation() {
+		return cotation;
+	}
+
+	public void setCotation(String cotation) {
+		this.cotation = cotation;
+	}
+
+	public Boolean getEquiperSpits() {
+		return equiperSpits;
+	}
+
+	public void setEquiperSpits(Boolean equiperSpits) {
+		this.equiperSpits = equiperSpits;
+	}
+
+=======
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public int getNumeroVoie() {
 		return numeroVoie;
 	}
@@ -112,6 +155,8 @@ public class Voie {
 		this.voieId = voieId;
 	}
 
+<<<<<<< HEAD
+=======
 	public List<Longueur> getLongueurs() {
 		return longueurs;
 	}
@@ -127,4 +172,5 @@ public class Voie {
 	}
 
 	
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 }

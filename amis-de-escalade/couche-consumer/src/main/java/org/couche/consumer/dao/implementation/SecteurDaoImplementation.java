@@ -88,31 +88,51 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 	/*
 	 * Methodes d'accès la base de données
 	 */
+<<<<<<< HEAD
+	
+=======
 	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void create(Secteur secteur) {
 		getCurrentSession().save(secteur);
 
 	}
 
+<<<<<<< HEAD
+	
+=======
 	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void update(Secteur secteur) {
 		getCurrentSession().update(secteur);
 	}
 
+<<<<<<< HEAD
+	
+=======
 	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void delete(Secteur secteur) {
 		getCurrentSession().delete(secteur);
 
 	}
 
 	@SuppressWarnings("unchecked")
+<<<<<<< HEAD
+	
+=======
 	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public List<Secteur> findAll() {
 		List<Secteur> Secteurs = (List<Secteur>) getCurrentSession().createQuery("from escalade").list();
 		return Secteurs;
 	}
 
+<<<<<<< HEAD
+	
+=======
 	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public void deleteAll() {
 		List<Secteur> secteurList = findAll();
 		for (Secteur secteur : secteurList) {
@@ -120,7 +140,11 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 		}
 	}
 
+<<<<<<< HEAD
+	
+=======
 	@Override
+>>>>>>> 6c588421674f436a525669a9ad2643eeac833cf7
 	public Secteur findById(Long id) {
 		Secteur Secteur = (Secteur) getCurrentSession().get(Secteur.class, id);
 		return Secteur;
