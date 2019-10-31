@@ -53,13 +53,13 @@ nav {
 
 /*Augementation de la hauteur de la nv*/
 .navbar {
-	min-height: 80px;
+	min-height: 100px;
 }
 
 .navbar-brand {
 	padding: 0 15px;
-	height: 80px;
-	line-height: 80px;
+	height: 100px;
+	line-height: 100px;
 }
 
 .navbar-toggle {

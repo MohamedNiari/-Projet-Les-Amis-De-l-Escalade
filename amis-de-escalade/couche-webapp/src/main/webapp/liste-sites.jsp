@@ -22,8 +22,7 @@
 <body>
 
 	<nav
-		class="navbar navbar-expand-lg navbar-dark bg-success border border-white"
-		id="ombre">
+		class="navbar navbar-expand-lg navbar-dark bg-success border border-white">
 		<c:url var="listeDesSites" value="ListeDesSites" />
 		<a class="navbar-brand" href="${listeDesSites}">Page d'accueil </a>
 
