@@ -52,6 +52,13 @@ public class SiteService {
 		siteDao.deleteAll();
 		siteDao.closeCurrentSessionwithTransaction();
 	}
+
+	public List<Site> searchSecteur(Integer sizeSecteur) {		
+		siteDao.openCurrentSession();
+		List<Site> sites = siteDao.searchSecteur(sizeSecteur);
+		siteDao.closeCurrentSession();
+		return sites;
+	}
 	
 
 

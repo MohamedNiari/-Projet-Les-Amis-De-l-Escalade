@@ -2,12 +2,19 @@ package org.couche.consumer.dao.implementation;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
+
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Site;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
 
 public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 
@@ -123,6 +130,25 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 	public Site findById(Long id) {
 		Site site = (Site) getCurrentSession().get(Site.class, id);
 		return site;
+	}
+
+	public List<Site> searchSecteur(Integer sizeSecteur) {
+		
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Site> criteria = builder.createQuery(Site.class);
+		
+		Root<Site> siteRoot = criteria.from(Site.class);
+		ParameterExpression<Integer> sizeSecteurParameter = builder.parameter(Integer.class);
+		
+		criteria.where(builder.and(builder.like(siteRoot.get("name"), "%Bing%"),
+				builder.like(siteRoot.get("address"), "%Looo%"),
+				builder.equal(builder.size(siteRoot.get("phones")), sizeSecteurParameter)));
+		
+		Query<Site> query = getCurrentSession().createQuery(criteria);
+		query.setParameter(sizeSecteurParameter, sizeSecteur);
+		List<Site> sites = query.getResultList();
+		return sites;
+		
 	}
 
 }

@@ -40,10 +40,18 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
 			</ul>
-			<form action="rechercheSite" method="post" class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche Site</button>
+			<form action="RechercheSite" method="post"
+				class="form-inline my-2 my-lg-0">
+				<div class="form-group">
+					<label for="nombreSecteurs">Nombre de secteurs</label> 
+					<select
+						class="form-control" name="nombreSecteurs">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select>
+				</div>
 			</form>
 			<span class="navbar-text"> Tout sur l'escalade </span>
 		</div>
@@ -84,36 +92,6 @@
 
 		</c:forEach>
 
-		<c:forEach var="tempSite" items="${SITE_LIST}">
-
-			<div class="card border-success mb-3 col-md-4 ">
-				<div class="card-header bg-transparent border-success">
-					<span class="float-left"><strong>${tempSite.nom}</strong></span> <span
-						class="float-right"><small> <i
-							class="fas fa-level-up-alt"></i> ${tempSite.hauteurMax} m
-					</small></span>
-				</div>
-				<div class="card-body text-success">
-					<h8 class="card-title"> <strong>Lieu</strong> ${tempSite.lieu}
-					<c:if test="${tempSite.taguerOfficiel}">
-						<span><img src="img/official.png" class="float-right"
-							id="official" alt="official"></img></span>
-					</c:if> </h8>
-					<br> <br>
-					<p class="card-text">${tempSite.description}</p>
-
-					<c:url var="detailsDesSites" value="DetailsDesSites">
-						<c:param name="siteId" value="${tempSite.siteId}" />
-					</c:url>
-					<a href="${detailsDesSites}" class="stretched-link"></a>
-				</div>
-				<div
-					class="card-footer bg-transparent border-success text-secondary">
-					<strong> Type </strong> <em>${tempSite.typeRocher}</em>
-				</div>
-			</div>
-
-		</c:forEach>
 	</section>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
