@@ -5,6 +5,7 @@ import java.util.List;
 import org.couche.consumer.dao.implementation.SiteDaoImplementation;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
+import org.couche.model.entities.TypeRocher;
 
 public class SiteService {
 
@@ -53,9 +54,9 @@ public class SiteService {
 		siteDao.closeCurrentSessionwithTransaction();
 	}
 
-	public List<Site> searchSecteur(Integer sizeSecteur) {		
+	public List<Site> searchSite(String lieu, TypeRocher typeRoche, Integer numberSecteur) {		
 		siteDao.openCurrentSession();
-		List<Site> sites = siteDao.searchSecteur(sizeSecteur);
+		List<Site> sites = siteDao.searchSite(lieu, typeRoche, numberSecteur);
 		siteDao.closeCurrentSession();
 		return sites;
 	}

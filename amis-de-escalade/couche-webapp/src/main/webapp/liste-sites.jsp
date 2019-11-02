@@ -31,6 +31,7 @@
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+		
 		<div class="collapse navbar-collapse" id="navbarText">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link" href="#">Mon
@@ -40,21 +41,22 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
 			</ul>
-			<form action="RechercheSite" method="post"
-				class="form-inline my-2 my-lg-0">
-				<div class="form-group">
-					<label for="nombreSecteurs">Nombre de secteurs</label> 
-					<select
-						class="form-control" name="nombreSecteurs">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
+			<form action="RechercheSite" method="post" class="form-inline">
+				<div>
+					<label for="nombreSecteurs">Nombre de secteurs</label> <select
+						class="form-control" name="nombreSecteurs"
+						onchange="this.form.submit()">
+						<c:set var="listNombreSecteurs">Indifferent,1,2,3,4,5</c:set>
+						<c:forEach var="item" items="${listNombreSecteurs}">
+							<option value="${item}"
+								${item == nombreSecteurs ? 'selected="selected"' : ''}>${item}</option>
+						</c:forEach>
 					</select>
 				</div>
 			</form>
 			<span class="navbar-text"> Tout sur l'escalade </span>
 		</div>
+		
 	</nav>
 
 	<section class="d-flex flex-wrap" id="cards">

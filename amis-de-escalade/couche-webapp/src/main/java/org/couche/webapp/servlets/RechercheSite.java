@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.couche.business.services.SiteService;
 import org.couche.model.entities.Site;
+import org.couche.model.entities.TypeRocher;
 
 /**
  * Servlet implementation class rechercheSite
@@ -43,20 +44,34 @@ public class RechercheSite extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		Integer nombreSecteurs = Integer.valueOf(request.getParameter("nombreSecteurs"));
-		
-		// Récupération de la liste des sites depuis la la BDD
-		SiteService siteService = new SiteService();
-		List<Site> sites = siteService.searchSecteur(nombreSecteurs);
 
-		// Ajout de sites à la request
-		request.setAttribute("SITE_LIST", sites);
+		String nombreSecteurs = request.getParameter("nombreSecteurs");
+		Integer numberSecteur = null;
 
-		// Envoi à la JSP
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/liste-sites.jsp");
-		dispatcher.forward(request, response);
-		
+		if (nombreSecteurs.matches("-?\\d+")) {
+			numberSecteur = Integer.valueOf(nombreSecteurs);
+
+			String lieu = "Privas";
+			TypeRocher typeRoche = TypeRocher.Granite;
+
+			// Récupération de la liste des sites depuis la la BDD
+			SiteService siteService = new SiteService();
+			List<Site> sites = siteService.searchSite(lieu, typeRoche, numberSecteur);
+
+			// Ajout de sites à la request
+			request.setAttribute("SITE_LIST", sites);
+			
+			//Récupération de la valeur de l'option
+			request.setAttribute("nombreSecteurs", nombreSecteurs);
+
+			// Envoi à la JSP
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/liste-sites.jsp");
+			dispatcher.forward(request, response);
+			
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListeDesSites");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

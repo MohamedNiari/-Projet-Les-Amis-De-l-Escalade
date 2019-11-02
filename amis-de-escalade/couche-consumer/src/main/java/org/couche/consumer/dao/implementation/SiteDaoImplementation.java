@@ -9,6 +9,7 @@ import javax.persistence.criteria.Root;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Site;
+import org.couche.model.entities.TypeRocher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -132,20 +133,21 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		return site;
 	}
 
-	public List<Site> searchSecteur(Integer sizeSecteur) {
+	public List<Site> searchSite(String lieu, TypeRocher typeRoche, Integer numberSecteur) {
 		
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<Site> criteria = builder.createQuery(Site.class);
 		
 		Root<Site> siteRoot = criteria.from(Site.class);
 		ParameterExpression<Integer> sizeSecteurParameter = builder.parameter(Integer.class);
+		ParameterExpression<TypeRocher> typeRocheParameter = builder.parameter(TypeRocher.class);
 		
-		criteria.where(builder.and(builder.like(siteRoot.get("name"), "%Bing%"),
-				builder.like(siteRoot.get("address"), "%Looo%"),
-				builder.equal(builder.size(siteRoot.get("phones")), sizeSecteurParameter)));
+		criteria.where(builder.and(builder.like(siteRoot.get("lieu"), lieu),
+				builder.equal(siteRoot.get("typeRocher"), typeRoche),
+				builder.equal(builder.size(siteRoot.get("secteurs")), sizeSecteurParameter)));
 		
 		Query<Site> query = getCurrentSession().createQuery(criteria);
-		query.setParameter(sizeSecteurParameter, sizeSecteur);
+		query.setParameter(sizeSecteurParameter, numberSecteur);
 		List<Site> sites = query.getResultList();
 		return sites;
 		
