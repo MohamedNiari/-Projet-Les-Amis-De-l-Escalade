@@ -31,7 +31,7 @@
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		
+
 		<div class="collapse navbar-collapse" id="navbarText">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link" href="#">Mon
@@ -41,22 +41,31 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
 			</ul>
-			<form action="RechercheSite" method="post" class="form-inline">
-				<div>
-					<label for="nombreSecteurs">Nombre de secteurs</label> <select
-						class="form-control" name="nombreSecteurs"
-						onchange="this.form.submit()">
-						<c:set var="listNombreSecteurs">Indifferent,1,2,3,4,5</c:set>
-						<c:forEach var="item" items="${listNombreSecteurs}">
-							<option value="${item}"
-								${item == nombreSecteurs ? 'selected="selected"' : ''}>${item}</option>
-						</c:forEach>
-					</select>
-				</div>
+
+			<form action="RechercheSite" method="post">
+
+				<select class="form-control btn btn-secondary dropdown-toggle"
+					name="nombreSecteurs" onchange="this.form.submit()" style="font-size: 0.9em;">
+					<c:set var="listNombreSecteurs">Nombre de Secteurs,1,2,3,4,5,Indifferent</c:set>
+					<c:forEach var="item" items="${listNombreSecteurs}">
+						<option value="${item}">${item}</option>
+					</c:forEach>
+				</select> 
+				
+				<label for="nombreSecteurs" class="text-white" style="font-size: 0.7em;"> <c:if
+						test="${nombreSecteurs == '1'}">
+						<c:out value="1 secteur" />
+					</c:if> <c:if
+						test="${(nombreSecteurs != '1') && (nombreSecteurs != null)}">
+						<c:out value="${nombreSecteurs} secteurs" />
+					</c:if>
+				</label>
+
 			</form>
-			<span class="navbar-text"> Tout sur l'escalade </span>
+
+			<span class="navbar-text">&nbsp; Tout sur l'escalade </span>
 		</div>
-		
+
 	</nav>
 
 	<section class="d-flex flex-wrap" id="cards">
@@ -96,6 +105,11 @@
 
 	</section>
 
+	<script>
+		function getNombreSecteurs() {
+			return document.getElementById("nombreSecteurs").innerHTML;
+		}
+	</script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
