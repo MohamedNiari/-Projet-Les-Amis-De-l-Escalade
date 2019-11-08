@@ -7,6 +7,8 @@ import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.TypeRocher;
 
+import com.sun.istack.Nullable;
+
 public class SiteService {
 
 	private static SiteDaoImplementation siteDao;

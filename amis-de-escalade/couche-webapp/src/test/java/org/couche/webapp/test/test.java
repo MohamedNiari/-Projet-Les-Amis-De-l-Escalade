@@ -1,11 +1,18 @@
 package org.couche.webapp.test;
 
+import java.util.List;
+
+import org.couche.business.services.SiteService;
+import org.couche.model.entities.Site;
+import org.couche.model.entities.TypeRocher;
+
 public class test {
 
 	public static void main(String[] args) {
-		String str = "1";
-		System.out.println(str.matches("-?\\d+"));
-		// TODO Auto-generated method stub
+		SiteService siteService = new SiteService();
+		List<Site> sites = siteService.searchSite("", null, null);
+
+		sites.forEach(x -> System.out.println(x.getNom()));
 
 	}
 

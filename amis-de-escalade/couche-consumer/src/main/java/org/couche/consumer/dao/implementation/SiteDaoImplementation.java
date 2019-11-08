@@ -1,10 +1,12 @@
 package org.couche.consumer.dao.implementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
@@ -16,6 +18,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import com.sun.istack.Nullable;
 
 public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 
@@ -133,24 +136,51 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		return site;
 	}
 
-	public List<Site> searchSite(String lieu, TypeRocher typeRoche, Integer numberSecteur) {
-		
+	public List<Site> searchSite(String lieu, TypeRocher typeRoche, Integer numberSecteur) {		
+
+		// Création du CriteriaBuilder pour la construction des requetes "quey"
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<Site> criteria = builder.createQuery(Site.class);
-		
+
+		// Création du root pour l'entité Site et des paramètres
 		Root<Site> siteRoot = criteria.from(Site.class);
 		ParameterExpression<Integer> sizeSecteurParameter = builder.parameter(Integer.class);
 		ParameterExpression<TypeRocher> typeRocheParameter = builder.parameter(TypeRocher.class);
+
+		// Creation des predicats
+		Predicate predicateLieu = builder.like(siteRoot.get("lieu"), "%" + lieu + "%");
+
+		Predicate predicateRoche = null;
+		if (Optional.ofNullable(typeRoche).isPresent()) {
+			predicateRoche = builder.equal(siteRoot.get("typeRocher"), typeRocheParameter);
+		} else {
+			predicateRoche = builder.conjunction();
+		}
+
+		Predicate predicateSecteur = null;
+		if (Optional.ofNullable(numberSecteur).isPresent()) {	
+			predicateSecteur = builder.equal(builder.size(siteRoot.get("secteurs")), sizeSecteurParameter);
+		} else {
+			predicateSecteur = builder.conjunction();
+		}
 		
-		criteria.where(builder.and(builder.like(siteRoot.get("lieu"), lieu),
-				builder.equal(siteRoot.get("typeRocher"), typeRoche),
-				builder.equal(builder.size(siteRoot.get("secteurs")), sizeSecteurParameter)));
+		Query<Site> query;
 		
-		Query<Site> query = getCurrentSession().createQuery(criteria);
-		query.setParameter(sizeSecteurParameter, numberSecteur);
+		// Ajout des prédicats au prédicat final
+		Predicate finalPredicate = builder.and(predicateLieu, predicateRoche, predicateSecteur);
+		criteria.where(finalPredicate);
+
+		query = getCurrentSession().createQuery(criteria);
+
+		if (numberSecteur != null) 
+			query.setParameter(sizeSecteurParameter, numberSecteur);
+		
+		if (typeRoche != null)
+			query.setParameter(typeRocheParameter, typeRoche);
+		
 		List<Site> sites = query.getResultList();
 		return sites;
-		
+
 	}
 
 }

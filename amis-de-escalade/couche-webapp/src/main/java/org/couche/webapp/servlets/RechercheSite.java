@@ -2,6 +2,7 @@ package org.couche.webapp.servlets;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.couche.business.services.SiteService;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.TypeRocher;
+import org.hibernate.hql.internal.ast.tree.IsNullLogicOperatorNode;
 
 /**
  * Servlet implementation class rechercheSite
@@ -35,10 +37,8 @@ public class RechercheSite extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-	}
 
-	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -48,32 +48,36 @@ public class RechercheSite extends HttpServlet {
 			throws ServletException, IOException {
 
 		String nombreSecteurs = request.getParameter("nombreSecteurs");
+		System.out.println("nombreSecteurs : " + nombreSecteurs);
+		String typeRoche = request.getParameter("typeRoche");
+		System.out.println("typeRoche : " + typeRoche);
+		System.out.println("siezTypeRoche : " + typeRoche.length());
+
+		TypeRocher typeRocher = null;
+		if (!typeRoche.trim().equals("Tous")) 
+			typeRocher = TypeRocher.valueOf(typeRoche);
+		
 		Integer numberSecteur = null;
-
-		if (nombreSecteurs.matches("-?\\d+")) {
+		if (nombreSecteurs.matches("-?\\d+"))
 			numberSecteur = Integer.valueOf(nombreSecteurs);
+		
+		String lieu = "";
 
-			String lieu = "Privas";
-			TypeRocher typeRoche = TypeRocher.Granite;
+		// Récupération de la liste des sites depuis la la BDD
+		SiteService siteService = new SiteService();
+		List<Site> sites = siteService.searchSite(lieu, typeRocher, numberSecteur);
 
-			// Récupération de la liste des sites depuis la la BDD
-			SiteService siteService = new SiteService();
-			List<Site> sites = siteService.searchSite(lieu, typeRoche, numberSecteur);
+		// Ajout de sites à la request
+		request.setAttribute("SITE_LIST", sites);
 
-			// Ajout de sites à la request
-			request.setAttribute("SITE_LIST", sites);
-			
-			//Récupération de la valeur de l'option
-			request.setAttribute("nombreSecteurs", nombreSecteurs);
+		// Récupération de la valeur de l'option
+		request.setAttribute("nombreSecteurs", nombreSecteurs);
+		request.setAttribute("typeRoche", typeRoche);
 
-			// Envoi à la JSP
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/liste-sites.jsp");
-			dispatcher.forward(request, response);
-			
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListeDesSites");
-			dispatcher.forward(request, response);
-		}
+		// Envoi à la JSP
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/liste-sites.jsp");
+		dispatcher.forward(request, response);
+
 	}
 
 }

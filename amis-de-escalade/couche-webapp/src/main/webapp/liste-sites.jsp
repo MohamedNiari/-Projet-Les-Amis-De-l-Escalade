@@ -42,24 +42,42 @@
 				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
 			</ul>
 
-			<form action="RechercheSite" method="post">
-
-				<select class="form-control btn btn-secondary dropdown-toggle"
-					name="nombreSecteurs" onchange="this.form.submit()" style="font-size: 0.9em;">
-					<c:set var="listNombreSecteurs">Nombre de Secteurs,1,2,3,4,5,Indifferent</c:set>
-					<c:forEach var="item" items="${listNombreSecteurs}">
-						<option value="${item}">${item}</option>
-					</c:forEach>
-				</select> 
+			<form action="RechercheSite" method="post"
+				class="form-inline">
 				
-				<label for="nombreSecteurs" class="text-white" style="font-size: 0.7em;"> <c:if
-						test="${nombreSecteurs == '1'}">
-						<c:out value="1 secteur" />
-					</c:if> <c:if
-						test="${(nombreSecteurs != '1') && (nombreSecteurs != null)}">
-						<c:out value="${nombreSecteurs} secteurs" />
-					</c:if>
-				</label>
+				<div class="form-row align-items-center">
+					<div class="col-auto">
+						<label for="nombreSecteurs"
+							class="text-white border border-white rounded"
+							style="font-size: 0.7em;"> <c:out
+								value="Nombre de Secteurs" />
+						</label> <select class="form-control input-sm btn btn-secondary dropdown-toggle"
+							name="nombreSecteurs" onchange="this.form.submit()"
+							style="font-size: 0.9em;" id="nombreSecteurs">
+							<c:set var="listNombreSecteurs">Tous,1,2,3,4,5</c:set>
+							<c:forEach var="item" items="${listNombreSecteurs}">
+								<option value="${item}"
+									${item == nombreSecteurs ? "selected" : ""}>${item}</option>
+							</c:forEach>
+							<option disabled>------------</option>
+						</select>
+					</div>
+					<div class="col-auto">
+						<label for="typeRoche"
+							class="text-white border border-white rounded"
+							style="font-size: 0.7em;"> <c:out value="Type de Roche" />
+						</label> <select class="form-control input-sm btn btn-secondary dropdown-toggle"
+							name="typeRoche" onchange="this.form.submit()"
+							style="font-size: 0.9em;" id="typeRoche">
+							<c:set var="listTypeRoche">Tous,Calcaire,Granite,Gneiss</c:set>
+							<c:forEach var="item" items="${listTypeRoche}">
+								<option value="${item}"
+									<c:if test="${item == typeRoche}"> selected </c:if>>${item}</option>
+							</c:forEach>
+							<option disabled>------------</option>
+						</select>
+					</div>
+				</div>
 
 			</form>
 
@@ -105,11 +123,6 @@
 
 	</section>
 
-	<script>
-		function getNombreSecteurs() {
-			return document.getElementById("nombreSecteurs").innerHTML;
-		}
-	</script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

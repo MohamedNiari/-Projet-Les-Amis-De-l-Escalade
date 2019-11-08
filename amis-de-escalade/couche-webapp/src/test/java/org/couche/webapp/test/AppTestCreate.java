@@ -70,20 +70,34 @@ public class AppTestCreate {
 		siteTest3.getUrlImages().add("img/LeTeillon.jpg");
 		siteTest3.getUrlImages().add("img/LeTeillon2.jpg");
 		siteTest3.getUrlImages().add("img/LeTeillon3.jpg");
+		
+		Site siteTest4 = new Site("Fixin", 21, "Dijon", false,
+				"À quelques kilomètres au Sud de Dijon, la falaise de Fixin surplombe le fameux vignoble bourguignon, réputé mondialement pour ses grands crus dont le célèbre cépage pousse à merveille sur les sous-sols calcaires du coin.",
+				TypeRocher.Granite, topoTest);
+
+		siteTest4.getUrlImages().add("img/Fixin.png");
+		siteTest4.getUrlImages().add("img/Fixin2.png");
+		siteTest4.getUrlImages().add("img/Fixin3.png");
 
 		siteService.create(siteTest);
 		siteService.create(siteTest2);
 		siteService.create(siteTest3);
+		siteService.create(siteTest4);
 
 		// test pour la table secteur
 		SecteurService secteurService = new SecteurService();
 		Secteur secteurTest = new Secteur("La vertical", 1, "Enormes cannelures", siteTest);
 		Secteur secteurTest2 = new Secteur("Saint-Georges", 2, "Son calcaire est superbe et unique", siteTest);
 		Secteur secteurTest3 = new Secteur("Autracien", 3, "Le rocher est finement sculpté ", siteTest);
+		
+		Secteur secteurTest4 = new Secteur("Himalaya", 1, "Très patinée", siteTest4);
+		Secteur secteurTest5 = new Secteur("Pic", 2, "Des lignes très abordables", siteTest4);
 
 		secteurService.create(secteurTest);
 		secteurService.create(secteurTest2);
 		secteurService.create(secteurTest3);
+		secteurService.create(secteurTest4);
+		secteurService.create(secteurTest5);
 
 		// test pour la table voie
 		VoieService VoieService = new VoieService();
