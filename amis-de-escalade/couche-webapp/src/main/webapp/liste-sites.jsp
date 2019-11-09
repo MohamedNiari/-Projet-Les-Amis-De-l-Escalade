@@ -94,6 +94,11 @@
 			</div>
 		
 	</nav>
+	
+	<aside class="bg">
+	<img src="img/presentation.png" alt="escalade" >
+	
+	</aside>
 
 	<section class="d-flex flex-wrap" id="cards">
 

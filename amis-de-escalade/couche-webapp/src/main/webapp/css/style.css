@@ -39,7 +39,7 @@ hr {
 	border-color: #5cb85c;
 }
 
-nav {
+nav, aside {
 	box-shadow: 0px 5px 2px #696969;
 }
 
@@ -49,46 +49,8 @@ nav {
 	
 }
 
-/*
-.navbar-nav {
-    float:none;
-    margin:0 auto;
-    display: block;
-    text-align: center;
+.bg {
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
-.navbar-nav > li {
-    display: inline-block;
-    float:none;
-}
-
-/*Augementation de la hauteur de la nav
-
-.navbar {
-	min-height: 100px;
-}
-
-
-
-.navbar-brand {
-	padding: 0 15px;
-	height: 100px;
-	line-height: 100px;
-}
-
-.navbar-toggle {
-	/* (80px - button height 34px) / 2 = 23px 
-	margin-top: 23px;
-	padding: 9px 10px !important;
-}
-
-@media ( min-width : 768px) {
-	.navbar-nav>li>a {
-		/* (80px - line-height of 27px) / 2 = 26.5px 
-		padding-top: 26.5px;
-		padding-bottom: 26.5px;
-		line-height: 27px;
-	}
-}*/
-
 
