@@ -47,11 +47,11 @@ public class RechercheSite extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// Récupération des valeurs depuis la jsp
 		String nombreSecteurs = request.getParameter("nombreSecteurs");
-		System.out.println("nombreSecteurs : " + nombreSecteurs);
 		String typeRoche = request.getParameter("typeRoche");
-		System.out.println("typeRoche : " + typeRoche);
-		System.out.println("siezTypeRoche : " + typeRoche.length());
+		String lieu = request.getParameter("lieu");
+
 
 		TypeRocher typeRocher = null;
 		if (!typeRoche.trim().equals("Tous")) 
@@ -60,8 +60,7 @@ public class RechercheSite extends HttpServlet {
 		Integer numberSecteur = null;
 		if (nombreSecteurs.matches("-?\\d+"))
 			numberSecteur = Integer.valueOf(nombreSecteurs);
-		
-		String lieu = "";
+
 
 		// Récupération de la liste des sites depuis la la BDD
 		SiteService siteService = new SiteService();
@@ -73,6 +72,7 @@ public class RechercheSite extends HttpServlet {
 		// Récupération de la valeur de l'option
 		request.setAttribute("nombreSecteurs", nombreSecteurs);
 		request.setAttribute("typeRoche", typeRoche);
+		request.setAttribute("lieu", lieu);
 
 		// Envoi à la JSP
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/liste-sites.jsp");

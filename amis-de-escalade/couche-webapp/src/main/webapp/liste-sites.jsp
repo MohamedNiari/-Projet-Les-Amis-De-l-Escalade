@@ -43,41 +43,51 @@
 			</ul>
 
 			<form action="RechercheSite" method="post"
-				class="form-inline">
-				
-				<div class="form-row align-items-center">
-					<div class="col-auto">
-						<label for="nombreSecteurs"
-							class="text-white border border-white rounded"
-							style="font-size: 0.7em;"> <c:out
-								value="Nombre de Secteurs" />
-						</label> <select class="form-control input-sm btn btn-secondary dropdown-toggle"
-							name="nombreSecteurs" onchange="this.form.submit()"
-							style="font-size: 0.9em;" id="nombreSecteurs">
-							<c:set var="listNombreSecteurs">Tous,1,2,3,4,5</c:set>
-							<c:forEach var="item" items="${listNombreSecteurs}">
-								<option value="${item}"
-									${item == nombreSecteurs ? "selected" : ""}>${item}</option>
-							</c:forEach>
-							<option disabled>------------</option>
-						</select>
-					</div>
-					<div class="col-auto">
-						<label for="typeRoche"
-							class="text-white border border-white rounded"
-							style="font-size: 0.7em;"> <c:out value="Type de Roche" />
-						</label> <select class="form-control input-sm btn btn-secondary dropdown-toggle"
-							name="typeRoche" onchange="this.form.submit()"
-							style="font-size: 0.9em;" id="typeRoche">
-							<c:set var="listTypeRoche">Tous,Calcaire,Granite,Gneiss</c:set>
-							<c:forEach var="item" items="${listTypeRoche}">
-								<option value="${item}"
-									<c:if test="${item == typeRoche}"> selected </c:if>>${item}</option>
-							</c:forEach>
-							<option disabled>------------</option>
-						</select>
-					</div>
+				class="form-row align-items-center ml-auto mr-auto">
+
+				<div class="col-auto">
+					<label for="nombreSecteurs" class="text-white"
+						style="font-size: 0.7em;"> <c:out
+							value="Nombre de Secteurs" />
+					</label> <select
+						class="form-control input-sm btn btn-secondary dropdown-toggle border border-white"
+						name="nombreSecteurs" onchange="this.form.submit()"
+						style="font-size: 0.9em;">
+						<c:set var="listNombreSecteurs">Tous,1,2,3,4,5</c:set>
+						<c:forEach var="item" items="${listNombreSecteurs}">
+							<option value="${item}"
+								${item == nombreSecteurs ? "selected" : ""}>${item}</option>
+						</c:forEach>
+						<option disabled>------------</option>
+					</select>
 				</div>
+
+				<div class="col-auto">
+					<label for="typeRoche" class="text-white" style="font-size: 0.7em;">
+						<c:out value="Type de Roche" />
+					</label> <select
+						class="form-control input-sm btn btn-secondary dropdown-toggle border border-white"
+						name="typeRoche" onchange="this.form.submit()"
+						style="font-size: 0.9em;">
+						<c:set var="listTypeRoche">Tous,Calcaire,Granite,Gneiss</c:set>
+						<c:forEach var="item" items="${listTypeRoche}">
+							<option value="${item}"
+								<c:if test="${item == typeRoche}"> selected </c:if>>${item}</option>
+						</c:forEach>
+						<option disabled>------------</option>
+					</select>
+				</div>
+
+				<div class="col-auto">
+					<label for="lieu" class="text-white" style="font-size: 0.7em;">
+						<c:out value="Lieu" />
+					</label> <input
+						class="form-control input-sm btn btn-secondary dropdown-toggle border border-white"
+						name="lieu" onchange="this.form.submit()"
+						style="font-size: 0.9em;" value="${lieu}">
+	
+				</div>
+
 
 			</form>
 
