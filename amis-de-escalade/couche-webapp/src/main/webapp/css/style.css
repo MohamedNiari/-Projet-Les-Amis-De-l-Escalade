@@ -20,13 +20,6 @@ section {
 	margin-top: 0.5%;
 }
 
-
-#hauteur {
-	font-size: 60%;
-	text-align: right;
-	display: block;
-}
-
 /* gestion du logo official */
 #official {
 	width: 30%;
@@ -47,14 +40,35 @@ hr {
 }
 
 nav {
-	margin-left: 10%;
-	margin-right: 10%;
+	box-shadow: 0px 5px 2px #696969;
 }
 
-/*Augementation de la hauteur de la nv*/
+#barreNavigation {
+	padding-right: 10%;
+	padding-left: 10%;
+	
+}
+
+/*
+.navbar-nav {
+    float:none;
+    margin:0 auto;
+    display: block;
+    text-align: center;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+    float:none;
+}
+
+/*Augementation de la hauteur de la nav
+
 .navbar {
 	min-height: 100px;
 }
+
+
 
 .navbar-brand {
 	padding: 0 15px;
@@ -63,18 +77,18 @@ nav {
 }
 
 .navbar-toggle {
-	/* (80px - button height 34px) / 2 = 23px */
+	/* (80px - button height 34px) / 2 = 23px 
 	margin-top: 23px;
 	padding: 9px 10px !important;
 }
 
 @media ( min-width : 768px) {
 	.navbar-nav>li>a {
-		/* (80px - line-height of 27px) / 2 = 26.5px */
+		/* (80px - line-height of 27px) / 2 = 26.5px 
 		padding-top: 26.5px;
 		padding-bottom: 26.5px;
 		line-height: 27px;
 	}
-}
+}*/
 
-/*Centrage du contenu de la nav*/
+

@@ -22,28 +22,80 @@
 
 <body>
 
-	<nav
-		class="navbar navbar-expand-lg navbar-dark bg-success border border-white"
-		>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-success"
+		id="barreNavigation">
+
 		<c:url var="listeDesSites" value="ListeDesSites" />
-		<a class="navbar-brand" href="${listeDesSites}">Page d'accueil </a>
+		<a class="navbar-brand" href="${listeDesSites}">Page d'accueil</a>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarText" aria-controls="navbarText"
-			aria-expanded="false" aria-label="Toggle navigation">
+			aria-expanded="true" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarText">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Mon
-						compte<span class="sr-only">(current)</span>
+
+		<div class="">
+			<ul class="navbar-nav nav-fill w-100">
+				<li class="navbar-nav mr-auto"><a class="nav-link" href="#">Mon
+						compte <span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Réserver</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
 			</ul>
-			<span class="navbar-text">Tout sur l'escalade</span>
 		</div>
+
+		<div class="navbar-collapse collapse">
+			<form action="RechercheSite" method="post"
+				class="form-inline my-2 my-lg-0" style="margin: 0 auto;">
+
+				<div class="col-auto">
+					<label for="nombreSecteurs" class="text-white"
+						style="font-size: 0.7em;"> <c:out
+							value="Nombre de Secteurs" />
+					</label> <select
+						class="form-control input-sm btn btn-secondary dropdown-toggle border border-white"
+						name="nombreSecteurs" onchange="this.form.submit()"
+						style="font-size: 0.9em;">
+						<c:set var="listNombreSecteurs">Tous,1,2,3,4,5</c:set>
+						<c:forEach var="item" items="${listNombreSecteurs}">
+							<option value="${item}"
+								${item == nombreSecteurs ? "selected" : ""}>${item}</option>
+						</c:forEach>
+						<option disabled>------------------</option>
+					</select>
+				</div>
+
+				<div class="col-auto">
+					<label for="typeRoche" class="text-white" style="font-size: 0.7em;">
+						<c:out value="Type de Roche" />
+					</label> <select
+						class="form-control input-sm btn btn-secondary dropdown-toggle border border-white"
+						name="typeRoche" onchange="this.form.submit()"
+						style="font-size: 0.9em;">
+						<c:set var="listTypeRoche">Tous,Calcaire,Granite,Gneiss</c:set>
+						<c:forEach var="item" items="${listTypeRoche}">
+							<option value="${item}"
+								<c:if test="${item == typeRoche}"> selected </c:if>>${item}</option>
+						</c:forEach>
+						<option disabled>------------------</option>
+					</select>
+				</div>
+
+				<div class="col-auto">
+					<label for="lieu" class="text-white" style="font-size: 0.7em;">
+						<c:out value="Lieu" />
+					</label> <input
+						class="form-control input-sm btn btn-secondary dropdown-toggle border border-white"
+						name="lieu" onchange="this.form.submit()"
+						style="font-size: 0.9em;" value="${lieu}">
+				</div>
+			</form>
+
+			<span class="navbar-text" id="barreNavigation">&nbsp; Tout sur
+				l'escalade </span>
+		</div>
+
 	</nav>
 
 	<section class="d-flex flex-wrap">
@@ -114,8 +166,8 @@
 				<c:forEach items="${SECTEUR_LIST}" var="itemSecteur">
 					<div style="margin-bottom: 2%">
 						<h6 style="font-size: 1.1em">
-							<i class="fas fa-share" style="color: #685450"></i> &nbsp; Secteur n°
-							${itemSecteur.numeroSecteur} : <strong>${itemSecteur.nom}</strong>
+							<i class="fas fa-share" style="color: #685450"></i> &nbsp;
+							Secteur n° ${itemSecteur.numeroSecteur} : <strong>${itemSecteur.nom}</strong>
 							<span class="float-right">${fn:length(itemSecteur.voies)}
 								voies</span>
 						</h6>
@@ -152,16 +204,14 @@
 															<th scope="row">${itemLongueur.numeroLongueur}</th>
 															<td>${itemLongueur.mesure}</td>
 															<td>${itemLongueur.cotation}</td>
-															<td>
-																<c:choose>
+															<td><c:choose>
 																	<c:when test="${itemLongueur.equiperSpits == true}">
 															            Oui
 															         </c:when>
 																	<c:otherwise>
 															            Non
 															         </c:otherwise>
-																</c:choose>
-															</td>
+																</c:choose></td>
 														</tr>
 													</c:forEach>
 												</tbody>
