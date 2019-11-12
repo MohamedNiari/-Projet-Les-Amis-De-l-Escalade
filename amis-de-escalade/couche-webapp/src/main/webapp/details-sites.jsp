@@ -26,7 +26,7 @@
 		id="barreNavigation">
 
 		<c:url var="listeDesSites" value="ListeDesSites" />
-		<a class="navbar-brand" href="${listeDesSites}">Page d'accueil</a>
+		<a class="navbar-brand" href="${listeDesSites}"><img src="img/amisEscaladeNav.png" alt="escalade" class="border border-white rounded"></a>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarText" aria-controls="navbarText"
@@ -92,8 +92,7 @@
 				</div>
 			</form>
 
-			<span class="navbar-text" id="barreNavigation">&nbsp; Tout sur
-				l'escalade </span>
+			<span class="navbar-text">&nbsp; Tout sur l'escalade </span>
 		</div>
 
 	</nav>
