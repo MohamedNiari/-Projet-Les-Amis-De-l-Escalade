@@ -34,7 +34,9 @@
 
 		<div class="collapse navbar-collapse">
 			<c:url var="listeDesSites" value="ListeDesSites" />
-			<a class="navbar-brand" href="${listeDesSites}"><img src="img/amisEscaladeNav.png" alt="escalade" class="border border-white rounded"></a>
+			<a class="navbar-brand" href="${listeDesSites}"><img
+				src="img/amisEscaladeNav.png" alt="escalade"
+				class="border border-white rounded"></a>
 
 			<ul class="navbar-nav mr-auto">
 				<li class="navbar-nav mr-auto"><a class="nav-link" href="#">Mon
@@ -45,25 +47,59 @@
 				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
 			</ul>
 
-			<span class="navbar-text">&nbsp; Tout sur l'escalade </span>
+			<a href="/SiteEscalade/LoginCheck"
+				class="btn btn-outline-light font-weight-bold buttons" role="button">SE
+				CONNECTER / S'INSCRIRE</a>
 		</div>
 	</nav>
 
 	<section>
 
-		<div class="page-content">	
+		<div class="page-content">
 			<div class="form-v8-content">
 				<div class="form-right">
 					<div class="tab">
 						<div class="tab-inner">
-							<button class="tablinks" onclick="openCity(event, 'sign-up')"
-								id="defaultOpen">S'INSCRIRE</button>
+							<button class="tablinks" onclick="openCity(event, 'sign-in')"
+								id="defaultOpen">SE CONNECTER</button>
 						</div>
 						<div class="tab-inner">
-							<button class="tablinks" onclick="openCity(event, 'sign-in')">SE
-								CONNECTER</button>
+							<button class="tablinks" onclick="openCity(event, 'sign-up')">S'INSCRIRE</button>
 						</div>
 					</div>
+					<form class="form-detail" action="LoginCheck" method="post">
+						<div class="tabcontent" id="sign-in">
+							<div class="form-row">
+								<label class="form-row-inner"> <input type="text"
+									class="input-text"> <span class="label text-danger">
+										<c:if test="${connexionKo != null}"> <i class="fas fa-times-circle"></i> &nbsp;  ${connexionKo} </c:if>
+								</span> <span class="border"></span></label>
+
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <input type="text"
+									name="nom" class="input-text"> <span class="label">Nom</span>
+									<span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <input type="text"
+									name="adresseMail" class="input-text" required> <span
+									class="label">Adresse Mail</span> <span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <input type="password"
+									name="motDePasse" class="input-text" required> <span
+									class="label">Mot de Passe</span> <span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row-last">
+								<input type="submit" name="register" class="register"
+									value="Se Connecter">
+							</div>
+						</div>
+					</form>
 					<form class="form-detail" action="Inscription" method="post">
 						<div class="tabcontent" id="sign-up">
 							<div class="form-row">
@@ -107,33 +143,6 @@
 							<div class="form-row-last">
 								<input type="submit" name="register" class="register"
 									value="S'inscrire">
-							</div>
-						</div>
-					</form>
-					<form class="form-detail" action="#" method="post">
-						<div class="tabcontent" id="sign-in">
-							<div class="form-row">
-								<label class="form-row-inner"> <input type="text"
-									name="full_name_1" id="full_name_1" class="input-text">
-									<span class="label">Nom</span> <span class="border"></span>
-								</label>
-							</div>
-							<div class="form-row">
-								<label class="form-row-inner"> <input type="text"
-									name="your_email_1" id="your_email_1" class="input-text"
-									required> <span class="label">Adresse Mail</span> <span
-									class="border"></span>
-								</label>
-							</div>
-							<div class="form-row">
-								<label class="form-row-inner"> <input type="password"
-									name="password_1" id="password_1" class="input-text" required>
-									<span class="label">Mot de Passe</span> <span class="border"></span>
-								</label>
-							</div>
-							<div class="form-row-last">
-								<input type="submit" name="register" class="register"
-									value="Se Connecter">
 							</div>
 						</div>
 					</form>

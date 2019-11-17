@@ -51,5 +51,12 @@ public class UtilisateurService {
 		utilisateurDao.deleteAll();
 		utilisateurDao.closeCurrentSessionwithTransaction();
 	}
+	
+	public Boolean checkLogin(String nom, String motDePasse) {
+		utilisateurDao.openCurrentSessionwithTransaction();
+		Boolean flag = utilisateurDao.checkLogin(nom, motDePasse);
+		utilisateurDao.closeCurrentSessionwithTransaction();
+		return flag;
+	}
 
 }

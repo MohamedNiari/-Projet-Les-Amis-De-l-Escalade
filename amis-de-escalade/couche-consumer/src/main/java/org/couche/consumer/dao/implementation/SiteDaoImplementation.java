@@ -138,7 +138,7 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 
 	public List<Site> searchSite(String lieu, TypeRocher typeRoche, Integer numberSecteur) {		
 
-		// Création du CriteriaBuilder pour la construction des requetes "quey"
+		// Création du CriteriaBuilder pour la construction des requetes
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<Site> criteria = builder.createQuery(Site.class);
 

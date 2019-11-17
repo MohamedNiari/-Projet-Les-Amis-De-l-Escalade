@@ -5,6 +5,7 @@ import java.util.List;
 import org.couche.business.services.SiteService;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.TypeRocher;
+import org.couche.model.entities.Utilisateur;
 
 public class test {
 

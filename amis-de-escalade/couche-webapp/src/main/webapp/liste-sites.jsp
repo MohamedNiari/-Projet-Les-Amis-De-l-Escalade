@@ -89,8 +89,7 @@
 							style="font-size: 0.9em;" value="${lieu}">
 					</div>
 				</form>
-
-				<span class="navbar-text">&nbsp; Tout sur l'escalade </span>
+				<a href="/SiteEscalade/LoginCheck" class="btn btn-outline-light font-weight-bold buttons" role="button">SE CONNECTER / S'INSCRIRE</a>
 			</div>
 		
 	</nav>

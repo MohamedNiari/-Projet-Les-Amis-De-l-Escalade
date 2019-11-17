@@ -54,3 +54,8 @@ nav, aside {
   background-size: cover;
 }
 
+.buttons:hover {
+  color: #5cb85c;
+  font-weight: bold;
+}
+
