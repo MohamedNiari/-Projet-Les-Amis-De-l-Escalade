@@ -72,15 +72,9 @@
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"
 									class="input-text"> <span class="label text-danger">
-										<c:if test="${connexionKo != null}"> <i class="fas fa-times-circle"></i> &nbsp;  ${connexionKo} </c:if>
+										<c:if test="${connexionKo != null}"> <i class="fas fa-times-circle"></i><c:out value="${connexionKo}"/> </c:if>
 								</span> <span class="border"></span></label>
 
-							</div>
-							<div class="form-row">
-								<label class="form-row-inner"> <input type="text"
-									name="nom" class="input-text"> <span class="label">Nom</span>
-									<span class="border"></span>
-								</label>
 							</div>
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"

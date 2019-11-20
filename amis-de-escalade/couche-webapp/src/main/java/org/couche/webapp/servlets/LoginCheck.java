@@ -18,7 +18,6 @@ import org.couche.business.services.UtilisateurService;
 @WebServlet("/LoginCheck")
 public class LoginCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	String connexionKo = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -34,9 +33,6 @@ public class LoginCheck extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("doGet connexionKo : " + connexionKo);
-		if (connexionKo != null)
-			request.removeAttribute(connexionKo);
 		response.sendRedirect("/SiteEscalade/loginRegistering.jsp");
 
 	}
@@ -49,6 +45,8 @@ public class LoginCheck extends HttpServlet {
 			throws ServletException, IOException {
 
 		Boolean etatConnexion;
+		String connexionKo = null;
+	
 		String adresseMail = request.getParameter("adresseMail");
 		String motDePasse = request.getParameter("motDePasse");
 
@@ -59,16 +57,21 @@ public class LoginCheck extends HttpServlet {
 		etatConnexion = utilisateurService.checkLogin(motDePasse, adresseMail);
 
 		if (etatConnexion) {
-			System.out.println("connexion ok");
+			session.setAttribute("connexionOk", true);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListeDesSites");
+			dispatcher.forward(request, response);
+
 		} else {
+
 			connexionKo = "Votre adresse mail ou votre mot de passe est incorrect.";
 			request.setAttribute("connexionKo", connexionKo);
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/loginRegistering.jsp");
 			dispatcher.forward(request, response);
+
 		}
 
-		System.out.println("doPost connexionKo : " + connexionKo);
-		System.out.println("etatConnexion : " + etatConnexion);
 
 	}
 
