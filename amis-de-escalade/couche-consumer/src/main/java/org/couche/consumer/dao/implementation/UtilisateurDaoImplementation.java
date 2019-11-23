@@ -1,6 +1,8 @@
 package org.couche.consumer.dao.implementation;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -132,18 +134,55 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 		return Utilisateur;
 	}
 
-	public Boolean checkLogin(String motDePasse, String adresseMail) {			
-		boolean flag = false;		
+	public Boolean checkLogin(String motDePasse, String adresseMail) {
+		boolean flag = false;
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<Utilisateur> criteria = builder.createQuery(Utilisateur.class);
 
 		Root<Utilisateur> utilisateurRoot = criteria.from(Utilisateur.class);
-		Query<Utilisateur> query;		
-		criteria.select(utilisateurRoot).where(builder.and(builder.equal(utilisateurRoot.get("motDePasse"), motDePasse),builder.equal(utilisateurRoot.get("adresseMail"), adresseMail)));
+		Query<Utilisateur> query;
+		criteria.select(utilisateurRoot).where(builder.and(builder.equal(utilisateurRoot.get("motDePasse"), motDePasse),
+				builder.equal(utilisateurRoot.get("adresseMail"), adresseMail)));
 		query = getCurrentSession().createQuery(criteria);
-		
+
 		flag = query.getResultList().size() > 0;
-		return flag;		
+		return flag;
+	}
+
+	public void validationEmail(String email) throws Exception {
+		if (email != null) {
+			if (!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
+				throw new Exception("Merci de saisir une adresse mail valide.");
+			}
+		} else {
+			throw new Exception("Merci de saisir une adresse mail.");
+		}
+	}
+
+	public void validationNom(String nom) throws Exception {
+		String messageErreur;
+		
+		if (nom.equals("ville")) {
+			messageErreur = "La ville doit contenir au moins 3 caractères.";
+		} else {
+			messageErreur = "Le " + nom + " doit contenir au moins 3 caractères.";
+		}
+
+		if (nom != null && nom.length() < 3) {
+			throw new Exception(messageErreur);
+		}
+	}
+
+	public void validationMotsDePasse(String motDePasse, String confirmation) throws Exception {
+		if (motDePasse != null && confirmation != null) {
+			if (!motDePasse.equals(confirmation)) {
+				throw new Exception("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
+			} else if (motDePasse.length() < 5) {
+				throw new Exception("Les mots de passe doivent contenir au moins 5 caractères.");
+			}
+		} else {
+			throw new Exception("Merci de saisir et confirmer votre mot de passe.");
+		}
 	}
 
 }

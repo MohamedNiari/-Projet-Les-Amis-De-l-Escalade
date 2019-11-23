@@ -1,20 +1,19 @@
 package org.couche.webapp.test;
 
+import java.util.HashMap;
+
 public class test {
 
 	public static void main(String[] args) {
 		
-		System.out.println(InscriptionForm.CHAMP_EMAIL.contains("o"));
+	    HashMap<String, String> capitalCities = new HashMap<String, String>();
 
+	    // Add keys and values (Country, City)
+	    capitalCities.put("England", "London");
+	    capitalCities.put("Germany", "Berlin");
+	    capitalCities.put("Norway", "Oslo");
+	    capitalCities.put("USA", "Washington DC");
+	    System.out.println(capitalCities);
+	    
 	}
-	
-	public final class InscriptionForm {
-	    private static final String CHAMP_EMAIL  = "email";
-	    private static final String CHAMP_PASS   = "motdepasse";
-	    private static final String CHAMP_CONF   = "confirmation";
-	    private static final String CHAMP_NOM    = "nom";
-
-	   
-	}
-
 }

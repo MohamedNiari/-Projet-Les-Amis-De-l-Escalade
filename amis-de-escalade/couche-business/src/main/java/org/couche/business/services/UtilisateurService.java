@@ -58,5 +58,29 @@ public class UtilisateurService {
 		utilisateurDao.closeCurrentSessionwithTransaction();
 		return flag;
 	}
+	
+	public void validationEmail(String email) throws Exception {
+		utilisateurDao.openCurrentSessionwithTransaction();
+		utilisateurDao.validationEmail(email);
+		utilisateurDao.closeCurrentSessionwithTransaction();
+	}
+	
+	public void validationNom(String nom) throws Exception {
+		utilisateurDao.openCurrentSessionwithTransaction();
+		utilisateurDao.validationNom(nom);
+		utilisateurDao.closeCurrentSessionwithTransaction();
+	}
+	
+	public void validationMotsDePasse(String motDePasse, String confirmation) throws Exception {
+		utilisateurDao.openCurrentSessionwithTransaction();
+		utilisateurDao.validationMotsDePasse(motDePasse, confirmation);
+		utilisateurDao.closeCurrentSessionwithTransaction();
+	}
+	
+	public void setErreur(String champ, String message) {
+		utilisateurDao.openCurrentSessionwithTransaction();
+		utilisateurDao.setErreur(champ, message);
+		utilisateurDao.closeCurrentSessionwithTransaction();
+	}
 
 }

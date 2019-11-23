@@ -72,7 +72,7 @@
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"
 									class="input-text"> <span class="label text-danger">
-										<c:if test="${connexionKo != null}"> <i class="fas fa-times-circle"></i><c:out value="${connexionKo}"/> </c:if>
+										<c:if test="${connexionKo != null}"> <i class="fas fa-times-circle"></i>&nbsp;<c:out value="${connexionKo}"/> </c:if>
 								</span> <span class="border"></span></label>
 
 							</div>
@@ -98,38 +98,38 @@
 						<div class="tabcontent" id="sign-up">
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"
-									name="full_name" id="full_name" class="input-text" required>
+									name="nomInscription" id="full_name" class="input-text" required>
 									<span class="label">Nom</span> <span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"
-									name="your_email" id="your_email" class="input-text" required>
+									name="emailInscription" id="your_email" class="input-text" required>
 									<span class="label">Adresse Mail</span> <span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="password"
-									name="password" id="password" class="input-text" required>
+									name="motDePasseInscription" id="password" class="input-text" required>
 									<span class="label">Mot de Passe</span> <span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="password"
-									name="comfirm_password" id="comfirm_password"
+									name="motDePasseConfirmationInscription" id="comfirm_password"
 									class="input-text" required> <span class="label">Confirmez
 										Mot de Passe</span> <span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"
-									name="your_city" id="your_city" class="input-text" required>
+									name="villeInscription" id="your_city" class="input-text" required>
 									<span class="label">Ville</span> <span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"
-									name="your_country" id="your_country" class="input-text"
+									name="paysInscription" id="your_country" class="input-text"
 									value="France" required> <span class="label">Pays</span>
 									<span class="border"></span>
 								</label>
