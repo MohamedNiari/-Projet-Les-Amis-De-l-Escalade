@@ -65,22 +65,17 @@ public class UtilisateurService {
 		utilisateurDao.closeCurrentSessionwithTransaction();
 	}
 	
-	public void validationNom(String nom) throws Exception {
+	public void validation(String nom, String type) throws Exception {
 		utilisateurDao.openCurrentSessionwithTransaction();
-		utilisateurDao.validationNom(nom);
+		utilisateurDao.validation(nom, type);
 		utilisateurDao.closeCurrentSessionwithTransaction();
 	}
 	
-	public void validationMotsDePasse(String motDePasse, String confirmation) throws Exception {
+	public void validationMotDePasse(String motDePasse, String confirmation) throws Exception {
 		utilisateurDao.openCurrentSessionwithTransaction();
-		utilisateurDao.validationMotsDePasse(motDePasse, confirmation);
+		utilisateurDao.validationMotDePasse(motDePasse, confirmation);
 		utilisateurDao.closeCurrentSessionwithTransaction();
 	}
 	
-	public void setErreur(String champ, String message) {
-		utilisateurDao.openCurrentSessionwithTransaction();
-		utilisateurDao.setErreur(champ, message);
-		utilisateurDao.closeCurrentSessionwithTransaction();
-	}
 
 }

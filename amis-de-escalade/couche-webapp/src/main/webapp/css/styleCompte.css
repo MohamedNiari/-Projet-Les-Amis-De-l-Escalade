@@ -151,7 +151,6 @@ body {
 
 .form-v8-content .form-detail input {
 	width: 100%;
-	padding: 0px 5px 5px 5px;
 	border: 1px solid transparent;
 	border-bottom: 1px solid;
 	border-bottom-color: rgba(255, 255, 255, 0.2);
@@ -224,6 +223,9 @@ body {
 	padding: 11px;
 }
 
+.form-row-inner span{
+	font-size: 12px;
+}
 
 /* Responsive */
 @media screen and (max-width: 991px) {

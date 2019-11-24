@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,63 +44,73 @@ public class Inscription extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		Map<String, String> erreurs = new HashMap<String, String>();
 		String resultat;
-		
+
 		String nom = request.getParameter("nomInscription");
-	    String email = request.getParameter("emailInscription");
-	    String motDePasse = request.getParameter("motDePasseInscription");
-	    String confirmation = request.getParameter("motDePasseConfirmationInscription");
-	    String ville = request.getParameter("villeInscription");
-	    String pays = request.getParameter("paysInscription");
+		String email = request.getParameter("emailInscription");
+		String motDePasse = request.getParameter("motDePasseInscription");
+		String confirmation = request.getParameter("motDePasseConfirmationInscription");
+		String ville = request.getParameter("villeInscription");
+		String pays = request.getParameter("paysInscription");
 
-	    UtilisateurService utilisateurService = new UtilisateurService();
-	    Utilisateur utilisateur = new Utilisateur();
-	    
-	    try {
-	    	utilisateurService.validationNom(nom);
-	    } catch (Exception e) {
-	    	erreurs.put(nom, e.getMessage());
-	    }
-	    utilisateur.setNom(nom);
+		UtilisateurService utilisateurService = new UtilisateurService();
+		Utilisateur utilisateur = new Utilisateur();
 
-	    try {
-	    	utilisateurService.validationEmail(email);
-	    } catch (Exception e) {
-	    	erreurs.put(email, e.getMessage());
-	    }
-	    utilisateur.setAdresseMail(email);
+		try {
+			utilisateurService.validation(nom, "Nom");
+		} catch (Exception e) {
+			erreurs.put("nom", e.getMessage());
+		}
+		utilisateur.setNom(nom);
 
-	    try {
-	    	utilisateurService.validationMotsDePasse(motDePasse, confirmation);
-	    } catch (Exception e) {
-	    	erreurs.put(motDePasse, e.getMessage() );
-	    	erreurs.put(confirmation, null );
-	    }
-	    utilisateur.setMotDePasse( motDePasse );
-	    
-	    try {
-	    	utilisateurService.validationNom(ville);
-	    } catch (Exception e) {
-	    	erreurs.put(ville, e.getMessage());
-	    }
-	    utilisateur.setNom(ville);
-	    
-	    try {
-	    	utilisateurService.validationNom(pays);
-	    } catch (Exception e) {
-	    	erreurs.put(pays, e.getMessage());
-	    }
-	    utilisateur.setNom(pays);
+		try {
+			utilisateurService.validationEmail(email);
+		} catch (Exception e) {
+			erreurs.put("email", e.getMessage());
+		}
+		utilisateur.setAdresseMail(email);
 
-	    if (erreurs.isEmpty()) {
-	        resultat = "Succès de l'inscription.";
-	    } else {
-	        resultat = "Échec de l'inscription.";
-	    }
-	    
-	    utilisateurService.create(utilisateur);
+		try {
+			utilisateurService.validationMotDePasse(motDePasse, confirmation);
+		} catch (Exception e) {
+			erreurs.put("motDePasse", e.getMessage());
+		}
+		utilisateur.setMotDePasse(motDePasse);
+
+		try {
+			utilisateurService.validation(ville, "Ville");
+		} catch (Exception e) {
+			erreurs.put("ville", e.getMessage());
+		}
+		utilisateur.setVille(ville);
+
+		try {
+			utilisateurService.validation(pays, "Pays");
+		} catch (Exception e) {
+			erreurs.put("pays", e.getMessage());
+		}
+		utilisateur.setPays(pays);
+
+		if (erreurs.isEmpty()) {
+			resultat = "Succès de l'inscription.";
+		} else {
+			resultat = "Échec de l'inscription.";
+		}
+
+		if (erreurs.isEmpty()) {
+			utilisateurService.create(utilisateur);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListeDesSites");
+			dispatcher.forward(request, response);
+
+		} else {
+			request.setAttribute("erreurs", erreurs);
+			request.setAttribute("utilisateur", utilisateur);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/loginRegistering.jsp");
+			dispatcher.forward(request, response);
+		}
 
 	}
 

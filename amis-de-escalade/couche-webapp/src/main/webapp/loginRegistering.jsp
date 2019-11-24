@@ -72,14 +72,17 @@
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"
 									class="input-text"> <span class="label text-danger">
-										<c:if test="${connexionKo != null}"> <i class="fas fa-times-circle"></i>&nbsp;<c:out value="${connexionKo}"/> </c:if>
+										<c:if test="${connexionKo != null}">
+											<i class="fas fa-times-circle"></i>&nbsp;<c:out
+												value="${connexionKo}" />
+										</c:if>
 								</span> <span class="border"></span></label>
 
 							</div>
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"
 									name="adresseMail" class="input-text" required> <span
-									class="label">Adresse Mail</span> <span class="border"></span>
+									class="label">Adresse Mail</span><span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row">
@@ -97,41 +100,54 @@
 					<form class="form-detail" action="Inscription" method="post">
 						<div class="tabcontent" id="sign-up">
 							<div class="form-row">
-								<label class="form-row-inner"> <input type="text"
-									name="nomInscription" id="full_name" class="input-text" required>
-									<span class="label">Nom</span> <span class="border"></span>
+								<label class="form-row-inner">
+								<span class="text-danger float-right">${erreurs['nom']}</span>
+								 <input type="text"
+									name="nomInscription" class="input-text" required> <span
+									class="label">Nom</span> 
+									<span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">								
+								<label class="form-row-inner">
+								<span class="text-danger float-right">${erreurs['email']}</span>
+								 <input type="text"
+									name="emailInscription" class="input-text" required> <span
+									class="label">Adresse Mail</span> <span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row">
-								<label class="form-row-inner"> <input type="text"
-									name="emailInscription" id="your_email" class="input-text" required>
-									<span class="label">Adresse Mail</span> <span class="border"></span>
-								</label>
-							</div>
-							<div class="form-row">
-								<label class="form-row-inner"> <input type="password"
-									name="motDePasseInscription" id="password" class="input-text" required>
+								<label class="form-row-inner"> 
+								<span class="text-danger float-right">${erreurs['motDePasse']}</span>
+								<input type="password"
+									name="motDePasseInscription" class="input-text" required>
 									<span class="label">Mot de Passe</span> <span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row">
-								<label class="form-row-inner"> <input type="password"
-									name="motDePasseConfirmationInscription" id="comfirm_password"
-									class="input-text" required> <span class="label">Confirmez
-										Mot de Passe</span> <span class="border"></span>
-								</label>
-							</div>
-							<div class="form-row">
-								<label class="form-row-inner"> <input type="text"
-									name="villeInscription" id="your_city" class="input-text" required>
-									<span class="label">Ville</span> <span class="border"></span>
-								</label>
-							</div>
-							<div class="form-row">
-								<label class="form-row-inner"> <input type="text"
-									name="paysInscription" id="your_country" class="input-text"
-									value="France" required> <span class="label">Pays</span>
+								<label class="form-row-inner"> 
+								<input type="password"
+									name="motDePasseConfirmationInscription" class="input-text"
+									required> <span class="label">Confirmez Mot de Passe</span> 	
 									<span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner">
+								<span class="text-danger float-right">${erreurs['ville']}</span> 
+								 <input type="text"
+									name="villeInscription" class="input-text" required> <span
+									class="label">Ville</span> <span
+									class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner">
+								<span class="text-danger float-right">${erreurs['pays']}</span>
+								 <input type="text"
+									name="paysInscription" class="input-text" value="France"
+									required> <span class="label">Pays</span> <span
+									class="border"></span>
 								</label>
 							</div>
 							<div class="form-row-last">
