@@ -1,7 +1,6 @@
 package org.couche.webapp.test;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import org.couche.business.services.LongueurService;
 import org.couche.business.services.SecteurService;
@@ -21,13 +20,11 @@ public class AppTestCreate {
 
 	public static void main(String[] args) throws ParseException {
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
 		// test pour la table utilisateur
 		UtilisateurService utilisateurService = new UtilisateurService();
 
-		Utilisateur utilisateurTest = new Utilisateur("Niari", "mniari@openclassroom.com", "A287755", "bonjour",
-				dateFormat.parse("04-09-2019"), true, "Sochaux", "France");
+		Utilisateur utilisateurTest = new Utilisateur("Niari", "mniari@openclassroom.com", "bonjour", "04/09/2019",
+				true, "Sochaux", "France");
 
 		utilisateurTest.getPrenoms().add("Mohamed");
 		utilisateurTest.getPrenoms().add("James");
@@ -40,7 +37,7 @@ public class AppTestCreate {
 
 		Topo topoTest = new Topo("Escalade en Savoie2",
 				"Rive gauche, le rocher passe à l’ombre à 12h30 mais les arbres cachent assez bien le soleil avant. On peut donc y grimper en été, même le matin hors période de canicule.",
-				"La Savoie2", dateFormat.parse("04-09-2019"), true, utilisateurTest);
+				"La Savoie2", "04/09/2019", true, utilisateurTest);
 
 		topoService.create(topoTest);
 
@@ -70,7 +67,7 @@ public class AppTestCreate {
 		siteTest3.getUrlImages().add("img/LeTeillon.jpg");
 		siteTest3.getUrlImages().add("img/LeTeillon2.jpg");
 		siteTest3.getUrlImages().add("img/LeTeillon3.jpg");
-		
+
 		Site siteTest4 = new Site("Fixin", 21, "Dijon", false,
 				"À quelques kilomètres au Sud de Dijon, la falaise de Fixin surplombe le fameux vignoble bourguignon, réputé mondialement pour ses grands crus dont le célèbre cépage pousse à merveille sur les sous-sols calcaires du coin.",
 				TypeRocher.Granite, topoTest);
@@ -89,7 +86,7 @@ public class AppTestCreate {
 		Secteur secteurTest = new Secteur("La vertical", 1, "Enormes cannelures", siteTest);
 		Secteur secteurTest2 = new Secteur("Saint-Georges", 2, "Son calcaire est superbe et unique", siteTest);
 		Secteur secteurTest3 = new Secteur("Autracien", 3, "Le rocher est finement sculpté ", siteTest);
-		
+
 		Secteur secteurTest4 = new Secteur("Himalaya", 1, "Très patinée", siteTest4);
 		Secteur secteurTest5 = new Secteur("Pic", 2, "Des lignes très abordables", siteTest4);
 
@@ -114,7 +111,7 @@ public class AppTestCreate {
 		VoieService.create(voieTest4);
 		VoieService.create(voieTest5);
 		VoieService.create(voieTest6);
-		
+
 		// test pour la table longueur
 		LongueurService longueurService = new LongueurService();
 		Longueur longueurTest = new Longueur(25, "4a", true, 1, voieTest);
@@ -143,7 +140,6 @@ public class AppTestCreate {
 		Longueur longueurTest24 = new Longueur(4, "6c", true, 7, voieTest4);
 		Longueur longueurTest25 = new Longueur(49, "6a", false, 8, voieTest4);
 
-
 		longueurService.create(longueurTest);
 		longueurService.create(longueurTest2);
 		longueurService.create(longueurTest3);
@@ -169,7 +165,7 @@ public class AppTestCreate {
 		longueurService.create(longueurTest23);
 		longueurService.create(longueurTest24);
 		longueurService.create(longueurTest25);
-		
+
 	}
 
 }

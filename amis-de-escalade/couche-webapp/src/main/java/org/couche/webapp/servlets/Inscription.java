@@ -1,6 +1,9 @@
 package org.couche.webapp.servlets;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,9 +48,12 @@ public class Inscription extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
 		Map<String, String> erreurs = new HashMap<String, String>();
 		String resultat;
 
+		String prenom = request.getParameter("prenomInscription");
 		String nom = request.getParameter("nomInscription");
 		String email = request.getParameter("emailInscription");
 		String motDePasse = request.getParameter("motDePasseInscription");
@@ -57,6 +63,13 @@ public class Inscription extends HttpServlet {
 
 		UtilisateurService utilisateurService = new UtilisateurService();
 		Utilisateur utilisateur = new Utilisateur();
+
+		try {
+			utilisateurService.validation(prenom, "Prenom");
+		} catch (Exception e) {
+			erreurs.put("prenom", e.getMessage());
+		}
+		utilisateur.getPrenoms().add(prenom);
 
 		try {
 			utilisateurService.validation(nom, "Nom");
@@ -94,19 +107,21 @@ public class Inscription extends HttpServlet {
 		utilisateur.setPays(pays);
 
 		if (erreurs.isEmpty()) {
-			resultat = "Succès de l'inscription.";
-		} else {
-			resultat = "Échec de l'inscription.";
-		}
-
-		if (erreurs.isEmpty()) {
+			utilisateur.setDateInscription(dateFormat.format(date));
+			utilisateur.setMembreAssociation(false);
 			utilisateurService.create(utilisateur);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListeDesSites");
 			dispatcher.forward(request, response);
 
 		} else {
 			request.setAttribute("erreurs", erreurs);
-			request.setAttribute("utilisateur", utilisateur);
+			request.setAttribute("prenom", prenom);
+			request.setAttribute("nom", nom);
+			request.setAttribute("email", email);
+			request.setAttribute("motDePasse", motDePasse);
+			request.setAttribute("confirmation", confirmation);
+			request.setAttribute("ville", ville);
+			request.setAttribute("pays", pays);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/loginRegistering.jsp");
 			dispatcher.forward(request, response);

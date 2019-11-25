@@ -32,7 +32,7 @@ public class Topo {
 	private String description;
 	private String lieu;
 	@Column(name = "date_parution")
-	private Date dateParution;
+	private String dateParution;
 	private Boolean disponible;
 
 	/*
@@ -59,7 +59,7 @@ public class Topo {
 	/*
 	 * Constructeur sans Id
 	 */
-	public Topo(String nom, String description, String lieu, Date dateParution, Boolean disponible, Utilisateur utilisateur) {
+	public Topo(String nom, String description, String lieu, String dateParution, Boolean disponible, Utilisateur utilisateur) {
 		this.nom = nom;
 		this.description = description;
 		this.lieu = lieu;
@@ -132,11 +132,11 @@ public class Topo {
 		this.lieu = lieu;
 	}
 
-	public Date getDateParution() {
+	public String getDateParution() {
 		return dateParution;
 	}
 
-	public void setDateParution(Date dateParution) {
+	public void setDateParution(String dateParution) {
 		this.dateParution = dateParution;
 	}
 

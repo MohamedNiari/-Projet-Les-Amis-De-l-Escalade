@@ -31,11 +31,10 @@ public class Utilisateur {
 	private String nom;
 	@Column(name = "adresse_mail")
 	private String adresseMail;
-	private String identifiant;
 	@Column(name = "mot_de_passe")
 	private String motDePasse;
 	@Column(name = "date_inscription")
-	private Date dateInscription;
+	private String dateInscription;
 	@Column(name = "membre_association")
 	private Boolean membreAssociation;
 	private String ville;
@@ -71,11 +70,10 @@ public class Utilisateur {
 	/*
 	 * Constructeur sans Id
 	 */
-	public Utilisateur(String nom, String adresseMail, String identifiant, String motDePasse, Date dateInscription,
+	public Utilisateur(String nom, String adresseMail, String motDePasse, String dateInscription,
 			Boolean membreAssociation, String ville, String pays) {
 		this.nom = nom;
 		this.adresseMail = adresseMail;
-		this.identifiant = identifiant;
 		this.motDePasse = motDePasse;
 		this.dateInscription = dateInscription;
 		this.membreAssociation = membreAssociation;
@@ -140,14 +138,6 @@ public class Utilisateur {
 		this.adresseMail = adresseMail;
 	}
 
-	public String getIdentifiant() {
-		return identifiant;
-	}
-
-	public void setIdentifiant(String identifiant) {
-		this.identifiant = identifiant;
-	}
-
 	public String getMotDePasse() {
 		return motDePasse;
 	}
@@ -156,11 +146,11 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 	}
 
-	public Date getDateInscription() {
+	public String getDateInscription() {
 		return dateInscription;
 	}
 
-	public void setDateInscription(Date dateInscription) {
+	public void setDateInscription(String dateInscription) {
 		this.dateInscription = dateInscription;
 	}
 
@@ -223,9 +213,9 @@ public class Utilisateur {
 	@Override
 	public String toString() {
 		return "Utilisateur [utilisateurId=" + utilisateurId + ", nom=" + nom + ", adresseMail=" + adresseMail
-				+ ", identifiant=" + identifiant + ", motDePasse=" + motDePasse + ", dateInscription=" + dateInscription
-				+ ", membreAssociation=" + membreAssociation + ", ville=" + ville + ", pays=" + pays + ", prenoms="
-				+ prenoms + ", topos=" + topos + ", commentaires=" + commentaires + "]";
+				+ ", motDePasse=" + motDePasse + ", dateInscription=" + dateInscription + ", membreAssociation="
+				+ membreAssociation + ", ville=" + ville + ", pays=" + pays + ", prenoms=" + prenoms + ", topos="
+				+ topos + ", commentaires=" + commentaires + "]";
 	}
 
 }

@@ -1,19 +1,17 @@
 package org.couche.webapp.test;
 
-import java.util.HashMap;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class test {
 
-	public static void main(String[] args) {
-		
-	    HashMap<String, String> capitalCities = new HashMap<String, String>();
+	public static void main(String[] args) throws ParseException {
 
-	    // Add keys and values (Country, City)
-	    capitalCities.put("England", "London");
-	    capitalCities.put("Germany", "Berlin");
-	    capitalCities.put("Norway", "Oslo");
-	    capitalCities.put("USA", "Washington DC");
-	    System.out.println(capitalCities);
-	    
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.parse(date.toString()).toString());
+
 	}
 }
