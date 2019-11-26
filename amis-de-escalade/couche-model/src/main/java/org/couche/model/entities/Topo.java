@@ -1,7 +1,6 @@
 package org.couche.model.entities;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,8 +37,8 @@ public class Topo {
 	/*
 	 * Relation de secteur à voie sans supression en cascade
 	 */
-	@OneToMany(fetch=FetchType.EAGER, mappedBy = "topo", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "topo", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<Site> sites;
 
 	/*
@@ -59,7 +58,8 @@ public class Topo {
 	/*
 	 * Constructeur sans Id
 	 */
-	public Topo(String nom, String description, String lieu, String dateParution, Boolean disponible, Utilisateur utilisateur) {
+	public Topo(String nom, String description, String lieu, String dateParution, Boolean disponible,
+			Utilisateur utilisateur) {
 		this.nom = nom;
 		this.description = description;
 		this.lieu = lieu;
@@ -71,7 +71,7 @@ public class Topo {
 	/*
 	 * Méthode pour la relation bidirectionnelle
 	 */
-	public void addSite(Site site) {		
+	public void addSite(Site site) {
 		if (sites == null) {
 			sites = new ArrayList<>();
 		}
@@ -155,7 +155,7 @@ public class Topo {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public Long getTopoId() {
 		return topoId;
 	}

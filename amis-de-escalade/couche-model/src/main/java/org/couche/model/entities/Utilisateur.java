@@ -2,18 +2,24 @@ package org.couche.model.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
 
 /*
  * Bean utilisateur qui représente sous forme d'objet la table du même nom
@@ -39,14 +45,13 @@ public class Utilisateur {
 	private Boolean membreAssociation;
 	private String ville;
 	private String pays;
-	
+
 	/*
 	 * Liste de prénoms
 	 */
-	@ElementCollection
-	@CollectionTable(name = "utilisateur_prenom", joinColumns = @JoinColumn(name = "utilisateur_id"))
-	@Column(name = "prenom")
-	private Collection<String> prenoms = new ArrayList<String>();
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "prenoms", joinColumns = @JoinColumn(name = "utilisateur_id"))
+	private Set<String> prenoms = new HashSet<String>();
 
 	/*
 	 * Relation de utilisateur à topo sans suppression en cascade
@@ -202,11 +207,11 @@ public class Utilisateur {
 		this.utilisateurId = utilisateurId;
 	}
 
-	public Collection<String> getPrenoms() {
+	public Set<String> getPrenoms() {
 		return prenoms;
 	}
 
-	public void setPrenoms(Collection<String> prenoms) {
+	public void setPrenoms(Set<String> prenoms) {
 		this.prenoms = prenoms;
 	}
 

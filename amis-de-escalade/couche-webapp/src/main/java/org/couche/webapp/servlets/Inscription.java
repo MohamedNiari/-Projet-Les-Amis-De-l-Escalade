@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.couche.business.services.UtilisateurService;
 import org.couche.model.entities.Utilisateur;
@@ -52,6 +53,7 @@ public class Inscription extends HttpServlet {
 		Date date = new Date();
 		Map<String, String> erreurs = new HashMap<String, String>();
 		String resultat;
+		HttpSession session = request.getSession();
 
 		String prenom = request.getParameter("prenomInscription");
 		String nom = request.getParameter("nomInscription");
@@ -110,6 +112,11 @@ public class Inscription extends HttpServlet {
 			utilisateur.setDateInscription(dateFormat.format(date));
 			utilisateur.setMembreAssociation(false);
 			utilisateurService.create(utilisateur);
+			
+			session.setAttribute("connexionOk", true);
+			session.setAttribute("nom", utilisateur.getNom());
+			session.setAttribute("prenom", utilisateur.getPrenoms().iterator().next());
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListeDesSites");
 			dispatcher.forward(request, response);
 

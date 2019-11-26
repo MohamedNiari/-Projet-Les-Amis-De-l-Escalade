@@ -40,7 +40,7 @@
 
 			<ul class="navbar-nav mr-auto">
 				<li class="navbar-nav mr-auto"><a class="nav-link" href="#">Mon
-						compte <span class="sr-only">(current)</span>
+						Compte <span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Réserver</a>
 				</li>

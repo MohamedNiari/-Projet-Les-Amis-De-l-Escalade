@@ -1,5 +1,6 @@
 package org.couche.consumer.dao.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -126,8 +127,23 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 
 	@Override
 	public Utilisateur findById(Long id) {
-		Utilisateur Utilisateur = (Utilisateur) getCurrentSession().get(Utilisateur.class, id);
-		return Utilisateur;
+		Utilisateur utilisateur = (Utilisateur) getCurrentSession().get(Utilisateur.class, id);
+		return utilisateur;
+	}
+
+	public List<Utilisateur> findByEmail(String adresseMail) {
+		List<Utilisateur> utilisateur = new ArrayList<Utilisateur>();
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Utilisateur> criteria = builder.createQuery(Utilisateur.class);
+
+		Root<Utilisateur> utilisateurRoot = criteria.from(Utilisateur.class);
+		Query<Utilisateur> query;
+
+		criteria.select(utilisateurRoot).where(builder.equal(utilisateurRoot.get("adresseMail"), adresseMail));
+		query = getCurrentSession().createQuery(criteria);
+
+		utilisateur = query.getResultList();
+		return utilisateur;
 	}
 
 	public Boolean checkLogin(String motDePasse, String adresseMail) {
@@ -137,6 +153,7 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 
 		Root<Utilisateur> utilisateurRoot = criteria.from(Utilisateur.class);
 		Query<Utilisateur> query;
+
 		criteria.select(utilisateurRoot).where(builder.and(builder.equal(utilisateurRoot.get("motDePasse"), motDePasse),
 				builder.equal(utilisateurRoot.get("adresseMail"), adresseMail)));
 		query = getCurrentSession().createQuery(criteria);
@@ -145,10 +162,13 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 		return flag;
 	}
 
-	public void validationEmail(String email) throws Exception {
-		if (email != null) {
-			if (!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
+	public void validationEmail(String adresseMail) throws Exception {
+System.out.println("nombreEmail : " +nombreEmail(adresseMail));
+		if (adresseMail != null) {
+			if (!adresseMail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
 				throw new Exception("Merci de saisir une Adresse Mail valide.");
+			} else if (nombreEmail(adresseMail) > 0) {
+				throw new Exception("L'Adresse Mail existe déjà.");
 			}
 		} else {
 			throw new Exception("Merci de saisir une Adresse Mail.");
@@ -156,6 +176,7 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 	}
 
 	public void validation(String nom, String type) throws Exception {
+
 		String messageErreur;
 
 		if (type.equals("Ville")) {
@@ -170,6 +191,7 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 	}
 
 	public void validationMotDePasse(String motDePasse, String confirmation) throws Exception {
+
 		if (motDePasse != null && confirmation != null) {
 			if (!motDePasse.equals(confirmation)) {
 				throw new Exception("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
@@ -179,6 +201,21 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 		} else {
 			throw new Exception("Merci de saisir et confirmer votre mot de passe.");
 		}
+
+	}
+
+	public Long nombreEmail(String adresseMail) {
+
+		Long count = 0L;
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+		Root<Utilisateur> utilisateurRoot = criteria.from(Utilisateur.class);
+
+		criteria.select(builder.count(utilisateurRoot))
+				.where(builder.equal(utilisateurRoot.get("adresseMail"), adresseMail));
+		count = getCurrentSession().createQuery(criteria).getSingleResult();
+
+		return count;
 	}
 
 }

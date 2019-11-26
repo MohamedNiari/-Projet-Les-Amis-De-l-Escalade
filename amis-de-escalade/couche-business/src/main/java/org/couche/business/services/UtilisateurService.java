@@ -31,6 +31,13 @@ public class UtilisateurService {
 		utilisateurDao.closeCurrentSession();
 		return utilisateur;
 	}
+	
+	public Utilisateur findByEmail(String adresseMail) {
+		utilisateurDao.openCurrentSession();
+		List<Utilisateur> listUtilisateur = utilisateurDao.findByEmail(adresseMail);
+		utilisateurDao.closeCurrentSession();
+		return listUtilisateur.get(0);
+	}
 
 	public void delete(Long id) {
 		utilisateurDao.openCurrentSessionwithTransaction();
@@ -77,5 +84,4 @@ public class UtilisateurService {
 		utilisateurDao.closeCurrentSessionwithTransaction();
 	}
 	
-
 }

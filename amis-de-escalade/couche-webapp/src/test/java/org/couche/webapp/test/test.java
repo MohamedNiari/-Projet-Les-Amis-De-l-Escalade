@@ -1,17 +1,19 @@
 package org.couche.webapp.test;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.couche.business.services.UtilisateurService;
+import org.couche.consumer.dao.implementation.UtilisateurDaoImplementation;
+import org.couche.model.entities.Utilisateur;
 
 public class test {
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws Exception {
 
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		Date date = new Date();
-		System.out.println(dateFormat.parse(date.toString()).toString());
+		UtilisateurService utilisateurService = new UtilisateurService();
+	
+
 
 	}
 }
