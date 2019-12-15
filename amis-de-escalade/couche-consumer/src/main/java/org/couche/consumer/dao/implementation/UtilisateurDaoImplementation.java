@@ -147,6 +147,7 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 	}
 
 	public Boolean checkLogin(String motDePasse, String adresseMail) {
+		
 		boolean flag = false;
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<Utilisateur> criteria = builder.createQuery(Utilisateur.class);
@@ -160,15 +161,16 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 
 		flag = query.getResultList().size() > 0;
 		return flag;
+		
 	}
 
 	public void validationEmail(String adresseMail) throws Exception {
-System.out.println("nombreEmail : " +nombreEmail(adresseMail));
+
 		if (adresseMail != null) {
 			if (!adresseMail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-				throw new Exception("Merci de saisir une Adresse Mail valide.");
+				throw new Exception("Merci de saisir une adresse mail valide.");
 			} else if (nombreEmail(adresseMail) > 0) {
-				throw new Exception("L'Adresse Mail existe déjà.");
+				throw new Exception("L'adresse mail existe déjà.");
 			}
 		} else {
 			throw new Exception("Merci de saisir une Adresse Mail.");

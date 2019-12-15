@@ -30,7 +30,6 @@ public class Inscription extends HttpServlet {
 	 */
 	public Inscription() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -52,8 +51,8 @@ public class Inscription extends HttpServlet {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
 		Map<String, String> erreurs = new HashMap<String, String>();
-		String resultat;
 		HttpSession session = request.getSession();
+		Boolean defaultOpenRegister = false;
 
 		String prenom = request.getParameter("prenomInscription");
 		String nom = request.getParameter("nomInscription");
@@ -121,6 +120,8 @@ public class Inscription extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		} else {
+			defaultOpenRegister = true;
+			request.setAttribute("defaultOpenRegister", defaultOpenRegister);
 			request.setAttribute("erreurs", erreurs);
 			request.setAttribute("prenom", prenom);
 			request.setAttribute("nom", nom);

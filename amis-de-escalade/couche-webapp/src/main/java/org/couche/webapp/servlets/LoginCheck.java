@@ -49,7 +49,7 @@ public class LoginCheck extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Boolean etatConnexion;
+		Boolean etatConnexion = false;
 		String connexionKo = null;
 		Set<String> prenoms = new HashSet<String>();
 
@@ -59,12 +59,16 @@ public class LoginCheck extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		UtilisateurService utilisateurService = new UtilisateurService();
-		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
-
-		prenoms = utilisateur.getPrenoms();
-		etatConnexion = utilisateurService.checkLogin(motDePasse, adresseMail);
+		Utilisateur utilisateur = new Utilisateur();
+		if(utilisateurService.findByEmail(adresseMail) !=null) {
+			
+			utilisateur = utilisateurService.findByEmail(adresseMail);
+			prenoms = utilisateur.getPrenoms();
+			etatConnexion = utilisateurService.checkLogin(motDePasse, adresseMail);
+		}
 
 		if (etatConnexion) {
+			
 			session.setAttribute("connexionOk", true);
 			session.setAttribute("nom", utilisateur.getNom());
 			session.setAttribute("prenom", prenoms.iterator().next());
@@ -73,6 +77,7 @@ public class LoginCheck extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		} else {
+			
 			connexionKo = "Votre adresse mail ou votre mot de passe est incorrect.";
 			request.setAttribute("connexionKo", connexionKo);
 

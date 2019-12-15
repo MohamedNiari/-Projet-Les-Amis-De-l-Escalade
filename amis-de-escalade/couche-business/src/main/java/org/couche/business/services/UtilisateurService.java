@@ -36,7 +36,11 @@ public class UtilisateurService {
 		utilisateurDao.openCurrentSession();
 		List<Utilisateur> listUtilisateur = utilisateurDao.findByEmail(adresseMail);
 		utilisateurDao.closeCurrentSession();
-		return listUtilisateur.get(0);
+		
+		if(listUtilisateur.isEmpty())
+			return null;
+		else
+			return listUtilisateur.get(0);
 	}
 
 	public void delete(Long id) {
