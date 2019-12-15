@@ -17,7 +17,7 @@ import org.couche.model.entities.Site;
 /**
  * Servlet implementation class ListeDesSites
  */
-@WebServlet("/ListeDesSites")
+@WebServlet(urlPatterns = "/ListeDesSites", name = "ListeDesSites")
 public class ListeDesSites extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
