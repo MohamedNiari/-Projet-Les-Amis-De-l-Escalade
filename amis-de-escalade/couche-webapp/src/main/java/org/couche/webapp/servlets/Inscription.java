@@ -121,6 +121,7 @@ public class Inscription extends HttpServlet {
 
 		} else {
 			defaultOpenRegister = true;
+			
 			request.setAttribute("defaultOpenRegister", defaultOpenRegister);
 			request.setAttribute("erreurs", erreurs);
 			request.setAttribute("prenom", prenom);
