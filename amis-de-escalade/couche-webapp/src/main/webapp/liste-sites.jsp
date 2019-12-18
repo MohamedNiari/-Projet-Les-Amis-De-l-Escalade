@@ -9,18 +9,28 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/c07610da30.js"
+	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<script src="https://kit.fontawesome.com/c07610da30.js"
-	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="img/Favicon.png" />
 </head>
 
 <body>
-
+	<!-- Barre de navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-success"
 		id="barreNavigation">
 
@@ -95,16 +105,21 @@
 			<c:if test="${connexionOk == true}">
 				<div class="dropdown show">
 					<a class="btn btn-success" href="#" role="button"
-						 data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> <span style="color: white;"> <i
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span style="color: white;"> <i
 							class="fas fa-user-circle fa-3x"></i>
 					</span>
 					</a>
 
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item font-weight-bold"> ${prenom} ${nom}</a> <a
-							class="dropdown-item" href="#">Another action</a> <a
-							class="dropdown-item" href="/SiteEscalade/LogOut"><i class="fas fa-power-off"></i>&nbsp; Déconnexion</a>
+						<a class="dropdown-item font-weight-bold"> ${prenom} ${nom}</a>
+
+						<button type="button" class="dropdown-item" data-toggle="modal"
+							data-target="#creationSiteModal" data-whatever="@mdo">Partager
+							un site</button>
+
+						<a class="dropdown-item" href="/SiteEscalade/LogOut"><i
+							class="fas fa-power-off"></i>&nbsp; Déconnexion</a>
 					</div>
 				</div>
 			</c:if>
@@ -118,11 +133,89 @@
 
 	</nav>
 
+	<!--  modal pour la création d'un site -->
+
+	<div class="modal fade bd-example-modal-lg" id="creationSiteModal"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-success">
+					<h5 class="modal-title" id="exampleModalLabel">Creation d'un
+						site</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body text-success">
+					<form id="formCreationSite">
+						<div class="form-group">
+							<label for="nomSite" class="col-form-label">Donner un nom
+								au site</label> <input type="text" class="form-control" id="nomSite"
+								name="nomSite">
+						</div>
+						<div class="form-group">
+							<label for="lieuSite" class="col-form-label">Lieu du site</label>
+							<input type="text" class="form-control" id="lieuSite"
+								name="lieuSite">
+						</div>
+						<div class="form-group">
+							<label for="hauteurSite" class="col-form-label">Hauteur
+								du site en mètre</label> <input type="text" class="form-control"
+								id="hauteurSite" name="hauteurSite">
+						</div>
+						<div class="form-group">
+							<label for="descriptionSite" class="col-form-label">Description
+								du site</label>
+							<textarea class="form-control" id="descriptionSite"
+								name="descriptionSite"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="nombreSecteurs" class="col-form-label">Nombre
+								de secteurs</label> <select
+								class="form-control input-sm btn btn-light  dropdown-toggle border"
+								name="nombreSecteurs" id="nombreSecteurs">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="typeRoche" class="col-form-label">Type de
+								roche</label> <select
+								class="form-control input-sm btn btn-light  dropdown-toggle border"
+								name="typeRoche" id="typeRoche">
+								<option>Calcaire</option>
+								<option>Gneiss</option>
+								<option>Granite</option>
+							</select>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Fermer</button>
+							<button type="submit" class="btn btn-success" id="submitButton">Envoyer
+								le site</button>
+						</div>
+					</form>
+				</div>
+				<div>
+					<p id="messageValidation" />
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Image de la page d'accueil -->
 	<aside class="bg">
 		<img src="img/presentation.png" alt="escalade">
 
 	</aside>
 
+	<!-- Liste des sites spus forme de cards -->
 	<section class="d-flex flex-wrap" id="cards">
 
 		<c:forEach var="tempSite" items="${SITE_LIST}">
@@ -160,13 +253,34 @@
 
 	</section>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function() {
+
+			$("#formCreationSite").submit(function() {
+
+				var formModal = $("#formCreationSite").serialize();
+				console.log(formModal);
+
+				$.ajax({
+					url : "/SiteEscalade/CreationSite",
+					type : "POST",					
+					data : formModal,
+					dataType : "json",
+					success : function() {
+
+						alert(formModal.nomSite);
+						//$("#creationSiteModal").modal("hide");
+
+					}
+
+				});
+				return false;
+			});
+
+		});
+	</script>
+
+
 </body>
 
 </html>
