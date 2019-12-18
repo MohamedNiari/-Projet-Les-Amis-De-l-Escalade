@@ -21,7 +21,6 @@
 <link rel="icon" type="image/png" href="img/Favicon.png" />
 </head>
 
-
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-success"
@@ -69,121 +68,123 @@
 								<button class="tablinks" onclick="openCity(event, 'sign-up')"
 									id="defaultOpen">S'INSCRIRE</button>
 							</div>
-					</div>
-					</c:if>
+						</c:if>
 
-					<c:if test="${not defaultOpenRegister}">
-						<div class="tab-inner">
-							<button class="tablinks" onclick="openCity(event, 'sign-in')"
-								id="defaultOpen">SE CONNECTER</button>
+						<c:if test="${not defaultOpenRegister}">
+							<div class="tab-inner">
+								<button class="tablinks" onclick="openCity(event, 'sign-in')"
+									id="defaultOpen">SE CONNECTER</button>
+							</div>
+							<div class="tab-inner">
+								<button class="tablinks" onclick="openCity(event, 'sign-up')">S'INSCRIRE</button>
+							</div>
+						</c:if>
+					</div>
+
+					<form class="form-detail" action="LoginCheck" method="post">
+						<div class="tabcontent" id="sign-in">
+							<div class="form-row">
+								<label class="form-row-inner"> <input type="text"
+									class="input-text" disabled> <span
+									class="label text-danger"> <c:if
+											test="${connexionKo != null}">
+											<i class="fas fa-times-circle"></i>&nbsp;<c:out
+												value="${connexionKo}" />
+										</c:if>
+								</span> <span class="border"></span></label>
+
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <input type="text"
+									name="adresseMail" class="input-text" required> <span
+									class="label">Adresse Mail</span><span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <input type="password"
+									name="motDePasse" class="input-text" required> <span
+									class="label">Mot de Passe</span> <span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row-last">
+								<input type="submit" name="register" class="register"
+									value="Se Connecter">
+							</div>
 						</div>
-						<div class="tab-inner">
-							<button class="tablinks" onclick="openCity(event, 'sign-up')">S'INSCRIRE</button>
+					</form>
+					<form class="form-detail" action="Inscription" method="post">
+						<div class="tabcontent" id="sign-up">
+							<div class="form-row">
+								<label class="form-row-inner"> <span
+									class="text-danger float-right">${erreurs['prenom']}</span> <input
+									type="text" name="prenomInscription" class="input-text"
+									value="${prenom}" required> <span class="label">Prenom</span>
+									<span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <span
+									class="text-danger float-right">${erreurs['nom']}</span> <input
+									type="text" name="nomInscription" class="input-text"
+									value="${nom}" required> <span class="label">Nom</span>
+									<span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <span
+									class="text-danger float-right">${erreurs['email']}</span> <input
+									type="text" name="emailInscription" class="input-text"
+									value="${email}" required> <span class="label">Adresse
+										Mail</span> <span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <span
+									class="text-danger float-right">${erreurs['motDePasse']}</span>
+									<input type="password" name="motDePasseInscription"
+									class="input-text" required> <span class="label">Mot
+										de Passe</span> <span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <input type="password"
+									name="motDePasseConfirmationInscription" class="input-text"
+									required> <span class="label">Confirmez Mot de
+										Passe</span> <span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <span
+									class="text-danger float-right">${erreurs['ville']}</span> <input
+									type="text" name="villeInscription" class="input-text"
+									value="${ville}" required> <span class="label">Ville</span>
+									<span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row">
+								<label class="form-row-inner"> <span
+									class="text-danger float-right">${erreurs['pays']}</span> <input
+									type="text" name="paysInscription" class="input-text"
+									value="${not empty pays ? pays : 'France'}" required> <span
+									class="label">Pays</span> <span class="border"></span>
+								</label>
+							</div>
+							<div class="form-row-last">
+								<input type="submit" name="register" class="register"
+									value="S'inscrire">
+							</div>
 						</div>
+					</form>
 				</div>
-				</c:if>
-				<form class="form-detail" action="LoginCheck" method="post">
-					<div class="tabcontent" id="sign-in">
-						<div class="form-row">
-							<label class="form-row-inner"> <input type="text"
-								class="input-text" disabled> <span
-								class="label text-danger"> <c:if
-										test="${connexionKo != null}">
-										<i class="fas fa-times-circle"></i>&nbsp;<c:out
-											value="${connexionKo}" />
-									</c:if>
-							</span> <span class="border"></span></label>
-
-						</div>
-						<div class="form-row">
-							<label class="form-row-inner"> <input type="text"
-								name="adresseMail" class="input-text" required> <span
-								class="label">Adresse Mail</span><span class="border"></span>
-							</label>
-						</div>
-						<div class="form-row">
-							<label class="form-row-inner"> <input type="password"
-								name="motDePasse" class="input-text" required> <span
-								class="label">Mot de Passe</span> <span class="border"></span>
-							</label>
-						</div>
-						<div class="form-row-last">
-							<input type="submit" name="register" class="register"
-								value="Se Connecter">
-						</div>
-					</div>
-				</form>
-				<form class="form-detail" action="Inscription" method="post">
-					<div class="tabcontent" id="sign-up">
-						<div class="form-row">
-							<label class="form-row-inner"> <span
-								class="text-danger float-right">${erreurs['prenom']}</span> <input
-								type="text" name="prenomInscription" class="input-text"
-								value="${prenom}" required> <span class="label">Prenom</span>
-								<span class="border"></span>
-							</label>
-						</div>
-						<div class="form-row">
-							<label class="form-row-inner"> <span
-								class="text-danger float-right">${erreurs['nom']}</span> <input
-								type="text" name="nomInscription" class="input-text"
-								value="${nom}" required> <span class="label">Nom</span>
-								<span class="border"></span>
-							</label>
-						</div>
-						<div class="form-row">
-							<label class="form-row-inner"> <span
-								class="text-danger float-right">${erreurs['email']}</span> <input
-								type="text" name="emailInscription" class="input-text"
-								value="${email}" required> <span class="label">Adresse
-									Mail</span> <span class="border"></span>
-							</label>
-						</div>
-						<div class="form-row">
-							<label class="form-row-inner"> <span
-								class="text-danger float-right">${erreurs['motDePasse']}</span>
-								<input type="password" name="motDePasseInscription"
-								class="input-text" required> <span class="label">Mot
-									de Passe</span> <span class="border"></span>
-							</label>
-						</div>
-						<div class="form-row">
-							<label class="form-row-inner"> <input type="password"
-								name="motDePasseConfirmationInscription" class="input-text"
-								required> <span class="label">Confirmez Mot de
-									Passe</span> <span class="border"></span>
-							</label>
-						</div>
-						<div class="form-row">
-							<label class="form-row-inner"> <span
-								class="text-danger float-right">${erreurs['ville']}</span> <input
-								type="text" name="villeInscription" class="input-text"
-								value="${ville}" required> <span class="label">Ville</span>
-								<span class="border"></span>
-							</label>
-						</div>
-						<div class="form-row">
-							<label class="form-row-inner"> <span
-								class="text-danger float-right">${erreurs['pays']}</span> <input
-								type="text" name="paysInscription" class="input-text"
-								value="${not empty pays ? pays : 'France'}" required> <span
-								class="label">Pays</span> <span class="border"></span>
-							</label>
-						</div>
-						<div class="form-row-last">
-							<input type="submit" name="register" class="register"
-								value="S'inscrire">
-						</div>
-					</div>
-				</form>
 			</div>
-		</div>
 		</div>
 
 	</section>
 
 	<script type="text/javascript">
+	
 		function openCity(evt, cityName) {
+			
 			var i, tabcontent, tablinks;
 			tabcontent = document.getElementsByClassName("tabcontent");
 			for (i = 0; i < tabcontent.length; i++) {
@@ -196,6 +197,7 @@
 			}
 			document.getElementById(cityName).style.display = "block";
 			evt.currentTarget.className += " active";
+			
 		}
 
 		document.getElementById("defaultOpen").click();
