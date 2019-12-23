@@ -26,7 +26,7 @@
 		<!-- Session courante en mode thread -->
 		<property name="current_session_context_class">thread</property>
 
-		<!-- Autorise des modifications du schema durant la phase de developpement -->
+		<!-- Empeche les modifications du schema durant la phase de production -->
 		<property name="hibernate.hbm2ddl.auto">validate</property>
 
 		<!-- mappings des classes annotées -->

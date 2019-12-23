@@ -17,11 +17,19 @@ public class SiteService {
 		siteDao = new SiteDaoImplementation();
 	}
 
+	public Long createSite(String nomSite, String lieuSite, Integer hauteurSite, Boolean official, String descriptionSite, TypeRocher typeRoche) {
+		siteDao.openCurrentSessionwithTransaction();
+		Long siteId = siteDao.createSite(nomSite, lieuSite, hauteurSite, official, descriptionSite, typeRoche);
+		siteDao.closeCurrentSessionwithTransaction();
+		return siteId;
+	}
+	
 	public void create(Site site) {
 		siteDao.openCurrentSessionwithTransaction();
 		siteDao.create(site);
 		siteDao.closeCurrentSessionwithTransaction();
 	}
+
 
 	public void update(Site site) {
 		siteDao.openCurrentSessionwithTransaction();

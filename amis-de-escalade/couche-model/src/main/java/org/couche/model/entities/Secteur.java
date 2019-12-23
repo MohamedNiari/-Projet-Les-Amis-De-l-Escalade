@@ -59,10 +59,10 @@ public class Secteur {
 	/*
 	 * Constructeur
 	 */
-	public Secteur(String nom, Integer numeroSecteur, String descriptions, Site site) {
+	public Secteur(String nom, Integer numeroSecteur, String description, Site site) {
 		this.nom = nom;
 		this.numeroSecteur = numeroSecteur;
-		this.description = descriptions;
+		this.description = description;
 		this.site = site;
 	}
 
@@ -113,14 +113,6 @@ public class Secteur {
 		this.numeroSecteur = numeroSecteur;
 	}
 
-	public String getDescriptions() {
-		return description;
-	}
-
-	public void setDescriptions(String descriptions) {
-		this.description = descriptions;
-	}
-
 	public List<Voie> getVoies() {
 		return voies;
 	}
@@ -144,7 +136,6 @@ public class Secteur {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 
 }

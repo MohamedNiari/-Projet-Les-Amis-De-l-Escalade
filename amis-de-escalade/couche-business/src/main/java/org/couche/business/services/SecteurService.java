@@ -3,16 +3,21 @@ package org.couche.business.services;
 import java.util.List;
 
 import org.couche.consumer.dao.implementation.SecteurDaoImplementation;
-import org.couche.consumer.dao.implementation.UtilisateurDaoImplementation;
 import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 
 public class SecteurService {
 
 	private static SecteurDaoImplementation secteurDao;
-	
+
 	public SecteurService() {
 		secteurDao = new SecteurDaoImplementation();
+	}
+	
+	public void createSecteur(String nom, Integer numeroSecteur, String description, Site site) {
+		secteurDao.openCurrentSessionwithTransaction();
+		secteurDao.createSecteur(nom, numeroSecteur, description, site);
+		secteurDao.closeCurrentSessionwithTransaction();
 	}
 
 	public void create(Secteur secteur) {
@@ -52,13 +57,13 @@ public class SecteurService {
 		secteurDao.openCurrentSessionwithTransaction();
 		secteurDao.deleteAll();
 		secteurDao.closeCurrentSessionwithTransaction();
-	}	
-	
-	public List<Secteur> findBySite(Long siteid){
+	}
+
+	public List<Secteur> findBySite(Long siteid) {
 		secteurDao.openCurrentSession();
 		List<Secteur> secteurs = secteurDao.findBySite(siteid);
 		secteurDao.closeCurrentSession();
-		return secteurs;		
+		return secteurs;
 	}
 
 }

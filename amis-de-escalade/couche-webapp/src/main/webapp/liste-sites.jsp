@@ -1,11 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -149,7 +151,8 @@
 					</button>
 				</div>
 				<div class="modal-body text-success">
-					<form id="formCreationSite">
+					<form method="post" action="CreationSite" id="formCreationSite">
+
 						<div class="form-group">
 							<label for="nomSite" class="col-form-label">Donner un nom
 								au site</label> <input type="text" class="form-control" id="nomSite"
@@ -169,7 +172,7 @@
 							<label for="descriptionSite" class="col-form-label">Description
 								du site</label>
 							<textarea class="form-control" id="descriptionSite"
-								name="descriptionSite"></textarea>
+								name="descriptionSite" maxlength=480 rows="5"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="nombreSecteurs" class="col-form-label">Nombre
@@ -253,13 +256,13 @@
 
 	</section>
 
-	<script>
+	<!-- script>
+	
 		$(document).ready(function() {
 
 			$("#formCreationSite").submit(function() {
 
 				var formModal = $("#formCreationSite").serialize();
-				console.log(formModal);
 
 				$.ajax({
 					url : "/SiteEscalade/CreationSite",
@@ -278,7 +281,7 @@
 			});
 
 		});
-	</script>
+	</script-->
 
 
 </body>

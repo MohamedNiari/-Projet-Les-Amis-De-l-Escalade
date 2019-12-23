@@ -35,7 +35,7 @@ public class ListeDesSites extends HttpServlet {
 		SiteService siteService = new SiteService();
 		List<Site> sites = siteService.findAll();
 		
-		// Ajout de sites à la request
+		// Ajout des sites à la request
 		request.setAttribute("SITE_LIST", sites);
 
 		// Envoi à la JSP
