@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -41,6 +42,7 @@ public class Site {
 	private String lieu;
 	@Column(name = "taguer_officiel")
 	private Boolean taguerOfficiel;
+	@Size(max=500)
 	private String description;
 	// @Column(columnDefinition = "enum('calcaire', 'granite', 'gneiss')")
 	@Enumerated(EnumType.STRING)
@@ -163,13 +165,6 @@ public class Site {
 		this.lieu = lieu;
 	}
 
-	public boolean isTaguerOfficiel() {
-		return taguerOfficiel;
-	}
-
-	public void setTaguerOfficiel(boolean taguerOfficiel) {
-		this.taguerOfficiel = taguerOfficiel;
-	}
 
 	public Boolean getTaguerOfficiel() {
 		return taguerOfficiel;

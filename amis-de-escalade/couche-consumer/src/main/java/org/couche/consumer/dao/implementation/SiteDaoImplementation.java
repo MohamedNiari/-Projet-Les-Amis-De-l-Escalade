@@ -182,5 +182,20 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		return sites;
 
 	}
+	
+	public Long createSite(String nomSite, String lieuSite, Integer hauteurSite, Boolean official, String descriptionSite, TypeRocher typeRoche) {		
+		
+		Site site = new Site();		
+		site.setNom(nomSite);
+		site.setLieu(lieuSite);
+		site.setHauteurMax(hauteurSite);
+		site.setTaguerOfficiel(official);
+		site.setDescription(descriptionSite);
+		site.setTypeRocher(typeRoche);
+		
+		Long id = (Long) getCurrentSession().save(site);
+		return id;
+
+	}
 
 }

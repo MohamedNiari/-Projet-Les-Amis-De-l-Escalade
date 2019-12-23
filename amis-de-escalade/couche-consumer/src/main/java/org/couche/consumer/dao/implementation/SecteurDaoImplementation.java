@@ -108,12 +108,14 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Secteur> findAll() {
+		
 		List<Secteur> Secteurs = (List<Secteur>) getCurrentSession().createQuery("from escalade").list();
 		return Secteurs;
 	}
 
 	@Override
 	public void deleteAll() {
+		
 		List<Secteur> secteurList = findAll();
 		for (Secteur secteur : secteurList) {
 			delete(secteur);
@@ -122,14 +124,27 @@ public class SecteurDaoImplementation implements DaoInterface<Secteur, Long> {
 
 	@Override
 	public Secteur findById(Long id) {
+		
 		Secteur Secteur = (Secteur) getCurrentSession().get(Secteur.class, id);
 		return Secteur;
 	}
 	
 	
 	public List<Secteur> findBySite(Long siteid) {
+		
 		List<Secteur> Secteurs = (List<Secteur>) getCurrentSession().get(Site.class, siteid).getSecteurs();
 		return Secteurs;
+
+	}
+	
+	public void createSecteur(String nom, Integer numeroSecteur, String description, Site site) {
+		
+		Secteur secteur = new Secteur();
+		secteur.setDescription(description);
+		secteur.setNom(nom);
+		secteur.setNumeroSecteur(numeroSecteur);
+		secteur.setSite(site);
+		getCurrentSession().save(secteur);
 
 	}
 
