@@ -2,7 +2,11 @@ package org.couche.webapp.servlets;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -20,22 +24,25 @@ import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.TypeRocher;
 import org.couche.model.entities.Voie;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 /**
- * Servlet implementation class creation de site
+ * Servlet implementation class rechercheSite
  */
-@WebServlet("/CreationSite")
-@MultipartConfig
-public class CreationSite extends HttpServlet {
+@WebServlet("/CreationSecteurs")
+public class CreationSecteurs extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CreationSite() {
+	public CreationSecteurs() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -62,49 +69,44 @@ public class CreationSite extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		String nomSite = request.getParameter("nomSite");
-		String lieuSite = request.getParameter("lieuSite");
-		String hauteurSite = request.getParameter("hauteurSite");
-		String descriptionSite = request.getParameter("descriptionSite");
-		String nombreSecteurs = request.getParameter("nombreSecteurs");
-		String typeRoche = request.getParameter("typeRoche");
-		Boolean official = false;
-		Integer hauteurSiteInt = 0;
-		Long siteId;
+		String siteId = request.getParameter("siteId");
 
-		TypeRocher typeRocher = TypeRocher.valueOf(typeRoche);
-
-		try {
-			hauteurSiteInt = Integer.parseInt(hauteurSite.trim());
-		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException: " + e.getMessage());
-		}
-		
-		//Création du site
-		SiteService siteService = new SiteService();
-		siteId = siteService.createSite(nomSite, lieuSite, hauteurSiteInt, official, descriptionSite, typeRocher);
-		
-		// Récupération du site depuis la BDD
-		Site site = siteService.findById(siteId);
-		
-		// Création des secteurs à vide
 		SecteurService secteurService = new SecteurService();
+		List<Secteur> secteurs = secteurService.findBySite(Long.parseLong(siteId));
+		VoieService voieService = new VoieService();
+
+		// Récupération du json String
+		JSONObject jObj = new JSONObject(request.getParameter("secteursData"));
 		
-		for(int i = 0; i < Long.parseLong(nombreSecteurs); i++) {
-			
-			secteurService.createSecteur("", i + 1, "", site);			
+		int nombreSecteurs = secteurs.size();
+		List<Integer> totalVoies = new ArrayList<Integer>();
+
+		// Update des secteurs et création des voies à vide
+		for (int i = 0; i < nombreSecteurs; i++) {
+
+			secteurs.get(i).setNom(jObj.get("nomSecteurNum" + (i + 1)).toString());
+			secteurs.get(i).setDescription(jObj.get("descriptionSecteurNum" + (i + 1)).toString());
+			secteurService.update(secteurs.get(i));
+
+			int nombreVoie = jObj.getInt("nombreVoiesSecteurNum" + (i + 1));
+			totalVoies.add(nombreVoie);
+
+			for (int j = 0; j < nombreVoie; j++)
+				voieService.createVoie(0, (j + 1), secteurs.get(i));
+
 		}
 		
-		//Envoi des données en json
+		// Envoi des données en json
 		response.setContentType("application/json"); 
 	    response.setCharacterEncoding("UTF-8");
 	    
         JsonObject jsonResponse = new JsonObject();
         jsonResponse.add("nombreSecteurs", new Gson().toJsonTree(nombreSecteurs));
-        jsonResponse.add("siteId", new Gson().toJsonTree(siteId));  
+        jsonResponse.add("totalVoies", new Gson().toJsonTree(totalVoies));  
+        jsonResponse.add("siteId", new Gson().toJsonTree(siteId));
         
 	    response.getWriter().write(jsonResponse.toString()); 
-		
+
 	}
-	
+
 }

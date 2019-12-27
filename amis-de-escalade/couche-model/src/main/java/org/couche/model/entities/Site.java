@@ -67,7 +67,7 @@ public class Site {
 	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
 	private List<Commentaire> commentaires;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@ManyToOne()
 	@JoinColumn(name = "topo_id")
 	private Topo topo;
 

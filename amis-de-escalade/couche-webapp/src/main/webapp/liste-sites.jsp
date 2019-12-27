@@ -15,14 +15,12 @@
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/c07610da30.js"
 	crossorigin="anonymous"></script>
+<script src="js/creationSite.js" type="text/javascript"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -138,12 +136,12 @@
 	<!--  modal pour la création d'un site -->
 
 	<div class="modal fade bd-example-modal-lg" id="creationSiteModal"
-		tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		tabindex="-1" role="dialog" aria-labelledby="creationSiteModal"
 		aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header text-success">
-					<h5 class="modal-title" id="exampleModalLabel">Creation d'un
+					<h5 class="modal-title" id="creationSiteModal">Creation d'un
 						site</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -151,7 +149,7 @@
 					</button>
 				</div>
 				<div class="modal-body text-success">
-					<form method="post" action="CreationSite" id="formCreationSite">
+					<form id="formCreationSite">
 
 						<div class="form-group">
 							<label for="nomSite" class="col-form-label">Donner un nom
@@ -199,18 +197,84 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">Fermer</button>
-							<button type="submit" class="btn btn-success" id="submitButton">Envoyer
-								le site</button>
+							<button type="submit" class="btn btn-success"
+								id="submitButtonSite">Envoyer le site</button>
 						</div>
 					</form>
-				</div>
-				<div>
-					<p id="messageValidation" />
 				</div>
 
 			</div>
 		</div>
 	</div>
+
+	<!--  modal pour la création des secteurs -->
+
+	<div class="modal fade bd-example-modal-lg" id="creationSecteursModal"
+		tabindex="-1" role="dialog" aria-labelledby="creationSecteursModal"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-success">
+					<h5 class="modal-title" id="creationSecteursModal">Creation
+						des secteurs</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body text-success">
+					<form id="formCreationSecteurs">
+
+						<div id="secteursContent"></div>
+						<input type="hidden" id="siteId" name="siteId">
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Fermer</button>
+							<button type="submit" class="btn btn-success"
+								id="submitButtonSecteurs">Envoyer les secteurs</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<!--  modal pour la création des voies -->
+
+	<div class="modal fade bd-example-modal-lg" id="creationVoiesModal"
+		tabindex="-1" role="dialog" aria-labelledby="creationVoiesModal"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-success">
+					<h5 class="modal-title" id="creationVoiesModal">Creation
+						des voies <small>(Définir le nombre de longueurs par voie)</small></h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body text-success">
+					<form id="formCreationVoies">
+
+						<div id="voiesContent"></div>
+						<input type="hidden" id="siteId" name="siteId">
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Fermer</button>
+							<button type="submit" class="btn btn-success"
+								id="submitButtonVoies">Valider les voies</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
 
 	<!-- Image de la page d'accueil -->
 	<aside class="bg">
@@ -255,34 +319,6 @@
 		</c:forEach>
 
 	</section>
-
-	<!-- script>
-	
-		$(document).ready(function() {
-
-			$("#formCreationSite").submit(function() {
-
-				var formModal = $("#formCreationSite").serialize();
-
-				$.ajax({
-					url : "/SiteEscalade/CreationSite",
-					type : "POST",					
-					data : formModal,
-					dataType : "json",
-					success : function() {
-
-						alert(formModal.nomSite);
-						//$("#creationSiteModal").modal("hide");
-
-					}
-
-				});
-				return false;
-			});
-
-		});
-	</script-->
-
 
 </body>
 

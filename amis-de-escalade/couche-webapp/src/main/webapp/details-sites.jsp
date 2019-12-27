@@ -21,7 +21,7 @@
 </head>
 
 <body>
-
+	<!-- Barre de navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-success"
 		id="barreNavigation">
 
@@ -145,7 +145,8 @@
 		</div>
 
 		<div class="col-md-8">
-
+		
+			<!-- Information du site -->
 			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
 				<div class="col-md-12">
 					<h4>
@@ -159,7 +160,8 @@
 				</div>
 
 			</div>
-
+			
+			<!-- Détails des secteurs -->
 			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
 
 				<c:forEach items="${SECTEUR_LIST}" var="itemSecteur">

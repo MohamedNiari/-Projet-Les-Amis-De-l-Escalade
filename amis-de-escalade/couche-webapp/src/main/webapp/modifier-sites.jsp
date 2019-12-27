@@ -18,6 +18,18 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="img/Favicon.png" />
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/c07610da30.js"
+	crossorigin="anonymous"></script>
+<script src="js/ajax.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -164,6 +176,9 @@
 									style="font-family: cursive"> <label for="nomSite">Nom
 										du Site </label> <input type="text" name="nomSite" id="nomSite"
 									class="form-control" value="${THE_SITE.nom}" /></strong>
+									
+									<input type="hidden"
+											name="siteId" value="${THE_SITE.siteId}" id="siteId"/>
 							</h4>
 						</div>
 						<hr>
@@ -186,15 +201,16 @@
 										<i class="fas fa-share" style="color: #685450"></i> &nbsp;
 										Secteur n° ${itemSecteur.numeroSecteur} : <strong> <input
 											type="text" name="nomSecteur" class="form-control"
-											value="${itemSecteur.nom}" />
+											value="${itemSecteur.nom}" /> 
 
 										</strong>
 									</h6>
 								</div>
 								<div class="col">
 									<span class="float-right" style="font-size: 0.8em"> <label
-										for="nombreVoies" class="font-weight-bold">Nombre de voies</label> <select
-										class="form-control-sm" id="nombreVoies" name="nombreVoies">
+										for="nombreVoies" class="font-weight-bold">Nombre de
+											voies</label> <select class="form-control-sm" id="nombreVoies"
+										name="nombreVoies">
 											<option>1</option>
 											<option>2</option>
 											<option>3</option>
@@ -280,15 +296,7 @@
 			</form>
 		</div>
 	</section>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/c07610da30.js"
-		crossorigin="anonymous"></script>
+
 
 </body>
 

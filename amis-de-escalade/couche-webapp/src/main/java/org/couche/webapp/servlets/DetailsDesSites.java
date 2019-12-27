@@ -1,6 +1,7 @@
 package org.couche.webapp.servlets;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,6 +32,12 @@ public class DetailsDesSites extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 
 		// Récupération de l'id du site depuis la JSP
 		String siteId = request.getParameter("siteId");
@@ -59,7 +66,7 @@ public class DetailsDesSites extends HttpServlet {
 		
 		request.setAttribute("VOIE_LIST", voies);
 		
-		// Envoi Ã  la jsp
+		// Envoi à la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");
 		dispatcher.forward(request, response);
 

@@ -13,6 +13,13 @@ public class VoieService {
 	public VoieService() {
 		voieDao = new VoieDaoImplementation();
 	}
+	
+	public void createVoie(Integer nombreLongueurs, Integer numeroVoie, Secteur secteur) {
+		voieDao.openCurrentSessionwithTransaction();
+		voieDao.createVoie(nombreLongueurs, numeroVoie, secteur);
+		voieDao.closeCurrentSessionwithTransaction();
+		
+	}
 
 	public void create(Voie voie) {
 		voieDao.openCurrentSessionwithTransaction();
@@ -55,7 +62,7 @@ public class VoieService {
 
 	public List<Voie> findBySecteur(Secteur secteur) {
 		voieDao.openCurrentSession();
-		List<Voie> voies = voieDao.findBySecteur(secteur.getId_Secteur());
+		List<Voie> voies = voieDao.findBySecteur(secteur.getSecteurId());
 		voieDao.closeCurrentSession();
 		return voies;
 

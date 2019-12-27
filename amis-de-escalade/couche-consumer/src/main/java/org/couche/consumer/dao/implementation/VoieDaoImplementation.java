@@ -93,6 +93,16 @@ public class VoieDaoImplementation implements DaoInterface<Voie, Long> {
 		getCurrentSession().save(voie);
 
 	}
+	
+	public void createVoie(Integer nombreLongueurs, Integer numeroVoie, Secteur secteur) {
+		
+		Voie voie = new Voie();
+		voie.setNombreLongueurs(nombreLongueurs);
+		voie.setNumeroVoie(numeroVoie);
+		voie.setSecteur(secteur);
+		getCurrentSession().save(voie);
+
+	}
 
 	@Override
 	public void update(Voie voie) {
