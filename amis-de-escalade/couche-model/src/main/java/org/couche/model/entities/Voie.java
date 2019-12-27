@@ -72,22 +72,6 @@ public class Voie {
 		this.voieId = id_Voie;
 	}
 
-	public int getNombreLongueurs() {
-		return nombreLongueurs;
-	}
-
-	public void setNombreLongueurs(int nombreLongueurs) {
-		this.nombreLongueurs = nombreLongueurs;
-	}
-
-	public int getNumeroVoie() {
-		return numeroVoie;
-	}
-
-	public void setNumeroVoie(int numeroVoie) {
-		this.numeroVoie = numeroVoie;
-	}
-
 	public Secteur getSecteur() {
 		return secteur;
 	}
@@ -118,6 +102,14 @@ public class Voie {
 
 	public void setLongueurs(List<Longueur> longueurs) {
 		this.longueurs = longueurs;
+	}	
+	
+	public Integer getNumeroVoie() {
+		return numeroVoie;
+	}
+
+	public Integer getNombreLongueurs() {
+		return nombreLongueurs;
 	}
 
 	@Override

@@ -20,19 +20,19 @@ import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.TypeRocher;
 import org.couche.model.entities.Voie;
+import org.json.JSONObject;
 
 /**
- * Servlet implementation class rechercheSite
+ * Servlet implementation class creation des voies
  */
-@WebServlet("/ModificationSite")
-@MultipartConfig
-public class ModificationSite extends HttpServlet {
+@WebServlet("/CreationVoie")
+public class CreationVoie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ModificationSite() {
+	public CreationVoie() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -43,41 +43,6 @@ public class ModificationSite extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
-		String nombreVoies = request.getParameter("nombreVoies").trim();
-		String secteurId = request.getParameter("secteurId").trim();
-		Integer nombreVoiesInt = 0;
-		
-		try {
-			nombreVoiesInt = Integer.parseInt(nombreVoies);
-		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException: " + e.getMessage());
-		}
-		
-		SecteurService secteurService = new SecteurService();
-		Secteur secteur = secteurService.findById(Long.parseLong(secteurId));
-		
-		// Enregistremenet des voies en BDD
-		VoieService voieService = new VoieService();
-		
-		for(int i = 0; i < nombreVoiesInt; i++) {
-			
-			voieService.createVoie(1, i + 1, secteur);			
-		}
-		
-		// Chargement des secteurs du site
-		List<Secteur> secteurs = secteurService.findBySite(1L);
-		
-		// Envoie des secteurs en ajax
-		request.setAttribute("SECTEUR_LIST", secteurs);
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().print(secteurs);			
 
 	}
 
@@ -87,6 +52,32 @@ public class ModificationSite extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		String siteId = request.getParameter("siteId");
+		JSONObject jObj = new JSONObject(request.getParameter("voiesData"));
+
+		SecteurService secteurService = new SecteurService();
+		List<Secteur> secteurs = secteurService.findBySite(Long.parseLong(siteId));
+		VoieService voieService = new VoieService();
+
+		int nombreSecteurs = secteurs.size();
+
+		// Update des voies
+		for (int i = 0; i < nombreSecteurs; i++) {
+
+			List<Voie> voies = secteurs.get(i).getVoies();
+			int nombreVoies = voies.size();
+
+			for (int j = 0; j < nombreVoies; j++) {
+				System.out.println("*************************************");
+				System.out.println("secteur : " + secteurs.get(i).getNom());
+				System.out.println("nombreVoies : " + nombreVoies);
+				voies.get(j).setNombreLongueurs(jObj.getInt(("secteurNum" + (i + 1) + "nombrelongueurVoieNum" + (j+1))));
+				voieService.update(voies.get(j));
+
+			}
+
+		}
 
 	}
 
