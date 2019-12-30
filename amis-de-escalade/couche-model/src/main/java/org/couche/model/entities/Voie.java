@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -42,6 +43,7 @@ public class Voie {
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "voie", cascade = { CascadeType.ALL })
+	@OrderBy("numeroLongueur")
 	private List<Longueur> longueurs;
 
 	/*

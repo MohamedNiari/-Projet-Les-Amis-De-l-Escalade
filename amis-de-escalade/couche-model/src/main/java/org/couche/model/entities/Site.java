@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
@@ -62,6 +63,7 @@ public class Site {
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
+	@OrderBy("numeroSecteur")
 	private List<Secteur> secteurs;
 
 	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })

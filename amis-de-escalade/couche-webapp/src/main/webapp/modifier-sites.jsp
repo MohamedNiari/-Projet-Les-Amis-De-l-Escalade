@@ -2,8 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="org.couche.model.entities.Voie"%>
 
 <!DOCTYPE html>
 <html>
@@ -16,20 +14,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="css/style.css">
-<link rel="icon" type="image/png" href="img/Favicon.png" />
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/c07610da30.js"
 	crossorigin="anonymous"></script>
-<script src="js/ajax.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="img/Favicon.png" />
 </head>
 
 <body>
@@ -47,17 +35,6 @@
 			aria-expanded="true" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
-		<div>
-			<ul class="navbar-nav nav-fill w-100">
-				<li class="navbar-nav mr-auto"><a class="nav-link" href="#">Mon
-						compte <span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Réserver</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
-			</ul>
-		</div>
 
 		<div class="navbar-collapse collapse">
 			<form action="RechercheSite" method="post"
@@ -105,16 +82,38 @@
 						style="font-size: 0.9em;" value="${lieu}">
 				</div>
 			</form>
+			<c:if test="${connexionOk == true}">
+				<div class="dropdown show">
+					<a class="btn btn-success" href="#" role="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span style="color: white;"> <i
+							class="fas fa-user-circle fa-3x"></i>
+					</span>
+					</a>
 
-			<span class="navbar-text">&nbsp; Tout sur l'escalade </span>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item font-weight-bold"> ${prenom} ${nom}</a>
+
+						<button type="button" class="dropdown-item" data-toggle="modal"
+							data-target="#creationSiteModal" data-whatever="@mdo">Partager
+							un site</button>
+
+						<a class="dropdown-item" href="/SiteEscalade/LogOut"><i
+							class="fas fa-power-off"></i>&nbsp; Déconnexion</a>
+					</div>
+				</div>
+			</c:if>
+
+			<c:if test="${connexionOk != true}">
+				<a href="/SiteEscalade/LoginCheck"
+					class="btn btn-outline-light font-weight-bold buttons"
+					role="button">SE CONNECTER / S'INSCRIRE</a>
+			</c:if>
 		</div>
 
 	</nav>
 
-
 	<section class="d-flex flex-wrap">
-
-		<!-- Carousel d'images pour le site -->
 		<div class="col-md-4">
 			<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
 				<div id="carouselImageSite" class="carousel slide"
@@ -161,78 +160,51 @@
 			</div>
 		</div>
 
-		<!-- Détails du site, secteurs et longueurs -->
 		<div class="col-md-8">
 
-			<!-- Formulaire de modification du site et de ses composants -->
-			<form method="post" id="formModifierSite" action="ModificationSite"
-				enctype="multipart/form-data">
-
-				<div class="shadow-lg p-4 mb-4 bg-light border border-success">
-					<div class="col-md-12">
-						<div class="form-group">
-							<h4>
-								<i class="fas fa-map-signs" style="color: #685450"></i> &nbsp;<strong
-									style="font-family: cursive"> <label for="nomSite">Nom
-										du Site </label> <input type="text" name="nomSite" id="nomSite"
-									class="form-control" value="${THE_SITE.nom}" /></strong>
-									
-									<input type="hidden"
-											name="siteId" value="${THE_SITE.siteId}" id="siteId"/>
-							</h4>
-						</div>
-						<hr>
-						<br> <label for="descriptionSite" class="font-italic">Description
-							du site</label>
-
-						<textarea type="text" name="descriptionSite" id="descriptionSite"
-							class="form-control input-sm font-italic" rows="5">${THE_SITE.description}</textarea>
-						<br>
-					</div>
+			<!-- Information du site -->
+			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
+				<div class="col-md-12">
+					<h4>
+						<i class="fas fa-map-signs" style="color: #685450"></i> &nbsp;<strong
+							style="font-family: cursive">Site de ${THE_SITE.nom}</strong>
+					</h4>
+					<hr>
+					<br>
+					<p style="font-size: 0.9em; font-style: italic">${THE_SITE.description}</p>
+					<br>
 				</div>
 
-				<div class="shadow-lg p-4 mb-4 bg-light border border-success">
+			</div>
 
+			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
+				<h5 class="text-success">
+					Création des longueurs <small class="text-secondary"> (
+						Veuillez définir les mesures, les cotations et les spits équipés
+						ou pas )</small> <i
+						class="far fa-hand-point-down float-right text-secondary font-weight-bold"></i>
+				</h5>
+				<hr>
+				<br>
+			</div>
+
+
+			<!-- Creation des longueurs -->
+			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
+				<form method="post" action="CreationLongueur">
+					<!-- input type="hidden" name="_method" value="put" /-->
 					<c:forEach items="${SECTEUR_LIST}" var="itemSecteur">
 						<div style="margin-bottom: 2%">
-							<div class="form-row">
-								<div class="col">
-									<h6 style="font-size: 1.1em">
-										<i class="fas fa-share" style="color: #685450"></i> &nbsp;
-										Secteur n° ${itemSecteur.numeroSecteur} : <strong> <input
-											type="text" name="nomSecteur" class="form-control"
-											value="${itemSecteur.nom}" /> 
-
-										</strong>
-									</h6>
-								</div>
-								<div class="col">
-									<span class="float-right" style="font-size: 0.8em"> <label
-										for="nombreVoies" class="font-weight-bold">Nombre de
-											voies</label> <select class="form-control-sm" id="nombreVoies"
-										name="nombreVoies">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-											<option>6</option>
-											<option>7</option>
-											<option>8</option>
-											<option>9</option>
-											<option>10</option>
-									</select>
-									</span>
-								</div>
-							</div>
+							<h6 style="font-size: 1.1em">
+								<i class="fas fa-share" style="color: #685450"></i> &nbsp;
+								Secteur n° ${itemSecteur.numeroSecteur} : <strong>${itemSecteur.nom}</strong>
+								<span class="float-right">${fn:length(itemSecteur.voies)}
+									voies</span>
+							</h6>
 							<hr>
 							<br>
-							<p style="font-size: 0.9em; font-style: italic">
-
-								<textarea type="text" name="descriptionSite"
-									class="form-control input-sm font-italic" rows="3">${itemSecteur.description}</textarea>
-
-							</p>
+							<p style="font-size: 0.9em; font-style: italic">${itemSecteur.description}</p>
+							<input type="hidden" id="siteId" name="siteId" value="${siteId}">
 
 							<c:forEach items="${itemSecteur.voies}" var="itemVoie">
 								<div class="card-deck">
@@ -262,16 +234,21 @@
 															var="itemLongueur">
 															<tr>
 																<th scope="row">${itemLongueur.numeroLongueur}</th>
-																<td>${itemLongueur.mesure}</td>
-																<td>${itemLongueur.cotation}</td>
-																<td><c:choose>
-																		<c:when test="${itemLongueur.equiperSpits == true}">
-															            Oui
-															         </c:when>
-																		<c:otherwise>
-															            Non
-															         </c:otherwise>
-																	</c:choose></td>
+																<td><input type="number" class="form-control-sm"
+																	min="1" max="30"
+																	title="La hauteur doit être comprise entre 1 et 30 m"
+																	required value="${itemLongueur.mesure}"
+																	name="mesureSecteurNum${itemSecteur.numeroSecteur}VoieNum${itemVoie.numeroVoie}longueurNum${itemLongueur.numeroLongueur}">
+																</td>
+																<td><input type="text" class="form-control-sm" pattern="[1-9][a-c]" required
+																	value="${itemLongueur.cotation}"
+																	name="cotationSecteurNum${itemSecteur.numeroSecteur}VoieNum${itemVoie.numeroVoie}longueurNum${itemLongueur.numeroLongueur}">
+																</td>
+																<td><select class="form-control-sm"
+																	name="spitsSecteurNum${itemSecteur.numeroSecteur}VoieNum${itemVoie.numeroVoie}longueurNum${itemLongueur.numeroLongueur}">
+																		<option>Non</option>
+																		<option>Oui</option>
+																</select></td>
 															</tr>
 														</c:forEach>
 													</tbody>
@@ -288,15 +265,21 @@
 							</c:forEach>
 						</div>
 					</c:forEach>
-				</div>
-				<div>
-					<button type="submit" class="btn btn-success btn md float-right">Valider
-						le site</button>
-				</div>
-			</form>
+					<button type="submit" class="btn btn-success"
+						id="submitButtonLongueur">Envoyer les longueurs</button>
+				</form>
+			</div>
 		</div>
 	</section>
-
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/c07610da30.js"
+		crossorigin="anonymous"></script>
 
 </body>
 

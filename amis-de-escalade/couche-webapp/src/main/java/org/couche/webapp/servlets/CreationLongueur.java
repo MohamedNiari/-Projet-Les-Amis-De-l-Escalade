@@ -25,14 +25,14 @@ import org.json.JSONObject;
 /**
  * Servlet implementation class creation des voies
  */
-@WebServlet("/CreationVoie")
-public class CreationVoie extends HttpServlet {
+@WebServlet("/CreationLongueur")
+public class CreationLongueur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CreationVoie() {
+	public CreationLongueur() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -44,7 +44,6 @@ public class CreationVoie extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 	}
 
 	/**
@@ -54,15 +53,14 @@ public class CreationVoie extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
 		String siteId = request.getParameter("siteId");
-		JSONObject jObj = new JSONObject(request.getParameter("voiesData"));
+		System.out.println("siteId : " + siteId);
 
+		// Récupération du site depuis la BDD
+		SiteService siteService = new SiteService();
+		Site site = siteService.findById(Long.parseLong(siteId));
+
+		// Récupération des secteurs du site
 		SecteurService secteurService = new SecteurService();
 		List<Secteur> secteurs = secteurService.findBySite(Long.parseLong(siteId));
 		VoieService voieService = new VoieService();
@@ -70,29 +68,32 @@ public class CreationVoie extends HttpServlet {
 
 		int nombreSecteurs = secteurs.size();
 
-		// Update des voies
+		// Update des longueurs
 		for (int i = 0; i < nombreSecteurs; i++) {
 
 			List<Voie> voies = secteurs.get(i).getVoies();
-			int nombreVoies = voies.size();
-			int nombreLongueurs = 0;
+			int nombreVoies = voies.size();			
 
 			for (int j = 0; j < nombreVoies; j++) {
-				nombreLongueurs = jObj.getInt(("secteurNum" + (i + 1) + "nombrelongueurVoieNum" + (j + 1)));
-				voies.get(j).setNombreLongueurs(nombreLongueurs);
-				voieService.update(voies.get(j));
-
-				// Création des longueurs
+				
+				List<Longueur> longueurs = voies.get(j).getLongueurs();
+				int nombreLongueurs = longueurs.size();
+				
 				for (int n = 0; n < nombreLongueurs; n++) {
 
-					Longueur longueur = new Longueur();
-					longueur.setCotation("");
-					longueur.setEquiperSpits(false);
-					longueur.setMesure(0);
-					longueur.setNumeroLongueur(n + 1);
-					longueur.setVoie(voies.get(j));
+					Integer mesure = Integer.parseInt(request.getParameter(
+							"mesureSecteurNum" + (i + 1) + "VoieNum" + (j + 1) + "longueurNum" + (n + 1)));
+					String cotation = request.getParameter(
+							"cotationSecteurNum" + (i + 1) + "VoieNum" + (j + 1) + "longueurNum" + (n + 1));
+					Boolean equiperSpits = Boolean.parseBoolean(request.getParameter(
+							"spitsSecteurNum" + (i + 1) + "VoieNum" + (j + 1) + "longueurNum" + (n + 1)));
+					
+					longueurs.get(n).setMesure(mesure);
+					longueurs.get(n).setCotation(cotation);
+					longueurs.get(n).setEquiperSpits(equiperSpits);
+					
+					longueurService.update(longueurs.get(n));
 
-					longueurService.create(longueur);
 				}
 
 			}
@@ -100,7 +101,7 @@ public class CreationVoie extends HttpServlet {
 		}
 		
 		request.setAttribute("siteId", siteId);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificationSite");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/DetailsDesSites");
 		dispatcher.forward(request, response);
 
 	}

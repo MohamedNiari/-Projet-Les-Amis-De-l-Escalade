@@ -2,8 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="org.couche.model.entities.Voie"%>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +24,9 @@
 		id="barreNavigation">
 
 		<c:url var="listeDesSites" value="ListeDesSites" />
-		<a class="navbar-brand" href="${listeDesSites}"><img src="img/amisEscaladeNav.png" alt="escalade" class="border border-white rounded"></a>
+		<a class="navbar-brand" href="${listeDesSites}"><img
+			src="img/amisEscaladeNav.png" alt="escalade"
+			class="border border-white rounded"></a>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarText" aria-controls="navbarText"
@@ -34,17 +34,7 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="">
-			<ul class="navbar-nav nav-fill w-100">
-				<li class="navbar-nav mr-auto"><a class="nav-link" href="#">Mon
-						compte <span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Réserver</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
-			</ul>
-		</div>
-
+		<!-- Recherche multi-critères -->
 		<div class="navbar-collapse collapse">
 			<form action="RechercheSite" method="post"
 				class="form-inline my-2 my-lg-0" style="margin: 0 auto;">
@@ -91,8 +81,33 @@
 						style="font-size: 0.9em;" value="${lieu}">
 				</div>
 			</form>
+			<c:if test="${connexionOk == true}">
+				<div class="dropdown show">
+					<a class="btn btn-success" href="#" role="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span style="color: white;"> <i
+							class="fas fa-user-circle fa-3x"></i>
+					</span>
+					</a>
 
-			<span class="navbar-text">&nbsp; Tout sur l'escalade </span>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item font-weight-bold"> ${prenom} ${nom}</a>
+
+						<button type="button" class="dropdown-item" data-toggle="modal"
+							data-target="#creationSiteModal" data-whatever="@mdo">Partager
+							un site</button>
+
+						<a class="dropdown-item" href="/SiteEscalade/LogOut"><i
+							class="fas fa-power-off"></i>&nbsp; Déconnexion</a>
+					</div>
+				</div>
+			</c:if>
+
+			<c:if test="${connexionOk != true}">
+				<a href="/SiteEscalade/LoginCheck"
+					class="btn btn-outline-light font-weight-bold buttons"
+					role="button">SE CONNECTER / S'INSCRIRE</a>
+			</c:if>
 		</div>
 
 	</nav>
@@ -145,7 +160,7 @@
 		</div>
 
 		<div class="col-md-8">
-		
+
 			<!-- Information du site -->
 			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
 				<div class="col-md-12">
@@ -160,7 +175,7 @@
 				</div>
 
 			</div>
-			
+
 			<!-- Détails des secteurs -->
 			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
 

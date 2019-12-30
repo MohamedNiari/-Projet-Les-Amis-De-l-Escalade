@@ -25,7 +25,6 @@ import org.couche.model.entities.Voie;
  * Servlet implementation class rechercheSite
  */
 @WebServlet("/ModificationSite")
-@MultipartConfig
 public class ModificationSite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,41 +42,56 @@ public class ModificationSite extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		System.out.println("Servlet : ModificationSite GET");
+
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		
-		String nombreVoies = request.getParameter("nombreVoies").trim();
-		String secteurId = request.getParameter("secteurId").trim();
-		Integer nombreVoiesInt = 0;
-		
-		try {
-			nombreVoiesInt = Integer.parseInt(nombreVoies);
-		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException: " + e.getMessage());
-		}
-		
+
+		// Récupération de l'id du site depuis la JSP
+		System.out.println("Récupération de l'id du site depuis la JSP");
+		//String siteId = request.getParameter("4L");
+		String siteId ="1";
+		System.out.println("siteId : " + siteId);
+
+		// Récupération du site depuis la BDD
+		System.out.println("Récupération du site depuis la BDD");
+		SiteService siteService = new SiteService();
+		Site site = siteService.findById(Long.parseLong(siteId));
+
+		// Chargement du site dans la request
+		System.out.println("Chargement du site dans la request");
+		request.setAttribute("THE_SITE", site);
+
+		// Chargement des images du site
+		System.out.println("Chargement des images du site");
+		Collection<String> urlImages = site.getUrlImages();
+		request.setAttribute("IMAGE_LIST", urlImages);
+
+		// Récupération des secteurs du site
+		System.out.println("Chargement des images du site");
 		SecteurService secteurService = new SecteurService();
-		Secteur secteur = secteurService.findById(Long.parseLong(secteurId));
-		
-		// Enregistremenet des voies en BDD
-		VoieService voieService = new VoieService();
-		
-		for(int i = 0; i < nombreVoiesInt; i++) {
-			
-			voieService.createVoie(1, i + 1, secteur);			
-		}
-		
+		List<Secteur> secteurs = secteurService.findBySite(Long.parseLong(siteId));
+
 		// Chargement des secteurs du site
-		List<Secteur> secteurs = secteurService.findBySite(1L);
-		
-		// Envoie des secteurs en ajax
+		System.out.println("Chargement des images du site");
 		request.setAttribute("SECTEUR_LIST", secteurs);
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().print(secteurs);			
+
+		// Récupération des voies
+		System.out.println("Récupération des voies");
+		VoieService voieService = new VoieService();
+		List<Voie> voies = voieService.findAll();
+
+		request.setAttribute("VOIE_LIST", voies);
+
+		// Envoi à la jsp
+		System.out.println("Envoi à la jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/modifier-sites.jsp");
+		dispatcher.forward(request, response);
+	
+		System.out.println("fin");
 
 	}
 
@@ -87,6 +101,19 @@ public class ModificationSite extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Servlet : ModificationSite POST");
+		doGet(request, response);
+
+	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		System.out.println("Servlet : ModificationSite PUT");
 
 	}
 

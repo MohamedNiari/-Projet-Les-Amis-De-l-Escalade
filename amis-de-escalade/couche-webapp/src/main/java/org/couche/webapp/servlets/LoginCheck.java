@@ -1,8 +1,6 @@
 package org.couche.webapp.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,7 +36,9 @@ public class LoginCheck extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("/SiteEscalade/loginRegistering.jsp");
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/loginRegistering.jsp");
+		dispatcher.forward(request, response);
 
 	}
 

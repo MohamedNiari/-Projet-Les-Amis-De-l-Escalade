@@ -32,7 +32,7 @@ public class DetailsDesSites extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -65,6 +65,7 @@ public class DetailsDesSites extends HttpServlet {
 		List<Voie> voies = voieService.findAll();
 		
 		request.setAttribute("VOIE_LIST", voies);
+		request.setAttribute("siteId", siteId);
 		
 		// Envoi à la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");
@@ -78,8 +79,9 @@ public class DetailsDesSites extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		doGet(request, response);
+				
 	}
 
 }

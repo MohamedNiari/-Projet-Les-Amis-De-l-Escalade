@@ -173,7 +173,7 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 				throw new Exception("L'adresse mail existe déjà.");
 			}
 		} else {
-			throw new Exception("Merci de saisir une Adresse Mail.");
+			throw new Exception("Merci de saisir une adresse Mail.");
 		}
 	}
 

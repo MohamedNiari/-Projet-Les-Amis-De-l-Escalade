@@ -90,7 +90,7 @@ public class CreationSite extends HttpServlet {
 		// Création des secteurs à vide
 		SecteurService secteurService = new SecteurService();
 		
-		for(int i = 0; i < Long.parseLong(nombreSecteurs); i++) {
+		for(int i = 0; i < Integer.parseInt(nombreSecteurs); i++) {
 			
 			secteurService.createSecteur("", i + 1, "", site);			
 		}

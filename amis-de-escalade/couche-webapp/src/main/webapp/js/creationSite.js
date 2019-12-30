@@ -1,3 +1,22 @@
+function resetFormSite() {
+	  $('#formCreationSite').each(function(){
+	    this.reset();
+	});
+}
+
+function resetFormSecteur() {
+	  $('#formCreationSecteurs').each(function(){
+	    this.reset();
+	});
+}
+
+function resetFormVoie() {
+	  $('#formCreationVoies').each(function(){
+	    this.reset();
+	});
+}
+
+
 $(document).ready(function() {
 	
 	$('#formCreationSite').submit(function (e) {
@@ -17,8 +36,8 @@ $(document).ready(function() {
 			success: function (response) {
 				for (var i = 1; i <= response.nombreSecteurs; i++) {
 					$('#secteursContent').append("<hr><br><h6 class='text-dark'>Secteur numéro " + i + "</h6>");
-					$('#secteursContent').append("<div class='row'><div class='col'><label for='nomSecteurNum" + i + "' class='col-form-label'>Nom du secteur</label> <input type='text' class='form-control' id='nomSecteurNum" + i + "' name='nomSecteurNum" + i + "'></div><div class='col'><label for='nombreVoiesSecteurNum" + i + "' class='col-form-label'>Nombre de voies</label><select class='form-control' id='nombreVoiesSecteurNum" + i + "' name='nombreVoiesSecteurNum" + i + "'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div></div>");
-					$('#secteursContent').append("<div class='form-group'><label for='descriptionSecteurNum" + i + "' class='col-form-label'>Description du secteur</label><textarea class='form-control' id='descriptionSecteurNum" + i + "' name='descriptionSecteurNum" + i + "'	maxlength=200></textarea></div>");
+					$('#secteursContent').append("<div class='row'><div class='col'><label for='nomSecteurNum" + i + "' class='col-form-label'>Nom du secteur</label> <input type='text' class='form-control' id='nomSecteurNum" + i + "' name='nomSecteurNum" + i + "' minlength=3 maxlength=100 required></div><div class='col'><label for='nombreVoiesSecteurNum" + i + "' class='col-form-label'>Nombre de voies</label><select class='form-control' id='nombreVoiesSecteurNum" + i + "' name='nombreVoiesSecteurNum" + i + "'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div></div>");
+					$('#secteursContent').append("<div class='form-group'><label for='descriptionSecteurNum" + i + "' class='col-form-label'>Description du secteur</label><textarea class='form-control' id='descriptionSecteurNum" + i + "' name='descriptionSecteurNum" + i + "'	minlength=3 maxlength=300 required></textarea></div>");
 				}
 				
 				$("#siteId").val(response.siteId);
