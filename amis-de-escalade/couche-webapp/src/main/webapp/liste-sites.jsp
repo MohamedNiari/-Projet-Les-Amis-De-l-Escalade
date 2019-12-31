@@ -144,14 +144,14 @@
 						<div class="form-group">
 							<label for="nomSite" class="col-form-label">Donner un nom
 								au site</label> <input type="text" class="form-control" id="nomSite"
-								name="nomSite" pattern="[a-z,A-Z,'-]+" minlength="3"
+								name="nomSite" pattern="[a-z,A-Z,'-éèàêò ]+" minlength="3"
 								maxlength="50"
 								title="Le nom ne peut contenir que des lettres, un tiret ou un apostrophe" required>
 						</div>
 						<div class="form-group">
 							<label for="lieuSite" class="col-form-label">Lieu du site</label>
 							<input type="text" class="form-control" id="lieuSite"
-								name="lieuSite" pattern="[a-z,A-Z,'-]+" minlength="3"
+								name="lieuSite" pattern="[a-z,A-Z,'-éèàêò ]+" minlength="3"
 								maxlength="50"
 								title="Le nom ne peut contenir que des lettres, un tiret ou un apostrophe" required>
 						</div>

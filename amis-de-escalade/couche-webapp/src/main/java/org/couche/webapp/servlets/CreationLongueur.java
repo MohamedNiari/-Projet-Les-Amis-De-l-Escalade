@@ -56,14 +56,11 @@ public class CreationLongueur extends HttpServlet {
 		String siteId = request.getParameter("siteId");
 		System.out.println("siteId : " + siteId);
 
-		// Récupération du site depuis la BDD
-		SiteService siteService = new SiteService();
-		Site site = siteService.findById(Long.parseLong(siteId));
 
 		// Récupération des secteurs du site
 		SecteurService secteurService = new SecteurService();
 		List<Secteur> secteurs = secteurService.findBySite(Long.parseLong(siteId));
-		VoieService voieService = new VoieService();
+	
 		LongueurService longueurService = new LongueurService();
 
 		int nombreSecteurs = secteurs.size();

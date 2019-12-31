@@ -6,11 +6,13 @@ public class test {
 
 	public static void main(String[] args) throws Exception {
 
-		SiteService siteService = new SiteService();
-		for (long i = 94L; i < 97L; i++)
-			siteService.delete(i);
+		deleteSite(20L, 23L);
 
-		
-		
+	}
+
+	static void deleteSite(Long debut, Long fin) {
+		SiteService siteService = new SiteService();
+		for (long i = debut; i < fin; i++)
+			siteService.delete(i);
 	}
 }

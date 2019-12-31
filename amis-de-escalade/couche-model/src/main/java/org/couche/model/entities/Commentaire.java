@@ -1,5 +1,6 @@
 package org.couche.model.entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -27,9 +28,8 @@ public class Commentaire {
 	@Column(name="commentaire_id")
 	private Long commentaireId;
 	private String texte;
-	@Temporal(TemporalType.DATE)
 	@Column(name="date_du_commentaire")
-	private Date dateDuCommentaire;
+	private String dateDuCommentaire;
 
 	/*
 	 * Relation de commentaire à site sans suppression en cascade
@@ -56,7 +56,7 @@ public class Commentaire {
 	/*
 	 * Constructeur
 	 */
-	public Commentaire(String texte, Date dateDuCommentaire, Site site, Utilisateur utilisateur) {
+	public Commentaire(String texte, String dateDuCommentaire, Site site, Utilisateur utilisateur) {
 		this.texte = texte;
 		this.dateDuCommentaire = dateDuCommentaire;
 		this.site = site;
@@ -93,14 +93,6 @@ public class Commentaire {
 		this.texte = texte;
 	}
 
-	public Date getDate_du_commentaire() {
-		return dateDuCommentaire;
-	}
-
-	public void setDate_du_commentaire(Date date_du_commentaire) {
-		this.dateDuCommentaire = date_du_commentaire;
-	}
-
 	public Long getCommentaireId() {
 		return commentaireId;
 	}
@@ -108,12 +100,12 @@ public class Commentaire {
 	public void setCommentaireId(Long commentaireId) {
 		this.commentaireId = commentaireId;
 	}
-
-	public Date getDateDuCommentaire() {
+	
+	public String getDateDuCommentaire() {
 		return dateDuCommentaire;
 	}
 
-	public void setDateDuCommentaire(Date dateDuCommentaire) {
+	public void setDateDuCommentaire(String dateDuCommentaire) {
 		this.dateDuCommentaire = dateDuCommentaire;
 	}
 

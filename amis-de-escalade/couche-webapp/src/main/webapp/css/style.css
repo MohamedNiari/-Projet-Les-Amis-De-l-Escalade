@@ -46,15 +46,14 @@ nav, aside {
 #barreNavigation {
 	padding-right: 10%;
 	padding-left: 10%;
-	
 }
 
 .bg {
-  background-repeat: no-repeat;
-  background-size: cover;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .buttons:hover {
-  color: #5cb85c;
-  font-weight: bold;
+	color: #5cb85c;
+	font-weight: bold;
 }

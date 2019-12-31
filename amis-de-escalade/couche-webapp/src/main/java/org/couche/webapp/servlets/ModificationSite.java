@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
@@ -51,47 +52,39 @@ public class ModificationSite extends HttpServlet {
 		}
 
 		// Récupération de l'id du site depuis la JSP
-		System.out.println("Récupération de l'id du site depuis la JSP");
-		//String siteId = request.getParameter("4L");
-		String siteId ="1";
-		System.out.println("siteId : " + siteId);
+		String siteId = request.getParameter("siteId");
 
 		// Récupération du site depuis la BDD
-		System.out.println("Récupération du site depuis la BDD");
 		SiteService siteService = new SiteService();
 		Site site = siteService.findById(Long.parseLong(siteId));
 
 		// Chargement du site dans la request
-		System.out.println("Chargement du site dans la request");
 		request.setAttribute("THE_SITE", site);
 
 		// Chargement des images du site
-		System.out.println("Chargement des images du site");
 		Collection<String> urlImages = site.getUrlImages();
 		request.setAttribute("IMAGE_LIST", urlImages);
 
 		// Récupération des secteurs du site
-		System.out.println("Chargement des images du site");
 		SecteurService secteurService = new SecteurService();
 		List<Secteur> secteurs = secteurService.findBySite(Long.parseLong(siteId));
 
 		// Chargement des secteurs du site
-		System.out.println("Chargement des images du site");
 		request.setAttribute("SECTEUR_LIST", secteurs);
 
 		// Récupération des voies
-		System.out.println("Récupération des voies");
 		VoieService voieService = new VoieService();
 		List<Voie> voies = voieService.findAll();
 
 		request.setAttribute("VOIE_LIST", voies);
+		
+		// Envoi de l'id du site en cours de modification
+		request.setAttribute("siteId", siteId);
 
 		// Envoi à la jsp
-		System.out.println("Envoi à la jsp");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/modifier-sites.jsp");
 		dispatcher.forward(request, response);
-	
-		System.out.println("fin");
+		
 
 	}
 
@@ -114,6 +107,8 @@ public class ModificationSite extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("Servlet : ModificationSite PUT");
+		
+
 
 	}
 

@@ -157,6 +157,27 @@
 					</a>
 				</div>
 			</div>
+
+			<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
+				<form action="CommentaireServlet" method="post" id="formCreationSite" style="width: 100%;">
+					<h5>
+						<strong style="font-family: cursive">Laissez votre
+							commentaire</strong>&nbsp; <i class="far fa-comment float-right"
+							style="color: #685450"></i>
+							<input type="hidden" name="siteId" value="${THE_SITE.siteId}">
+					</h5>
+					<hr>
+					<br>
+					<div class="form-group">
+						<textarea class="form-control" name="commentaire" minlength="3"
+							maxlength="300" rows="3" required></textarea>
+
+					</div>
+					<button type="submit" class="btn btn-success"
+						id="submitCommentaire">Envoyer</button>
+				</form>
+			</div>
+
 		</div>
 
 		<div class="col-md-8">
@@ -166,7 +187,7 @@
 				<div class="col-md-12">
 					<h4>
 						<i class="fas fa-map-signs" style="color: #685450"></i> &nbsp;<strong
-							style="font-family: cursive">Site de ${THE_SITE.nom}</strong>
+							style="font-family: cursive">Site ${THE_SITE.nom}</strong>
 					</h4>
 					<hr>
 					<br>

@@ -96,8 +96,9 @@ $(document).ready(function() {
 				voiesData : JSON.stringify(data)
 			},
 
-			success : function() {
-				  $('#creationVoiesModal').modal('hide');				 
+			success : function(response) {
+				  $('#creationVoiesModal').modal('hide');
+				  window.location.replace(response.url);
 			}
 		});
 		

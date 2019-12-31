@@ -2,7 +2,6 @@ package org.couche.webapp.servlets;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.couche.business.services.LongueurService;
 import org.couche.business.services.SecteurService;
-import org.couche.business.services.SiteService;
 import org.couche.business.services.VoieService;
 import org.couche.model.entities.Longueur;
 import org.couche.model.entities.Secteur;
-import org.couche.model.entities.Site;
 import org.couche.model.entities.Voie;
 import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 /**
  * Servlet implementation class creation des voies
@@ -44,7 +44,6 @@ public class CreationVoie extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 	}
 
 	/**
@@ -59,7 +58,7 @@ public class CreationVoie extends HttpServlet {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		
+
 		String siteId = request.getParameter("siteId");
 		JSONObject jObj = new JSONObject(request.getParameter("voiesData"));
 
@@ -98,10 +97,22 @@ public class CreationVoie extends HttpServlet {
 			}
 
 		}
+
+		//request.setAttribute("siteId", siteId);
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificationSite");
+		//dispatcher.forward(request, response);
+
+		// HttpSession session = request.getSession(false);
+		// session.setAttribute("siteId", siteId);
+		// response.sendRedirect("/SiteEscalade/ModificationSite");
 		
-		request.setAttribute("siteId", siteId);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificationSite");
-		dispatcher.forward(request, response);
+		response.setContentType("application/json"); 
+	    response.setCharacterEncoding("UTF-8");
+	    
+        JsonObject jsonResponse = new JsonObject();
+        jsonResponse.add("url", new Gson().toJsonTree(request.getRequestURL().substring(0, request.getRequestURL().lastIndexOf("/"))+"/ModificationSite?siteId=" + siteId));
+        
+	    response.getWriter().write(jsonResponse.toString()); 
 
 	}
 

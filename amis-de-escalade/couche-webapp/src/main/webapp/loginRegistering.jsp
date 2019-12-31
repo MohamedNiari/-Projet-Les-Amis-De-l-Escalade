@@ -37,16 +37,8 @@
 			<a class="navbar-brand" href="${listeDesSites}"><img
 				src="img/amisEscaladeNav.png" alt="escalade"
 				class="border border-white rounded"></a>
-
-			<ul class="navbar-nav mr-auto">
-				<li class="navbar-nav mr-auto"><a class="nav-link" href="#">Mon
-						Compte <span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Réserver</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Topos</a></li>
-			</ul>
-
+		</div>
+		<div class="float-right">
 			<a href="/SiteEscalade/LoginCheck"
 				class="btn btn-outline-light font-weight-bold buttons" role="button">SE
 				CONNECTER / S'INSCRIRE</a>
@@ -182,9 +174,8 @@
 	</section>
 
 	<script type="text/javascript">
-	
 		function openCity(evt, cityName) {
-			
+
 			var i, tabcontent, tablinks;
 			tabcontent = document.getElementsByClassName("tabcontent");
 			for (i = 0; i < tabcontent.length; i++) {
@@ -197,7 +188,7 @@
 			}
 			document.getElementById(cityName).style.display = "block";
 			evt.currentTarget.className += " active";
-			
+
 		}
 
 		document.getElementById("defaultOpen").click();
