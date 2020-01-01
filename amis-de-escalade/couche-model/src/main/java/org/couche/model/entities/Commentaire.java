@@ -1,8 +1,5 @@
 package org.couche.model.entities;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /*
  * Objet Commentaire qui représente sous forme d'objet la table du même nom
@@ -25,10 +20,10 @@ public class Commentaire {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="commentaire_id")
+	@Column(name = "commentaire_id")
 	private Long commentaireId;
 	private String texte;
-	@Column(name="date_du_commentaire")
+	@Column(name = "date_du_commentaire")
 	private String dateDuCommentaire;
 
 	/*
@@ -39,8 +34,7 @@ public class Commentaire {
 	private Site site;
 
 	/*
-	 * Relation de commentaire à utilisateur sans supression en
-	 * cascade
+	 * Relation de commentaire à utilisateur sans supression en cascade
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "utilisateur_id")
@@ -63,11 +57,9 @@ public class Commentaire {
 		this.utilisateur = utilisateur;
 	}
 
-
 	/**************************************
 	 * Generation des setters et getters *
 	 **************************************/
-
 
 	public String getTexte() {
 		return texte;
@@ -100,7 +92,7 @@ public class Commentaire {
 	public void setCommentaireId(Long commentaireId) {
 		this.commentaireId = commentaireId;
 	}
-	
+
 	public String getDateDuCommentaire() {
 		return dateDuCommentaire;
 	}

@@ -53,5 +53,12 @@ public class CommentaireService {
 		commentaireDao.deleteAll();
 		commentaireDao.closeCurrentSessionwithTransaction();
 	}
+	
+	public List<Commentaire> findBySite(Site site) {
+		commentaireDao.openCurrentSession();
+		List<Commentaire> commentaires = commentaireDao.findBySite(site);
+		commentaireDao.closeCurrentSession();
+		return commentaires;
+	}
 
 }

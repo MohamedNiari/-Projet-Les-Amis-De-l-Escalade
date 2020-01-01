@@ -158,25 +158,43 @@
 				</div>
 			</div>
 
-			<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
-				<form action="CommentaireServlet" method="post" id="formCreationSite" style="width: 100%;">
-					<h5>
-						<strong style="font-family: cursive">Laissez votre
-							commentaire</strong>&nbsp; <i class="far fa-comment float-right"
-							style="color: #685450"></i>
-							<input type="hidden" name="siteId" value="${THE_SITE.siteId}">
-					</h5>
-					<hr>
-					<br>
-					<div class="form-group">
-						<textarea class="form-control" name="commentaire" minlength="3"
-							maxlength="300" rows="3" required></textarea>
+			<c:if test="${connexionOk == true}">
+				<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
+					<form action="CommentaireServlet" method="post"
+						id="formCreationSite" style="width: 100%;">
+						<h5>
+							<strong style="font-family: cursive">Laissez votre
+								commentaire</strong>&nbsp; <i class="far fa-comment float-right"
+								style="color: #685450"></i> <input type="hidden" name="siteId"
+								value="${THE_SITE.siteId}">
+						</h5>
+						<hr>
+						<br>
+						<div class="form-group">
+							<textarea class="form-control" name="commentaire" minlength="3"
+								maxlength="300" rows="3" required></textarea>
 
-					</div>
-					<button type="submit" class="btn btn-success"
-						id="submitCommentaire">Envoyer</button>
-				</form>
-			</div>
+						</div>
+						<button type="submit" class="btn btn-success"
+							id="submitCommentaire">Envoyer</button>
+						<br> <br>
+						<hr>
+						<br>
+					</form>
+
+					<c:forEach var="tempCommentaire" items="${commentaires}">
+						<div style="width: 100%;">
+
+							<h6>${tempCommentaire.texte}</h6>
+							<p><small>Par <strong>${tempCommentaire.utilisateur.prenoms.iterator().next()}  ${tempCommentaire.utilisateur.nom}</strong> le ${tempCommentaire.dateDuCommentaire}</small></p>
+
+							<hr>
+							<br>
+						</div>
+					</c:forEach>
+
+				</div>
+			</c:if>
 
 		</div>
 
@@ -194,7 +212,6 @@
 					<p style="font-size: 0.9em; font-style: italic">${THE_SITE.description}</p>
 					<br>
 				</div>
-
 			</div>
 
 			<!-- Détails des secteurs -->

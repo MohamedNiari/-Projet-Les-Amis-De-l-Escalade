@@ -2,14 +2,18 @@ package org.couche.consumer.dao.implementation;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Commentaire;
 import org.couche.model.entities.Site;
-import org.couche.model.entities.Utilisateur;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 public class CommentaireDaoImplementation implements DaoInterface<Commentaire, Long> {
 
@@ -118,6 +122,24 @@ public class CommentaireDaoImplementation implements DaoInterface<Commentaire, L
 	public Commentaire findById(Long id) {
 		Commentaire Commentaire = (Commentaire) getCurrentSession().get(Commentaire.class, id);
 		return Commentaire;
+	}
+
+	public List<Commentaire> findBySite(Site site) {
+
+		// Création du CriteriaBuilder pour la construction des requetes
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Commentaire> criteria = builder.createQuery(Commentaire.class);
+
+		// Création du root pour l'entité Commentaire
+		Root<Commentaire> commentaireRoot = criteria.from(Commentaire.class);
+		criteria.where(builder.equal(commentaireRoot.get("site"), site));
+
+		Query<Commentaire> query;
+		query = getCurrentSession().createQuery(criteria);
+
+		List<Commentaire> commentaires = query.getResultList();
+		return commentaires;
+
 	}
 
 }

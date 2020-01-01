@@ -11,10 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.couche.business.services.CommentaireService;
 import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
 import org.couche.business.services.VoieService;
+import org.couche.model.entities.Commentaire;
 import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Voie;
@@ -66,6 +69,15 @@ public class DetailsDesSites extends HttpServlet {
 		
 		request.setAttribute("VOIE_LIST", voies);
 		request.setAttribute("siteId", siteId);
+		
+		// Vérifie si l'utilisateur est connecté
+		HttpSession session = request.getSession(false);
+		session.setAttribute("connexionOk", session.getAttribute("connexionOk"));
+		
+		// Récupération de tous les commentaires du site
+		CommentaireService commentaireService = new CommentaireService();
+		List<Commentaire> commentaires = commentaireService.findBySite(site);		
+		request.setAttribute("commentaires", commentaires);
 		
 		// Envoi à la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");
