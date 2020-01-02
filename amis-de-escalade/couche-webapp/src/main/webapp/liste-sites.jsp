@@ -106,7 +106,9 @@
 
 						<button type="button" class="dropdown-item" data-toggle="modal"
 							data-target="#creationSiteModal" data-whatever="@mdo">Partager
-							un site</button>
+							un Site</button>
+
+						<a class="dropdown-item" href="/SiteEscalade/MesTopos"> Mes Topos</a>
 
 						<a class="dropdown-item" href="/SiteEscalade/LogOut"><i
 							class="fas fa-power-off"></i>&nbsp; Déconnexion</a>
@@ -146,14 +148,16 @@
 								au site</label> <input type="text" class="form-control" id="nomSite"
 								name="nomSite" pattern="[a-z,A-Z,'-éèàêò ]+" minlength="3"
 								maxlength="50"
-								title="Le nom ne peut contenir que des lettres, un tiret ou un apostrophe" required>
+								title="Le nom ne peut contenir que des lettres, un tiret ou un apostrophe"
+								required>
 						</div>
 						<div class="form-group">
 							<label for="lieuSite" class="col-form-label">Lieu du site</label>
 							<input type="text" class="form-control" id="lieuSite"
 								name="lieuSite" pattern="[a-z,A-Z,'-éèàêò ]+" minlength="3"
 								maxlength="50"
-								title="Le nom ne peut contenir que des lettres, un tiret ou un apostrophe" required>
+								title="Le nom ne peut contenir que des lettres, un tiret ou un apostrophe"
+								required>
 						</div>
 						<div class="form-group">
 							<label for="hauteurSite" class="col-form-label">Hauteur
@@ -165,7 +169,8 @@
 							<label for="descriptionSite" class="col-form-label">Description
 								du site</label>
 							<textarea class="form-control" id="descriptionSite"
-								name="descriptionSite" minlength="3" maxlength=480 rows="5" required></textarea>
+								name="descriptionSite" minlength="3" maxlength=480 rows="5"
+								required></textarea>
 						</div>
 						<div class="form-group">
 							<label for="nombreSecteurs" class="col-form-label">Nombre

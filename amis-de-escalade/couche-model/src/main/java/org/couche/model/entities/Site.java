@@ -59,7 +59,7 @@ public class Site {
 	private Collection<String> urlImages = new ArrayList<String>();
 
 	/*
-	 * Relation de secteur à voie sans supression en cascade
+	 * Relation de secteur à voie avec suppression en cascade
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
