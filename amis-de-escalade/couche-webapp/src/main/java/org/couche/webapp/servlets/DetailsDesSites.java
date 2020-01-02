@@ -74,6 +74,10 @@ public class DetailsDesSites extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		session.setAttribute("connexionOk", session.getAttribute("connexionOk"));
 		
+		// Vérifie si l'utilisateur est membre de l'association
+		session.setAttribute("membreAssociation", session.getAttribute("membreAssociation"));
+		System.out.println("membreAssociation : " + session.getAttribute("membreAssociation"));
+		
 		// Récupération de tous les commentaires du site
 		CommentaireService commentaireService = new CommentaireService();
 		List<Commentaire> commentaires = commentaireService.findBySite(site);		

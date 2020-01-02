@@ -26,6 +26,11 @@ section {
 	height: 30%;
 }
 
+#official2 {
+	width: 10%;
+	height: 10%;
+}
+
 /* gestion de la carousel */
 #carouselStyle {
 	width: 100%;

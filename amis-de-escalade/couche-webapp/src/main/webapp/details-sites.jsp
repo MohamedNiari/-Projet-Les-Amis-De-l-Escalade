@@ -186,7 +186,12 @@
 						<div style="width: 100%;">
 
 							<h6>${tempCommentaire.texte}</h6>
-							<p><small>Par <strong>${tempCommentaire.utilisateur.prenoms.iterator().next()}  ${tempCommentaire.utilisateur.nom}</strong> le ${tempCommentaire.dateDuCommentaire}</small></p>
+							<p>
+								<small>Par <strong>${tempCommentaire.utilisateur.prenoms.iterator().next()}
+										${tempCommentaire.utilisateur.nom}</strong> le
+									${tempCommentaire.dateDuCommentaire}
+								</small>
+							</p>
 
 							<hr>
 							<br>
@@ -203,13 +208,39 @@
 			<!-- Information du site -->
 			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
 				<div class="col-md-12">
-					<h4>
-						<i class="fas fa-map-signs" style="color: #685450"></i> &nbsp;<strong
-							style="font-family: cursive">Site ${THE_SITE.nom}</strong>
-					</h4>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<h4>
+									<i class="fas fa-map-signs" style="color: #685450"></i> &nbsp;<strong
+										style="font-family: cursive">Site ${THE_SITE.nom}</strong>
+								</h4>
+							</div>
+							<div class="col-md-6">
+								<c:if test="${connexionOk == true && membreAssociation == true}">
+									<form class="float-right" action="TaguerSite" method="post">
+										<input type="hidden" name="siteId" value="${THE_SITE.siteId}">
+										<select style="font-size: 70%;"
+											class="form-control-sm input-small btn btn-light dropdown-toggle border text-success"
+											name="taguerOfficiel" onchange="this.form.submit()">
+											<option>Taguer Officiel</option>
+											<option>Oui</option>
+											<option>Non</option>
+										</select>
+									</form>
+								</c:if>
+							</div>
+						</div>
+					</div>
 					<hr>
 					<br>
-					<p style="font-size: 0.9em; font-style: italic">${THE_SITE.description}</p>
+
+					<p style="font-size: 0.9em; font-style: italic">
+						<c:if test="${THE_SITE.taguerOfficiel}">
+							<span><img src="img/official.png" alt="official"
+								id="official2" class="float-right"></img></span>
+						</c:if>${THE_SITE.description}</p>
+
 					<br>
 				</div>
 			</div>

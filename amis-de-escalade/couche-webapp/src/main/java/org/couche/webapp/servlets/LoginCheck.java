@@ -73,6 +73,7 @@ public class LoginCheck extends HttpServlet {
 			session.setAttribute("nom", utilisateur.getNom());
 			session.setAttribute("prenom", prenoms.iterator().next());
 			session.setAttribute("adresseMail", adresseMail);
+			session.setAttribute("membreAssociation", utilisateur.getMembreAssociation());
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListeDesSites");
 			dispatcher.forward(request, response);

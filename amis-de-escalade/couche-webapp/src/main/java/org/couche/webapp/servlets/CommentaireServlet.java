@@ -62,8 +62,6 @@ public class CommentaireServlet extends HttpServlet {
 		
 		HttpSession session =request.getSession(false);
 		String adresseMail = (String) session.getAttribute("adresseMail");
-		String nom = (String) session.getAttribute("nom");
-		String prenom = (String) session.getAttribute("prenom");
 		
 		UtilisateurService utilisateurService = new UtilisateurService();
 		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
