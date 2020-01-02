@@ -35,9 +35,9 @@ public class AppTestCreate {
 		// test pour la table topo
 		TopoService topoService = new TopoService();
 
-		Topo topoTest = new Topo("Escalade en Savoie2",
+		Topo topoTest = new Topo("Escalade en Savoie",
 				"Rive gauche, le rocher passe à l’ombre à 12h30 mais les arbres cachent assez bien le soleil avant. On peut donc y grimper en été, même le matin hors période de canicule.",
-				"La Savoie2", "04/09/2019", true, utilisateurTest);
+				"La Savoie", "04/09/2019", true, utilisateurTest);
 
 		topoService.create(topoTest);
 

@@ -67,7 +67,7 @@ public class Site {
 	private List<Secteur> secteurs;
 
 	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
-	@OrderBy("dateDuCommentaire")
+	@OrderBy("commentaireId DESC")
 	private List<Commentaire> commentaires;
 
 	@ManyToOne()

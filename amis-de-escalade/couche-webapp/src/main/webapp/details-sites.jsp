@@ -112,6 +112,7 @@
 
 	</nav>
 
+	<!-- Carousel d'images d'un site -->
 	<section class="d-flex flex-wrap">
 		<div class="col-md-4">
 			<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
@@ -158,6 +159,7 @@
 				</div>
 			</div>
 
+			<!-- Commentaire -->
 			<c:if test="${connexionOk == true}">
 				<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
 					<form action="CommentaireServlet" method="post"
@@ -184,15 +186,33 @@
 
 					<c:forEach var="tempCommentaire" items="${commentaires}">
 						<div style="width: 100%;">
+						
+							<c:set var="enableDisable" value="disabled"></c:set>
+							<c:set var="tohide" value="hidden"></c:set>
+							<c:if test="${membreAssociation == true}">
+								<c:set var="enableDisable" value=""></c:set>
+								<c:set var="tohide" value="submit"></c:set>
+							</c:if>
+							
+							<form action="CommentaireServlet" method="get"
+								style="width: 100%;">
+								<input type="hidden" name="commentaireId" value="${tempCommentaire.commentaireId}">
+								<input type="hidden" name="siteId" value="${THE_SITE.siteId}">
 
-							<h6>${tempCommentaire.texte}</h6>
-							<p>
+								<textarea class="form-control text-success" name="commentaire" minlength="3"
+									maxlength="300" rows="3" required <c:out value="${enableDisable}"/>>${tempCommentaire.texte}</textarea>
+
 								<small>Par <strong>${tempCommentaire.utilisateur.prenoms.iterator().next()}
+				
 										${tempCommentaire.utilisateur.nom}</strong> le
 									${tempCommentaire.dateDuCommentaire}
-								</small>
-							</p>
-
+								</small> 
+								<br>
+								<input type="${tohide}" class="btn btn-success btn-sm" name="update" value="Modifier" >
+								<input type="${tohide}" class="btn btn-success btn-sm"
+									name="delete" value="Supprimer">
+							</form>
+							<br>
 							<hr>
 							<br>
 						</div>
@@ -221,7 +241,7 @@
 									<form class="float-right" action="TaguerSite" method="post">
 										<input type="hidden" name="siteId" value="${THE_SITE.siteId}">
 										<select style="font-size: 70%;"
-											class="form-control-sm input-small btn btn-light dropdown-toggle border text-success"
+											class="form-control-sm input-small btn btn-light dropdown-toggle border text-success font-weight-bold"
 											name="taguerOfficiel" onchange="this.form.submit()">
 											<option>Taguer Officiel</option>
 											<option>Oui</option>
