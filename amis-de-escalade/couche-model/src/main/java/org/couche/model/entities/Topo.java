@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -46,6 +48,17 @@ public class Topo {
 	@ManyToOne
 	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
+	
+	/*
+	 * Relation plusieurs à plusieurs pour la réservation
+	 */
+	@ManyToMany(fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinTable(
+			name="reservation",
+			joinColumns = @JoinColumn(name="topo_id"),
+			inverseJoinColumns = @JoinColumn(name="utilisateur_id")
+			)
+	private List<Utilisateur> utilisateurs;
 
 	/*
 	 * Constructeur
@@ -154,6 +167,14 @@ public class Topo {
 
 	public void setTopoId(Long topoId) {
 		this.topoId = topoId;
+	}
+	
+	public List<Utilisateur> getUtilisateurs() {
+		return utilisateurs;
+	}
+
+	public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+		this.utilisateurs = utilisateurs;
 	}
 
 	@Override

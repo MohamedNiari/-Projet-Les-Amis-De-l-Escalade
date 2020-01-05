@@ -16,12 +16,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 
 import org.hibernate.FetchMode;
 import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.ManyToAny;
 
 /*
  * Bean utilisateur qui représente sous forme d'objet la table du même nom
@@ -56,12 +59,6 @@ public class Utilisateur {
 	private Set<String> prenoms = new HashSet<String>();
 
 	/*
-	 * Relation de utilisateur à topo sans suppression en cascade
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utilisateur")
-	private List<Topo> topos;
-
-	/*
 	 * Relation de utilisateur à commentaire sans suppression en cascade
 	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utilisateur")
@@ -70,7 +67,18 @@ public class Utilisateur {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utilisateur")
 	@OrderBy("nom")
 	private List<Site> sites;
-
+	
+	/*
+	 * Relation plusieurs à plusieurs pour la réservation
+	 */
+	@ManyToMany(fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinTable(
+			name="reservation",
+			joinColumns = @JoinColumn(name="utilisateur_id"),
+			inverseJoinColumns = @JoinColumn(name="topo_id")
+			)
+	private List<Topo> topos;
+	
 	/*
 	 * Constructeur
 	 */
@@ -189,14 +197,6 @@ public class Utilisateur {
 		this.pays = pays;
 	}
 
-	public List<Topo> getTopos() {
-		return topos;
-	}
-
-	public void setTopos(List<Topo> topos) {
-		this.topos = topos;
-	}
-
 	public List<Commentaire> getCommentaires() {
 		return commentaires;
 	}
@@ -227,6 +227,14 @@ public class Utilisateur {
 
 	public void setSites(List<Site> sites) {
 		this.sites = sites;
+	}	
+	
+	public List<Topo> getTopos() {
+		return topos;
+	}
+
+	public void setTopos(List<Topo> topos) {
+		this.topos = topos;
 	}
 
 	@Override
