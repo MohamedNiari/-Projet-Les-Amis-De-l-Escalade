@@ -10,8 +10,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
+import org.couche.model.entities.Commentaire;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.TypeRocher;
+import org.couche.model.entities.Utilisateur;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -135,6 +137,22 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		Site site = (Site) getCurrentSession().get(Site.class, id);
 		return site;
 	}
+	
+	public Site findByName(String nom) {
+		// Création du CriteriaBuilder pour la construction des requetes
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Site> criteria = builder.createQuery(Site.class);
+
+		// Création du root pour l'entité Commentaire
+		Root<Site> siteRoot = criteria.from(Site.class);
+		criteria.where(builder.equal(siteRoot.get("nom"), nom));
+
+		Query<Site> query;
+		query = getCurrentSession().createQuery(criteria);
+
+		Site site = query.getSingleResult();
+		return site;
+	}
 
 	public List<Site> searchSite(String lieu, TypeRocher typeRoche, Integer numberSecteur) {		
 
@@ -195,6 +213,24 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		
 		Long id = (Long) getCurrentSession().save(site);
 		return id;
+
+	}
+	
+	public List<Site> findByUser(Utilisateur utilisateur) {
+
+		// Création du CriteriaBuilder pour la construction des requetes
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Site> criteria = builder.createQuery(Site.class);
+
+		// Création du root pour l'entité Commentaire
+		Root<Site> siteRoot = criteria.from(Site.class);
+		criteria.where(builder.equal(siteRoot.get("utilisateur"), utilisateur));
+
+		Query<Site> query;
+		query = getCurrentSession().createQuery(criteria);
+
+		List<Site> sites = query.getResultList();
+		return sites;
 
 	}
 

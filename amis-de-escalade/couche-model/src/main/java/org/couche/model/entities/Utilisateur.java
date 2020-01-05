@@ -17,6 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 
 import org.hibernate.FetchMode;
 import org.hibernate.annotations.Fetch;
@@ -56,14 +58,18 @@ public class Utilisateur {
 	/*
 	 * Relation de utilisateur à topo sans suppression en cascade
 	 */
-	@OneToMany(mappedBy = "utilisateur")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utilisateur")
 	private List<Topo> topos;
 
 	/*
 	 * Relation de utilisateur à commentaire sans suppression en cascade
 	 */
-	@OneToMany(mappedBy = "utilisateur")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utilisateur")
 	private List<Commentaire> commentaires;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utilisateur")
+	@OrderBy("nom")
+	private List<Site> sites;
 
 	/*
 	 * Constructeur
@@ -213,6 +219,14 @@ public class Utilisateur {
 
 	public void setPrenoms(Set<String> prenoms) {
 		this.prenoms = prenoms;
+	}
+	
+	public List<Site> getSites() {
+		return sites;
+	}
+
+	public void setSites(List<Site> sites) {
+		this.sites = sites;
 	}
 
 	@Override

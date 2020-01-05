@@ -37,14 +37,13 @@ public class Topo {
 	/*
 	 * Relation de secteur à voie sans supression en cascade
 	 */
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "topo", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "topo")
 	private List<Site> sites;
 
 	/*
 	 * Relation de topo à utilisateur sans supression en cascade
 	 */
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@ManyToOne
 	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
 
@@ -140,13 +139,6 @@ public class Topo {
 		this.dateParution = dateParution;
 	}
 
-	public boolean isDisponible() {
-		return disponible;
-	}
-
-	public void setDisponible(boolean disponible) {
-		this.disponible = disponible;
-	}
 
 	public String getDescription() {
 		return description;

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -91,7 +90,6 @@ public class Secteur {
 		this.site = site;
 	}
 
-
 	public String getNom() {
 		return nom;
 	}
@@ -137,6 +135,5 @@ public class Secteur {
 		return "Secteur [secteurId=" + secteurId + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
 				+ ", description=" + description + ", voies=" + voies + ", site=" + site + "]";
 	}
-
 
 }

@@ -37,7 +37,7 @@ public class AppTestCreate {
 
 		Topo topoTest = new Topo("Escalade en Savoie",
 				"Rive gauche, le rocher passe à l’ombre à 12h30 mais les arbres cachent assez bien le soleil avant. On peut donc y grimper en été, même le matin hors période de canicule.",
-				"La Savoie", "04/09/2019", true, utilisateurTest);
+				"La Savoie", "04 Septembre 2015", true, utilisateurTest);
 
 		topoService.create(topoTest);
 

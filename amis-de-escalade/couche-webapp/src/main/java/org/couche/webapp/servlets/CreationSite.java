@@ -12,13 +12,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
+import org.couche.business.services.UtilisateurService;
 import org.couche.business.services.VoieService;
 import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.TypeRocher;
+import org.couche.model.entities.Utilisateur;
 import org.couche.model.entities.Voie;
 
 import com.google.gson.Gson;
@@ -84,8 +87,17 @@ public class CreationSite extends HttpServlet {
 		SiteService siteService = new SiteService();
 		siteId = siteService.createSite(nomSite, lieuSite, hauteurSiteInt, official, descriptionSite, typeRocher);
 		
+		HttpSession session = request.getSession(false);
+		String adresseMail = (String) session.getAttribute("adresseMail");
+
+		UtilisateurService utilisateurService = new UtilisateurService();
+		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
+	
 		// Récupération du site depuis la BDD
 		Site site = siteService.findById(siteId);
+		site.setUtilisateur(utilisateur);
+		siteService.update(site);		
+		
 		
 		// Création des secteurs à vide
 		SecteurService secteurService = new SecteurService();

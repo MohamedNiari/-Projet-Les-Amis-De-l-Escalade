@@ -121,10 +121,11 @@ public class CommentaireServlet extends HttpServlet {
 		// Enregistrement du commentaire dans la BDD
 		commentaireBean.setDateDuCommentaire(currentDate.format(formatter));
 		commentaireBean.setTexte(commentaire);
-		commentaireBean.setSite(site);
+		//commentaireBean.setSite(site);
 		commentaireBean.setUtilisateur(utilisateur);
-
-		commentaireService.create(commentaireBean, utilisateur, site);
+		site.addCommentaire(commentaireBean);
+		siteService.update(site);
+		//commentaireService.create(commentaireBean, utilisateur, site);
 
 		request.setAttribute("siteId", siteId);
 
@@ -132,5 +133,5 @@ public class CommentaireServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-
+	
 }

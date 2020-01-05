@@ -2,13 +2,19 @@ package org.couche.consumer.dao.implementation;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.couche.consumer.dao.interfaces.DaoInterface;
+import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.Utilisateur;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 
@@ -122,6 +128,24 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 	public Topo findById(Long id) {
 		Topo Topo = (Topo) getCurrentSession().get(Topo.class, id);
 		return Topo;
+	}
+	
+	public List<Topo> findByUser(Utilisateur utilisateur) {
+
+		// Création du CriteriaBuilder pour la construction des requetes
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Topo> criteria = builder.createQuery(Topo.class);
+
+		// Création du root pour l'entité Commentaire
+		Root<Topo> topoRoot = criteria.from(Topo.class);
+		criteria.where(builder.equal(topoRoot.get("utilisateur"), utilisateur));
+
+		Query<Topo> query;
+		query = getCurrentSession().createQuery(criteria);
+
+		List<Topo> topos = query.getResultList();
+		return topos;
+
 	}
 
 }

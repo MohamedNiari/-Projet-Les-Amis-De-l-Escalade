@@ -1,27 +1,13 @@
 package org.couche.webapp.test;
 
-import java.util.List;
-
 import org.couche.business.services.SiteService;
-import org.couche.business.services.UtilisateurService;
-import org.couche.consumer.dao.implementation.CommentaireDaoImplementation;
-import org.couche.model.entities.Commentaire;
-import org.couche.model.entities.Site;
-import org.couche.model.entities.Utilisateur;
+import org.couche.business.services.TopoService;
 
 public class test {
 
 	public static void main(String[] args) throws Exception {
-
-		//deleteSite(20L, 23L);
-		UtilisateurService utilisateurService = new UtilisateurService();
-
-		Utilisateur utilisateurTest = new Utilisateur("Smith", "lsmith@openclassroom.com", "bonjour", "01/01/2020",
-				false, "Bern", "Suisse");
-
-		utilisateurTest.getPrenoms().add("Lauren");
-		
-		utilisateurService.create(utilisateurTest);
+		TopoService topoService = new TopoService();
+		topoService.delete(3L);
 
 	}
 

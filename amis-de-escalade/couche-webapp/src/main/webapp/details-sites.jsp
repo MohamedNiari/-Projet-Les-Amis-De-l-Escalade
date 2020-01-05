@@ -202,8 +202,7 @@
 								<textarea class="form-control text-success" name="commentaire" minlength="3"
 									maxlength="300" rows="3" required <c:out value="${enableDisable}"/>>${tempCommentaire.texte}</textarea>
 
-								<small>Par <strong>${tempCommentaire.utilisateur.prenoms.iterator().next()}
-				
+								<small>Par <strong>${tempCommentaire.utilisateur.prenoms.iterator().next()}				
 										${tempCommentaire.utilisateur.nom}</strong> le
 									${tempCommentaire.dateDuCommentaire}
 								</small> 

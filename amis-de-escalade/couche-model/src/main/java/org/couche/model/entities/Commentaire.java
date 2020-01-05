@@ -28,11 +28,11 @@ public class Commentaire {
 
 	/*
 	 * Relation de commentaire à site sans suppression en cascade
-	 */
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+		 
+	@ManyToOne
 	@JoinColumn(name = "site_id")
 	private Site site;
-
+*/
 	/*
 	 * Relation de commentaire à utilisateur sans supression en cascade
 	 */
@@ -50,10 +50,10 @@ public class Commentaire {
 	/*
 	 * Constructeur
 	 */
-	public Commentaire(String texte, String dateDuCommentaire, Site site, Utilisateur utilisateur) {
+	public Commentaire(String texte, String dateDuCommentaire, Utilisateur utilisateur) {
 		this.texte = texte;
 		this.dateDuCommentaire = dateDuCommentaire;
-		this.site = site;
+		//this.site = site;
 		this.utilisateur = utilisateur;
 	}
 
@@ -65,13 +65,6 @@ public class Commentaire {
 		return texte;
 	}
 
-	public Site getSite() {
-		return site;
-	}
-
-	public void setSite(Site site) {
-		this.site = site;
-	}
 
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
@@ -104,7 +97,7 @@ public class Commentaire {
 	@Override
 	public String toString() {
 		return "Commentaire [commentaireId=" + commentaireId + ", texte=" + texte + ", dateDuCommentaire="
-				+ dateDuCommentaire + ", site=" + site + ", utilisateur=" + utilisateur + "]";
+				+ dateDuCommentaire + ", site=" + ", utilisateur=" + utilisateur + "]";
 	}
 
 }

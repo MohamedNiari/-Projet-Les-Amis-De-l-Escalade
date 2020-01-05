@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.validation.constraints.Size;
 
@@ -65,12 +66,18 @@ public class Site {
 	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
 	@OrderBy("numeroSecteur")
 	private List<Secteur> secteurs;
-
-	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
+	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "site_id")
 	@OrderBy("commentaireId DESC")
 	private List<Commentaire> commentaires;
+	
+	@ManyToOne
+	@JoinColumn(name = "utilisateur_id")
+	private Utilisateur utilisateur;
 
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "topo_id")
 	private Topo topo;
 
@@ -79,6 +86,14 @@ public class Site {
 	 */
 	public Site() {
 
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	/*
@@ -96,15 +111,13 @@ public class Site {
 	}
 
 	/*
-	 * Méthode pour la relation bidirectionnelle
+	 * Méthode pour la relation unidirectionnelle
 	 */
 	public void addCommentaire(Commentaire commentaire) {
 		if (commentaires == null) {
 			commentaires = new ArrayList<>();
 		}
-
-		commentaires.add(commentaire);
-		commentaire.setSite(this);
+		commentaires.add(commentaire);		
 	}
 
 	public void addSecteur(Secteur secteur) {

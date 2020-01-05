@@ -71,9 +71,9 @@ public class DetailsDesSites extends HttpServlet {
 		request.setAttribute("siteId", siteId);
 		
 		// Récupération de tous les commentaires du site
-		CommentaireService commentaireService = new CommentaireService();
-		List<Commentaire> commentaires = commentaireService.findBySite(site);		
-		request.setAttribute("commentaires", commentaires);
+		//CommentaireService commentaireService = new CommentaireService();
+		//List<Commentaire> commentaires = commentaireService.findBySite(site);		
+		request.setAttribute("commentaires", site.getCommentaires());
 		
 		// Envoi à la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");

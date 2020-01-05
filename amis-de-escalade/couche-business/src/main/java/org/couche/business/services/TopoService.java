@@ -3,6 +3,7 @@ package org.couche.business.services;
 import java.util.List;
 
 import org.couche.consumer.dao.implementation.TopoDaoImplementation;
+import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.Utilisateur;
 
@@ -51,6 +52,13 @@ public class TopoService {
 		topoDao.openCurrentSessionwithTransaction();
 		topoDao.deleteAll();
 		topoDao.closeCurrentSessionwithTransaction();
+	}
+	
+	public List<Topo> findByUser(Utilisateur utilisateur) {
+		topoDao.openCurrentSession();
+		List<Topo> topos = topoDao.findByUser(utilisateur);
+		topoDao.closeCurrentSession();
+		return topos;
 	}
 
 }

@@ -3,9 +3,11 @@ package org.couche.business.services;
 import java.util.List;
 
 import org.couche.consumer.dao.implementation.SiteDaoImplementation;
+import org.couche.model.entities.Commentaire;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.TypeRocher;
+import org.couche.model.entities.Utilisateur;
 
 import com.sun.istack.Nullable;
 
@@ -43,6 +45,13 @@ public class SiteService {
 		siteDao.closeCurrentSession();
 		return site;
 	}
+	
+	public Site findByName(String nom) {
+		siteDao.openCurrentSession();
+		Site site = siteDao.findByName(nom);
+		siteDao.closeCurrentSession();
+		return site;
+	}
 
 	public void delete(Long id) {
 		siteDao.openCurrentSessionwithTransaction();
@@ -71,6 +80,12 @@ public class SiteService {
 		return sites;
 	}
 	
+	public List<Site> findByUser(Utilisateur utilisateur) {
+		siteDao.openCurrentSession();
+		List<Site> sites = siteDao.findByUser(utilisateur);
+		siteDao.closeCurrentSession();
+		return sites;
+	}
 
 
 }
