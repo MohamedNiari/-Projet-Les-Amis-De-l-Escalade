@@ -17,7 +17,7 @@ import org.couche.business.services.CommentaireService;
 import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
 import org.couche.business.services.VoieService;
-import org.couche.model.entities.Commentaire;
+import org.couche.model.entities.Reservation;
 import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Voie;

@@ -36,15 +36,11 @@
 			<div class="col-md-3">
 				<span class="btn btn-success font-weight-bold"
 					style="border-width: 3px;"> <i class="fas fa-book"></i>&nbsp;
-					MES TOPOS
+					TOPOS DISPONIBLE
 				</span>
 			</div>
 			<div class="col-md-6"></div>
-			<div class="col-md-3">
-				<a href="/SiteEscalade/CreerTopos"
-					class="btn btn-outline-success font-weight-bold buttons float-right"
-					role="button">Créer un nouveau Topo</a>
-			</div>
+			<div class="col-md-3"></div>
 		</div>
 
 		<br>
@@ -58,33 +54,32 @@
 					<th scope="col">Lieu</th>
 					<th scope="col">Description</th>
 					<th scope="col">Date de parution</th>
-					<th scope="col">Disponible</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="item" items="${topos}">
-
+				<c:forEach var="item" items="${mapTopoAttente}">
 					<tr>
-						<th scope="row"><c:out value="${item.id}" /></th>
-						<td><c:out value="${item.nom}" /></td>
-						<td><c:out value="${item.lieu}" /></td>
-						<td><c:out value="${item.description}" /></td>
-						<td><c:out value="${item.dateParution}" /></td>
+						<th scope="row"><c:out value="${item.key.id}" /></th>
+						<td><c:out value="${item.key.nom}" /></td>
+						<td><c:out value="${item.key.lieu}" /></td>
+						<td><c:out value="${item.key.description}" /></td>
+						<td><c:out value="${item.key.dateParution}" /></td>
 						<td>
-							<form action="MesTopos" method="post">
-								<input type="hidden" name="topoId" value="${item.id}">
-								<select name="disponibiliteSite" onchange="this.form.submit()">									
-										<option selected>
-										${item.disponible == false ? "Non" : "Oui"}
-										</option>
-										<option>
-										${item.disponible == false ? "Oui" : "Non"}
-										</option>				
-								</select>
-							</form>
+						<c:if test="${item.value == false}">
+								<form action="ReservationServlet" method="post">
+									<input type="hidden" name="topoId" value="${item.key.id}">
+									<button class="btn btn-outline-success" type="submit">Réserver</button>
+								</form>
+						</c:if> 
+						<c:if test="${item.value == true}">
+								<form action="ReservationServlet" method="post">
+									<input type="hidden" name="topoId" value="${item.key.id}">
+									<button class="btn btn-outline-success" disabled>En Attente</button>
+								</form>
+						</c:if>
 						</td>
 					</tr>
-
 				</c:forEach>
 			</tbody>
 		</table>

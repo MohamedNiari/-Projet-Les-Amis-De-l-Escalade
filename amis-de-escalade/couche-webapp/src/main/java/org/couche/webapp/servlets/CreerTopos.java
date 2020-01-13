@@ -74,6 +74,9 @@ public class CreerTopos extends HttpServlet {
 		String lieuTopo = request.getParameter("lieuTopo");
 		String descriptionTopo = request.getParameter("descriptionTopo");
 		
+		for(String site : listeSites)
+		System.out.println("site : " + site);
+		
 		LocalDateTime currentDate = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
 		
@@ -100,12 +103,11 @@ public class CreerTopos extends HttpServlet {
 		
 		for(String nomSite : listeSites) {
 			Site site = siteService.findByName(nomSite);
-			site.setTopo(topo);
+			topo.getSites().add(site);
 			siteService.update(site);			
 		}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/MesTopos");
-		dispatcher.forward(request, response);
+				
+		response.sendRedirect(request.getContextPath() + "/MesTopos");
 
 	}
 

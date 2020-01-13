@@ -1,12 +1,10 @@
 package org.couche.model.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /*
  * Bean Topo qui représente sous forme d'objet la table du même nom
@@ -27,8 +24,7 @@ public class Topo {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "topo_id")
-	private Long topoId;
+	private Long id;
 	private String nom;
 	private String description;
 	private String lieu;
@@ -37,9 +33,13 @@ public class Topo {
 	private Boolean disponible;
 
 	/*
-	 * Relation de secteur à voie sans supression en cascade
+	 * Relation de plusieurs à plusieurs Topo/Site
 	 */
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "topo")
+	@ManyToMany(cascade = {CascadeType.PERSIST})
+	@JoinTable(
+				name = "topo_site", 
+				joinColumns = { @JoinColumn(name = "topo_id") }, 
+				inverseJoinColumns = {@JoinColumn(name = "site_id") })
 	private List<Site> sites;
 
 	/*
@@ -48,17 +48,6 @@ public class Topo {
 	@ManyToOne
 	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
-	
-	/*
-	 * Relation plusieurs à plusieurs pour la réservation
-	 */
-	@ManyToMany(fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinTable(
-			name="reservation",
-			joinColumns = @JoinColumn(name="topo_id"),
-			inverseJoinColumns = @JoinColumn(name="utilisateur_id")
-			)
-	private List<Utilisateur> utilisateurs;
 
 	/*
 	 * Constructeur
@@ -80,22 +69,19 @@ public class Topo {
 		this.utilisateur = utilisateur;
 	}
 
-	/*
-	 * Méthode pour la relation bidirectionnelle
-	 */
-	public void addSite(Site site) {
-		if (sites == null) {
-			sites = new ArrayList<>();
-		}
-
-		sites.add(site);
-		site.setTopo(this);
-	}
-
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
+	
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public Boolean getDisponible() {
 		return disponible;
 	}
@@ -120,13 +106,6 @@ public class Topo {
 		this.utilisateur = utilisateur;
 	}
 
-	public Long getId_Topo() {
-		return topoId;
-	}
-
-	public void setId_Topo(Long id_Topo) {
-		this.topoId = id_Topo;
-	}
 
 	public String getNom() {
 		return nom;
@@ -152,7 +131,6 @@ public class Topo {
 		this.dateParution = dateParution;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
@@ -161,27 +139,5 @@ public class Topo {
 		this.description = description;
 	}
 
-	public Long getTopoId() {
-		return topoId;
-	}
-
-	public void setTopoId(Long topoId) {
-		this.topoId = topoId;
-	}
-	
-	public List<Utilisateur> getUtilisateurs() {
-		return utilisateurs;
-	}
-
-	public void setUtilisateurs(List<Utilisateur> utilisateurs) {
-		this.utilisateurs = utilisateurs;
-	}
-
-	@Override
-	public String toString() {
-		return "Topo [topoId=" + topoId + ", nom=" + nom + ", description=" + description + ", lieu=" + lieu
-				+ ", dateParution=" + dateParution + ", disponible=" + disponible + ", sites=" + sites
-				+ ", utilisateur=" + utilisateur + "]";
-	}
 
 }

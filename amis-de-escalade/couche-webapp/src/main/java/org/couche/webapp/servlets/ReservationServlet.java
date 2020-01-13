@@ -2,7 +2,9 @@ package org.couche.webapp.servlets;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,22 +14,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.couche.business.services.ReservationService;
 import org.couche.business.services.TopoService;
 import org.couche.business.services.UtilisateurService;
+import org.couche.model.entities.Reservation;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.Utilisateur;
 
 /**
  * Servlet implementation class MesTopos
  */
-@WebServlet("/MesTopos")
-public class MesTopos extends HttpServlet {
+@WebServlet("/ReservationServlet")
+public class ReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public MesTopos() {
+	public ReservationServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -38,31 +42,44 @@ public class MesTopos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		HttpSession session = request.getSession(false);
 		String adresseMail = (String) session.getAttribute("adresseMail");
-
+		
 		UtilisateurService utilisateurService = new UtilisateurService();
 		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
-
+		
 		TopoService topoService = new TopoService();
-		List<Topo> topos = topoService.findByUser(utilisateur);
+		ReservationService reservationService = new ReservationService();
+		
+		HashMap<Topo, Boolean> mapTopoAttente = new HashMap<Topo, Boolean>();
+		List<Topo> topos = topoService.disponible();
+		
+		for(Topo topo : topos) {			
+			mapTopoAttente.put(topo, reservationService.isTopoEnAttente(topo, utilisateur));			
+		}
+		
+		for(Map.Entry<Topo, Boolean> entry : mapTopoAttente.entrySet()) {
+			System.out.println("topo : " + entry.getKey().getNom());
+			System.out.println("topoEnAttente : " + entry.getValue());			
+		}
+			
 		
 		request.setAttribute("topos", topos);
+		request.setAttribute("mapTopoAttente", mapTopoAttente);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/mes-topos.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/topos-disponible.jsp");
 		dispatcher.forward(request, response);
 
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 * Mise à jour de la disponibilité d'un Topo
+	 *      response) Mise à jour de la disponibilité d'un Topo
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		System.out.println("POST ReservationServlet");
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -71,24 +88,28 @@ public class MesTopos extends HttpServlet {
 
 		String topoId = request.getParameter("topoId");
 
-		Boolean disponibilite = false;
-		String disponibiliteSite = request.getParameter("disponibiliteSite");
-			
-		if(disponibiliteSite != null && disponibiliteSite.equals("Oui")) {
-			disponibilite = true;
-		}
-		
-		if(disponibiliteSite == null || disponibiliteSite.equals("Non")) {
-			disponibilite = false;
-		}
-				
+		HttpSession session = request.getSession(false);
+		String adresseMail = (String) session.getAttribute("adresseMail");
+
+		UtilisateurService utilisateurService = new UtilisateurService();
+		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
+
 		TopoService topoService = new TopoService();
 		Topo topo = topoService.findById(Long.parseLong(topoId));
+
+		Reservation reservation = new Reservation();
+		reservation.setAccepter(false);
+		reservation.setProprietaire(topo.getUtilisateur());
+		reservation.setTopo(topo);
+		reservation.setUtilisateur(utilisateur);
 		
-		topo.setDisponible(disponibilite);
-		topoService.update(topo);	
+		ReservationService reservationService = new ReservationService();
+		reservationService.create(reservation);
 		
-		doGet(request,response);
+		Boolean topoEnAttente = reservationService.isTopoEnAttente(topo, utilisateur);
+		System.out.println("topoEnAttente : " + topoEnAttente);
+
+		response.sendRedirect(request.getRequestURI().toString() + "?topoEnAttente=" + topoEnAttente);
 	}
 
 }

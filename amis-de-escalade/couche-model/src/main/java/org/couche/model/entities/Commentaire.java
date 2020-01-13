@@ -20,19 +20,17 @@ public class Commentaire {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "commentaire_id")
-	private Long commentaireId;
+	private Long id;
 	private String texte;
 	@Column(name = "date_du_commentaire")
 	private String dateDuCommentaire;
 
 	/*
 	 * Relation de commentaire à site sans suppression en cascade
-		 
+	*/	 
 	@ManyToOne
 	@JoinColumn(name = "site_id")
 	private Site site;
-*/
 	/*
 	 * Relation de commentaire à utilisateur sans supression en cascade
 	 */
@@ -78,12 +76,12 @@ public class Commentaire {
 		this.texte = texte;
 	}
 
-	public Long getCommentaireId() {
-		return commentaireId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCommentaireId(Long commentaireId) {
-		this.commentaireId = commentaireId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDateDuCommentaire() {
@@ -92,12 +90,21 @@ public class Commentaire {
 
 	public void setDateDuCommentaire(String dateDuCommentaire) {
 		this.dateDuCommentaire = dateDuCommentaire;
+	}	
+
+	public Site getSite() {
+		return site;
+	}
+
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 	@Override
 	public String toString() {
-		return "Commentaire [commentaireId=" + commentaireId + ", texte=" + texte + ", dateDuCommentaire="
-				+ dateDuCommentaire + ", site=" + ", utilisateur=" + utilisateur + "]";
+		return "Commentaire [id=" + id + ", texte=" + texte + ", dateDuCommentaire=" + dateDuCommentaire + ", site="
+				+ site + ", utilisateur=" + utilisateur + "]";
 	}
 
 }
+

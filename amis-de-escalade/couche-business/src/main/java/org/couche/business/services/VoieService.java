@@ -60,9 +60,9 @@ public class VoieService {
 		voieDao.closeCurrentSessionwithTransaction();
 	}
 
-	public List<Voie> findBySecteur(Secteur secteur) {
+	public List<Voie> findBySecteur(Long secteurid) {
 		voieDao.openCurrentSession();
-		List<Voie> voies = voieDao.findBySecteur(secteur.getSecteurId());
+		List<Voie> voies = voieDao.findBySecteur(secteurid);
 		voieDao.closeCurrentSession();
 		return voies;
 

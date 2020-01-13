@@ -43,7 +43,6 @@ public class ModificationSite extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Servlet : ModificationSite GET");
 
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -94,22 +93,10 @@ public class ModificationSite extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Servlet : ModificationSite POST");
+		
 		doGet(request, response);
 
 	}
 	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		System.out.println("Servlet : ModificationSite PUT");
-		
-
-
-	}
 
 }

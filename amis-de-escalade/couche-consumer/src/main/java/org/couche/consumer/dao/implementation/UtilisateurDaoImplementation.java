@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
+import org.couche.model.entities.Topo;
 import org.couche.model.entities.Utilisateur;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -10,12 +10,12 @@ import org.couche.model.entities.Utilisateur;
 public class CommentaireService {
 
 	private static CommentaireDaoImplementation commentaireDao;
-	
+
 	public CommentaireService() {
 		commentaireDao = new CommentaireDaoImplementation();
 	}
 
-	public void create(Commentaire commentaire, Utilisateur utilisateur, Site site) {
+	public void create(Commentaire commentaire) {
 		commentaireDao.openCurrentSessionwithTransaction();
 		commentaireDao.create(commentaire);
 		commentaireDao.closeCurrentSessionwithTransaction();
@@ -53,7 +53,7 @@ public class CommentaireService {
 		commentaireDao.deleteAll();
 		commentaireDao.closeCurrentSessionwithTransaction();
 	}
-	
+
 	public List<Commentaire> findBySite(Site site) {
 		commentaireDao.openCurrentSession();
 		List<Commentaire> commentaires = commentaireDao.findBySite(site);

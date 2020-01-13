@@ -27,8 +27,7 @@ public class Voie {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "voie_id")
-	private Long voieId;
+	private Long id;
 	@Column(name = "numero_voie")
 	private Integer numeroVoie;
 	@Column(name = "nombre_longueur")
@@ -66,14 +65,6 @@ public class Voie {
 	 * Generation des setters and getters *
 	 **************************************/
 
-	public Long getId_Voie() {
-		return voieId;
-	}
-
-	public void setId_Voie(Long id_Voie) {
-		this.voieId = id_Voie;
-	}
-
 	public Secteur getSecteur() {
 		return secteur;
 	}
@@ -88,14 +79,6 @@ public class Voie {
 
 	public void setNumeroVoie(Integer numeroVoie) {
 		this.numeroVoie = numeroVoie;
-	}
-
-	public Long getVoieId() {
-		return voieId;
-	}
-
-	public void setVoieId(Long voieId) {
-		this.voieId = voieId;
 	}
 
 	public List<Longueur> getLongueurs() {
@@ -116,7 +99,7 @@ public class Voie {
 
 	@Override
 	public String toString() {
-		return "Voie [voieId=" + voieId + ", numeroVoie=" + numeroVoie + ", nombreLongueurs=" + nombreLongueurs
+		return "Voie [voieId=" + ", numeroVoie=" + numeroVoie + ", nombreLongueurs=" + nombreLongueurs
 				+ ", secteur=" + secteur + ", longueurs=" + longueurs + "]";
 	}
 

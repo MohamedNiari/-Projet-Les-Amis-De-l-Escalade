@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +17,7 @@ import org.couche.business.services.CommentaireService;
 import org.couche.business.services.SiteService;
 import org.couche.business.services.UtilisateurService;
 import org.couche.model.entities.Commentaire;
+import org.couche.model.entities.Reservation;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Utilisateur;
 
@@ -43,15 +42,15 @@ public class CommentaireServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		
+
 		String commentaireId = request.getParameter("commentaireId");
-		String commentaire = request.getParameter("commentaire");
+		String commentaireString = request.getParameter("commentaire");
 		String siteId = request.getParameter("siteId");
 
 		HttpSession session = request.getSession(false);
@@ -61,23 +60,23 @@ public class CommentaireServlet extends HttpServlet {
 		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
 
 		CommentaireService commentaireService = new CommentaireService();
-		Commentaire commentaireBean = commentaireService.findById(Long.parseLong(commentaireId));
-		
+		Commentaire commentaire = commentaireService.findById(Long.parseLong(commentaireId));
+
 		LocalDateTime currentDate = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy à HH:mm:ss");
 
 		if (request.getParameter("update") != null) {
-			
-			commentaireBean.setDateDuCommentaire(currentDate.format(formatter));
-			commentaireBean.setTexte(commentaire);
-			commentaireBean.setUtilisateur(utilisateur);
-			commentaireService.update(commentaireBean);
+
+			commentaire.setDateDuCommentaire(currentDate.format(formatter));
+			commentaire.setTexte(commentaireString);
+			commentaire.setUtilisateur(utilisateur);
+			commentaireService.update(commentaire);
 
 		} else if (request.getParameter("delete") != null) {
-			
+
 			commentaireService.delete(Long.parseLong(commentaireId));
 		}
-		
+
 		request.setAttribute("siteId", siteId);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/DetailsDesSites");
@@ -100,7 +99,7 @@ public class CommentaireServlet extends HttpServlet {
 		}
 
 		String siteId = request.getParameter("siteId");
-		String commentaire = request.getParameter("commentaire");
+		String commentaireString = request.getParameter("commentaire");
 
 		HttpSession session = request.getSession(false);
 		String adresseMail = (String) session.getAttribute("adresseMail");
@@ -112,20 +111,18 @@ public class CommentaireServlet extends HttpServlet {
 		Site site = siteService.findById(Long.parseLong(siteId));
 
 		CommentaireService commentaireService = new CommentaireService();
-		Commentaire commentaireBean = new Commentaire();
+		Commentaire commentaire = new Commentaire();
 
 		// Creation du format date et heure
 		LocalDateTime currentDate = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy à HH:mm:ss");
 
 		// Enregistrement du commentaire dans la BDD
-		commentaireBean.setDateDuCommentaire(currentDate.format(formatter));
-		commentaireBean.setTexte(commentaire);
-		//commentaireBean.setSite(site);
-		commentaireBean.setUtilisateur(utilisateur);
-		site.addCommentaire(commentaireBean);
-		siteService.update(site);
-		//commentaireService.create(commentaireBean, utilisateur, site);
+		commentaire.setDateDuCommentaire(currentDate.format(formatter));
+		commentaire.setTexte(commentaireString);
+		commentaire.setUtilisateur(utilisateur);
+		commentaire.setSite(site);
+        commentaireService.create(commentaire);
 
 		request.setAttribute("siteId", siteId);
 
@@ -133,5 +130,5 @@ public class CommentaireServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-	
+
 }

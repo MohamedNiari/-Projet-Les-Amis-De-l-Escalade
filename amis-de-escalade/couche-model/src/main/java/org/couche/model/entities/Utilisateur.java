@@ -1,12 +1,10 @@
 package org.couche.model.entities;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -16,15 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
-
-import org.hibernate.FetchMode;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.ManyToAny;
 
 /*
  * Bean utilisateur qui représente sous forme d'objet la table du même nom
@@ -37,8 +28,7 @@ public class Utilisateur {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "utilisateur_id")
-	private Long utilisateurId;
+	private Long id;
 	private String nom;
 	@Column(name = "adresse_mail")
 	private String adresseMail;
@@ -61,24 +51,19 @@ public class Utilisateur {
 	/*
 	 * Relation de utilisateur à commentaire sans suppression en cascade
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utilisateur")
-	private List<Commentaire> commentaires;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utilisateur")
+	@OneToMany(mappedBy = "utilisateur")
+	private List<Reservation> commentaires;
+
+	@OneToMany(mappedBy = "utilisateur")
 	@OrderBy("nom")
 	private List<Site> sites;
-	
-	/*
-	 * Relation plusieurs à plusieurs pour la réservation
-	 */
-	@ManyToMany(fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinTable(
-			name="reservation",
-			joinColumns = @JoinColumn(name="utilisateur_id"),
-			inverseJoinColumns = @JoinColumn(name="topo_id")
-			)
-	private List<Topo> topos;
-	
+
+	@OneToMany(mappedBy = "proprietaire")
+	private List<Reservation> reservationsProprietaire;
+
+	@OneToMany(mappedBy = "utilisateur")
+	private List<Reservation> reservationsUtilisateur;
+
 	/*
 	 * Constructeur
 	 */
@@ -100,19 +85,7 @@ public class Utilisateur {
 		this.pays = pays;
 	}
 
-	/*
-	 * Méthode pour la relation bidirectionnelle
-	 */
-	public void addTopo(Topo topo) {
-		if (topos == null) {
-			topos = new ArrayList<>();
-		}
-
-		topos.add(topo);
-		topo.setUtilisateur(this);
-	}
-
-	public void addCommentaire(Commentaire commentaire) {
+	public void addCommentaire(Reservation commentaire) {
 		if (commentaires == null) {
 			commentaires = new ArrayList<>();
 		}
@@ -124,23 +97,31 @@ public class Utilisateur {
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
-
-	public Long getId_Utilisateur() {
-		return utilisateurId;
-	}
-
-	public void setId_Utilisateur(Long id_Utilisateur) {
-		this.utilisateurId = id_Utilisateur;
-	}
-
+	
 	public Long getId() {
-		return utilisateurId;
+		return id;
 	}
 
-	public void setId(Long id_Utilisateur) {
-		this.utilisateurId = id_Utilisateur;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
+	public List<Reservation> getReservationsProprietaire() {
+		return reservationsProprietaire;
+	}
+
+	public void setReservationsProprietaire(List<Reservation> reservationsProprietaire) {
+		this.reservationsProprietaire = reservationsProprietaire;
+	}
+
+	public List<Reservation> getReservationsUtilisateur() {
+		return reservationsUtilisateur;
+	}
+
+	public void setReservationsUtilisateur(List<Reservation> reservationsUtilisateur) {
+		this.reservationsUtilisateur = reservationsUtilisateur;
+	}
+	
 	public String getNom() {
 		return nom;
 	}
@@ -197,20 +178,12 @@ public class Utilisateur {
 		this.pays = pays;
 	}
 
-	public List<Commentaire> getCommentaires() {
+	public List<Reservation> getCommentaires() {
 		return commentaires;
 	}
 
-	public void setCommentaires(List<Commentaire> commentaires) {
+	public void setCommentaires(List<Reservation> commentaires) {
 		this.commentaires = commentaires;
-	}
-
-	public Long getUtilisateurId() {
-		return utilisateurId;
-	}
-
-	public void setUtilisateurId(Long utilisateurId) {
-		this.utilisateurId = utilisateurId;
 	}
 
 	public Set<String> getPrenoms() {
@@ -220,7 +193,7 @@ public class Utilisateur {
 	public void setPrenoms(Set<String> prenoms) {
 		this.prenoms = prenoms;
 	}
-	
+
 	public List<Site> getSites() {
 		return sites;
 	}
@@ -228,21 +201,5 @@ public class Utilisateur {
 	public void setSites(List<Site> sites) {
 		this.sites = sites;
 	}	
-	
-	public List<Topo> getTopos() {
-		return topos;
-	}
-
-	public void setTopos(List<Topo> topos) {
-		this.topos = topos;
-	}
-
-	@Override
-	public String toString() {
-		return "Utilisateur [utilisateurId=" + utilisateurId + ", nom=" + nom + ", adresseMail=" + adresseMail
-				+ ", motDePasse=" + motDePasse + ", dateInscription=" + dateInscription + ", membreAssociation="
-				+ membreAssociation + ", ville=" + ville + ", pays=" + pays + ", prenoms=" + prenoms + ", topos="
-				+ topos + ", commentaires=" + commentaires + "]";
-	}
 
 }

@@ -1,6 +1,5 @@
 package org.couche.model.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,8 +27,7 @@ public class Secteur {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "secteur_id")
-	private Long secteurId;
+	private Long id;
 	private String nom;
 	@Column(name = "numero_secteur")
 	private Integer numeroSecteur;
@@ -67,18 +65,6 @@ public class Secteur {
 		this.site = site;
 	}
 
-	/*
-	 * Méthode pour la relation bidirectionnelle
-	 */
-	public void addVoie(Voie voie) {
-		if (voies == null) {
-			voies = new ArrayList<>();
-		}
-
-		voies.add(voie);
-		voie.setSecteur(this);
-	}
-
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
@@ -114,14 +100,6 @@ public class Secteur {
 		this.voies = voies;
 	}
 
-	public Long getSecteurId() {
-		return secteurId;
-	}
-
-	public void setSecteurId(Long secteurId) {
-		this.secteurId = secteurId;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -132,7 +110,7 @@ public class Secteur {
 
 	@Override
 	public String toString() {
-		return "Secteur [secteurId=" + secteurId + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
+		return "Secteur [secteurId=" + ", nom=" + nom + ", numeroSecteur=" + numeroSecteur
 				+ ", description=" + description + ", voies=" + voies + ", site=" + site + "]";
 	}
 

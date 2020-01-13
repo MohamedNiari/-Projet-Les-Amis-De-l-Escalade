@@ -60,5 +60,12 @@ public class TopoService {
 		topoDao.closeCurrentSession();
 		return topos;
 	}
+	
+	public List<Topo> disponible() {
+		topoDao.openCurrentSession();
+		List<Topo> topos = topoDao.disponible();
+		topoDao.closeCurrentSession();
+		return topos;
+	}
 
 }

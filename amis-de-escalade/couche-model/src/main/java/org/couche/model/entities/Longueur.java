@@ -20,8 +20,7 @@ public class Longueur {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "longueur_id")
-	private Long longueurId;
+	private Long id;
 	@Column(name = "mesure")
 	private Integer mesure;
 	@Column(name = "cotation")
@@ -59,14 +58,6 @@ public class Longueur {
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
-
-	public Long getLongueurId() {
-		return longueurId;
-	}
-
-	public void setLongueurId(Long longueurId) {
-		this.longueurId = longueurId;
-	}
 
 	public Voie getVoie() {
 		return voie;
@@ -110,7 +101,7 @@ public class Longueur {
 
 	@Override
 	public String toString() {
-		return "Longueur [longueurId=" + longueurId + ", mesure=" + mesure + ", cotation=" + cotation
+		return "Longueur [longueurId=" + ", mesure=" + mesure + ", cotation=" + cotation
 				+ ", equiperSpits=" + equiperSpits + ", numeroLongueur=" + numeroLongueur + ", voie=" + voie + "]";
 	}
 

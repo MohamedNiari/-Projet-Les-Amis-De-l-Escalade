@@ -2,10 +2,7 @@ package org.couche.webapp.servlets;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,12 +14,9 @@ import javax.servlet.http.HttpSession;
 import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
 import org.couche.business.services.UtilisateurService;
-import org.couche.business.services.VoieService;
-import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.TypeRocher;
 import org.couche.model.entities.Utilisateur;
-import org.couche.model.entities.Voie;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -82,41 +76,40 @@ public class CreationSite extends HttpServlet {
 		} catch (NumberFormatException e) {
 			System.out.println("NumberFormatException: " + e.getMessage());
 		}
-		
-		//Création du site
+
+		// Création du site
 		SiteService siteService = new SiteService();
 		siteId = siteService.createSite(nomSite, lieuSite, hauteurSiteInt, official, descriptionSite, typeRocher);
-		
+
 		HttpSession session = request.getSession(false);
 		String adresseMail = (String) session.getAttribute("adresseMail");
 
 		UtilisateurService utilisateurService = new UtilisateurService();
 		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
-	
+
 		// Récupération du site depuis la BDD
 		Site site = siteService.findById(siteId);
 		site.setUtilisateur(utilisateur);
-		siteService.update(site);		
-		
-		
+		siteService.update(site);
+
 		// Création des secteurs à vide
 		SecteurService secteurService = new SecteurService();
-		
-		for(int i = 0; i < Integer.parseInt(nombreSecteurs); i++) {
-			
-			secteurService.createSecteur("", i + 1, "", site);			
+
+		for (int i = 0; i < Integer.parseInt(nombreSecteurs); i++) {
+
+			secteurService.createSecteur("", i + 1, "", site);
 		}
-		
-		//Envoi des données en json
-		response.setContentType("application/json"); 
-	    response.setCharacterEncoding("UTF-8");
-	    
-        JsonObject jsonResponse = new JsonObject();
-        jsonResponse.add("nombreSecteurs", new Gson().toJsonTree(nombreSecteurs));
-        jsonResponse.add("siteId", new Gson().toJsonTree(siteId));  
-        
-	    response.getWriter().write(jsonResponse.toString()); 
-		
+
+		// Envoi des données en json
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		JsonObject jsonResponse = new JsonObject();
+		jsonResponse.add("nombreSecteurs", new Gson().toJsonTree(nombreSecteurs));
+		jsonResponse.add("siteId", new Gson().toJsonTree(siteId));
+
+		response.getWriter().write(jsonResponse.toString());
+
 	}
-	
+
 }

@@ -16,9 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.validation.constraints.Size;
 
@@ -36,15 +36,14 @@ public class Site {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "site_id")
-	private Long siteId;
+	private Long id;
 	private String nom;
 	@Column(name = "hauteur_max")
 	private Integer hauteurMax;
 	private String lieu;
 	@Column(name = "taguer_officiel")
 	private Boolean taguerOfficiel;
-	@Size(max=500)
+	@Size(max = 500)
 	private String description;
 	// @Column(columnDefinition = "enum('calcaire', 'granite', 'gneiss')")
 	@Enumerated(EnumType.STRING)
@@ -55,7 +54,7 @@ public class Site {
 	 * Liste de prénoms
 	 */
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "site_url_image", joinColumns = {@JoinColumn(name = "site_id") })
+	@CollectionTable(name = "site_url_image", joinColumns = { @JoinColumn(name = "site_id") })
 	@Column(name = "url_image")
 	private Collection<String> urlImages = new ArrayList<String>();
 
@@ -66,20 +65,18 @@ public class Site {
 	@OneToMany(mappedBy = "site", cascade = { CascadeType.ALL })
 	@OrderBy("numeroSecteur")
 	private List<Secteur> secteurs;
-	
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "site_id")
+
+
+	@OneToMany(mappedBy = "site")
 	@OrderBy("commentaireId DESC")
 	private List<Commentaire> commentaires;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = { CascadeType.PERSIST })
 	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
 
-	@ManyToOne
-	@JoinColumn(name = "topo_id")
-	private Topo topo;
+	@ManyToMany(mappedBy = "sites")
+	private List<Topo> topos;
 
 	/*
 	 * Constructeur
@@ -100,61 +97,36 @@ public class Site {
 	 * Constructeur sans Id
 	 */
 	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String description,
-			TypeRocher typeRocher, Topo topo) {
+			TypeRocher typeRocher) {
 		this.nom = nom;
 		this.hauteurMax = hauteurMax;
 		this.lieu = lieu;
 		this.taguerOfficiel = taguerOfficiel;
 		this.description = description;
 		this.typeRocher = typeRocher;
-		this.topo = topo;
 	}
 
-	/*
-	 * Méthode pour la relation unidirectionnelle
-	 */
-	public void addCommentaire(Commentaire commentaire) {
-		if (commentaires == null) {
-			commentaires = new ArrayList<>();
-		}
-		commentaires.add(commentaire);		
-	}
 
-	public void addSecteur(Secteur secteur) {
-		if (secteurs == null) {
-			secteurs = new ArrayList<>();
-		}
-
-		secteurs.add(secteur);
-		secteur.setSite(this);
-	}
 
 	/**************************************
 	 * Generation des setters and getters *
 	 **************************************/
 
-	public List<Commentaire> getCommentaires() {
-		return commentaires;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setCommentaires(List<Commentaire> commentaires) {
-		this.commentaires = commentaires;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Topo getTopo() {
-		return topo;
+	public List<Topo> getTopos() {
+		return topos;
 	}
 
-	public void setTopo(Topo topo) {
-		this.topo = topo;
-	}
-
-	public Long getId_Site() {
-		return siteId;
-	}
-
-	public void setId_Site(Long id_Site) {
-		this.siteId = id_Site;
+	public void setTopos(List<Topo> topos) {
+		this.topos = topos;
 	}
 
 	public String getNom() {
@@ -181,7 +153,6 @@ public class Site {
 		this.lieu = lieu;
 	}
 
-
 	public Boolean getTaguerOfficiel() {
 		return taguerOfficiel;
 	}
@@ -198,14 +169,6 @@ public class Site {
 		this.secteurs = secteurs;
 	}
 
-	public Long getSiteId() {
-		return siteId;
-	}
-
-	public void setSiteId(Long siteId) {
-		this.siteId = siteId;
-	}
-
 	public TypeRocher getTypeRocher() {
 		return typeRocher;
 	}
@@ -218,6 +181,7 @@ public class Site {
 		return description;
 	}
 
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -229,13 +193,24 @@ public class Site {
 	public void setUrlImages(Collection<String> urlImages) {
 		this.urlImages = urlImages;
 	}
+	
+
+	public List<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+
+	public void setCommentaires(List<Commentaire> commentaires) {
+		this.commentaires = commentaires;
+	}
 
 	@Override
 	public String toString() {
-		return "Site [siteId=" + siteId + ", nom=" + nom + ", hauteurMax=" + hauteurMax + ", lieu=" + lieu
-				+ ", taguerOfficiel=" + taguerOfficiel + ", description=" + description + ", typeRocher=" + typeRocher
-				+ ", urlImages=" + urlImages + ", secteurs=" + secteurs + ", commentaires=" + commentaires + ", topo="
-				+ topo + "]";
+		return "Site [id=" + id + ", nom=" + nom + ", hauteurMax=" + hauteurMax + ", lieu=" + lieu + ", taguerOfficiel="
+				+ taguerOfficiel + ", description=" + description + ", typeRocher=" + typeRocher + ", urlImages="
+				+ urlImages + ", secteurs=" + secteurs + ", commentaires=" + commentaires + ", utilisateur="
+				+ utilisateur + ", topos=" + topos + "]";
 	}
+
+
 
 }

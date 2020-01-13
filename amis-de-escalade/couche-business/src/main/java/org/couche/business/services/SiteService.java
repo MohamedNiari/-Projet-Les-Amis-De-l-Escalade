@@ -3,7 +3,7 @@ package org.couche.business.services;
 import java.util.List;
 
 import org.couche.consumer.dao.implementation.SiteDaoImplementation;
-import org.couche.model.entities.Commentaire;
+import org.couche.model.entities.Reservation;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.TypeRocher;

@@ -8,6 +8,7 @@ import javax.persistence.criteria.Root;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
 import org.couche.model.entities.Commentaire;
+import org.couche.model.entities.Reservation;
 import org.couche.model.entities.Site;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

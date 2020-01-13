@@ -112,7 +112,7 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Topo> findAll() {
-		List<Topo> Topos = (List<Topo>) getCurrentSession().createQuery("from escalade").list();
+		List<Topo> Topos = (List<Topo>) getCurrentSession().createQuery("SELECT t FROM Topo t").list();
 		return Topos;
 	}
 
@@ -139,6 +139,24 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 		// Création du root pour l'entité Commentaire
 		Root<Topo> topoRoot = criteria.from(Topo.class);
 		criteria.where(builder.equal(topoRoot.get("utilisateur"), utilisateur));
+
+		Query<Topo> query;
+		query = getCurrentSession().createQuery(criteria);
+
+		List<Topo> topos = query.getResultList();
+		return topos;
+
+	}
+	
+	public List<Topo> disponible() {
+
+		// Création du CriteriaBuilder pour la construction des requetes
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Topo> criteria = builder.createQuery(Topo.class);
+
+		// Création du root pour l'entité Commentaire
+		Root<Topo> topoRoot = criteria.from(Topo.class);
+		criteria.where(builder.equal(topoRoot.get("disponible"), true));
 
 		Query<Topo> query;
 		query = getCurrentSession().createQuery(criteria);
