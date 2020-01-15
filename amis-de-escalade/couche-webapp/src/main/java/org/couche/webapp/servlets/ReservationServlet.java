@@ -59,12 +59,6 @@ public class ReservationServlet extends HttpServlet {
 			mapTopoAttente.put(topo, reservationService.isTopoEnAttente(topo, utilisateur));			
 		}
 		
-		for(Map.Entry<Topo, Boolean> entry : mapTopoAttente.entrySet()) {
-			System.out.println("topo : " + entry.getKey().getNom());
-			System.out.println("topoEnAttente : " + entry.getValue());			
-		}
-			
-		
 		request.setAttribute("topos", topos);
 		request.setAttribute("mapTopoAttente", mapTopoAttente);
 
@@ -107,7 +101,6 @@ public class ReservationServlet extends HttpServlet {
 		reservationService.create(reservation);
 		
 		Boolean topoEnAttente = reservationService.isTopoEnAttente(topo, utilisateur);
-		System.out.println("topoEnAttente : " + topoEnAttente);
 
 		response.sendRedirect(request.getRequestURI().toString() + "?topoEnAttente=" + topoEnAttente);
 	}

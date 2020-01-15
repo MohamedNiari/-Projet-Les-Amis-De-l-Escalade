@@ -39,7 +39,45 @@
 					MES TOPOS
 				</span>
 			</div>
-			<div class="col-md-6"></div>
+
+			<div class="col-md-6">
+
+				<!-- Toast pour notifier une demande de réservation en attente-->
+				<c:if test="${nombreReservation > 0}">
+					<div aria-live="polite" aria-atomic="true"
+						class="d-flex justify-content-center align-items-center"
+						style="min-height: 100px;">
+						<div role="alert" aria-live="assertive" aria-atomic="true"
+							class="toast" style="min-width: 500px;" data-autohide="false">
+							<div
+								class="toast-header bg-success text-white border border-light rounded">
+								<i class="fas fa-chevron-circle-right text-dark"></i>&nbsp; <strong
+									class="mr-auto">Demande de réservation</strong>
+
+								<button type="button" class="ml-2 mb-1 close"
+									data-dismiss="toast" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<c:forEach var="item" items="${mapReservationAttentes}">
+								<div
+									class="toast-body bg-success text-white border border-light rounded">
+									<br>&nbsp;<strong>${item.value.prenoms.iterator().next()}
+										${item.value.nom}</strong> souhaite réserver votre topo n° <strong>${item.key.id}</strong>
+									<br> <br>
+									<form action="ConfirmationReservation" method="post">
+										<input type="hidden" name="topoId" value="${item.key.id}">
+										<input type="hidden" name="reservationId" value="${item.key.id}">
+										<button class="btn btn-dark btn-sm" name="accepter">Accepter</button>
+										<button class="btn btn-dark btn-sm" name="refuser">Refuser</button>
+									</form>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</c:if>
+			</div>
+
 			<div class="col-md-3">
 				<a href="/SiteEscalade/CreerTopos"
 					class="btn btn-outline-success font-weight-bold buttons float-right"
@@ -72,14 +110,11 @@
 						<td><c:out value="${item.dateParution}" /></td>
 						<td>
 							<form action="MesTopos" method="post">
-								<input type="hidden" name="topoId" value="${item.id}">
-								<select name="disponibiliteSite" onchange="this.form.submit()">									
-										<option selected>
-										${item.disponible == false ? "Non" : "Oui"}
-										</option>
-										<option>
-										${item.disponible == false ? "Oui" : "Non"}
-										</option>				
+								<input type="hidden" name="topoId" value="${item.id}"> <select
+									name="disponibiliteSite" onchange="this.form.submit()">
+									<option selected>${item.disponible == false ? "Non" : "Oui"}
+									</option>
+									<option>${item.disponible == false ? "Oui" : "Non"}</option>
 								</select>
 							</form>
 						</td>
@@ -100,6 +135,10 @@
 		crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/c07610da30.js"
 		crossorigin="anonymous"></script>
+
+	<script>
+		$('.toast').toast('show');
+	</script>
 
 </body>
 

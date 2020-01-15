@@ -69,9 +69,16 @@ public class ReservationService {
 	
 	public Boolean isTopoEnAttente(Topo topo, Utilisateur utilisateur) {
 		reservationDao.openCurrentSession();
-		Boolean topoAttente = reservationDao.isTopoEnAttente(topo, utilisateur);
+		Boolean topoAttente = reservationDao.isTopoEnAttenteDeReservation(topo, utilisateur);
 		reservationDao.closeCurrentSession();
 		return topoAttente;
+	}
+	
+	public List<Reservation> listeReservationEnAttente(Utilisateur proprietaire) {
+		reservationDao.openCurrentSession();
+		List<Reservation> reservations = (List<Reservation>) reservationDao.listeReservationEnAttente(proprietaire);
+		reservationDao.closeCurrentSession();
+		return reservations;
 	}
 
 }

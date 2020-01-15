@@ -141,7 +141,7 @@ public class ReservationDaoImplementation implements DaoInterface<Reservation, L
 
 	}
 
-	public Boolean isTopoEnAttente(Topo topo, Utilisateur utilisateur) {
+	public Boolean isTopoEnAttenteDeReservation(Topo topo, Utilisateur utilisateur) {
 
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<Reservation> criteria = builder.createQuery(Reservation.class);
@@ -159,6 +159,25 @@ public class ReservationDaoImplementation implements DaoInterface<Reservation, L
 
 		System.out.println("size query : " + query.getResultList().size());
 		return query.getResultList().size() >= 1;
+	}
+	
+	public List<Reservation> listeReservationEnAttente(Utilisateur proprietaire) {
+		
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Reservation> criteria = builder.createQuery(Reservation.class);
+		Root<Reservation> reservationRoot = criteria.from(Reservation.class);
+		
+		Predicate predicateProprietaire = builder.equal(reservationRoot.get("proprietaire"), proprietaire);
+		Predicate predicateAccepter = builder.equal(reservationRoot.get("accepter"), false);
+		
+		Predicate finalPredicate = builder.and(predicateAccepter, predicateProprietaire);
+		criteria.where(finalPredicate);
+		
+		Query<Reservation> query;
+		query = getCurrentSession().createQuery(criteria);
+		
+		return query.getResultList();
+
 	}
 
 }

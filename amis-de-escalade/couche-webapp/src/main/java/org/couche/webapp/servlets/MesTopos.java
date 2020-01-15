@@ -2,6 +2,8 @@ package org.couche.webapp.servlets;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.couche.business.services.ReservationService;
 import org.couche.business.services.TopoService;
 import org.couche.business.services.UtilisateurService;
+import org.couche.model.entities.Reservation;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.Utilisateur;
 
@@ -46,8 +50,22 @@ public class MesTopos extends HttpServlet {
 		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
 
 		TopoService topoService = new TopoService();
-		List<Topo> topos = topoService.findByUser(utilisateur);
+		ReservationService reservationService = new ReservationService();
 		
+		List<Topo> topos = topoService.findByUser(utilisateur);			
+		List<Reservation> reservations = reservationService.listeReservationEnAttente(utilisateur);
+		
+		// Récupération du nombre de réservation en attente
+		Integer nombreReservation = reservations.size();
+		
+		// Récupération des utilisateurs et topos par réservation
+		HashMap<Topo, Utilisateur> mapReservationAttente = new HashMap<Topo, Utilisateur>();		
+		for(Reservation reservation : reservations) {
+			mapReservationAttente.put(reservation.getTopo(), reservation.getUtilisateur());
+			reservation.getId();
+		}
+		request.setAttribute("nombreReservation", nombreReservation);
+		request.setAttribute("mapReservationAttentes", mapReservationAttente);
 		request.setAttribute("topos", topos);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/mes-topos.jsp");

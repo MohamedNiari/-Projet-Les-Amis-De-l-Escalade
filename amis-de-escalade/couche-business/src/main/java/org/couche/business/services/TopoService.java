@@ -20,10 +20,22 @@ public class TopoService {
 		topoDao.create(topo);
 		topoDao.closeCurrentSessionwithTransaction();
 	}
+	
+	public void persist(Topo topo) {
+		topoDao.openCurrentSessionwithTransaction();
+		topoDao.persist(topo);
+		topoDao.closeCurrentSessionwithTransaction();
+	}
 
 	public void update(Topo topo) {
 		topoDao.openCurrentSessionwithTransaction();
 		topoDao.update(topo);
+		topoDao.closeCurrentSessionwithTransaction();
+	}
+	
+	public void merge(Topo topo) {
+		topoDao.openCurrentSessionwithTransaction();
+		topoDao.merge(topo);
 		topoDao.closeCurrentSessionwithTransaction();
 	}
 

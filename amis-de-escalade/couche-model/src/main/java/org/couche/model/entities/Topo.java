@@ -1,5 +1,6 @@
 package org.couche.model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class Topo {
 	/*
 	 * Relation de plusieurs à plusieurs Topo/Site
 	 */
-	@ManyToMany(cascade = {CascadeType.PERSIST})
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 				name = "topo_site", 
 				joinColumns = { @JoinColumn(name = "topo_id") }, 
@@ -67,6 +68,19 @@ public class Topo {
 		this.dateParution = dateParution;
 		this.disponible = disponible;
 		this.utilisateur = utilisateur;
+	}
+	
+	/*
+	 * Creation d'une methode add pour l'ajout des sites au topo
+	 */
+	
+	public void addSite(Site site) {
+		
+		if(sites == null) {
+			sites = new ArrayList<>();
+		}
+		
+		sites.add(site);
 	}
 
 	/**************************************

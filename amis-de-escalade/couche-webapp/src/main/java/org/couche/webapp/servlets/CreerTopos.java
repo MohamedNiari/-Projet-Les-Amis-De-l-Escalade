@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.couche.business.services.ReservationService;
 import org.couche.business.services.SiteService;
 import org.couche.business.services.TopoService;
 import org.couche.business.services.UtilisateurService;
+import org.couche.model.entities.Reservation;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.Utilisateur;
@@ -28,31 +30,33 @@ import org.couche.model.entities.Utilisateur;
 @WebServlet("/CreerTopos")
 public class CreerTopos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreerTopos() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public CreerTopos() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession(false);
 		String adresseMail = (String) session.getAttribute("adresseMail");
 
 		UtilisateurService utilisateurService = new UtilisateurService();
 		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
-		
+
 		SiteService siteService = new SiteService();
 		List<Site> sites = siteService.findByUser(utilisateur);
-		
+
 		request.setAttribute("sites", sites);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/creer-topos.jsp");
 		dispatcher.forward(request, response);
 
@@ -74,9 +78,7 @@ public class CreerTopos extends HttpServlet {
 		String lieuTopo = request.getParameter("lieuTopo");
 		String descriptionTopo = request.getParameter("descriptionTopo");
 		
-		for(String site : listeSites)
-		System.out.println("site : " + site);
-		
+	
 		LocalDateTime currentDate = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
 		
@@ -95,17 +97,16 @@ public class CreerTopos extends HttpServlet {
 
 		UtilisateurService utilisateurService = new UtilisateurService();
 		Utilisateur utilisateur = utilisateurService.findByEmail(adresseMail);
-		topo.setUtilisateur(utilisateur);
-		
-		topoService.create(topo);
+		topo.setUtilisateur(utilisateur);		
 		
 		SiteService siteService = new SiteService();
 		
-		for(String nomSite : listeSites) {
+		for(String nomSite : listeSites) {			
 			Site site = siteService.findByName(nomSite);
-			topo.getSites().add(site);
-			siteService.update(site);			
-		}
+			topo.addSite(site);	
+		}		
+
+		topoService.merge(topo);
 				
 		response.sendRedirect(request.getContextPath() + "/MesTopos");
 

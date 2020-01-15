@@ -2,6 +2,7 @@ package org.couche.webapp.servlets;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.couche.business.services.ReservationService;
 import org.couche.business.services.UtilisateurService;
+import org.couche.model.entities.Reservation;
 import org.couche.model.entities.Utilisateur;
 
 /**
@@ -66,6 +69,11 @@ public class LoginCheck extends HttpServlet {
 			prenoms = utilisateur.getPrenoms();
 			etatConnexion = utilisateurService.checkLogin(motDePasse, adresseMail);
 		}
+		
+		// Récupération du nombre de réservation en attente
+		ReservationService reservationService = new ReservationService();
+		List<Reservation> reservations = reservationService.listeReservationEnAttente(utilisateur);
+		Integer nombreReservation = reservations.size();
 
 		if (etatConnexion) {
 			
@@ -74,6 +82,7 @@ public class LoginCheck extends HttpServlet {
 			session.setAttribute("prenom", prenoms.iterator().next());
 			session.setAttribute("adresseMail", adresseMail);
 			session.setAttribute("membreAssociation", utilisateur.getMembreAssociation());
+			session.setAttribute("nombreReservation", nombreReservation);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListeDesSites");
 			dispatcher.forward(request, response);

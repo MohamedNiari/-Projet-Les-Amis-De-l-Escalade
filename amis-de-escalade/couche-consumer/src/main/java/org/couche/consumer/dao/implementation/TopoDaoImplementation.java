@@ -102,6 +102,10 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 	public void update(Topo topo) {
 		getCurrentSession().update(topo);
 	}
+	
+	public void merge(Topo topo) {
+		getCurrentSession().merge(topo);
+	}
 
 	@Override
 	public void delete(Topo topo) {
@@ -164,6 +168,11 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 		List<Topo> topos = query.getResultList();
 		return topos;
 
+	}
+
+	public void persist(Topo topo) {
+		getCurrentSession().persist(topo);
+		
 	}
 
 }
