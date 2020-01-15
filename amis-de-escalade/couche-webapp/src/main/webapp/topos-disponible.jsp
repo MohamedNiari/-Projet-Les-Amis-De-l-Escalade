@@ -66,7 +66,7 @@
 					<th scope="col">Lieu</th>
 					<th scope="col">Description</th>
 					<th scope="col">Date de parution</th>
-					<th scope="col"></th>
+					<th scope="col">Statut</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -82,13 +82,15 @@
 									<input type="hidden" name="topoId" value="${item.key.id}">
 									<button class="btn btn-outline-success" type="submit">Réserver</button>
 								</form>
-							</c:if> <c:if test="${item.value == true}">
+							</c:if> 
+							<c:if test="${item.value == true}">
 								<form action="ReservationServlet" method="post">
 									<input type="hidden" name="topoId" value="${item.key.id}">
 									<button class="btn btn-outline-success" disabled>En
 										Attente</button>
 								</form>
-							</c:if></td>
+							</c:if>							
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

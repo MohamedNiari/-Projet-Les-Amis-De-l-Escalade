@@ -128,6 +128,11 @@ public class ReservationDaoImplementation implements DaoInterface<Reservation, L
 		getCurrentSession().update(reservation);
 
 	}
+	
+	public void merge(Reservation reservation) {
+		getCurrentSession().merge(reservation);
+
+	}
 
 	@Override
 	public Reservation findById(Long id) {
@@ -157,7 +162,6 @@ public class ReservationDaoImplementation implements DaoInterface<Reservation, L
 		Query<Reservation> query;
 		query = getCurrentSession().createQuery(criteria);
 
-		System.out.println("size query : " + query.getResultList().size());
 		return query.getResultList().size() >= 1;
 	}
 	

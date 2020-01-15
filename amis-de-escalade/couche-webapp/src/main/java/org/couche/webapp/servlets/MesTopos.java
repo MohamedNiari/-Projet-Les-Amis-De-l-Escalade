@@ -52,20 +52,12 @@ public class MesTopos extends HttpServlet {
 		TopoService topoService = new TopoService();
 		ReservationService reservationService = new ReservationService();
 		
-		List<Topo> topos = topoService.findByUser(utilisateur);			
+		List<Topo> topos = topoService.findByUser(utilisateur);
+		
+		// Récupération de la liste de toutes les réservations en attente
 		List<Reservation> reservations = reservationService.listeReservationEnAttente(utilisateur);
 		
-		// Récupération du nombre de réservation en attente
-		Integer nombreReservation = reservations.size();
-		
-		// Récupération des utilisateurs et topos par réservation
-		HashMap<Topo, Utilisateur> mapReservationAttente = new HashMap<Topo, Utilisateur>();		
-		for(Reservation reservation : reservations) {
-			mapReservationAttente.put(reservation.getTopo(), reservation.getUtilisateur());
-			reservation.getId();
-		}
-		request.setAttribute("nombreReservation", nombreReservation);
-		request.setAttribute("mapReservationAttentes", mapReservationAttente);
+		request.setAttribute("reservations", reservations);
 		request.setAttribute("topos", topos);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/mes-topos.jsp");

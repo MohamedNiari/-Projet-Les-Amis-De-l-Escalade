@@ -1,5 +1,6 @@
 package org.couche.model.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Reservation {
 	@Column(name = "accepter")
 	private Boolean accepter = false;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "topo_id")
 	private Topo topo;
 	

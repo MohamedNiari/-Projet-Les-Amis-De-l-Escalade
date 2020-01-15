@@ -26,6 +26,12 @@ public class ReservationService {
 		reservationDao.update(reservation);
 		reservationDao.closeCurrentSessionwithTransaction();
 	}
+	
+	public void merge(Reservation reservation) {
+		reservationDao.openCurrentSessionwithTransaction();
+		reservationDao.merge(reservation);
+		reservationDao.closeCurrentSessionwithTransaction();
+	}
 
 	public Reservation findById(Long id) {
 		reservationDao.openCurrentSession();

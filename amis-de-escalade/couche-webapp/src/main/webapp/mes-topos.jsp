@@ -59,15 +59,15 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<c:forEach var="item" items="${mapReservationAttentes}">
+							<c:forEach var="item" items="${reservations}">
 								<div
 									class="toast-body bg-success text-white border border-light rounded">
-									<br>&nbsp;<strong>${item.value.prenoms.iterator().next()}
-										${item.value.nom}</strong> souhaite réserver votre topo n° <strong>${item.key.id}</strong>
+									<br>&nbsp;<strong>${item.utilisateur.prenoms.iterator().next()}
+										${item.utilisateur.nom}</strong> souhaite réserver votre topo n° <strong>${item.topo.id}</strong>
 									<br> <br>
 									<form action="ConfirmationReservation" method="post">
-										<input type="hidden" name="topoId" value="${item.key.id}">
-										<input type="hidden" name="reservationId" value="${item.key.id}">
+										<input type="hidden" name="topoId" value="${item.topo.id}">
+										<input type="hidden" name="reservationId" value="${item.id}">
 										<button class="btn btn-dark btn-sm" name="accepter">Accepter</button>
 										<button class="btn btn-dark btn-sm" name="refuser">Refuser</button>
 									</form>
