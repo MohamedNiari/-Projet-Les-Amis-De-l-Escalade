@@ -31,7 +31,7 @@ public class SiteService {
 		siteDao.create(site);
 		siteDao.closeCurrentSessionwithTransaction();
 	}
-
+	
 
 	public void update(Site site) {
 		siteDao.openCurrentSessionwithTransaction();

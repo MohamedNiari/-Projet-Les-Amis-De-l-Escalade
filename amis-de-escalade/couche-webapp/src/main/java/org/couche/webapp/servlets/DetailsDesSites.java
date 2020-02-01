@@ -11,13 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.couche.business.services.CommentaireService;
 import org.couche.business.services.SecteurService;
 import org.couche.business.services.SiteService;
 import org.couche.business.services.VoieService;
-import org.couche.model.entities.Reservation;
+import org.couche.model.entities.Commentaire;
 import org.couche.model.entities.Secteur;
 import org.couche.model.entities.Site;
 import org.couche.model.entities.Voie;
@@ -62,19 +61,19 @@ public class DetailsDesSites extends HttpServlet {
 
 		// Chargement des secteurs du site
 		request.setAttribute("SECTEUR_LIST", secteurs);
-		
+
 		// Récupération des voies
 		VoieService voieService = new VoieService();
 		List<Voie> voies = voieService.findAll();
-		
+
 		request.setAttribute("VOIE_LIST", voies);
 		request.setAttribute("siteId", siteId);
-		
+
 		// Récupération de tous les commentaires du site
-		//CommentaireService commentaireService = new CommentaireService();
-		//List<Commentaire> commentaires = commentaireService.findBySite(site);		
-		request.setAttribute("commentaires", site.getCommentaires());
-		
+		CommentaireService commentaireService = new CommentaireService();
+		List<Commentaire> commentaires = commentaireService.findBySite(site);
+		request.setAttribute("commentaires", commentaires);
+
 		// Envoi à la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/details-sites.jsp");
 		dispatcher.forward(request, response);
@@ -87,9 +86,9 @@ public class DetailsDesSites extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		doGet(request, response);
-				
+
 	}
 
 }

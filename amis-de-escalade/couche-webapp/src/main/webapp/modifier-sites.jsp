@@ -1,29 +1,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page language="java" contentType="text/html; UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<script src="https://kit.fontawesome.com/c07610da30.js"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="css/style.css">
-<link rel="icon" type="image/png" href="img/Favicon.png" />
+<title>Modifier site</title>
+<%@ include file="header.jsp"%>
 </head>
 
 <body>
 
 	<!-- Barre de navigation -->
 	<jsp:include page="barre-navigation.jsp"></jsp:include>
+
+	<!-- Modals pour la création d'un site -->
+	<jsp:include page="modal-creation-site.jsp"></jsp:include>
 
 	<section class="d-flex flex-wrap">
 		<div class="col-md-4">
@@ -70,6 +63,25 @@
 					</a>
 				</div>
 			</div>
+
+			<div class="card border border-success">
+				<form method="post" action="TelechargerImages?siteId=${siteId}"
+					enctype="multipart/form-data">
+
+					<div class="form-group m-3">
+						<div class="custom-file mb-3">						
+							<input type="file" class="custom-file-input" id="customFile"
+								multiple name="filename"> <label
+								class="custom-file-label" for="customFile">Choisir 3
+								images (max)</label>
+						</div>
+						<div class="mt-3">
+							<input type="submit" class="btn btn-success" />
+						</div>
+					</div>
+
+				</form>
+			</div>
 		</div>
 
 		<div class="col-md-8">
@@ -104,7 +116,6 @@
 			<!-- Creation des longueurs -->
 			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
 				<form method="post" action="CreationLongueur">
-					<!-- input type="hidden" name="_method" value="put" /-->
 					<c:forEach items="${SECTEUR_LIST}" var="itemSecteur">
 						<div style="margin-bottom: 2%">
 							<h6 style="font-size: 1.1em">
@@ -132,40 +143,42 @@
 												</div>
 											</div>
 											<div class="card-text">
-												<table class="table">
-													<thead class="thead-light">
-														<tr>
-															<th scope="col">Longueur</th>
-															<th scope="col">Mesure</th>
-															<th scope="col">Cotation</th>
-															<th scope="col">Equipée Spits</th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach items="${itemVoie.longueurs}"
-															var="itemLongueur">
+												<div class="table-responsive">
+													<table class="table">
+														<thead>
 															<tr>
-																<th scope="row">${itemLongueur.numeroLongueur}</th>
-																<td><input type="number" class="form-control-sm"
-																	min="1" max="30"
-																	title="La hauteur doit être comprise entre 1 et 30 m"
-																	required value="${itemLongueur.mesure}"
-																	name="mesureSecteurNum${itemSecteur.numeroSecteur}VoieNum${itemVoie.numeroVoie}longueurNum${itemLongueur.numeroLongueur}">
-																</td>
-																<td><input type="text" class="form-control-sm"
-																	pattern="[1-9][a-c]" required
-																	value="${itemLongueur.cotation}"
-																	name="cotationSecteurNum${itemSecteur.numeroSecteur}VoieNum${itemVoie.numeroVoie}longueurNum${itemLongueur.numeroLongueur}">
-																</td>
-																<td><select class="form-control-sm"
-																	name="spitsSecteurNum${itemSecteur.numeroSecteur}VoieNum${itemVoie.numeroVoie}longueurNum${itemLongueur.numeroLongueur}">
-																		<option>Non</option>
-																		<option>Oui</option>
-																</select></td>
+																<th scope="col">Longueur</th>
+																<th scope="col">Mesure</th>
+																<th scope="col">Cotation</th>
+																<th scope="col">Equipée Spits</th>
 															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
+														</thead>
+														<tbody>
+															<c:forEach items="${itemVoie.longueurs}"
+																var="itemLongueur">
+																<tr>
+																	<th scope="row">${itemLongueur.numeroLongueur}</th>
+																	<td><input type="number" class="form-control-sm"
+																		min="1" max="30"
+																		title="La hauteur doit être comprise entre 1 et 30 m"
+																		required value="${itemLongueur.mesure}"
+																		name="mesureSecteurNum${itemSecteur.numeroSecteur}VoieNum${itemVoie.numeroVoie}longueurNum${itemLongueur.numeroLongueur}">
+																	</td>
+																	<td><input type="text" class="form-control-sm"
+																		pattern="[1-9][a-c]" required
+																		value="${itemLongueur.cotation}"
+																		name="cotationSecteurNum${itemSecteur.numeroSecteur}VoieNum${itemVoie.numeroVoie}longueurNum${itemLongueur.numeroLongueur}">
+																	</td>
+																	<td><select class="form-control-sm"
+																		name="spitsSecteurNum${itemSecteur.numeroSecteur}VoieNum${itemVoie.numeroVoie}longueurNum${itemLongueur.numeroLongueur}">
+																			<option>Non</option>
+																			<option>Oui</option>
+																	</select></td>
+																</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</div>
 
 											</div>
 											<div class="card-footer">
@@ -184,16 +197,22 @@
 			</div>
 		</div>
 	</section>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/c07610da30.js"
-		crossorigin="anonymous"></script>
 
+	<%@ include file="scriptJs.jsp"%>
+
+	<!--  Gestion de l'upload d'images -->
+    <script>
+        $("#customFile").change(function () {
+            var files = $(this)[0].files;
+            $(this).siblings(".custom-file-label").html("");
+            for (var i = 0; i < files.length; i++) {
+                if (i == 0)
+                    $(this).siblings(".custom-file-label").append(files[i].name);
+                else
+                    $(this).siblings(".custom-file-label").append(", " + files[i].name);
+            }
+        });
+    </script>
 </body>
 
 </html>

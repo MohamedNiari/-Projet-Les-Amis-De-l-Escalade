@@ -16,7 +16,6 @@
 		<!-- Paramétrage du pool de connexion -->
 		<property name="connection.pool_size">100</property>
 
-
 		<!-- Selection du dialect MySQL -->
 		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
@@ -26,7 +25,7 @@
 		<!-- Session courante en mode thread -->
 		<property name="current_session_context_class">thread</property>
 
-		<!-- Empeche les modifications du schema durant la phase de production -->
+		<!-- Schema non modifiable en environnement de production -->
 		<property name="hibernate.hbm2ddl.auto">validate</property>
 
 		<!-- mappings des classes annotées -->

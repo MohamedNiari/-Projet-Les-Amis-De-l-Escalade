@@ -62,21 +62,24 @@ public class LoginCheck extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		UtilisateurService utilisateurService = new UtilisateurService();
+		ReservationService reservationService = new ReservationService();
 		Utilisateur utilisateur = new Utilisateur();
-		if(utilisateurService.findByEmail(adresseMail) !=null) {
-			
+		Integer nombreReservation = 0;
+
+		if (utilisateurService.findByEmail(adresseMail) != null) {
+
 			utilisateur = utilisateurService.findByEmail(adresseMail);
 			prenoms = utilisateur.getPrenoms();
 			etatConnexion = utilisateurService.checkLogin(motDePasse, adresseMail);
+
+			// Récupération du nombre de réservation en attente
+			List<Reservation> reservations = reservationService.listeReservationEnAttente(utilisateur);
+			nombreReservation = reservations.size();
+
 		}
-		
-		// Récupération du nombre de réservation en attente
-		ReservationService reservationService = new ReservationService();
-		List<Reservation> reservations = reservationService.listeReservationEnAttente(utilisateur);
-		Integer nombreReservation = reservations.size();
 
 		if (etatConnexion) {
-			
+
 			session.setAttribute("connexionOk", true);
 			session.setAttribute("nom", utilisateur.getNom());
 			session.setAttribute("prenom", prenoms.iterator().next());
@@ -88,7 +91,7 @@ public class LoginCheck extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		} else {
-			
+
 			connexionKo = "Votre adresse mail ou votre mot de passe est incorrect.";
 			request.setAttribute("connexionKo", connexionKo);
 

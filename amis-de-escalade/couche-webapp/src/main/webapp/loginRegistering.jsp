@@ -1,24 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<script src="https://kit.fontawesome.com/c07610da30.js"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="css/sourcesanspro-font.css">
-<link rel="stylesheet" href="css/style.css">
+<title>Page de Login</title>
+<%@ include file="header.jsp"%>
 <link rel="stylesheet" href="css/styleCompte.css" />
-<link rel="icon" type="image/png" href="img/Favicon.png" />
 </head>
 
 <body>
@@ -53,39 +41,40 @@
 					<div class="tab">
 						<c:if test="${defaultOpenRegister}">
 							<div class="tab-inner">
-								<button class="tablinks" onclick="openCity(event, 'sign-in')">SE
+								<button class="tablinks" onclick="choiceLogin(event, 'sign-in')">SE
 									CONNECTER</button>
 							</div>
 							<div class="tab-inner">
-								<button class="tablinks" onclick="openCity(event, 'sign-up')"
+								<button class="tablinks" onclick="choiceLogin(event, 'sign-up')"
 									id="defaultOpen">S'INSCRIRE</button>
 							</div>
 						</c:if>
 
 						<c:if test="${not defaultOpenRegister}">
 							<div class="tab-inner">
-								<button class="tablinks" onclick="openCity(event, 'sign-in')"
+								<button class="tablinks" onclick="choiceLogin(event, 'sign-in')"
 									id="defaultOpen">SE CONNECTER</button>
 							</div>
 							<div class="tab-inner">
-								<button class="tablinks" onclick="openCity(event, 'sign-up')">S'INSCRIRE</button>
+								<button class="tablinks" onclick="choiceLogin(event, 'sign-up')">S'INSCRIRE</button>
 							</div>
 						</c:if>
 					</div>
 
 					<form class="form-detail" action="LoginCheck" method="post">
 						<div class="tabcontent" id="sign-in">
-							<div class="form-row">
-								<label class="form-row-inner"> <input type="text"
-									class="input-text" disabled> <span
-									class="label text-danger"> <c:if
-											test="${connexionKo != null}">
-											<i class="fas fa-times-circle"></i>&nbsp;<c:out
+							<c:if test="${connexionKo != null}">
+								<div class="form-row">
+									<label class="form-row-inner"> <input type="text"
+										class="input-text" disabled> <span
+										class="label text-danger"> <i
+											class="fas fa-times-circle"></i>&nbsp;<c:out
 												value="${connexionKo}" />
-										</c:if>
-								</span> <span class="border"></span></label>
 
-							</div>
+									</span> <span class="border"></span></label>
+
+								</div>
+							</c:if>
 							<div class="form-row">
 								<label class="form-row-inner"> <input type="text"
 									name="adresseMail" class="input-text" required> <span
@@ -104,6 +93,7 @@
 							</div>
 						</div>
 					</form>
+
 					<form class="form-detail" action="Inscription" method="post">
 						<div class="tabcontent" id="sign-up">
 							<div class="form-row">
@@ -173,20 +163,25 @@
 
 	</section>
 
+	<%@ include file="scriptJs.jsp"%>
 	<script type="text/javascript">
-		function openCity(evt, cityName) {
+		function choiceLogin(evt, screen) {
 
 			var i, tabcontent, tablinks;
 			tabcontent = document.getElementsByClassName("tabcontent");
+
 			for (i = 0; i < tabcontent.length; i++) {
 				tabcontent[i].style.display = "none";
 			}
+
 			tablinks = document.getElementsByClassName("tablinks");
+
 			for (i = 0; i < tablinks.length; i++) {
 				tablinks[i].className = tablinks[i].className.replace(
 						" active", "");
 			}
-			document.getElementById(cityName).style.display = "block";
+
+			document.getElementById(screen).style.display = "block";
 			evt.currentTarget.className += " active";
 
 		}
@@ -194,13 +189,6 @@
 		document.getElementById("defaultOpen").click();
 	</script>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
 </body>
 
 </html>

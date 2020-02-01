@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; UTF-8"
+<%@ page language="java" contentType="text/html"
 	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 
 <!-- Barre de navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-success"

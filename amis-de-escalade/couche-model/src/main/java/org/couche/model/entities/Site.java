@@ -56,7 +56,7 @@ public class Site {
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "site_url_image", joinColumns = { @JoinColumn(name = "site_id") })
 	@Column(name = "url_image")
-	private Collection<String> urlImages = new ArrayList<String>();
+	private List<String> urlImages = new ArrayList<String>();
 
 	/*
 	 * Relation de secteur à voie avec suppression en cascade
@@ -186,14 +186,13 @@ public class Site {
 		this.description = description;
 	}
 
-	public Collection<String> getUrlImages() {
+	public List<String> getUrlImages() {
 		return urlImages;
 	}
 
-	public void setUrlImages(Collection<String> urlImages) {
+	public void setUrlImages(List<String> urlImages) {
 		this.urlImages = urlImages;
 	}
-	
 
 	public List<Commentaire> getCommentaires() {
 		return commentaires;
@@ -210,7 +209,5 @@ public class Site {
 				+ urlImages + ", secteurs=" + secteurs + ", commentaires=" + commentaires + ", utilisateur="
 				+ utilisateur + ", topos=" + topos + "]";
 	}
-
-
 
 }

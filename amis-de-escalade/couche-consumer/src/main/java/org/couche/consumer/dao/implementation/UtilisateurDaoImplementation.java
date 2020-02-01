@@ -8,7 +8,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
-import org.couche.model.entities.Topo;
 import org.couche.model.entities.Utilisateur;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -148,7 +147,7 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 	}
 
 	public Boolean checkLogin(String motDePasse, String adresseMail) {
-		
+
 		boolean flag = false;
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<Utilisateur> criteria = builder.createQuery(Utilisateur.class);
@@ -162,7 +161,7 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 
 		flag = query.getResultList().size() > 0;
 		return flag;
-		
+
 	}
 
 	public void validationEmail(String adresseMail) throws Exception {

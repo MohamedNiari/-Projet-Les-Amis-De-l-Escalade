@@ -7,7 +7,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.couche.consumer.dao.interfaces.DaoInterface;
-import org.couche.model.entities.Site;
 import org.couche.model.entities.Topo;
 import org.couche.model.entities.Utilisateur;
 import org.hibernate.Session;
@@ -102,7 +101,7 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 	public void update(Topo topo) {
 		getCurrentSession().update(topo);
 	}
-	
+
 	public void merge(Topo topo) {
 		getCurrentSession().merge(topo);
 	}
@@ -133,7 +132,7 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 		Topo Topo = (Topo) getCurrentSession().get(Topo.class, id);
 		return Topo;
 	}
-	
+
 	public List<Topo> findByUser(Utilisateur utilisateur) {
 
 		// Création du CriteriaBuilder pour la construction des requetes
@@ -151,7 +150,7 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 		return topos;
 
 	}
-	
+
 	public List<Topo> disponible() {
 
 		// Création du CriteriaBuilder pour la construction des requetes
@@ -172,7 +171,7 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 
 	public void persist(Topo topo) {
 		getCurrentSession().persist(topo);
-		
+
 	}
 
 }
