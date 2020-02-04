@@ -4,6 +4,7 @@
 <html>
 
 <head>
+<%@ include file="meta.jsp"%>
 <title>Page de Login</title>
 <%@ include file="header.jsp"%>
 <link rel="stylesheet" href="css/styleCompte.css" />
@@ -15,21 +16,23 @@
 		id="barreNavigation">
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarText" aria-controls="navbarText"
+			data-target="#navbarDropDown" aria-controls="navbarText"
 			aria-expanded="true" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="collapse navbar-collapse">
-			<c:url var="listeDesSites" value="ListeDesSites" />
-			<a class="navbar-brand" href="${listeDesSites}"><img
-				src="img/amisEscaladeNav.png" alt="escalade"
-				class="border border-white rounded"></a>
-		</div>
-		<div class="float-right">
-			<a href="/SiteEscalade/LoginCheck"
-				class="btn btn-outline-light font-weight-bold buttons" role="button">SE
-				CONNECTER / S'INSCRIRE</a>
+		<div class="collapse navbar-collapse" id="navbarDropDown">
+			<div class="col-10">
+				<c:url var="listeDesSites" value="ListeDesSites" />
+				<a class="navbar-brand" href="${listeDesSites}"><img
+					src="img/amisEscaladeNav.png" alt="escalade"
+					class="border border-white rounded"></a>
+			</div>
+			<div class="col-2">
+				<a href="/SiteEscalade/LoginCheck"
+					class="btn btn-outline-light font-weight-bold buttons"
+					role="button">SE CONNECTER / S'INSCRIRE</a>
+			</div>
 		</div>
 	</nav>
 

@@ -1,12 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page language="java" contentType="text/html"
-	pageEncoding="UTF-8"%>
-	
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 
 <head>
+<%@ include file="meta.jsp"%>
 <title>Mes topos</title>
 <%@ include file="header.jsp"%>
 </head>
@@ -84,44 +84,46 @@
 		<br>
 		<hr>
 		<br>
-		<table class="table col-md-12">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col">Numéro</th>
-					<th scope="col">Nom</th>
-					<th scope="col">Lieu</th>
-					<th scope="col">Description</th>
-					<th scope="col">Date de parution</th>
-					<th scope="col">Disponible</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="item" items="${topos}">
-
+		<div class="table-responsive">
+			<table class="table">
+				<thead class="thead-dark">
 					<tr>
-						<th scope="row"><c:out value="${item.id}" /></th>
-						<td><c:out value="${item.nom}" /></td>
-						<td><c:out value="${item.lieu}" /></td>
-						<td><c:out value="${item.description}" /></td>
-						<td><c:out value="${item.dateParution}" /></td>
-						<td>
-							<form action="MesTopos" method="post">
-								<input type="hidden" name="topoId" value="${item.id}"> <select
-									name="disponibiliteSite" onchange="this.form.submit()">
-									<option selected>${item.disponible == false ? "Non" : "Oui"}
-									</option>
-									<option>${item.disponible == false ? "Oui" : "Non"}</option>
-								</select>
-							</form>
-						</td>
+						<th scope="col">Numéro</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Lieu</th>
+						<th scope="col">Description</th>
+						<th scope="col">Date de parution</th>
+						<th scope="col">Disponible</th>
 					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="item" items="${topos}">
 
-				</c:forEach>
-			</tbody>
-		</table>
+						<tr>
+							<th scope="row"><c:out value="${item.id}" /></th>
+							<td><c:out value="${item.nom}" /></td>
+							<td><c:out value="${item.lieu}" /></td>
+							<td><c:out value="${item.description}" /></td>
+							<td><c:out value="${item.dateParution}" /></td>
+							<td>
+								<form action="MesTopos" method="post">
+									<input type="hidden" name="topoId" value="${item.id}">
+									<select name="disponibiliteSite" onchange="this.form.submit()">
+										<option selected>${item.disponible == false ? "Non" : "Oui"}
+										</option>
+										<option>${item.disponible == false ? "Oui" : "Non"}</option>
+									</select>
+								</form>
+							</td>
+						</tr>
+
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 
 	</section>
-	
+
 	<%@ include file="scriptJs.jsp"%>
 	<script>
 		$('.toast').toast('show');

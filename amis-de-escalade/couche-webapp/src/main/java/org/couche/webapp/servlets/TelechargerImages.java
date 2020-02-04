@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -71,10 +72,16 @@ public class TelechargerImages extends HttpServlet {
 			
 			site.setUrlImages(urlImages);
 			serviceSite.update(site);
+			
+			request.setAttribute("siteId", siteId);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificationSite");
+			dispatcher.forward(request, response);
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 
 	}
 

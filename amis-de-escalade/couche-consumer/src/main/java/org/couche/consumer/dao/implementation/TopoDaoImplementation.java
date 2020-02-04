@@ -151,15 +151,15 @@ public class TopoDaoImplementation implements DaoInterface<Topo, Long> {
 
 	}
 
-	public List<Topo> disponible() {
+	public List<Topo> disponible(Utilisateur utilisateur) {
 
 		// Création du CriteriaBuilder pour la construction des requetes
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<Topo> criteria = builder.createQuery(Topo.class);
 
-		// Création du root pour l'entité Commentaire
+		// Création du root pour l'entité Topo
 		Root<Topo> topoRoot = criteria.from(Topo.class);
-		criteria.where(builder.equal(topoRoot.get("disponible"), true));
+		criteria.where(builder.and(builder.equal(topoRoot.get("disponible"), true), builder.notEqual(topoRoot.get("utilisateur"), utilisateur)));
 
 		Query<Topo> query;
 		query = getCurrentSession().createQuery(criteria);

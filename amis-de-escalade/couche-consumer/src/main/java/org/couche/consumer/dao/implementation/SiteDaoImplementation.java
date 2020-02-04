@@ -111,6 +111,10 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		getCurrentSession().update(site);
 	}
 
+	public void merge(Site site) {
+		getCurrentSession().merge(site);
+	}
+
 	@Override
 	public void delete(Site site) {
 		getCurrentSession().delete(site);
@@ -137,7 +141,7 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		Site site = (Site) getCurrentSession().get(Site.class, id);
 		return site;
 	}
-	
+
 	public Site findByName(String nom) {
 		// Création du CriteriaBuilder pour la construction des requetes
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
@@ -154,7 +158,7 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		return site;
 	}
 
-	public List<Site> searchSite(String lieu, TypeRocher typeRoche, Integer numberSecteur) {		
+	public List<Site> searchSite(String lieu, TypeRocher typeRoche, Integer numberSecteur) {
 
 		// Création du CriteriaBuilder pour la construction des requetes
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
@@ -176,46 +180,47 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		}
 
 		Predicate predicateSecteur = null;
-		if (Optional.ofNullable(numberSecteur).isPresent()) {	
+		if (Optional.ofNullable(numberSecteur).isPresent()) {
 			predicateSecteur = builder.equal(builder.size(siteRoot.get("secteurs")), sizeSecteurParameter);
 		} else {
 			predicateSecteur = builder.conjunction();
 		}
-		
+
 		Query<Site> query;
-		
+
 		// Ajout des prédicats au prédicat final
 		Predicate finalPredicate = builder.and(predicateLieu, predicateRoche, predicateSecteur);
 		criteria.where(finalPredicate);
 
 		query = getCurrentSession().createQuery(criteria);
 
-		if (numberSecteur != null) 
+		if (numberSecteur != null)
 			query.setParameter(sizeSecteurParameter, numberSecteur);
-		
+
 		if (typeRoche != null)
 			query.setParameter(typeRocheParameter, typeRoche);
-		
+
 		List<Site> sites = query.getResultList();
 		return sites;
 
 	}
-	
-	public Long createSite(String nomSite, String lieuSite, Integer hauteurSite, Boolean official, String descriptionSite, TypeRocher typeRoche) {		
-		
-		Site site = new Site();		
+
+	public Long createSite(String nomSite, String lieuSite, Integer hauteurSite, Boolean official,
+			String descriptionSite, TypeRocher typeRoche) {
+
+		Site site = new Site();
 		site.setNom(nomSite);
 		site.setLieu(lieuSite);
 		site.setHauteurMax(hauteurSite);
 		site.setTaguerOfficiel(official);
 		site.setDescription(descriptionSite);
 		site.setTypeRocher(typeRoche);
-		
+
 		Long id = (Long) getCurrentSession().save(site);
 		return id;
 
 	}
-	
+
 	public List<Site> findByUser(Utilisateur utilisateur) {
 
 		// Création du CriteriaBuilder pour la construction des requetes
@@ -232,6 +237,50 @@ public class SiteDaoImplementation implements DaoInterface<Site, Long> {
 		List<Site> sites = query.getResultList();
 		return sites;
 
+	}
+
+	public void validationNomSite(Site site) {
+
+		List<Site> listeSite = listeSiteNomIdentique(site);
+		if (listeSite.size() > 1) {
+			int n = 0;
+
+			for (Site sites : listeSite) {
+				if (getLastInt(sites.getNom()) > n)
+					n = getLastInt(sites.getNom());
+			}
+			System.out.println("new name : " + site.getNom().replaceAll("\\d+$", "") + (n + 1));
+			site.setNom(site.getNom().replaceAll("\\d+$", "") + (n + 1));
+		}
+
+	}
+
+	public List<Site> listeSiteNomIdentique(Site site) {
+
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<Site> criteria = builder.createQuery(Site.class);
+		Root<Site> siteRoot = criteria.from(Site.class);
+
+		criteria.where(builder.like(siteRoot.get("nom"), site.getNom().replaceAll("\\d+$", "") + "%"));
+
+		return getCurrentSession().createQuery(criteria).getResultList();
+	}
+
+	public int getLastInt(String line) {
+
+		int offset = line.length();
+		for (int i = line.length() - 1; i >= 0; i--) {
+			char c = line.charAt(i);
+			if (Character.isDigit(c)) {
+				offset--;
+			} else {
+				if (offset == line.length()) {
+					return -1;
+				}
+				return Integer.parseInt(line.substring(offset));
+			}
+		}
+		return Integer.parseInt(line.substring(offset));
 	}
 
 }

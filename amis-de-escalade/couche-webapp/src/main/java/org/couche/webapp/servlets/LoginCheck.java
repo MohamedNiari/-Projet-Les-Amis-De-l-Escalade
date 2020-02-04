@@ -69,7 +69,7 @@ public class LoginCheck extends HttpServlet {
 		if (utilisateurService.findByEmail(adresseMail) != null) {
 
 			utilisateur = utilisateurService.findByEmail(adresseMail);
-			prenoms = utilisateur.getPrenoms();
+			prenoms = (Set<String>) utilisateur.getPrenoms();
 			etatConnexion = utilisateurService.checkLogin(motDePasse, adresseMail);
 
 			// Récupération du nombre de réservation en attente

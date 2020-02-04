@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -54,9 +55,9 @@ public class Utilisateur {
 	@OneToMany(mappedBy = "utilisateur")
 	private List<Reservation> commentaires;
 
-	@OneToMany(mappedBy = "utilisateur")
+	@OneToMany(mappedBy = "utilisateur", cascade = { CascadeType.PERSIST})
 	@OrderBy("nom")
-	private List<Site> sites;
+	private List<Site> sites = new ArrayList<Site>();
 
 	@OneToMany(mappedBy = "proprietaire")
 	private List<Reservation> reservationsProprietaire;
@@ -96,7 +97,8 @@ public class Utilisateur {
 
 	/**************************************
 	 * Generation des setters and getters *
-	 **************************************/
+	 **************************************/	
+	
 	
 	public Long getId() {
 		return id;
@@ -197,9 +199,5 @@ public class Utilisateur {
 	public List<Site> getSites() {
 		return sites;
 	}
-
-	public void setSites(List<Site> sites) {
-		this.sites = sites;
-	}	
 
 }

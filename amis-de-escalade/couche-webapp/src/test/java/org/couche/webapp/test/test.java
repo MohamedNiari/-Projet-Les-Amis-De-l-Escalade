@@ -1,28 +1,36 @@
 package org.couche.webapp.test;
 
-import java.io.File;
-
-import org.couche.business.services.SiteService;
-
 public class test {
 
 	public static void main(String[] args) throws Exception {
-		
-		File file = new File("f");
-		System.out.println("========================================");
-		System.out.println("          name:" + file.getName());
-		System.out.println("  is directory:" + file.isDirectory());
-		System.out.println("        exists:" + file.exists());
-		System.out.println("          path:" + file.getPath());
-		System.out.println(" absolute file:" + file.getAbsoluteFile());	
-		System.out.println("canonical file:" + file.getCanonicalFile());
-		System.out.println("canonical path:" + file.getCanonicalPath());
-		
+
+		String str = "25Bleu1978";
+
+		System.out.println(str.substring(6));
+
 	}
 
-	static void deleteSite(Long debut, Long fin) {
-		SiteService siteService = new SiteService();
-		for (long i = debut; i < fin; i++)
-			siteService.delete(i);
+	public static int getLastInt(String line) {
+
+		int offset = line.length();
+
+		for (int i = line.length() - 1; i >= 0; i--) {
+
+			char c = line.charAt(i);
+
+			if (Character.isDigit(c)) {
+				offset--;
+
+			} else {
+
+				if (offset == line.length()) {
+					return -1;
+				}
+
+				return Integer.parseInt(line.substring(offset));
+			}
+		}
+
+		return Integer.parseInt(line.substring(offset));
 	}
 }

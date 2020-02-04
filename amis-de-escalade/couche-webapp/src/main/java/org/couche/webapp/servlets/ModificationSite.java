@@ -56,6 +56,14 @@ public class ModificationSite extends HttpServlet {
 		// Récupération du site depuis la BDD
 		SiteService siteService = new SiteService();
 		Site site = siteService.findById(Long.parseLong(siteId));
+		
+		String ancienNomSite = site.getNom();
+		
+		// Check des noms en doublon
+		siteService.validationNomSite(site);
+		
+		if(!site.getNom().equals(ancienNomSite))
+			request.setAttribute("nouveauNomSite", true);
 
 		// Chargement du site dans la request
 		request.setAttribute("THE_SITE", site);
@@ -82,8 +90,7 @@ public class ModificationSite extends HttpServlet {
 
 		// Envoi à la jsp
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/modifier-sites.jsp");
-		dispatcher.forward(request, response);
-		
+		dispatcher.forward(request, response);		
 
 	}
 

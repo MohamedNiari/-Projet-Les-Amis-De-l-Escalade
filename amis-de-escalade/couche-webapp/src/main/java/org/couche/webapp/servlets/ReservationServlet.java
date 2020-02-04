@@ -53,7 +53,7 @@ public class ReservationServlet extends HttpServlet {
 		ReservationService reservationService = new ReservationService();
 		
 		HashMap<Topo, Boolean> mapTopoAttente = new HashMap<Topo, Boolean>();
-		List<Topo> topos = topoService.disponible();
+		List<Topo> topos = topoService.disponible(utilisateur);
 		
 		for(Topo topo : topos) {			
 			mapTopoAttente.put(topo, reservationService.isTopoEnAttente(topo, utilisateur));			

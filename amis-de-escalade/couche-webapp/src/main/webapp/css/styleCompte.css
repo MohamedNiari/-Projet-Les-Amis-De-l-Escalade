@@ -3,6 +3,7 @@ body {
 	background: url(../img/presentationLogin.png);
 	background-repeat: no-repeat;
 	background-size: cover;
+	height: 100%;
 }
 
 .page-content {
@@ -112,8 +113,8 @@ body {
 }
 
 .form-v8-content .form-detail .input-text {
-	margin-bottom: 31px;
-	margin-top: 31px;
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 .form-v8-content .form-detail input {
@@ -132,7 +133,7 @@ body {
 	-webkit-outline: none;
 	-o-outline: none;
 	-ms-outline: none;
-	font-size: 18px;
+	font-size: 16px;
 	color: #fff;
 	font-weight: 300;
 	box-sizing: border-box;
@@ -149,11 +150,11 @@ body {
 
 .form-v8-content .form-detail .form-row .input-text:focus+.label,
 	.form-v8-content .form-detail .form-row .input-text:valid+.label {
-	transform: translateY(-26px) scale(1);
-	-moz-transform: translateY(-26px) scale(1);
-	-webkit-transform: translateY(-26px) scale(1);
-	-o-transform: translateY(-26px) scale(1);
-	-ms-transform: translateY(-26px) scale(1);
+	transform: translateY(-10px) scale(1);
+	-moz-transform: translateY(-10px) scale(1);
+	-webkit-transform: translateY(-10px) scale(1);
+	-o-transform: translateY(-10px) scale(1);
+	-ms-transform: translateY(-10px) scale(1);
 }
 
 .form-v8-content .form-detail .form-row .input-text:focus+.border,

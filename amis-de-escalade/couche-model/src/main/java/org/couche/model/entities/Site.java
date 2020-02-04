@@ -71,7 +71,7 @@ public class Site {
 	@OrderBy("commentaireId DESC")
 	private List<Commentaire> commentaires;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST })
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
 
@@ -85,6 +85,27 @@ public class Site {
 
 	}
 
+
+	/*
+	 * Constructeur sans Id
+	 */
+	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String description,
+			TypeRocher typeRocher, Utilisateur utilisateur) {
+		this.nom = nom;
+		this.hauteurMax = hauteurMax;
+		this.lieu = lieu;
+		this.taguerOfficiel = taguerOfficiel;
+		this.description = description;
+		this.typeRocher = typeRocher;
+		this.utilisateur = utilisateur;
+	}
+
+
+
+	/**************************************
+	 * Generation des setters and getters *
+	 **************************************/	
+	
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
@@ -92,27 +113,7 @@ public class Site {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-
-	/*
-	 * Constructeur sans Id
-	 */
-	public Site(String nom, Integer hauteurMax, String lieu, Boolean taguerOfficiel, String description,
-			TypeRocher typeRocher) {
-		this.nom = nom;
-		this.hauteurMax = hauteurMax;
-		this.lieu = lieu;
-		this.taguerOfficiel = taguerOfficiel;
-		this.description = description;
-		this.typeRocher = typeRocher;
-	}
-
-
-
-	/**************************************
-	 * Generation des setters and getters *
-	 **************************************/
-
-
+	
 	public Long getId() {
 		return id;
 	}

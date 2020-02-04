@@ -73,9 +73,10 @@ public class TopoService {
 		return topos;
 	}
 	
-	public List<Topo> disponible() {
+	//Topos disponible pour un utilisateur en particulier
+	public List<Topo> disponible(Utilisateur utilisateur) {
 		topoDao.openCurrentSession();
-		List<Topo> topos = topoDao.disponible();
+		List<Topo> topos = topoDao.disponible(utilisateur);
 		topoDao.closeCurrentSession();
 		return topos;
 	}

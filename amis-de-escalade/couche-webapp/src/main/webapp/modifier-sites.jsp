@@ -6,9 +6,17 @@
 <html>
 
 <head>
+<%@ include file="meta.jsp"%>
 <title>Modifier site</title>
 <%@ include file="header.jsp"%>
 </head>
+
+<!-- Changement de "Browser" en "Parcourir" -->
+<style>
+.custom-file-label::after {
+	content: "Parcourir" !important;
+}
+</style>
 
 <body>
 
@@ -18,60 +26,29 @@
 	<!-- Modals pour la création d'un site -->
 	<jsp:include page="modal-creation-site.jsp"></jsp:include>
 
+	<!-- Message d'alerte pour création des images -->
+	<div class="alert alert-warning alert-dismissible fade show"
+		role="alert">
+		<strong>IMPORTANT!</strong> Pensez à enregistrer vos images avant de
+		valider les longueurs
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
 	<section class="d-flex flex-wrap">
 		<div class="col-md-4">
-			<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
-				<div id="carouselImageSite" class="carousel slide"
-					data-ride="carousel">
-
-					<ol class="carousel-indicators">
-						<li data-target="#carouselImageSite" data-slide-to="0"
-							class="active"></li>
-						<li data-target="#carouselImageSite" data-slide-to="1"></li>
-						<li data-target="#carouselImageSite" data-slide-to="2"></li>
-						<li data-target="#carouselImageSite" data-slide-to="3"></li>
-					</ol>
-
-					<div class="carousel-inner" role="listbox" id="carouselStyle">
-						<div class="carousel-item active">
-							<img class="img-fluid img-responsive" src="img/amisEscalade.jpg"
-								alt="slide presentation"></img>
-							<div class="carousel-caption d-none d-md-block"
-								style="font-family: cursive; color: #695D5A">
-								<br> <br>
-								<h5>
-									Découvez le site de <strong>${THE_SITE.nom}</strong>
-								</h5>
-							</div>
-						</div>
-						<c:forEach items="${IMAGE_LIST}" var="item">
-							<div class="carousel-item">
-								<img class="img-fluid img-responsive" src="${item}"
-									alt="slides du site"></img>
-							</div>
-						</c:forEach>
-					</div>
-
-					<a class="carousel-control-prev" href="#carouselImageSite"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselImageSite"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
-					</a>
-				</div>
-			</div>
+			<%@ include file="carousel.jsp"%>
 
 			<div class="card border border-success">
 				<form method="post" action="TelechargerImages?siteId=${siteId}"
 					enctype="multipart/form-data">
 
 					<div class="form-group m-3">
-						<div class="custom-file mb-3">						
+						<div class="custom-file mb-3">
 							<input type="file" class="custom-file-input" id="customFile"
-								multiple name="filename"> <label
+								lang="fr" multiple name="filename"> <label
 								class="custom-file-label" for="customFile">Choisir 3
 								images (max)</label>
 						</div>
@@ -88,6 +65,19 @@
 
 			<!-- Information du site -->
 			<div class="shadow-lg p-4 mb-4 bg-light border border-success">
+				<c:if test="${nouveauNomSite == true}">
+					<!-- Message d'alerte de changement de nom du site -->
+					<div class="alert alert-info alert-dismissible fade show"
+						role="alert">
+						<strong>INFORMATION!</strong> Pour cause de doublon, le nom du
+						site a été changé
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</c:if>
+				
 				<div class="col-md-12">
 					<h4>
 						<i class="fas fa-map-signs" style="color: #685450"></i> &nbsp;<strong
@@ -201,18 +191,21 @@
 	<%@ include file="scriptJs.jsp"%>
 
 	<!--  Gestion de l'upload d'images -->
-    <script>
-        $("#customFile").change(function () {
-            var files = $(this)[0].files;
-            $(this).siblings(".custom-file-label").html("");
-            for (var i = 0; i < files.length; i++) {
-                if (i == 0)
-                    $(this).siblings(".custom-file-label").append(files[i].name);
-                else
-                    $(this).siblings(".custom-file-label").append(", " + files[i].name);
-            }
-        });
-    </script>
+	<script>
+		$("#customFile").change(
+				function() {
+					var files = $(this)[0].files;
+					$(this).siblings(".custom-file-label").html("");
+					for (var i = 0; i < files.length; i++) {
+						if (i == 0)
+							$(this).siblings(".custom-file-label").append(
+									files[i].name);
+						else
+							$(this).siblings(".custom-file-label").append(
+									", " + files[i].name);
+					}
+				});
+	</script>
 </body>
 
 </html>

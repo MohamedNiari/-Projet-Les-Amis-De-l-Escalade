@@ -1,8 +1,6 @@
 package org.couche.webapp.test;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.couche.business.services.LongueurService;
 import org.couche.business.services.SecteurService;
@@ -21,7 +19,7 @@ import org.couche.model.entities.Voie;
 public class AppTestCreate {
 
 	public static void main(String[] args) throws ParseException {
-		
+
 		// test pour la table utilisateur
 		UtilisateurService utilisateurService = new UtilisateurService();
 
@@ -33,11 +31,11 @@ public class AppTestCreate {
 		utilisateurTest.getPrenoms().add("Mohamed");
 		utilisateurTest.getPrenoms().add("James");
 		utilisateurTest.getPrenoms().add("Tayeb");
-		
+
 		utilisateurTest2.getPrenoms().add("Lauren");
 
-		//utilisateurService.create(utilisateurTest);
-		//utilisateurService.create(utilisateurTest2);
+		// utilisateurService.create(utilisateurTest);
+		// utilisateurService.create(utilisateurTest2);
 
 		// test pour la table topo
 		TopoService topoService = new TopoService();
@@ -46,70 +44,54 @@ public class AppTestCreate {
 				"Rive gauche, le rocher passe à l’ombre à 12h30 mais les arbres cachent assez bien le soleil avant. On peut donc y grimper en été, même le matin hors période de canicule.",
 				"La Savoie", "04 Septembre 2015", true, utilisateurTest);
 
-	
-
 		// test pour la table site
-		SiteService siteService = new SiteService();
 
 		Site siteTest = new Site("Bellevue", 42, "Privas", false,
 				"Pas beaucoup de voies pour l’instant mais il y a encore un peu de potentiel, il est donc probable que de nouvelles voies soient équipées, voire d’autres secteurs.",
-				TypeRocher.Granite);
+				TypeRocher.Granite, utilisateurTest);
 
 		siteTest.getUrlImages().add("img/Ablon.jpg");
 		siteTest.getUrlImages().add("img/Ablon2.jpg");
 		siteTest.getUrlImages().add("img/Ablon3.jpg");
 
-
 		Site siteTest2 = new Site("Ablon", 74, "Thorens", true,
 				"C’est LA FALAISE incontournable de la région par sa taille, sa grimpe et sa vue. Son orientation ouest, et le peu d’ombre au pied de la falaise, font que l’on peut y grimper toute l’année.",
-				TypeRocher.Gneiss);
+				TypeRocher.Gneiss, utilisateurTest);
 
 		siteTest2.getUrlImages().add("img/Bellevue.jpg");
 		siteTest2.getUrlImages().add("img/Bellevue2.png");
 		siteTest2.getUrlImages().add("img/Bellevue3.png");
-		
 
 		Site siteTest3 = new Site("Le Teillon", 69, "Oullins", true,
 				"Site à la mode dans les années 1970 pour aller taquiner du piton, le Teillon aujourd’hui ne parle plus à personne, éclipsé qu’il est dans l’ombre médiatique et photogénique de sa célébrissime voisine.",
-				TypeRocher.Calcaire);
+				TypeRocher.Calcaire, utilisateurTest2);
 
 		siteTest3.getUrlImages().add("img/LeTeillon.jpg");
 		siteTest3.getUrlImages().add("img/LeTeillon2.jpg");
 		siteTest3.getUrlImages().add("img/LeTeillon3.jpg");
-		
 
 		Site siteTest4 = new Site("Fixin", 21, "Dijon", false,
 				"À quelques kilomètres au Sud de Dijon, la falaise de Fixin surplombe le fameux vignoble bourguignon, réputé mondialement pour ses grands crus dont le célèbre cépage pousse à merveille sur les sous-sols calcaires du coin.",
-				TypeRocher.Granite);
+				TypeRocher.Granite, utilisateurTest2);
 
 		siteTest4.getUrlImages().add("img/Fixin.png");
 		siteTest4.getUrlImages().add("img/Fixin2.png");
 		siteTest4.getUrlImages().add("img/Fixin3.png");
-		
-		List<Site> sites1 = new ArrayList<Site>();
-		List<Site> sites2 = new ArrayList<Site>();
-		sites1.add(siteTest);
-		sites1.add(siteTest2);
-		sites2.add(siteTest3);
-		sites2.add(siteTest4);
-		
-		utilisateurTest.setSites(sites1);
-		utilisateurTest2.setSites(sites2);	
-		
-		siteService.create(siteTest);
-		siteService.create(siteTest2);
-		siteService.create(siteTest3);
-		siteService.create(siteTest4);
-		
+
+		utilisateurTest.getSites().add(siteTest);
+		utilisateurTest.getSites().add(siteTest2);
+		utilisateurTest2.getSites().add(siteTest3);
+		utilisateurTest2.getSites().add(siteTest4);
+
 		utilisateurService.create(utilisateurTest);
 		utilisateurService.create(utilisateurTest2);
+
 		topoService.create(topoTest);
 
-		/*siteService.create(siteTest);
-		siteService.create(siteTest2);
-		siteService.create(siteTest3);
-		siteService.create(siteTest4);*/		
-
+		/*
+		 * siteService.create(siteTest); siteService.create(siteTest2);
+		 * siteService.create(siteTest3); siteService.create(siteTest4);
+		 */
 
 		// test pour la table secteur
 		SecteurService secteurService = new SecteurService();

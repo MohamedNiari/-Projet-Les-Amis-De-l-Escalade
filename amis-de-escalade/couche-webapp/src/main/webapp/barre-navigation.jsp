@@ -13,12 +13,12 @@
 		class="border border-white rounded"></a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarText" aria-controls="navbarText"
+		data-target="#navbarDropDown" aria-controls="navbarText"
 		aria-expanded="true" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<div class="navbar-collapse collapse">
+	<div class="navbar-collapse collapse" id="navbarDropDown">
 		<form action="RechercheSite" method="post"
 			class="form-inline my-2 my-lg-0" style="margin: 0 auto;">
 

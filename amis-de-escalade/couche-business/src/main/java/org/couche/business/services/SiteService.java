@@ -72,6 +72,13 @@ public class SiteService {
 		siteDao.deleteAll();
 		siteDao.closeCurrentSessionwithTransaction();
 	}
+	
+	public void validationNomSite(Site site) {
+		siteDao.openCurrentSessionwithTransaction();
+		siteDao.validationNomSite(site);
+		siteDao.merge(site);
+		siteDao.closeCurrentSessionwithTransaction();
+	}
 
 	public List<Site> searchSite(String lieu, TypeRocher typeRoche, Integer numberSecteur) {		
 		siteDao.openCurrentSession();

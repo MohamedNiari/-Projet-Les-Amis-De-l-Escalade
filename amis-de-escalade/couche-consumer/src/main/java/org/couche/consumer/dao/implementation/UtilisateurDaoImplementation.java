@@ -95,7 +95,7 @@ public class UtilisateurDaoImplementation implements DaoInterface<Utilisateur, L
 	 */
 	@Override
 	public void create(Utilisateur utilisateur) {
-		getCurrentSession().save(utilisateur);
+		getCurrentSession().persist(utilisateur);
 
 	}
 

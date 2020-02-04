@@ -7,7 +7,10 @@
 <html>
 
 <head>
+<%@ include file="meta.jsp"%>
 <title>Creation de topos</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<%@ include file="scriptJs.jsp"%>
 <%@ include file="header.jsp"%>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
@@ -61,14 +64,13 @@
 			<div class="form-group text-success">
 				<label for="descriptionTopo">Description du Topo</label>
 				<textarea class="form-control" name="descriptionTopo" rows="3"
-					placeholder="Description du Topo"></textarea>
+					placeholder="Description du Topo" maxlength="200"></textarea>
 			</div>
 			<button class="btn btn-success" type="submit">Envoyer le
 				Topo</button>
 
 		</form>
 	</section>
-	<%@ include file="scriptJs.jsp"%>
 </body>
 
 <script>

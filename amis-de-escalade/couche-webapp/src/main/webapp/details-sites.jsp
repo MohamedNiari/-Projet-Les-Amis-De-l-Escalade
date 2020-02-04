@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page language="java" contentType="text/html"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -22,50 +21,9 @@
 	<!-- Carousel d'images d'un site -->
 	<section class="d-flex flex-wrap">
 		<div class="col-md-4">
-			<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
-				<div id="carouselImageSite" class="carousel slide" style="width: 100%;"
-					data-ride="carousel">
-
-					<ol class="carousel-indicators">
-						<li data-target="#carouselImageSite" data-slide-to="0"
-							class="active"></li>
-						<li data-target="#carouselImageSite" data-slide-to="1"></li>
-						<li data-target="#carouselImageSite" data-slide-to="2"></li>
-						<li data-target="#carouselImageSite" data-slide-to="3"></li>
-					</ol>
-
-					<div class="carousel-inner" role="listbox" id="carouselStyle">
-						<div class="carousel-item active">
-							<img class="img-fluid img-responsive" src="img/amisEscalade.jpg"
-								alt="slide presentation"></img>
-							<div class="carousel-caption d-none d-md-block"
-								style="font-family: cursive; color: #695D5A">
-								<br> <br>
-								<h5>
-									Découvrez le site de <strong>${THE_SITE.nom}</strong>
-								</h5>
-							</div>
-						</div>
-						<c:forEach items="${IMAGE_LIST}" var="item">
-							<div class="carousel-item">
-								<figure class="cadre"><img class="img-fluid img-responsive" src="${item}"
-									alt="slides du site"></img></figure>
-							</div>
-						</c:forEach>
-					</div>
-
-					<a class="carousel-control-prev" href="#carouselImageSite"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselImageSite"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
-					</a>
-				</div>
-			</div>
-
+			<!--  Carousel d'image pour le site -->
+			<%@ include file="carousel.jsp"%>
+			
 			<!-- Commentaire -->
 			<c:if test="${connexionOk == true}">
 				<div class="row shadow-lg p-4 mb-4 bg-light border border-success">
@@ -104,7 +62,7 @@
 							<form action="CommentaireServlet" method="get"
 								style="width: 100%;">
 								<input type="hidden" name="commentaireId"
-									value="${tempCommentaire.commentaireId}"> <input
+									value="${tempCommentaire.id}"> <input
 									type="hidden" name="siteId" value="${THE_SITE.id}">
 
 								<textarea class="form-control text-success" name="commentaire"
@@ -201,33 +159,36 @@
 											</div>
 										</div>
 										<div class="card-text">
-											<table class="table">
-												<thead class="thead-light">
-													<tr>
-														<th scope="col">Longueur</th>
-														<th scope="col">Mesure</th>
-														<th scope="col">Cotation</th>
-														<th scope="col">Equipée Spits</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:forEach items="${itemVoie.longueurs}" var="itemLongueur">
+											<div class="table-responsive">
+												<table class="table">
+													<thead class="thead-light">
 														<tr>
-															<th scope="row">${itemLongueur.numeroLongueur}</th>
-															<td>${itemLongueur.mesure}</td>
-															<td>${itemLongueur.cotation}</td>
-															<td><c:choose>
-																	<c:when test="${itemLongueur.equiperSpits == true}">
+															<th scope="col">Longueur</th>
+															<th scope="col">Mesure</th>
+															<th scope="col">Cotation</th>
+															<th scope="col">Equipée Spits</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach items="${itemVoie.longueurs}"
+															var="itemLongueur">
+															<tr>
+																<th scope="row">${itemLongueur.numeroLongueur}</th>
+																<td>${itemLongueur.mesure}</td>
+																<td>${itemLongueur.cotation}</td>
+																<td><c:choose>
+																		<c:when test="${itemLongueur.equiperSpits == true}">
 															            Oui
 															         </c:when>
-																	<c:otherwise>
+																		<c:otherwise>
 															            Non
 															         </c:otherwise>
-																</c:choose></td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
+																	</c:choose></td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
 
 										</div>
 										<div class="card-footer">
