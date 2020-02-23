@@ -13,7 +13,7 @@ import com.sun.istack.Nullable;
 
 public class SiteService {
 
-	private static SiteDaoImplementation siteDao;
+	private SiteDaoImplementation siteDao;
 
 	public SiteService() {
 		siteDao = new SiteDaoImplementation();
@@ -30,8 +30,7 @@ public class SiteService {
 		siteDao.openCurrentSessionwithTransaction();
 		siteDao.create(site);
 		siteDao.closeCurrentSessionwithTransaction();
-	}
-	
+	}	
 
 	public void update(Site site) {
 		siteDao.openCurrentSessionwithTransaction();

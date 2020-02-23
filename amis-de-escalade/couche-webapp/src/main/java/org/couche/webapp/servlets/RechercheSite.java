@@ -22,6 +22,7 @@ import org.hibernate.hql.internal.ast.tree.IsNullLogicOperatorNode;
 @WebServlet("/RechercheSite")
 public class RechercheSite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private SiteService siteService = new SiteService();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -63,7 +64,6 @@ public class RechercheSite extends HttpServlet {
 
 
 		// Récupération de la liste des sites depuis la la BDD
-		SiteService siteService = new SiteService();
 		List<Site> sites = siteService.searchSite(lieu, typeRocher, numberSecteur);
 
 		// Ajout de sites à la request
